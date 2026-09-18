@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Sort a small sample of browser bookmarks with the Simple Jev classifier API." />
+    <title>Bookmark sorter — Simple Jev</title>
+    <link rel="icon" type="image/png" href="/assets/simple-jev.png" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <simple-jev-demo-header></simple-jev-demo-header>
+    <main>
+      <p class="eyebrow">COOL DEMO · STRUCTURED DECISIONS</p>
+      <h1>Sort a messy<br />bookmark pile.</h1>
+      <p class="lead">Drop a browser bookmark export, pick a tiny sample, and watch an open model file every link into one useful category—with a probability for each choice.</p>
+      <div class="controls">
+        <section class="panel">
+          <h2>Bring your own bookmarks</h2>
+          <p>Chrome, Firefox, Safari, and Edge can export bookmarks as HTML. Your file stays in this browser; only the selected links are sent when you run the demo.</p>
+          <label class="upload" for="bookmark-file">Choose bookmarks.html</label>
+          <input id="bookmark-file" type="file" accept=".html,.htm,text/html" />
+          <div class="actions"><button id="use-sample" type="button">Use a mixed sample instead</button></div>
+        </section>
+        <section class="panel">
+          <label for="model">Classifier model</label>
+          <select id="model" disabled><option>Loading models…</option></select>
+          <div class="actions"><button id="shuffle" type="button">Pick another sample</button><button id="run" class="primary" type="button">Classify bookmarks</button></div>
+        </section>
+      </div>
+      <p id="status" class="status">Loading the public demo API…</p>
+      <section class="selected-panel">
+        <header><h2>Bookmarks to classify</h2><span>Up to 30 links · one shared-context request</span></header>
+        <ul id="selected"></ul>
+      </section>
+      <section id="results" aria-live="polite"></section>
+      <p class="fine-print">This is one live call to the public Simple Jev demo API. All 30 decisions share the same bookmark context. Results are model decisions, not hand-authored labels.</p>
+    </main>
+    <script src="/shared/demo-header.js"></script>
+    <script type="module" src="app.js"></script>
+  </body>
+</html>
