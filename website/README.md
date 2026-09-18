@@ -46,7 +46,7 @@ Open the [playground](http://127.0.0.1:8765/) or the [API documentation](http://
 - `playground.mjs`: scenario/question examples, request construction, and response validation.
 - `tests/playground.test.mjs`: offline request/response contract tests (`node --test website/tests/playground.test.mjs`).
 - `assets/simple-jev.png`: the official Simple Jev mascot badge, used as the logo and favicon.
-- `assets/featherless.png`: supplied Featherless logo for the “Built by Featherless.ai” attribution.
+- `assets/featherless_logo_dark.svg`: supplied Featherless logo for the “Built by Featherless.ai” attribution.
 
 ## API behavior
 
