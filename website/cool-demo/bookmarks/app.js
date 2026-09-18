@@ -1,5 +1,5 @@
 import {
-  API_BASE, BATCH_SIZE, CATEGORIES, MAX_BOOKMARKS, SAMPLE_BOOKMARKS,
+  API_BASE, BATCH_SIZE, CATEGORIES, LIMITS, MAX_BOOKMARKS, SAMPLE_BOOKMARKS,
   answerFor, buildRequest, hostOf, parseBookmarks,
 } from './bookmarks.mjs'
 
@@ -97,6 +97,9 @@ form.addEventListener('change', async () => {
   const file = form.files?.[0]
   if (!file) return
   try {
+    if (file.size > LIMITS.FILE_BYTES) {
+      throw Error(`That export is too large. Choose a file smaller than ${LIMITS.FILE_BYTES / 1024 / 1024} MB.`)
+    }
     library = parseBookmarks(await file.text())
     if (!library.length) throw Error('No web bookmarks found in that file.')
     selected = chooseSample(library)

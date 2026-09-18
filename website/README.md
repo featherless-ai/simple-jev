@@ -92,7 +92,7 @@ Both 2048 and the driving simulator load `shared/demo-header.js`, providing the 
 
 ## Bookmark sorter
 
-`/cool-demo/bookmarks/` accepts a local Netscape-format browser export (Chrome, Firefox, Safari, or Edge), selects at most 30 links, and sends one shared-context request with 30 choice questions to the public demo API. The export stays in the browser; only the selected titles and URLs are sent when the visitor runs the classifier. Include `cool-demo/bookmarks/` and `shared/` when deploying.
+`/cool-demo/bookmarks/` accepts a local Netscape-format browser export (Chrome, Firefox, Safari, or Edge), selects at most 30 links, and sends one shared-context request with 30 choice questions to the public demo API. It rejects files over 5 MB, scans at most 10,000 anchors, and bounds/normalizes title and URL input before building the request. The export stays in the browser; only the selected titles and URLs are sent when the visitor runs the classifier. Include `cool-demo/bookmarks/` and `shared/` when deploying.
 
 ## Vision catalog demo
 

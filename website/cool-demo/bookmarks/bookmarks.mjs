@@ -56,6 +56,36 @@ export const SAMPLE_BOOKMARKS = [
 
 export const MAX_BOOKMARKS = 30
 export const BATCH_SIZE = 30
+export const LIMITS = {
+  FILE_BYTES: 5 * 1024 * 1024,
+  MAX_ANCHORS_SCAN: 10_000,
+  TITLE_CHARS: 180,
+  URL_CHARS: 1_500,
+}
+
+export function sanitizeText(value, maxChars) {
+  const text = String(value ?? '')
+    // eslint-disable-next-line no-control-regex
+    .replace(/[\u0000-\u001F\u007F]/g, '')
+    .replace(/\s+/g, ' ')
+    .trim()
+  return text.slice(0, maxChars)
+}
+
+export function validBookmarkUrl(value) {
+  const raw = String(value ?? '')
+    // eslint-disable-next-line no-control-regex
+    .replace(/[\u0000-\u001F\u007F]/g, '')
+    .trim()
+  if (!raw || raw.length > LIMITS.URL_CHARS) return null
+  try {
+    const url = new URL(raw)
+    if (!/^https?:$/.test(url.protocol) || url.href.length > LIMITS.URL_CHARS) return null
+    return url.href
+  } catch {
+    return null
+  }
+}
 
 export function hostOf(url) {
   try { return new URL(url).hostname.replace(/^www\./, '') } catch { return url }
@@ -65,14 +95,13 @@ export function parseBookmarks(html) {
   const doc = new DOMParser().parseFromString(html, 'text/html')
   const seen = new Set()
   const bookmarks = []
-  for (const anchor of doc.querySelectorAll('a[href]')) {
-    try {
-      const url = new URL(anchor.getAttribute('href'))
-      if (!/^https?:$/.test(url.protocol) || seen.has(url.href)) continue
-      seen.add(url.href)
-      const title = (anchor.textContent || '').replace(/\s+/g, ' ').trim() || hostOf(url.href)
-      bookmarks.push({ title: title.slice(0, 180), url: url.href })
-    } catch { /* Skip malformed or non-web exports. */ }
+  const anchors = [...doc.querySelectorAll('a[href]')].slice(0, LIMITS.MAX_ANCHORS_SCAN)
+  for (const anchor of anchors) {
+    const url = validBookmarkUrl(anchor.getAttribute('href'))
+    if (!url || seen.has(url)) continue
+    seen.add(url)
+    const title = sanitizeText(anchor.textContent, LIMITS.TITLE_CHARS) || hostOf(url)
+    bookmarks.push({ title, url })
   }
   return bookmarks
 }
