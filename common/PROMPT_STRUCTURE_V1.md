@@ -267,7 +267,7 @@ The permitted labels are the digits `1` through `9`:
 ```text
 Truth rubric:
 <CRITERIA_JSON>
-Rate the probability that the answer is yes, from 0.1 to 0.9. Encode probability with 0.1 being the lowers, and 0.9 as the highest
+Rate the probability that the answer is yes as a single whole number from 1 to 9, where 1 means definitely no and 9 means definitely yes.
 ```
 
 Render criteria as canonical JSON; omitted or null criteria become `{}`.
