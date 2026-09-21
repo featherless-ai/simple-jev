@@ -65,3 +65,24 @@ migrate such artifacts separately.
 These are our endpoint-adaptation scores. A full score does not imply reproduction
 of an upstream prompting protocol, all optional tracks, or official leaderboard
 eligibility. CodeMMLU explicitly labels its malformed-row exclusions.
+
+## Store benchmark reports in Git
+
+Keep raw runs in ignored `eval/results/`. Export compact files per named project:
+
+```sh
+python3 eval/report.py \
+  --run eval/results/first-run \
+  --export eval/benchmarks/MODEL/YYYY-MM-DD
+```
+
+Repeat `--run` to combine disjoint runs of the same model and endpoint. The export
+writes an index plus `PROJECT/report.md` and `PROJECT/results.json`. Each project
+has its full/configuration scores, category splits, failed-row counts, provenance,
+actual returned model IDs, and summed response costs. Unlike ordinary report
+printing, export expects completed per-suite `summary.json` files.
+
+These small reports are tracked; original responses, scoring inputs, and downloaded
+datasets remain local. Retain the raw run archive: reports reference its file
+hashes and paths, but Git alone cannot reconstruct the raw evidence. Saved response
+cost excludes probes and any requests that were billed without a saved response.

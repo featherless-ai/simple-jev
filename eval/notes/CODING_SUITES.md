@@ -67,3 +67,11 @@ can exceed small endpoint context limits; it is not silently shortened.
 
 Validation performed: offline contract tests and import validation of all 980
 CodeComplex test rows. No model evaluations were run.
+
+## Default run selection
+
+BigCloneBench is **opt-in** (`default_enabled: false` in its suite manifest).
+Its 415,416 pairs dominate runtime; standard full-run queues skip it. CodeComplex,
+CodeMMLU, code-security classification, and code-ranking suites remain enabled.
+An explicit `run.py --suite eval/suites/english/bigclonebench-test.json` still runs
+its full test set. Queue builders should honor `default_enabled` (default: true).

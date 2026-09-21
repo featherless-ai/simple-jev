@@ -1,0 +1,486 @@
+{
+  "model": "typesafe/jev-1.13",
+  "endpoint": "https://openrouter.ai/api/v1/systemone",
+  "by_project": [
+    {
+      "project": "Jev Korean benchmark",
+      "configuration": "en-en",
+      "metric": "accuracy",
+      "score": 0.895,
+      "metrics": {
+        "rows": 200,
+        "successful_rows": 200,
+        "failed_rows": 0,
+        "accuracy": 0.895,
+        "equal_case_modal_agreement": 0.895,
+        "mean_family_balanced_accuracy": 0.8962637362637362,
+        "equal_case_total_variation_successful_only": null,
+        "total_variation_rows": 0
+      },
+      "suites": [
+        "korean-public-en-en"
+      ],
+      "missing_suites": [],
+      "coverage": "complete"
+    },
+    {
+      "project": "Jev Korean benchmark",
+      "configuration": "ko-en",
+      "metric": "accuracy",
+      "score": 0.8466666666666667,
+      "metrics": {
+        "rows": 300,
+        "successful_rows": 300,
+        "failed_rows": 0,
+        "accuracy": 0.8466666666666667,
+        "equal_case_modal_agreement": 0.8466666666666667,
+        "mean_family_balanced_accuracy": 0.8470144704011981,
+        "equal_case_total_variation_successful_only": null,
+        "total_variation_rows": 0
+      },
+      "suites": [
+        "korean-public-ko-en-context",
+        "korean-public-ko-en-knowledge"
+      ],
+      "missing_suites": [],
+      "coverage": "complete"
+    },
+    {
+      "project": "Jev Korean benchmark",
+      "configuration": "ko-ko",
+      "metric": "accuracy",
+      "score": 0.8366666666666667,
+      "metrics": {
+        "rows": 300,
+        "successful_rows": 300,
+        "failed_rows": 0,
+        "accuracy": 0.8366666666666667,
+        "equal_case_modal_agreement": 0.8366666666666667,
+        "mean_family_balanced_accuracy": 0.8376183351354975,
+        "equal_case_total_variation_successful_only": null,
+        "total_variation_rows": 0
+      },
+      "suites": [
+        "korean-public-ko-ko-context",
+        "korean-public-ko-ko-knowledge"
+      ],
+      "missing_suites": [],
+      "coverage": "complete"
+    }
+  ],
+  "by_category": [
+    {
+      "project": "Jev Korean benchmark",
+      "configuration": "en-en",
+      "metric": "accuracy",
+      "score": 0.895,
+      "metrics": {
+        "rows": 200,
+        "successful_rows": 200,
+        "failed_rows": 0,
+        "accuracy": 0.895,
+        "equal_case_modal_agreement": 0.895,
+        "mean_family_balanced_accuracy": 0.8962637362637362,
+        "equal_case_total_variation_successful_only": null,
+        "total_variation_rows": 0
+      },
+      "suites": [
+        "korean-public-en-en"
+      ],
+      "missing_suites": [],
+      "coverage": "complete",
+      "placement": [
+        "text",
+        "english",
+        "general-language",
+        "classification-decision"
+      ]
+    },
+    {
+      "project": "Jev Korean benchmark",
+      "configuration": "ko-en",
+      "metric": "accuracy",
+      "score": 0.865,
+      "metrics": {
+        "rows": 200,
+        "successful_rows": 200,
+        "failed_rows": 0,
+        "accuracy": 0.865,
+        "equal_case_modal_agreement": 0.865,
+        "mean_family_balanced_accuracy": 0.8658289536550406,
+        "equal_case_total_variation_successful_only": null,
+        "total_variation_rows": 0
+      },
+      "suites": [
+        "korean-public-ko-en-context"
+      ],
+      "missing_suites": [],
+      "coverage": "complete",
+      "placement": [
+        "text",
+        "non-english",
+        "general-language",
+        "classification-decision"
+      ]
+    },
+    {
+      "project": "Jev Korean benchmark",
+      "configuration": "ko-ko",
+      "metric": "accuracy",
+      "score": 0.855,
+      "metrics": {
+        "rows": 200,
+        "successful_rows": 200,
+        "failed_rows": 0,
+        "accuracy": 0.855,
+        "equal_case_modal_agreement": 0.855,
+        "mean_family_balanced_accuracy": 0.8562637362637362,
+        "equal_case_total_variation_successful_only": null,
+        "total_variation_rows": 0
+      },
+      "suites": [
+        "korean-public-ko-ko-context"
+      ],
+      "missing_suites": [],
+      "coverage": "complete",
+      "placement": [
+        "text",
+        "non-english",
+        "general-language",
+        "classification-decision"
+      ]
+    },
+    {
+      "project": "Jev Korean benchmark",
+      "configuration": "ko-en",
+      "metric": "accuracy",
+      "score": 0.81,
+      "metrics": {
+        "rows": 100,
+        "successful_rows": 100,
+        "failed_rows": 0,
+        "accuracy": 0.81,
+        "equal_case_modal_agreement": 0.81,
+        "mean_family_balanced_accuracy": 0.809385503893513,
+        "equal_case_total_variation_successful_only": null,
+        "total_variation_rows": 0
+      },
+      "suites": [
+        "korean-public-ko-en-knowledge"
+      ],
+      "missing_suites": [],
+      "coverage": "complete",
+      "placement": [
+        "text",
+        "non-english",
+        "general-language",
+        "model-knowledge"
+      ]
+    },
+    {
+      "project": "Jev Korean benchmark",
+      "configuration": "ko-ko",
+      "metric": "accuracy",
+      "score": 0.8,
+      "metrics": {
+        "rows": 100,
+        "successful_rows": 100,
+        "failed_rows": 0,
+        "accuracy": 0.8,
+        "equal_case_modal_agreement": 0.8,
+        "mean_family_balanced_accuracy": 0.8003275328790203,
+        "equal_case_total_variation_successful_only": null,
+        "total_variation_rows": 0
+      },
+      "suites": [
+        "korean-public-ko-ko-knowledge"
+      ],
+      "missing_suites": [],
+      "coverage": "complete",
+      "placement": [
+        "text",
+        "non-english",
+        "general-language",
+        "model-knowledge"
+      ]
+    }
+  ],
+  "provenance": {
+    "export_git_revision": "b6f63bb11a4319e39afff35a9e6e8a04e8d294ea",
+    "evaluator_sha256": {
+      "catalog.py": "f69e435c11f1d35cefca32075db31858ff9ef7c2c360507b8ac0259d452c0ef9",
+      "run.py": "60b26b661a3f99f89eef22bf89744d78d14b56068945f19e020c951fd7ce42d3",
+      "retry.py": "ed3ed9b31152d62bd20705501391557b2b6f128edd84be96e8f71609ec8770c6",
+      "suites.py": "85f443ba008dc2d83b6777e5906a30de37d925bcb4abc9829c63ce325d9f218a",
+      "report.py": "a002bc6d2cddd4f2c0309861c822ef487818ed9dc25f7ecef6785e824c6a6ff0",
+      "prepare.py": "ccbfafde1bb1fa2fe227b9e44525042e487e49abf5dedcb81c22dd7b95db97f8",
+      "adapters/typed.py": "9f1ab94e0fe312fcbb4c0872260fac051fbe27430e38e2723f4924a1454eabf8",
+      "adapters/mmlu.py": "de4432175d2e66d19b10f5743524b33cea5d874ddc20aac81478ac7078dc8f81",
+      "adapters/fields.py": "de77fcdaa13266b14492e361c5ce6d5a48c27d9498ed7de60ae9327f72e4a357",
+      "adapters/vision.py": "9e7856043a82e19df4f039fbb0abf7421110b0bc6eb3cbe5f1ddf3e408b8f327",
+      "adapters/binary_battery.py": "6909af0c264d1222079c6f9c49ca7699227469a45dae385577d2303c53c81458",
+      "adapters/choice.py": "c088c9277435df01845009b36e270731754a1558748a84b990ea7c3e11c2fe8c",
+      "adapters/__init__.py": "2dda3c52d95dc2b8b259271a286bfc9e7155ace75784e486b77fc105aa2c3ea9",
+      "adapters/passage_rerank.py": "c5f4194ae9018caf7532d4bccbbda13c51a5317266f04a2ee5b2a88c8a0fb96d",
+      "adapters/rag.py": "f67507426adbacd4f74739f3223f6280d8fe0762cd1c0fbd936a08d9fef62055",
+      "adapters/graded_rag.py": "d411f8a1aaa245aeb72b1dd87ca6175489a38efe9a0ba1b45ecd15e8bc12ffc8",
+      "adapters/visual_qa.py": "d806c360f7aafb8abe70c255523a3f5e8b10cb523883a707a06e8265fae04991",
+      "adapters/domain_ranking.py": "b32c10e3d550bf571dbb381e315748b3f8d8e81eab9602299367bc9f3537cd08"
+    },
+    "returned_models": [
+      "typesafe/jev-1.13-20260917"
+    ],
+    "usage": {
+      "input_tokens": 393988,
+      "output_tokens": 29900,
+      "reported_cost_usd": 0.016547496000000005,
+      "responses_with_cost": 800
+    },
+    "artifacts": [
+      {
+        "suite": "korean-public-en-en",
+        "directory": "eval/results/jev-1.13-2026-09-20/runs/korean-public-en-en/korean-public-en-en",
+        "manifest": {
+          "endpoint": "https://openrouter.ai/api/v1/systemone",
+          "model": "typesafe/jev-1.13",
+          "dataset_sha256": "922045092644a5697ad536491d50f37c509f3e163248ba48218067c0cefa8912",
+          "rows": 200,
+          "suite": {
+            "schema_version": 1,
+            "id": "korean-public-en-en",
+            "version": "1",
+            "adapter": "typed-v1",
+            "dataset": "../../data/korean-public-en-en.jsonl",
+            "language_group": "english",
+            "languages": [
+              "en"
+            ],
+            "headline_metric": "accuracy",
+            "source": {
+              "repository": "mahlernim/jev-korean-benchmark",
+              "revision": "2c983b7f6e7f1c2baf7e078161eae3698420f3de"
+            },
+            "condition": "en_en",
+            "category": "general-language",
+            "subcategory": "classification-decision",
+            "modality": "text",
+            "scope_note": "Belebele passage comprehension and PAWS-X sentence equivalence. No KorMedMCQA English arm is included.",
+            "task_detail": "reading-and-equivalence",
+            "project": "Jev Korean benchmark",
+            "project_configuration": "en-en"
+          },
+          "adapter_sha256": "9f1ab94e0fe312fcbb4c0872260fac051fbe27430e38e2723f4924a1454eabf8",
+          "retries": 5,
+          "delay": 0.02,
+          "timeout": 120.0,
+          "workers": 16,
+          "reporting": {
+            "project": "Jev Korean benchmark",
+            "configuration": "en-en",
+            "expected_suites": [
+              "korean-public-en-en"
+            ],
+            "partitions": [
+              {
+                "id": "korean-public-en-en",
+                "category": "general-language",
+                "subcategory": "classification-decision",
+                "modality": "text",
+                "language_group": "english"
+              }
+            ]
+          },
+          "started_at_unix": 1789967874.6938171,
+          "runner_sha256": "cf1d35b8368e75343a3f70c883a843e4ecc52af2ea803c4412fbfabc48e0caf1",
+          "scoring_rows_sha256": "922045092644a5697ad536491d50f37c509f3e163248ba48218067c0cefa8912"
+        },
+        "sha256": {
+          "manifest.json": "9a534fc6c27cce393e642c7dfbe369facf5a10365cf02297cb97e7deb72bd25d",
+          "predictions.jsonl": "b63b11c5662501d0b4eec36a7962ae9c7c13bf2c8b79743e8a86d5b5c26179a4",
+          "scoring_rows.jsonl": "922045092644a5697ad536491d50f37c509f3e163248ba48218067c0cefa8912",
+          "summary.json": "05034b472e29e7d5ac2c8445816bc7726a343581be56495d715ce8695aa77a20"
+        }
+      },
+      {
+        "suite": "korean-public-ko-en",
+        "directory": "eval/results/jev-1.13-2026-09-20/runs/korean-public-ko-en/korean-public-ko-en",
+        "manifest": {
+          "endpoint": "https://openrouter.ai/api/v1/systemone",
+          "model": "typesafe/jev-1.13",
+          "dataset_sha256": "d8f8bac64ad3e50d0ab38b3f7a8515553e67de513a27a64da9a0c7ccf40aeddf",
+          "rows": 300,
+          "suite": {
+            "schema_version": 1,
+            "id": "korean-public-ko-en",
+            "version": "1",
+            "adapter": "typed-v1",
+            "dataset": "../../data/korean-public-ko-en.jsonl",
+            "language_group": "non-english",
+            "languages": [
+              "ko",
+              "en"
+            ],
+            "headline_metric": "accuracy",
+            "source": {
+              "repository": "mahlernim/jev-korean-benchmark",
+              "revision": "2c983b7f6e7f1c2baf7e078161eae3698420f3de"
+            },
+            "condition": "ko_en",
+            "category": "general-language",
+            "subcategory": "classification-decision",
+            "modality": "text",
+            "scope_note": "Mixed reading comprehension, paraphrase equivalence and Korean medical QA; task composition differs by language condition.",
+            "task_detail": "reading-and-equivalence",
+            "aggregate_children": [
+              "korean-public-ko-en-knowledge",
+              "korean-public-ko-en-context"
+            ],
+            "project": "Jev Korean benchmark",
+            "project_configuration": "ko-en"
+          },
+          "adapter_sha256": "9f1ab94e0fe312fcbb4c0872260fac051fbe27430e38e2723f4924a1454eabf8",
+          "retries": 5,
+          "delay": 0.02,
+          "timeout": 120.0,
+          "workers": 16,
+          "reporting": {
+            "project": "Jev Korean benchmark",
+            "configuration": "ko-en",
+            "expected_suites": [
+              "korean-public-ko-en-context",
+              "korean-public-ko-en-knowledge"
+            ],
+            "partitions": [
+              {
+                "id": "korean-public-ko-en-knowledge",
+                "category": "general-language",
+                "subcategory": "model-knowledge",
+                "modality": "text",
+                "language_group": "non-english",
+                "row_filter": {
+                  "field": "family",
+                  "values": [
+                    "kormed"
+                  ]
+                }
+              },
+              {
+                "id": "korean-public-ko-en-context",
+                "category": "general-language",
+                "subcategory": "classification-decision",
+                "modality": "text",
+                "language_group": "non-english",
+                "row_filter": {
+                  "field": "family",
+                  "values": [
+                    "belebele",
+                    "pawsx"
+                  ]
+                }
+              }
+            ]
+          },
+          "started_at_unix": 1789967880.639717,
+          "runner_sha256": "cf1d35b8368e75343a3f70c883a843e4ecc52af2ea803c4412fbfabc48e0caf1",
+          "scoring_rows_sha256": "d8f8bac64ad3e50d0ab38b3f7a8515553e67de513a27a64da9a0c7ccf40aeddf"
+        },
+        "sha256": {
+          "manifest.json": "ca3cd7827fa0387d32c45a2d26cbb2993163e16422fdc53b32054d3d783f711d",
+          "predictions.jsonl": "ce6de7b7af4ee29a10ac9115a8c14d7206311f7e62500b9b534a8ed1cf3f39d8",
+          "scoring_rows.jsonl": "d8f8bac64ad3e50d0ab38b3f7a8515553e67de513a27a64da9a0c7ccf40aeddf",
+          "summary.json": "b5cc66329189b38670102c1d0ece02dca4cc9ef9c8fb592e429e7bc0cdba18db"
+        }
+      },
+      {
+        "suite": "korean-public-ko-ko",
+        "directory": "eval/results/jev-1.13-2026-09-20/runs/korean-public-ko-ko/korean-public-ko-ko",
+        "manifest": {
+          "endpoint": "https://openrouter.ai/api/v1/systemone",
+          "model": "typesafe/jev-1.13",
+          "dataset_sha256": "9bb964946d046161a1425aa055e1c659003c362d7a910919b1f312de0863b131",
+          "rows": 300,
+          "suite": {
+            "schema_version": 1,
+            "id": "korean-public-ko-ko",
+            "version": "1",
+            "adapter": "typed-v1",
+            "dataset": "../../data/korean-public-ko-ko.jsonl",
+            "language_group": "non-english",
+            "languages": [
+              "ko"
+            ],
+            "headline_metric": "accuracy",
+            "source": {
+              "repository": "mahlernim/jev-korean-benchmark",
+              "revision": "2c983b7f6e7f1c2baf7e078161eae3698420f3de"
+            },
+            "condition": "ko_ko",
+            "category": "general-language",
+            "subcategory": "classification-decision",
+            "modality": "text",
+            "scope_note": "Mixed reading comprehension, paraphrase equivalence and Korean medical QA; task composition differs by language condition.",
+            "task_detail": "reading-and-equivalence",
+            "aggregate_children": [
+              "korean-public-ko-ko-knowledge",
+              "korean-public-ko-ko-context"
+            ],
+            "project": "Jev Korean benchmark",
+            "project_configuration": "ko-ko"
+          },
+          "adapter_sha256": "9f1ab94e0fe312fcbb4c0872260fac051fbe27430e38e2723f4924a1454eabf8",
+          "retries": 5,
+          "delay": 0.02,
+          "timeout": 120.0,
+          "workers": 16,
+          "reporting": {
+            "project": "Jev Korean benchmark",
+            "configuration": "ko-ko",
+            "expected_suites": [
+              "korean-public-ko-ko-context",
+              "korean-public-ko-ko-knowledge"
+            ],
+            "partitions": [
+              {
+                "id": "korean-public-ko-ko-knowledge",
+                "category": "general-language",
+                "subcategory": "model-knowledge",
+                "modality": "text",
+                "language_group": "non-english",
+                "row_filter": {
+                  "field": "family",
+                  "values": [
+                    "kormed"
+                  ]
+                }
+              },
+              {
+                "id": "korean-public-ko-ko-context",
+                "category": "general-language",
+                "subcategory": "classification-decision",
+                "modality": "text",
+                "language_group": "non-english",
+                "row_filter": {
+                  "field": "family",
+                  "values": [
+                    "belebele",
+                    "pawsx"
+                  ]
+                }
+              }
+            ]
+          },
+          "started_at_unix": 1789967889.3342578,
+          "runner_sha256": "cf1d35b8368e75343a3f70c883a843e4ecc52af2ea803c4412fbfabc48e0caf1",
+          "scoring_rows_sha256": "9bb964946d046161a1425aa055e1c659003c362d7a910919b1f312de0863b131"
+        },
+        "sha256": {
+          "manifest.json": "c87db8784a4c7fd9485dc17a2a0bc2bfc1b04a31f2e26f5296de019b662ee163",
+          "predictions.jsonl": "1e8414883b2227bb1be22ab24467f3f1f9843cf2e4ea5882a28a53829f721a81",
+          "scoring_rows.jsonl": "9bb964946d046161a1425aa055e1c659003c362d7a910919b1f312de0863b131",
+          "summary.json": "e5ca71910dde8e9c4b44daa1ba1bc79be9d767ada29b0eed40e10166a744c5bf"
+        }
+      }
+    ],
+    "cost_scope": "Sum of usage.cost in saved responses; excludes probes, discarded attempts, and any billed requests without saved responses."
+  }
+}

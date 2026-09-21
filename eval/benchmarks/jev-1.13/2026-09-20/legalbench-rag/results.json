@@ -1,0 +1,367 @@
+{
+  "model": "typesafe/jev-1.13",
+  "endpoint": "https://openrouter.ai/api/v1/systemone",
+  "by_project": [
+    {
+      "project": "LegalBench-RAG",
+      "configuration": "frozen BM25 reranking",
+      "metric": "ndcg_at_10",
+      "score": 0.29147649645086066,
+      "metrics": {
+        "rows": 6889,
+        "failed_rows": 0,
+        "recall_at_5": 0.28980479891715166,
+        "mrr_at_10": 0.32912885045632884,
+        "ndcg_at_10": 0.29147649645086066,
+        "candidate_recall": 0.31998560664187037,
+        "recall_at_10": 0.30736438163858687,
+        "mean_character_precision_at_5": 0.021580318804239513,
+        "mean_character_recall_at_5": 0.29229950575961255
+      },
+      "suites": [
+        "legal-rag-contractnli",
+        "legal-rag-cuad",
+        "legal-rag-maud",
+        "legal-rag-privacy-qa"
+      ],
+      "missing_suites": [],
+      "coverage": "complete"
+    }
+  ],
+  "by_category": [
+    {
+      "project": "LegalBench-RAG",
+      "configuration": "frozen BM25 reranking",
+      "metric": "ndcg_at_10",
+      "score": 0.29147649645086066,
+      "metrics": {
+        "rows": 6889,
+        "failed_rows": 0,
+        "recall_at_5": 0.28980479891715166,
+        "mrr_at_10": 0.32912885045632884,
+        "ndcg_at_10": 0.29147649645086066,
+        "candidate_recall": 0.31998560664187037,
+        "recall_at_10": 0.30736438163858687,
+        "mean_character_precision_at_5": 0.021580318804239513,
+        "mean_character_recall_at_5": 0.29229950575961255
+      },
+      "suites": [
+        "legal-rag-contractnli",
+        "legal-rag-cuad",
+        "legal-rag-maud",
+        "legal-rag-privacy-qa"
+      ],
+      "missing_suites": [],
+      "coverage": "complete",
+      "placement": [
+        "text",
+        "english",
+        "legal",
+        "ranking"
+      ]
+    }
+  ],
+  "provenance": {
+    "export_git_revision": "b6f63bb11a4319e39afff35a9e6e8a04e8d294ea",
+    "evaluator_sha256": {
+      "catalog.py": "f69e435c11f1d35cefca32075db31858ff9ef7c2c360507b8ac0259d452c0ef9",
+      "run.py": "60b26b661a3f99f89eef22bf89744d78d14b56068945f19e020c951fd7ce42d3",
+      "retry.py": "ed3ed9b31152d62bd20705501391557b2b6f128edd84be96e8f71609ec8770c6",
+      "suites.py": "85f443ba008dc2d83b6777e5906a30de37d925bcb4abc9829c63ce325d9f218a",
+      "report.py": "a002bc6d2cddd4f2c0309861c822ef487818ed9dc25f7ecef6785e824c6a6ff0",
+      "prepare.py": "ccbfafde1bb1fa2fe227b9e44525042e487e49abf5dedcb81c22dd7b95db97f8",
+      "adapters/typed.py": "9f1ab94e0fe312fcbb4c0872260fac051fbe27430e38e2723f4924a1454eabf8",
+      "adapters/mmlu.py": "de4432175d2e66d19b10f5743524b33cea5d874ddc20aac81478ac7078dc8f81",
+      "adapters/fields.py": "de77fcdaa13266b14492e361c5ce6d5a48c27d9498ed7de60ae9327f72e4a357",
+      "adapters/vision.py": "9e7856043a82e19df4f039fbb0abf7421110b0bc6eb3cbe5f1ddf3e408b8f327",
+      "adapters/binary_battery.py": "6909af0c264d1222079c6f9c49ca7699227469a45dae385577d2303c53c81458",
+      "adapters/choice.py": "c088c9277435df01845009b36e270731754a1558748a84b990ea7c3e11c2fe8c",
+      "adapters/__init__.py": "2dda3c52d95dc2b8b259271a286bfc9e7155ace75784e486b77fc105aa2c3ea9",
+      "adapters/passage_rerank.py": "c5f4194ae9018caf7532d4bccbbda13c51a5317266f04a2ee5b2a88c8a0fb96d",
+      "adapters/rag.py": "f67507426adbacd4f74739f3223f6280d8fe0762cd1c0fbd936a08d9fef62055",
+      "adapters/graded_rag.py": "d411f8a1aaa245aeb72b1dd87ca6175489a38efe9a0ba1b45ecd15e8bc12ffc8",
+      "adapters/visual_qa.py": "d806c360f7aafb8abe70c255523a3f5e8b10cb523883a707a06e8265fae04991",
+      "adapters/domain_ranking.py": "b32c10e3d550bf571dbb381e315748b3f8d8e81eab9602299367bc9f3537cd08"
+    },
+    "returned_models": [
+      "typesafe/jev-1.13-20260917"
+    ],
+    "usage": {
+      "input_tokens": 56199056,
+      "output_tokens": 2576486,
+      "reported_cost_usd": 2.3603603519999994,
+      "responses_with_cost": 6889
+    },
+    "artifacts": [
+      {
+        "suite": "legal-rag-contractnli",
+        "directory": "eval/results/jev-1.13-2026-09-20/runs/legal-rag-contractnli/legal-rag-contractnli",
+        "manifest": {
+          "endpoint": "https://openrouter.ai/api/v1/systemone",
+          "model": "typesafe/jev-1.13",
+          "dataset_sha256": "c65dcadc8acb4f0be121c78610ce833cb3bbfa3feb1c550e1922b1c4f1d6ae99",
+          "rows": 977,
+          "suite": {
+            "schema_version": 1,
+            "id": "legal-rag-contractnli",
+            "version": "1",
+            "adapter": "domain-ranking-v1",
+            "dataset": "../../data/legal-rag-contractnli.jsonl",
+            "language_group": "english",
+            "languages": [
+              "en"
+            ],
+            "modality": "text",
+            "category": "legal",
+            "subcategory": "ranking",
+            "task_detail": "legal-rag-contractnli",
+            "headline_metric": "ndcg_at_10",
+            "source": {
+              "repository": "zeroentropy-ai/legalbenchrag",
+              "revision": "431bc8f2488a81569ab7259fa633dcc50ab77f9a",
+              "url": "https://github.com/zeroentropy-ai/legalbenchrag"
+            },
+            "scope_note": "Frozen BM25 candidate reranking adaptation; all queries count; no gold injection.",
+            "project": "LegalBench-RAG",
+            "project_configuration": "frozen BM25 reranking"
+          },
+          "adapter_sha256": "b32c10e3d550bf571dbb381e315748b3f8d8e81eab9602299367bc9f3537cd08",
+          "retries": 5,
+          "delay": 0.02,
+          "timeout": 120.0,
+          "workers": 16,
+          "reporting": {
+            "project": "LegalBench-RAG",
+            "configuration": "frozen BM25 reranking",
+            "expected_suites": [
+              "legal-rag-contractnli",
+              "legal-rag-cuad",
+              "legal-rag-maud",
+              "legal-rag-privacy-qa"
+            ],
+            "partitions": [
+              {
+                "id": "legal-rag-contractnli",
+                "category": "legal",
+                "subcategory": "ranking",
+                "modality": "text",
+                "language_group": "english"
+              }
+            ]
+          },
+          "started_at_unix": 1789968059.256426,
+          "runner_sha256": "cf1d35b8368e75343a3f70c883a843e4ecc52af2ea803c4412fbfabc48e0caf1",
+          "scoring_rows_sha256": "c65dcadc8acb4f0be121c78610ce833cb3bbfa3feb1c550e1922b1c4f1d6ae99"
+        },
+        "sha256": {
+          "manifest.json": "1a185c5137cb5f873a10d31f035a273be3772e87d4da3faf44f0af85012308cd",
+          "predictions.jsonl": "ef7d1870e7ffc796e425b729a9da688a125c993e005a5daa8da553ce13e93f0c",
+          "scoring_rows.jsonl": "c65dcadc8acb4f0be121c78610ce833cb3bbfa3feb1c550e1922b1c4f1d6ae99",
+          "summary.json": "9fb42c07cffed4cba21dc5e78e29acc4fd3696d38218396d4fdb4d77192036c3"
+        }
+      },
+      {
+        "suite": "legal-rag-cuad",
+        "directory": "eval/results/jev-1.13-2026-09-20/runs/legal-rag-cuad/legal-rag-cuad",
+        "manifest": {
+          "endpoint": "https://openrouter.ai/api/v1/systemone",
+          "model": "typesafe/jev-1.13",
+          "dataset_sha256": "bc631fbf8d2f85ed4c1393a2471997ccc8c72d8378685e1c6aca1717d8bc47c8",
+          "rows": 4042,
+          "suite": {
+            "schema_version": 1,
+            "id": "legal-rag-cuad",
+            "version": "1",
+            "adapter": "domain-ranking-v1",
+            "dataset": "../../data/legal-rag-cuad.jsonl",
+            "language_group": "english",
+            "languages": [
+              "en"
+            ],
+            "modality": "text",
+            "category": "legal",
+            "subcategory": "ranking",
+            "task_detail": "legal-rag-cuad",
+            "headline_metric": "ndcg_at_10",
+            "source": {
+              "repository": "zeroentropy-ai/legalbenchrag",
+              "revision": "431bc8f2488a81569ab7259fa633dcc50ab77f9a",
+              "url": "https://github.com/zeroentropy-ai/legalbenchrag"
+            },
+            "scope_note": "Frozen BM25 candidate reranking adaptation; all queries count; no gold injection.",
+            "project": "LegalBench-RAG",
+            "project_configuration": "frozen BM25 reranking"
+          },
+          "adapter_sha256": "b32c10e3d550bf571dbb381e315748b3f8d8e81eab9602299367bc9f3537cd08",
+          "retries": 5,
+          "delay": 0.02,
+          "timeout": 120.0,
+          "workers": 16,
+          "reporting": {
+            "project": "LegalBench-RAG",
+            "configuration": "frozen BM25 reranking",
+            "expected_suites": [
+              "legal-rag-contractnli",
+              "legal-rag-cuad",
+              "legal-rag-maud",
+              "legal-rag-privacy-qa"
+            ],
+            "partitions": [
+              {
+                "id": "legal-rag-cuad",
+                "category": "legal",
+                "subcategory": "ranking",
+                "modality": "text",
+                "language_group": "english"
+              }
+            ]
+          },
+          "started_at_unix": 1789968088.994139,
+          "runner_sha256": "cf1d35b8368e75343a3f70c883a843e4ecc52af2ea803c4412fbfabc48e0caf1",
+          "scoring_rows_sha256": "bc631fbf8d2f85ed4c1393a2471997ccc8c72d8378685e1c6aca1717d8bc47c8"
+        },
+        "sha256": {
+          "manifest.json": "2b6db643811aaffeebabe678f3f392f8e0f3a1e434683aaa36c1ee99ce1f8913",
+          "predictions.jsonl": "e4cdfbd025731eab431a45fecfe8a86ca79adf540044566115eb5a228a49b977",
+          "scoring_rows.jsonl": "bc631fbf8d2f85ed4c1393a2471997ccc8c72d8378685e1c6aca1717d8bc47c8",
+          "summary.json": "64e2cf1d519dacae6398197a5357190fd774a182c5caaec9302bc28138058bdd"
+        }
+      },
+      {
+        "suite": "legal-rag-maud",
+        "directory": "eval/results/jev-1.13-2026-09-20/runs/legal-rag-maud/legal-rag-maud",
+        "manifest": {
+          "endpoint": "https://openrouter.ai/api/v1/systemone",
+          "model": "typesafe/jev-1.13",
+          "dataset_sha256": "4c6f35d1e22dafb19ed6de42fd80e72ee448901b6f1e01e2f4b8b71c1a606c6a",
+          "rows": 1676,
+          "suite": {
+            "schema_version": 1,
+            "id": "legal-rag-maud",
+            "version": "1",
+            "adapter": "domain-ranking-v1",
+            "dataset": "../../data/legal-rag-maud.jsonl",
+            "language_group": "english",
+            "languages": [
+              "en"
+            ],
+            "modality": "text",
+            "category": "legal",
+            "subcategory": "ranking",
+            "task_detail": "legal-rag-maud",
+            "headline_metric": "ndcg_at_10",
+            "source": {
+              "repository": "zeroentropy-ai/legalbenchrag",
+              "revision": "431bc8f2488a81569ab7259fa633dcc50ab77f9a",
+              "url": "https://github.com/zeroentropy-ai/legalbenchrag"
+            },
+            "scope_note": "Frozen BM25 candidate reranking adaptation; all queries count; no gold injection.",
+            "project": "LegalBench-RAG",
+            "project_configuration": "frozen BM25 reranking"
+          },
+          "adapter_sha256": "b32c10e3d550bf571dbb381e315748b3f8d8e81eab9602299367bc9f3537cd08",
+          "retries": 5,
+          "delay": 0.02,
+          "timeout": 120.0,
+          "workers": 16,
+          "reporting": {
+            "project": "LegalBench-RAG",
+            "configuration": "frozen BM25 reranking",
+            "expected_suites": [
+              "legal-rag-contractnli",
+              "legal-rag-cuad",
+              "legal-rag-maud",
+              "legal-rag-privacy-qa"
+            ],
+            "partitions": [
+              {
+                "id": "legal-rag-maud",
+                "category": "legal",
+                "subcategory": "ranking",
+                "modality": "text",
+                "language_group": "english"
+              }
+            ]
+          },
+          "started_at_unix": 1789968277.142998,
+          "runner_sha256": "60b26b661a3f99f89eef22bf89744d78d14b56068945f19e020c951fd7ce42d3",
+          "scoring_rows_sha256": "4c6f35d1e22dafb19ed6de42fd80e72ee448901b6f1e01e2f4b8b71c1a606c6a"
+        },
+        "sha256": {
+          "manifest.json": "29d5a9273a3599c75a3ec919c0503da48c48e5288b43d065938d94fbe5bd892e",
+          "predictions.jsonl": "e36a582494ebb02018a47becdf68d373091d2c7bb9498ce003e56fa5fe578839",
+          "scoring_rows.jsonl": "4c6f35d1e22dafb19ed6de42fd80e72ee448901b6f1e01e2f4b8b71c1a606c6a",
+          "summary.json": "b38d58b54ebef1c83adfba61cd58add69cbd3b79e8eedaac119227e6f37fd5e1"
+        }
+      },
+      {
+        "suite": "legal-rag-privacy-qa",
+        "directory": "eval/results/jev-1.13-2026-09-20/runs/legal-rag-privacy-qa/legal-rag-privacy-qa",
+        "manifest": {
+          "endpoint": "https://openrouter.ai/api/v1/systemone",
+          "model": "typesafe/jev-1.13",
+          "dataset_sha256": "bff0e7a5c3dcb3a8224016eb151cefa24f01e893369f90b9474328b708e3a156",
+          "rows": 194,
+          "suite": {
+            "schema_version": 1,
+            "id": "legal-rag-privacy-qa",
+            "version": "1",
+            "adapter": "domain-ranking-v1",
+            "dataset": "../../data/legal-rag-privacy-qa.jsonl",
+            "language_group": "english",
+            "languages": [
+              "en"
+            ],
+            "modality": "text",
+            "category": "legal",
+            "subcategory": "ranking",
+            "task_detail": "legal-rag-privacy-qa",
+            "headline_metric": "ndcg_at_10",
+            "source": {
+              "repository": "zeroentropy-ai/legalbenchrag",
+              "revision": "431bc8f2488a81569ab7259fa633dcc50ab77f9a",
+              "url": "https://github.com/zeroentropy-ai/legalbenchrag"
+            },
+            "scope_note": "Frozen BM25 candidate reranking adaptation; all queries count; no gold injection.",
+            "project": "LegalBench-RAG",
+            "project_configuration": "frozen BM25 reranking"
+          },
+          "adapter_sha256": "b32c10e3d550bf571dbb381e315748b3f8d8e81eab9602299367bc9f3537cd08",
+          "retries": 5,
+          "delay": 0.02,
+          "timeout": 120.0,
+          "workers": 16,
+          "reporting": {
+            "project": "LegalBench-RAG",
+            "configuration": "frozen BM25 reranking",
+            "expected_suites": [
+              "legal-rag-contractnli",
+              "legal-rag-cuad",
+              "legal-rag-maud",
+              "legal-rag-privacy-qa"
+            ],
+            "partitions": [
+              {
+                "id": "legal-rag-privacy-qa",
+                "category": "legal",
+                "subcategory": "ranking",
+                "modality": "text",
+                "language_group": "english"
+              }
+            ]
+          },
+          "started_at_unix": 1789968276.857672,
+          "runner_sha256": "60b26b661a3f99f89eef22bf89744d78d14b56068945f19e020c951fd7ce42d3",
+          "scoring_rows_sha256": "bff0e7a5c3dcb3a8224016eb151cefa24f01e893369f90b9474328b708e3a156"
+        },
+        "sha256": {
+          "manifest.json": "346840baad01847d36a6c24fa93be4321d4a2976a3b78d55e15b0a196360b0fb",
+          "predictions.jsonl": "b681fbc504b416342aa58114b1e0b525bcc4da6db41c5c2b491c0ae190ecf1c5",
+          "scoring_rows.jsonl": "bff0e7a5c3dcb3a8224016eb151cefa24f01e893369f90b9474328b708e3a156",
+          "summary.json": "2ac5b038b50a185af33d9b50f04b5b6ba396f20af76dacc22441ddeddbfbc7b5"
+        }
+      }
+    ],
+    "cost_scope": "Sum of usage.cost in saved responses; excludes probes, discarded attempts, and any billed requests without saved responses."
+  }
+}

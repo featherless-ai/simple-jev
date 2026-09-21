@@ -53,6 +53,7 @@ def render(category=None,language_group=None):
                     for p,d in rows:
                         metric=d['headline_metric']
                         detail=d.get('task_detail',sub).replace('-',' ')
+                        if not d.get('default_enabled',True): detail += ' (opt-in; excluded from default runs)'
                         lines.append(f"| [{d['id']}](../{p.relative_to(ROOT).as_posix()}) | {detail} | {d['language_group']} | {metric} |")
                     lines+=['']
     lines+=['## Grouping rules','',

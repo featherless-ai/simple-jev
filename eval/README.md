@@ -65,3 +65,33 @@ python3 -m unittest discover -s eval -p 'test_*.py'
 
 For the request contract, custom adapters, and baseline details, see the
 [framework reference](notes/FRAMEWORK.md).
+
+For long runs, `--workers 16 --delay 0.02` allows up to 16 concurrent requests,
+with at least 20 ms between dispatches. Choose settings appropriate to your
+endpoint. `--resume` continues an interrupted output directory with identical
+settings/data, preserving every saved prediction (including failures). A malformed
+partial JSONL record requires review rather than automatic deletion.
+
+The runner pauses on authentication/billing rejection or 20 consecutive errors.
+Retries apply to HTTP 429 and all HTTP 5xx server errors. Context-free questions send an
+empty string for `state`, compatible with System One's non-null input contract.
+
+Export small, tracked reports per project with `report.py --export`; see
+[report storage](notes/REPORTING.md#store-benchmark-reports-in-git).
+
+BigCloneBench is opt-in because it contains 415,416 examples. Full-run selectors
+should skip manifests with `default_enabled: false`; explicit `--suite` selection
+still works. Other coding benchmarks remain in the default set.
+
+To repair saved server failures after a run finishes:
+
+```sh
+python3 eval/retry.py --run eval/results/first-run --key-env JEV_API_KEY
+```
+
+Only HTTP 5xx failures are retried. Successful predictions are preserved, original
+failures are retained in `prior_results` and a retry journal, and scores are rebuilt.
+Do not retry a run while another process is writing to it.
+
+ToolRet Web is also disabled by default: its full candidate descriptions can exceed
+32K context. ToolRet Code and Customized remain enabled; no silent truncation is applied.

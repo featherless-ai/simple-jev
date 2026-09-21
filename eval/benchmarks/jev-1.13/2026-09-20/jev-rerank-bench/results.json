@@ -1,0 +1,1598 @@
+{
+  "model": "typesafe/jev-1.13",
+  "endpoint": "https://openrouter.ai/api/v1/systemone",
+  "by_project": [
+    {
+      "project": "Jev Rerank Bench",
+      "configuration": "bright-biology",
+      "metric": "ndcg_at_10",
+      "score": 0.4325548046175666,
+      "metrics": {
+        "rows": 103,
+        "failed_rows": 0,
+        "ranking_rows": 39,
+        "no_relevant_candidate_rows": 64,
+        "ndcg_at_10": 0.4325548046175666,
+        "mrr_at_10": 0.6855311355311355,
+        "recall_at_5": 0.34699211045364886,
+        "top_pick_accuracy": 0.5897435897435898
+      },
+      "suites": [
+        "passage-rerank-bright-biology"
+      ],
+      "missing_suites": [],
+      "coverage": "complete"
+    },
+    {
+      "project": "Jev Rerank Bench",
+      "configuration": "bright-earth_science",
+      "metric": "ndcg_at_10",
+      "score": 0.4673805645426405,
+      "metrics": {
+        "rows": 116,
+        "failed_rows": 0,
+        "ranking_rows": 57,
+        "no_relevant_candidate_rows": 59,
+        "ndcg_at_10": 0.4673805645426405,
+        "mrr_at_10": 0.703411306042885,
+        "recall_at_5": 0.4096238620266079,
+        "top_pick_accuracy": 0.5964912280701754
+      },
+      "suites": [
+        "passage-rerank-bright-earth_science"
+      ],
+      "missing_suites": [],
+      "coverage": "complete"
+    },
+    {
+      "project": "Jev Rerank Bench",
+      "configuration": "bright-economics",
+      "metric": "ndcg_at_10",
+      "score": 0.5194261764909158,
+      "metrics": {
+        "rows": 103,
+        "failed_rows": 0,
+        "ranking_rows": 38,
+        "no_relevant_candidate_rows": 65,
+        "ndcg_at_10": 0.5194261764909158,
+        "mrr_at_10": 0.66296992481203,
+        "recall_at_5": 0.406307017186134,
+        "top_pick_accuracy": 0.5526315789473685
+      },
+      "suites": [
+        "passage-rerank-bright-economics"
+      ],
+      "missing_suites": [],
+      "coverage": "complete"
+    },
+    {
+      "project": "Jev Rerank Bench",
+      "configuration": "bright-psychology",
+      "metric": "ndcg_at_10",
+      "score": 0.637042057628861,
+      "metrics": {
+        "rows": 101,
+        "failed_rows": 0,
+        "ranking_rows": 29,
+        "no_relevant_candidate_rows": 72,
+        "ndcg_at_10": 0.637042057628861,
+        "mrr_at_10": 0.7876847290640394,
+        "recall_at_5": 0.555460363213646,
+        "top_pick_accuracy": 0.6551724137931034
+      },
+      "suites": [
+        "passage-rerank-bright-psychology"
+      ],
+      "missing_suites": [],
+      "coverage": "complete"
+    },
+    {
+      "project": "Jev Rerank Bench",
+      "configuration": "bright-robotics",
+      "metric": "ndcg_at_10",
+      "score": 0.4779107496321768,
+      "metrics": {
+        "rows": 101,
+        "failed_rows": 0,
+        "ranking_rows": 35,
+        "no_relevant_candidate_rows": 66,
+        "ndcg_at_10": 0.4779107496321768,
+        "mrr_at_10": 0.6848752834467119,
+        "recall_at_5": 0.39235062318282693,
+        "top_pick_accuracy": 0.6
+      },
+      "suites": [
+        "passage-rerank-bright-robotics"
+      ],
+      "missing_suites": [],
+      "coverage": "complete"
+    },
+    {
+      "project": "Jev Rerank Bench",
+      "configuration": "bright-stackoverflow",
+      "metric": "ndcg_at_10",
+      "score": 0.3869586746154206,
+      "metrics": {
+        "rows": 117,
+        "failed_rows": 0,
+        "ranking_rows": 62,
+        "no_relevant_candidate_rows": 55,
+        "ndcg_at_10": 0.3869586746154206,
+        "mrr_at_10": 0.582142857142857,
+        "recall_at_5": 0.3315425260770223,
+        "top_pick_accuracy": 0.41935483870967744
+      },
+      "suites": [
+        "passage-rerank-bright-stackoverflow"
+      ],
+      "missing_suites": [],
+      "coverage": "complete"
+    },
+    {
+      "project": "Jev Rerank Bench",
+      "configuration": "bright-sustainable_living",
+      "metric": "ndcg_at_10",
+      "score": 0.5065729637533545,
+      "metrics": {
+        "rows": 108,
+        "failed_rows": 0,
+        "ranking_rows": 47,
+        "no_relevant_candidate_rows": 61,
+        "ndcg_at_10": 0.5065729637533545,
+        "mrr_at_10": 0.7627912867274569,
+        "recall_at_5": 0.4329726650847861,
+        "top_pick_accuracy": 0.6382978723404256
+      },
+      "suites": [
+        "passage-rerank-bright-sustainable_living"
+      ],
+      "missing_suites": [],
+      "coverage": "complete"
+    },
+    {
+      "project": "Jev Rerank Bench",
+      "configuration": "csn-python",
+      "metric": "ndcg_at_10",
+      "score": 0.9820655904090562,
+      "metrics": {
+        "rows": 300,
+        "failed_rows": 0,
+        "ranking_rows": 256,
+        "no_relevant_candidate_rows": 44,
+        "ndcg_at_10": 0.9820655904090562,
+        "mrr_at_10": 0.9759114583333333,
+        "recall_at_5": 1.0,
+        "top_pick_accuracy": 0.95703125
+      },
+      "suites": [
+        "passage-rerank-csn-python"
+      ],
+      "missing_suites": [],
+      "coverage": "complete"
+    },
+    {
+      "project": "Jev Rerank Bench",
+      "configuration": "fiqa",
+      "metric": "ndcg_at_10",
+      "score": 0.6159890493879656,
+      "metrics": {
+        "rows": 648,
+        "failed_rows": 0,
+        "ranking_rows": 411,
+        "no_relevant_candidate_rows": 237,
+        "ndcg_at_10": 0.6159890493879656,
+        "mrr_at_10": 0.7809765187502411,
+        "recall_at_5": 0.6052793853888747,
+        "top_pick_accuracy": 0.6715328467153284
+      },
+      "suites": [
+        "passage-rerank-fiqa"
+      ],
+      "missing_suites": [],
+      "coverage": "complete"
+    },
+    {
+      "project": "Jev Rerank Bench",
+      "configuration": "miracl-fr",
+      "metric": "ndcg_at_10",
+      "score": 0.6893385285809647,
+      "metrics": {
+        "rows": 269,
+        "failed_rows": 0,
+        "ranking_rows": 152,
+        "no_relevant_candidate_rows": 117,
+        "ndcg_at_10": 0.6893385285809647,
+        "mrr_at_10": 0.7561403508771929,
+        "recall_at_5": 0.7187343358395989,
+        "top_pick_accuracy": 0.6513157894736842
+      },
+      "suites": [
+        "passage-rerank-miracl-fr"
+      ],
+      "missing_suites": [],
+      "coverage": "complete"
+    },
+    {
+      "project": "Jev Rerank Bench",
+      "configuration": "nfcorpus",
+      "metric": "ndcg_at_10",
+      "score": 0.5024929261554457,
+      "metrics": {
+        "rows": 323,
+        "failed_rows": 0,
+        "ranking_rows": 239,
+        "no_relevant_candidate_rows": 84,
+        "ndcg_at_10": 0.5024929261554457,
+        "mrr_at_10": 0.7859384339509863,
+        "recall_at_5": 0.1945747388853464,
+        "top_pick_accuracy": 0.6903765690376569
+      },
+      "suites": [
+        "passage-rerank-nfcorpus"
+      ],
+      "missing_suites": [],
+      "coverage": "complete"
+    },
+    {
+      "project": "Jev Rerank Bench",
+      "configuration": "nq",
+      "metric": "ndcg_at_10",
+      "score": 0.8027227239846185,
+      "metrics": {
+        "rows": 500,
+        "failed_rows": 0,
+        "ranking_rows": 320,
+        "no_relevant_candidate_rows": 180,
+        "ndcg_at_10": 0.8027227239846185,
+        "mrr_at_10": 0.7886049107142858,
+        "recall_at_5": 0.9020833333333333,
+        "top_pick_accuracy": 0.659375
+      },
+      "suites": [
+        "passage-rerank-nq"
+      ],
+      "missing_suites": [],
+      "coverage": "complete"
+    },
+    {
+      "project": "Jev Rerank Bench",
+      "configuration": "scifact",
+      "metric": "ndcg_at_10",
+      "score": 0.8855260840444031,
+      "metrics": {
+        "rows": 300,
+        "failed_rows": 0,
+        "ranking_rows": 264,
+        "no_relevant_candidate_rows": 36,
+        "ndcg_at_10": 0.8855260840444031,
+        "mrr_at_10": 0.8606872294372295,
+        "recall_at_5": 0.9521464646464646,
+        "top_pick_accuracy": 0.7954545454545454
+      },
+      "suites": [
+        "passage-rerank-scifact"
+      ],
+      "missing_suites": [],
+      "coverage": "complete"
+    },
+    {
+      "project": "Jev Rerank Bench",
+      "configuration": "trec-covid",
+      "metric": "ndcg_at_10",
+      "score": 0.7751022349711353,
+      "metrics": {
+        "rows": 50,
+        "failed_rows": 0,
+        "ranking_rows": 50,
+        "no_relevant_candidate_rows": 0,
+        "ndcg_at_10": 0.7751022349711353,
+        "mrr_at_10": 0.9583333333333335,
+        "recall_at_5": 0.011722645954794506,
+        "top_pick_accuracy": 0.94
+      },
+      "suites": [
+        "passage-rerank-trec-covid"
+      ],
+      "missing_suites": [],
+      "coverage": "complete"
+    }
+  ],
+  "by_category": [
+    {
+      "project": "Jev Rerank Bench",
+      "configuration": "bright-stackoverflow",
+      "metric": "ndcg_at_10",
+      "score": 0.3869586746154206,
+      "metrics": {
+        "rows": 117,
+        "failed_rows": 0,
+        "ranking_rows": 62,
+        "no_relevant_candidate_rows": 55,
+        "ndcg_at_10": 0.3869586746154206,
+        "mrr_at_10": 0.582142857142857,
+        "recall_at_5": 0.3315425260770223,
+        "top_pick_accuracy": 0.41935483870967744
+      },
+      "suites": [
+        "passage-rerank-bright-stackoverflow"
+      ],
+      "missing_suites": [],
+      "coverage": "complete",
+      "placement": [
+        "text",
+        "english",
+        "coding",
+        "ranking"
+      ]
+    },
+    {
+      "project": "Jev Rerank Bench",
+      "configuration": "csn-python",
+      "metric": "ndcg_at_10",
+      "score": 0.9820655904090562,
+      "metrics": {
+        "rows": 300,
+        "failed_rows": 0,
+        "ranking_rows": 256,
+        "no_relevant_candidate_rows": 44,
+        "ndcg_at_10": 0.9820655904090562,
+        "mrr_at_10": 0.9759114583333333,
+        "recall_at_5": 1.0,
+        "top_pick_accuracy": 0.95703125
+      },
+      "suites": [
+        "passage-rerank-csn-python"
+      ],
+      "missing_suites": [],
+      "coverage": "complete",
+      "placement": [
+        "text",
+        "english",
+        "coding",
+        "ranking"
+      ]
+    },
+    {
+      "project": "Jev Rerank Bench",
+      "configuration": "fiqa",
+      "metric": "ndcg_at_10",
+      "score": 0.6159890493879656,
+      "metrics": {
+        "rows": 648,
+        "failed_rows": 0,
+        "ranking_rows": 411,
+        "no_relevant_candidate_rows": 237,
+        "ndcg_at_10": 0.6159890493879656,
+        "mrr_at_10": 0.7809765187502411,
+        "recall_at_5": 0.6052793853888747,
+        "top_pick_accuracy": 0.6715328467153284
+      },
+      "suites": [
+        "passage-rerank-fiqa"
+      ],
+      "missing_suites": [],
+      "coverage": "complete",
+      "placement": [
+        "text",
+        "english",
+        "corporate-documents",
+        "ranking"
+      ]
+    },
+    {
+      "project": "Jev Rerank Bench",
+      "configuration": "bright-biology",
+      "metric": "ndcg_at_10",
+      "score": 0.4325548046175666,
+      "metrics": {
+        "rows": 103,
+        "failed_rows": 0,
+        "ranking_rows": 39,
+        "no_relevant_candidate_rows": 64,
+        "ndcg_at_10": 0.4325548046175666,
+        "mrr_at_10": 0.6855311355311355,
+        "recall_at_5": 0.34699211045364886,
+        "top_pick_accuracy": 0.5897435897435898
+      },
+      "suites": [
+        "passage-rerank-bright-biology"
+      ],
+      "missing_suites": [],
+      "coverage": "complete",
+      "placement": [
+        "text",
+        "english",
+        "general-language",
+        "ranking"
+      ]
+    },
+    {
+      "project": "Jev Rerank Bench",
+      "configuration": "bright-earth_science",
+      "metric": "ndcg_at_10",
+      "score": 0.4673805645426405,
+      "metrics": {
+        "rows": 116,
+        "failed_rows": 0,
+        "ranking_rows": 57,
+        "no_relevant_candidate_rows": 59,
+        "ndcg_at_10": 0.4673805645426405,
+        "mrr_at_10": 0.703411306042885,
+        "recall_at_5": 0.4096238620266079,
+        "top_pick_accuracy": 0.5964912280701754
+      },
+      "suites": [
+        "passage-rerank-bright-earth_science"
+      ],
+      "missing_suites": [],
+      "coverage": "complete",
+      "placement": [
+        "text",
+        "english",
+        "general-language",
+        "ranking"
+      ]
+    },
+    {
+      "project": "Jev Rerank Bench",
+      "configuration": "bright-economics",
+      "metric": "ndcg_at_10",
+      "score": 0.5194261764909158,
+      "metrics": {
+        "rows": 103,
+        "failed_rows": 0,
+        "ranking_rows": 38,
+        "no_relevant_candidate_rows": 65,
+        "ndcg_at_10": 0.5194261764909158,
+        "mrr_at_10": 0.66296992481203,
+        "recall_at_5": 0.406307017186134,
+        "top_pick_accuracy": 0.5526315789473685
+      },
+      "suites": [
+        "passage-rerank-bright-economics"
+      ],
+      "missing_suites": [],
+      "coverage": "complete",
+      "placement": [
+        "text",
+        "english",
+        "general-language",
+        "ranking"
+      ]
+    },
+    {
+      "project": "Jev Rerank Bench",
+      "configuration": "bright-psychology",
+      "metric": "ndcg_at_10",
+      "score": 0.637042057628861,
+      "metrics": {
+        "rows": 101,
+        "failed_rows": 0,
+        "ranking_rows": 29,
+        "no_relevant_candidate_rows": 72,
+        "ndcg_at_10": 0.637042057628861,
+        "mrr_at_10": 0.7876847290640394,
+        "recall_at_5": 0.555460363213646,
+        "top_pick_accuracy": 0.6551724137931034
+      },
+      "suites": [
+        "passage-rerank-bright-psychology"
+      ],
+      "missing_suites": [],
+      "coverage": "complete",
+      "placement": [
+        "text",
+        "english",
+        "general-language",
+        "ranking"
+      ]
+    },
+    {
+      "project": "Jev Rerank Bench",
+      "configuration": "bright-robotics",
+      "metric": "ndcg_at_10",
+      "score": 0.4779107496321768,
+      "metrics": {
+        "rows": 101,
+        "failed_rows": 0,
+        "ranking_rows": 35,
+        "no_relevant_candidate_rows": 66,
+        "ndcg_at_10": 0.4779107496321768,
+        "mrr_at_10": 0.6848752834467119,
+        "recall_at_5": 0.39235062318282693,
+        "top_pick_accuracy": 0.6
+      },
+      "suites": [
+        "passage-rerank-bright-robotics"
+      ],
+      "missing_suites": [],
+      "coverage": "complete",
+      "placement": [
+        "text",
+        "english",
+        "general-language",
+        "ranking"
+      ]
+    },
+    {
+      "project": "Jev Rerank Bench",
+      "configuration": "bright-sustainable_living",
+      "metric": "ndcg_at_10",
+      "score": 0.5065729637533545,
+      "metrics": {
+        "rows": 108,
+        "failed_rows": 0,
+        "ranking_rows": 47,
+        "no_relevant_candidate_rows": 61,
+        "ndcg_at_10": 0.5065729637533545,
+        "mrr_at_10": 0.7627912867274569,
+        "recall_at_5": 0.4329726650847861,
+        "top_pick_accuracy": 0.6382978723404256
+      },
+      "suites": [
+        "passage-rerank-bright-sustainable_living"
+      ],
+      "missing_suites": [],
+      "coverage": "complete",
+      "placement": [
+        "text",
+        "english",
+        "general-language",
+        "ranking"
+      ]
+    },
+    {
+      "project": "Jev Rerank Bench",
+      "configuration": "nfcorpus",
+      "metric": "ndcg_at_10",
+      "score": 0.5024929261554457,
+      "metrics": {
+        "rows": 323,
+        "failed_rows": 0,
+        "ranking_rows": 239,
+        "no_relevant_candidate_rows": 84,
+        "ndcg_at_10": 0.5024929261554457,
+        "mrr_at_10": 0.7859384339509863,
+        "recall_at_5": 0.1945747388853464,
+        "top_pick_accuracy": 0.6903765690376569
+      },
+      "suites": [
+        "passage-rerank-nfcorpus"
+      ],
+      "missing_suites": [],
+      "coverage": "complete",
+      "placement": [
+        "text",
+        "english",
+        "general-language",
+        "ranking"
+      ]
+    },
+    {
+      "project": "Jev Rerank Bench",
+      "configuration": "nq",
+      "metric": "ndcg_at_10",
+      "score": 0.8027227239846185,
+      "metrics": {
+        "rows": 500,
+        "failed_rows": 0,
+        "ranking_rows": 320,
+        "no_relevant_candidate_rows": 180,
+        "ndcg_at_10": 0.8027227239846185,
+        "mrr_at_10": 0.7886049107142858,
+        "recall_at_5": 0.9020833333333333,
+        "top_pick_accuracy": 0.659375
+      },
+      "suites": [
+        "passage-rerank-nq"
+      ],
+      "missing_suites": [],
+      "coverage": "complete",
+      "placement": [
+        "text",
+        "english",
+        "general-language",
+        "ranking"
+      ]
+    },
+    {
+      "project": "Jev Rerank Bench",
+      "configuration": "scifact",
+      "metric": "ndcg_at_10",
+      "score": 0.8855260840444031,
+      "metrics": {
+        "rows": 300,
+        "failed_rows": 0,
+        "ranking_rows": 264,
+        "no_relevant_candidate_rows": 36,
+        "ndcg_at_10": 0.8855260840444031,
+        "mrr_at_10": 0.8606872294372295,
+        "recall_at_5": 0.9521464646464646,
+        "top_pick_accuracy": 0.7954545454545454
+      },
+      "suites": [
+        "passage-rerank-scifact"
+      ],
+      "missing_suites": [],
+      "coverage": "complete",
+      "placement": [
+        "text",
+        "english",
+        "general-language",
+        "ranking"
+      ]
+    },
+    {
+      "project": "Jev Rerank Bench",
+      "configuration": "trec-covid",
+      "metric": "ndcg_at_10",
+      "score": 0.7751022349711353,
+      "metrics": {
+        "rows": 50,
+        "failed_rows": 0,
+        "ranking_rows": 50,
+        "no_relevant_candidate_rows": 0,
+        "ndcg_at_10": 0.7751022349711353,
+        "mrr_at_10": 0.9583333333333335,
+        "recall_at_5": 0.011722645954794506,
+        "top_pick_accuracy": 0.94
+      },
+      "suites": [
+        "passage-rerank-trec-covid"
+      ],
+      "missing_suites": [],
+      "coverage": "complete",
+      "placement": [
+        "text",
+        "english",
+        "general-language",
+        "ranking"
+      ]
+    },
+    {
+      "project": "Jev Rerank Bench",
+      "configuration": "miracl-fr",
+      "metric": "ndcg_at_10",
+      "score": 0.6893385285809647,
+      "metrics": {
+        "rows": 269,
+        "failed_rows": 0,
+        "ranking_rows": 152,
+        "no_relevant_candidate_rows": 117,
+        "ndcg_at_10": 0.6893385285809647,
+        "mrr_at_10": 0.7561403508771929,
+        "recall_at_5": 0.7187343358395989,
+        "top_pick_accuracy": 0.6513157894736842
+      },
+      "suites": [
+        "passage-rerank-miracl-fr"
+      ],
+      "missing_suites": [],
+      "coverage": "complete",
+      "placement": [
+        "text",
+        "non-english",
+        "general-language",
+        "ranking"
+      ]
+    }
+  ],
+  "provenance": {
+    "export_git_revision": "b6f63bb11a4319e39afff35a9e6e8a04e8d294ea",
+    "evaluator_sha256": {
+      "catalog.py": "f69e435c11f1d35cefca32075db31858ff9ef7c2c360507b8ac0259d452c0ef9",
+      "run.py": "60b26b661a3f99f89eef22bf89744d78d14b56068945f19e020c951fd7ce42d3",
+      "retry.py": "ed3ed9b31152d62bd20705501391557b2b6f128edd84be96e8f71609ec8770c6",
+      "suites.py": "85f443ba008dc2d83b6777e5906a30de37d925bcb4abc9829c63ce325d9f218a",
+      "report.py": "a002bc6d2cddd4f2c0309861c822ef487818ed9dc25f7ecef6785e824c6a6ff0",
+      "prepare.py": "ccbfafde1bb1fa2fe227b9e44525042e487e49abf5dedcb81c22dd7b95db97f8",
+      "adapters/typed.py": "9f1ab94e0fe312fcbb4c0872260fac051fbe27430e38e2723f4924a1454eabf8",
+      "adapters/mmlu.py": "de4432175d2e66d19b10f5743524b33cea5d874ddc20aac81478ac7078dc8f81",
+      "adapters/fields.py": "de77fcdaa13266b14492e361c5ce6d5a48c27d9498ed7de60ae9327f72e4a357",
+      "adapters/vision.py": "9e7856043a82e19df4f039fbb0abf7421110b0bc6eb3cbe5f1ddf3e408b8f327",
+      "adapters/binary_battery.py": "6909af0c264d1222079c6f9c49ca7699227469a45dae385577d2303c53c81458",
+      "adapters/choice.py": "c088c9277435df01845009b36e270731754a1558748a84b990ea7c3e11c2fe8c",
+      "adapters/__init__.py": "2dda3c52d95dc2b8b259271a286bfc9e7155ace75784e486b77fc105aa2c3ea9",
+      "adapters/passage_rerank.py": "c5f4194ae9018caf7532d4bccbbda13c51a5317266f04a2ee5b2a88c8a0fb96d",
+      "adapters/rag.py": "f67507426adbacd4f74739f3223f6280d8fe0762cd1c0fbd936a08d9fef62055",
+      "adapters/graded_rag.py": "d411f8a1aaa245aeb72b1dd87ca6175489a38efe9a0ba1b45ecd15e8bc12ffc8",
+      "adapters/visual_qa.py": "d806c360f7aafb8abe70c255523a3f5e8b10cb523883a707a06e8265fae04991",
+      "adapters/domain_ranking.py": "b32c10e3d550bf571dbb381e315748b3f8d8e81eab9602299367bc9f3537cd08"
+    },
+    "returned_models": [
+      "typesafe/jev-1.13-20260917"
+    ],
+    "usage": {
+      "input_tokens": 32268811,
+      "output_tokens": 1425106,
+      "reported_cost_usd": 1.3552900619999975,
+      "responses_with_cost": 3139
+    },
+    "artifacts": [
+      {
+        "suite": "passage-rerank-bright-biology",
+        "directory": "eval/results/jev-1.13-2026-09-20/runs/passage-rerank-bright-biology/passage-rerank-bright-biology",
+        "manifest": {
+          "endpoint": "https://openrouter.ai/api/v1/systemone",
+          "model": "typesafe/jev-1.13",
+          "dataset_sha256": "e7ecf4d65e9b58f63fa6b42759847a2cad0f5878d079f494d849b4a76847bcca",
+          "rows": 103,
+          "suite": {
+            "schema_version": 1,
+            "id": "passage-rerank-bright-biology",
+            "version": "1",
+            "adapter": "passage-rerank-v1",
+            "dataset": "../../data/passage-rerank-bright-biology.jsonl",
+            "language_group": "english",
+            "languages": [
+              "en"
+            ],
+            "headline_metric": "ndcg_at_10",
+            "source": {
+              "repository": "anessbelbati/jev-rerank-bench",
+              "revision": "cd9a35b22aeb4187334f7018a0ee1960a7470586"
+            },
+            "scope": "present candidate list, rubric batch; per-dataset results",
+            "category": "general-language",
+            "subcategory": "ranking",
+            "modality": "text",
+            "task_detail": "reasoning-intensive",
+            "project": "Jev Rerank Bench",
+            "project_configuration": "bright-biology"
+          },
+          "adapter_sha256": "c5f4194ae9018caf7532d4bccbbda13c51a5317266f04a2ee5b2a88c8a0fb96d",
+          "retries": 5,
+          "delay": 0.02,
+          "timeout": 120.0,
+          "workers": 16,
+          "reporting": {
+            "project": "Jev Rerank Bench",
+            "configuration": "bright-biology",
+            "expected_suites": [
+              "passage-rerank-bright-biology"
+            ],
+            "partitions": [
+              {
+                "id": "passage-rerank-bright-biology",
+                "category": "general-language",
+                "subcategory": "ranking",
+                "modality": "text",
+                "language_group": "english"
+              }
+            ]
+          },
+          "started_at_unix": 1789968327.835863,
+          "runner_sha256": "60b26b661a3f99f89eef22bf89744d78d14b56068945f19e020c951fd7ce42d3",
+          "scoring_rows_sha256": "e7ecf4d65e9b58f63fa6b42759847a2cad0f5878d079f494d849b4a76847bcca"
+        },
+        "sha256": {
+          "manifest.json": "c41aede7a861b328524e77192ecbf9ec121cddaca01c871ed4723f9910315c73",
+          "predictions.jsonl": "9fafbf69e4d9e3a5f18b623bca34e390acd7e746848b6b859efcf8d2cc8d6769",
+          "scoring_rows.jsonl": "e7ecf4d65e9b58f63fa6b42759847a2cad0f5878d079f494d849b4a76847bcca",
+          "summary.json": "6709c9a90cb050c6720604a367cd330015fc939306b53808b19799d992073da6"
+        }
+      },
+      {
+        "suite": "passage-rerank-bright-earth_science",
+        "directory": "eval/results/jev-1.13-2026-09-20/runs/passage-rerank-bright-earth_science/passage-rerank-bright-earth_science",
+        "manifest": {
+          "endpoint": "https://openrouter.ai/api/v1/systemone",
+          "model": "typesafe/jev-1.13",
+          "dataset_sha256": "48fe5110dd9783ab7ded93687ad1c8ebbf112a55304ac5870e05269c0e22cd6d",
+          "rows": 116,
+          "suite": {
+            "schema_version": 1,
+            "id": "passage-rerank-bright-earth_science",
+            "version": "1",
+            "adapter": "passage-rerank-v1",
+            "dataset": "../../data/passage-rerank-bright-earth_science.jsonl",
+            "language_group": "english",
+            "languages": [
+              "en"
+            ],
+            "headline_metric": "ndcg_at_10",
+            "source": {
+              "repository": "anessbelbati/jev-rerank-bench",
+              "revision": "cd9a35b22aeb4187334f7018a0ee1960a7470586"
+            },
+            "scope": "present candidate list, rubric batch; per-dataset results",
+            "category": "general-language",
+            "subcategory": "ranking",
+            "modality": "text",
+            "task_detail": "reasoning-intensive",
+            "project": "Jev Rerank Bench",
+            "project_configuration": "bright-earth_science"
+          },
+          "adapter_sha256": "c5f4194ae9018caf7532d4bccbbda13c51a5317266f04a2ee5b2a88c8a0fb96d",
+          "retries": 5,
+          "delay": 0.02,
+          "timeout": 120.0,
+          "workers": 16,
+          "reporting": {
+            "project": "Jev Rerank Bench",
+            "configuration": "bright-earth_science",
+            "expected_suites": [
+              "passage-rerank-bright-earth_science"
+            ],
+            "partitions": [
+              {
+                "id": "passage-rerank-bright-earth_science",
+                "category": "general-language",
+                "subcategory": "ranking",
+                "modality": "text",
+                "language_group": "english"
+              }
+            ]
+          },
+          "started_at_unix": 1789968328.6681652,
+          "runner_sha256": "60b26b661a3f99f89eef22bf89744d78d14b56068945f19e020c951fd7ce42d3",
+          "scoring_rows_sha256": "48fe5110dd9783ab7ded93687ad1c8ebbf112a55304ac5870e05269c0e22cd6d"
+        },
+        "sha256": {
+          "manifest.json": "713bca63fa694a4bb7039803a35b7c099a40be1259d396faa4d44f5f8bf8347c",
+          "predictions.jsonl": "0c909aa64e2ea5a1988fd698fdd7b9f742c459cab3cb157523c43dad06dacc1f",
+          "scoring_rows.jsonl": "48fe5110dd9783ab7ded93687ad1c8ebbf112a55304ac5870e05269c0e22cd6d",
+          "summary.json": "76191585df64cfc323fadeab3d4d796fcf48766aa6f53ec755ae67152c2f30d4"
+        }
+      },
+      {
+        "suite": "passage-rerank-bright-economics",
+        "directory": "eval/results/jev-1.13-2026-09-20/runs/passage-rerank-bright-economics/passage-rerank-bright-economics",
+        "manifest": {
+          "endpoint": "https://openrouter.ai/api/v1/systemone",
+          "model": "typesafe/jev-1.13",
+          "dataset_sha256": "c8045d09fe6fac3518f5194f95b66a18658d0d18824ee7e2c89ff3556a3480b3",
+          "rows": 103,
+          "suite": {
+            "schema_version": 1,
+            "id": "passage-rerank-bright-economics",
+            "version": "1",
+            "adapter": "passage-rerank-v1",
+            "dataset": "../../data/passage-rerank-bright-economics.jsonl",
+            "language_group": "english",
+            "languages": [
+              "en"
+            ],
+            "headline_metric": "ndcg_at_10",
+            "source": {
+              "repository": "anessbelbati/jev-rerank-bench",
+              "revision": "cd9a35b22aeb4187334f7018a0ee1960a7470586"
+            },
+            "scope": "present candidate list, rubric batch; per-dataset results",
+            "category": "general-language",
+            "subcategory": "ranking",
+            "modality": "text",
+            "task_detail": "reasoning-intensive",
+            "project": "Jev Rerank Bench",
+            "project_configuration": "bright-economics"
+          },
+          "adapter_sha256": "c5f4194ae9018caf7532d4bccbbda13c51a5317266f04a2ee5b2a88c8a0fb96d",
+          "retries": 5,
+          "delay": 0.02,
+          "timeout": 120.0,
+          "workers": 16,
+          "reporting": {
+            "project": "Jev Rerank Bench",
+            "configuration": "bright-economics",
+            "expected_suites": [
+              "passage-rerank-bright-economics"
+            ],
+            "partitions": [
+              {
+                "id": "passage-rerank-bright-economics",
+                "category": "general-language",
+                "subcategory": "ranking",
+                "modality": "text",
+                "language_group": "english"
+              }
+            ]
+          },
+          "started_at_unix": 1789968332.471515,
+          "runner_sha256": "60b26b661a3f99f89eef22bf89744d78d14b56068945f19e020c951fd7ce42d3",
+          "scoring_rows_sha256": "c8045d09fe6fac3518f5194f95b66a18658d0d18824ee7e2c89ff3556a3480b3"
+        },
+        "sha256": {
+          "manifest.json": "69f7e5204864e8b578866b491b7c70b141a361312586d6db0ec0facf2575ce7f",
+          "predictions.jsonl": "912c885e40bcf98bd9c4b4d5af16c8c0f3a88d270e27dc47dbe3b86350dfef3e",
+          "scoring_rows.jsonl": "c8045d09fe6fac3518f5194f95b66a18658d0d18824ee7e2c89ff3556a3480b3",
+          "summary.json": "d87a46ed4bc51b2ee292b9753debbe041c7a657914ff3ebde072984897469ca7"
+        }
+      },
+      {
+        "suite": "passage-rerank-bright-psychology",
+        "directory": "eval/results/jev-1.13-2026-09-20/runs/passage-rerank-bright-psychology/passage-rerank-bright-psychology",
+        "manifest": {
+          "endpoint": "https://openrouter.ai/api/v1/systemone",
+          "model": "typesafe/jev-1.13",
+          "dataset_sha256": "daff6ee52f47adc4cd829fa2d375708bfcacb0787cf9f0e01897ab22cce657b6",
+          "rows": 101,
+          "suite": {
+            "schema_version": 1,
+            "id": "passage-rerank-bright-psychology",
+            "version": "1",
+            "adapter": "passage-rerank-v1",
+            "dataset": "../../data/passage-rerank-bright-psychology.jsonl",
+            "language_group": "english",
+            "languages": [
+              "en"
+            ],
+            "headline_metric": "ndcg_at_10",
+            "source": {
+              "repository": "anessbelbati/jev-rerank-bench",
+              "revision": "cd9a35b22aeb4187334f7018a0ee1960a7470586"
+            },
+            "scope": "present candidate list, rubric batch; per-dataset results",
+            "category": "general-language",
+            "subcategory": "ranking",
+            "modality": "text",
+            "task_detail": "reasoning-intensive",
+            "project": "Jev Rerank Bench",
+            "project_configuration": "bright-psychology"
+          },
+          "adapter_sha256": "c5f4194ae9018caf7532d4bccbbda13c51a5317266f04a2ee5b2a88c8a0fb96d",
+          "retries": 5,
+          "delay": 0.02,
+          "timeout": 120.0,
+          "workers": 16,
+          "reporting": {
+            "project": "Jev Rerank Bench",
+            "configuration": "bright-psychology",
+            "expected_suites": [
+              "passage-rerank-bright-psychology"
+            ],
+            "partitions": [
+              {
+                "id": "passage-rerank-bright-psychology",
+                "category": "general-language",
+                "subcategory": "ranking",
+                "modality": "text",
+                "language_group": "english"
+              }
+            ]
+          },
+          "started_at_unix": 1789968332.659327,
+          "runner_sha256": "60b26b661a3f99f89eef22bf89744d78d14b56068945f19e020c951fd7ce42d3",
+          "scoring_rows_sha256": "daff6ee52f47adc4cd829fa2d375708bfcacb0787cf9f0e01897ab22cce657b6"
+        },
+        "sha256": {
+          "manifest.json": "f0afb940b65d91a433556086f06161dfc3e74e6447fa7539048ee267702a0472",
+          "predictions.jsonl": "02b04b4025d63f519195975c2165a4a0c4d640e757bcab45aaf4e9bbd7d72d86",
+          "scoring_rows.jsonl": "daff6ee52f47adc4cd829fa2d375708bfcacb0787cf9f0e01897ab22cce657b6",
+          "summary.json": "a4848721eb7b79913854ad56a064f43683ddb29d4dea0efe66cd3f34e5f649b7"
+        }
+      },
+      {
+        "suite": "passage-rerank-bright-robotics",
+        "directory": "eval/results/jev-1.13-2026-09-20/runs/passage-rerank-bright-robotics/passage-rerank-bright-robotics",
+        "manifest": {
+          "endpoint": "https://openrouter.ai/api/v1/systemone",
+          "model": "typesafe/jev-1.13",
+          "dataset_sha256": "9f0f0b1d72f06b18382d1ea28f6feefd124623edb301b8c300efbfb5fd820f8a",
+          "rows": 101,
+          "suite": {
+            "schema_version": 1,
+            "id": "passage-rerank-bright-robotics",
+            "version": "1",
+            "adapter": "passage-rerank-v1",
+            "dataset": "../../data/passage-rerank-bright-robotics.jsonl",
+            "language_group": "english",
+            "languages": [
+              "en"
+            ],
+            "headline_metric": "ndcg_at_10",
+            "source": {
+              "repository": "anessbelbati/jev-rerank-bench",
+              "revision": "cd9a35b22aeb4187334f7018a0ee1960a7470586"
+            },
+            "scope": "present candidate list, rubric batch; per-dataset results",
+            "category": "general-language",
+            "subcategory": "ranking",
+            "modality": "text",
+            "task_detail": "reasoning-intensive",
+            "project": "Jev Rerank Bench",
+            "project_configuration": "bright-robotics"
+          },
+          "adapter_sha256": "c5f4194ae9018caf7532d4bccbbda13c51a5317266f04a2ee5b2a88c8a0fb96d",
+          "retries": 5,
+          "delay": 0.02,
+          "timeout": 120.0,
+          "workers": 16,
+          "reporting": {
+            "project": "Jev Rerank Bench",
+            "configuration": "bright-robotics",
+            "expected_suites": [
+              "passage-rerank-bright-robotics"
+            ],
+            "partitions": [
+              {
+                "id": "passage-rerank-bright-robotics",
+                "category": "general-language",
+                "subcategory": "ranking",
+                "modality": "text",
+                "language_group": "english"
+              }
+            ]
+          },
+          "started_at_unix": 1789968336.006496,
+          "runner_sha256": "60b26b661a3f99f89eef22bf89744d78d14b56068945f19e020c951fd7ce42d3",
+          "scoring_rows_sha256": "9f0f0b1d72f06b18382d1ea28f6feefd124623edb301b8c300efbfb5fd820f8a"
+        },
+        "sha256": {
+          "manifest.json": "1e9b118cbf68b389f2cb541f362c9c7218b1af84f36154969501d3982f9bd751",
+          "predictions.jsonl": "4a3ed5b55cfd863b625229e4fcbff50f2975df05942a205e1abffb6ad522d93c",
+          "scoring_rows.jsonl": "9f0f0b1d72f06b18382d1ea28f6feefd124623edb301b8c300efbfb5fd820f8a",
+          "summary.json": "a2b9028592f8e95e2e2c99664376f22f819df908d68414b1c3ade9d328474360"
+        }
+      },
+      {
+        "suite": "passage-rerank-bright-stackoverflow",
+        "directory": "eval/results/jev-1.13-2026-09-20/runs/passage-rerank-bright-stackoverflow/passage-rerank-bright-stackoverflow",
+        "manifest": {
+          "endpoint": "https://openrouter.ai/api/v1/systemone",
+          "model": "typesafe/jev-1.13",
+          "dataset_sha256": "4def2c2e5ce8f3b8ca5c1f2b2ef13551eccc5542143056b90418545d45ae79fc",
+          "rows": 117,
+          "suite": {
+            "schema_version": 1,
+            "id": "passage-rerank-bright-stackoverflow",
+            "version": "1",
+            "adapter": "passage-rerank-v1",
+            "dataset": "../../data/passage-rerank-bright-stackoverflow.jsonl",
+            "language_group": "english",
+            "languages": [
+              "en"
+            ],
+            "headline_metric": "ndcg_at_10",
+            "source": {
+              "repository": "anessbelbati/jev-rerank-bench",
+              "revision": "cd9a35b22aeb4187334f7018a0ee1960a7470586"
+            },
+            "scope": "present candidate list, rubric batch; per-dataset results",
+            "category": "coding",
+            "subcategory": "ranking",
+            "modality": "text",
+            "task_detail": "reasoning-intensive",
+            "project": "Jev Rerank Bench",
+            "project_configuration": "bright-stackoverflow"
+          },
+          "adapter_sha256": "c5f4194ae9018caf7532d4bccbbda13c51a5317266f04a2ee5b2a88c8a0fb96d",
+          "retries": 5,
+          "delay": 0.02,
+          "timeout": 120.0,
+          "workers": 16,
+          "reporting": {
+            "project": "Jev Rerank Bench",
+            "configuration": "bright-stackoverflow",
+            "expected_suites": [
+              "passage-rerank-bright-stackoverflow"
+            ],
+            "partitions": [
+              {
+                "id": "passage-rerank-bright-stackoverflow",
+                "category": "coding",
+                "subcategory": "ranking",
+                "modality": "text",
+                "language_group": "english"
+              }
+            ]
+          },
+          "started_at_unix": 1789968336.099452,
+          "runner_sha256": "60b26b661a3f99f89eef22bf89744d78d14b56068945f19e020c951fd7ce42d3",
+          "scoring_rows_sha256": "4def2c2e5ce8f3b8ca5c1f2b2ef13551eccc5542143056b90418545d45ae79fc"
+        },
+        "sha256": {
+          "manifest.json": "1fc8e28f6ce01c16cb71994ca164244ba8afce81b1fb5f1e06123d65f1e3712d",
+          "predictions.jsonl": "91a6ace0e057a6ba19d06c79f0b39916af75b6caf57002c8d848103cbb13c847",
+          "scoring_rows.jsonl": "4def2c2e5ce8f3b8ca5c1f2b2ef13551eccc5542143056b90418545d45ae79fc",
+          "summary.json": "8502a78f0fe37ea54bd2678b109dd285984d1f1019fb31e81fe4d39e65c1b1ea"
+        }
+      },
+      {
+        "suite": "passage-rerank-bright-sustainable_living",
+        "directory": "eval/results/jev-1.13-2026-09-20/runs/passage-rerank-bright-sustainable_living/passage-rerank-bright-sustainable_living",
+        "manifest": {
+          "endpoint": "https://openrouter.ai/api/v1/systemone",
+          "model": "typesafe/jev-1.13",
+          "dataset_sha256": "0d74b2027d57c3ba615dd894e05f25fcf335920bd890b39ceee253283dca65da",
+          "rows": 108,
+          "suite": {
+            "schema_version": 1,
+            "id": "passage-rerank-bright-sustainable_living",
+            "version": "1",
+            "adapter": "passage-rerank-v1",
+            "dataset": "../../data/passage-rerank-bright-sustainable_living.jsonl",
+            "language_group": "english",
+            "languages": [
+              "en"
+            ],
+            "headline_metric": "ndcg_at_10",
+            "source": {
+              "repository": "anessbelbati/jev-rerank-bench",
+              "revision": "cd9a35b22aeb4187334f7018a0ee1960a7470586"
+            },
+            "scope": "present candidate list, rubric batch; per-dataset results",
+            "category": "general-language",
+            "subcategory": "ranking",
+            "modality": "text",
+            "task_detail": "reasoning-intensive",
+            "project": "Jev Rerank Bench",
+            "project_configuration": "bright-sustainable_living"
+          },
+          "adapter_sha256": "c5f4194ae9018caf7532d4bccbbda13c51a5317266f04a2ee5b2a88c8a0fb96d",
+          "retries": 5,
+          "delay": 0.02,
+          "timeout": 120.0,
+          "workers": 16,
+          "reporting": {
+            "project": "Jev Rerank Bench",
+            "configuration": "bright-sustainable_living",
+            "expected_suites": [
+              "passage-rerank-bright-sustainable_living"
+            ],
+            "partitions": [
+              {
+                "id": "passage-rerank-bright-sustainable_living",
+                "category": "general-language",
+                "subcategory": "ranking",
+                "modality": "text",
+                "language_group": "english"
+              }
+            ]
+          },
+          "started_at_unix": 1789968339.780597,
+          "runner_sha256": "60b26b661a3f99f89eef22bf89744d78d14b56068945f19e020c951fd7ce42d3",
+          "scoring_rows_sha256": "0d74b2027d57c3ba615dd894e05f25fcf335920bd890b39ceee253283dca65da"
+        },
+        "sha256": {
+          "manifest.json": "3303eb0cc1189515e25815a45e86bf57ced7d49d30418a0c966f50d63a52c76b",
+          "predictions.jsonl": "345b9512b4905c343b663b5bc91d09093bfdbc209db96ac2b7277af71cb976c7",
+          "scoring_rows.jsonl": "0d74b2027d57c3ba615dd894e05f25fcf335920bd890b39ceee253283dca65da",
+          "summary.json": "f81fafced78628bf14e28c8c529a4f9f63bfc563c300a96fa8eb7a5667d29ace"
+        }
+      },
+      {
+        "suite": "passage-rerank-csn-python",
+        "directory": "eval/results/jev-1.13-2026-09-20/runs/passage-rerank-csn-python/passage-rerank-csn-python",
+        "manifest": {
+          "endpoint": "https://openrouter.ai/api/v1/systemone",
+          "model": "typesafe/jev-1.13",
+          "dataset_sha256": "ed88707b1315a71db7b21f8cb6e2ce8a910463f3261116d321d09b45d06cc64d",
+          "rows": 300,
+          "suite": {
+            "schema_version": 1,
+            "id": "passage-rerank-csn-python",
+            "version": "1",
+            "adapter": "passage-rerank-v1",
+            "dataset": "../../data/passage-rerank-csn-python.jsonl",
+            "language_group": "english",
+            "languages": [
+              "en"
+            ],
+            "headline_metric": "ndcg_at_10",
+            "source": {
+              "repository": "anessbelbati/jev-rerank-bench",
+              "revision": "cd9a35b22aeb4187334f7018a0ee1960a7470586"
+            },
+            "scope": "present candidate list, rubric batch; per-dataset results",
+            "category": "coding",
+            "subcategory": "ranking",
+            "modality": "text",
+            "task_detail": "code",
+            "project": "Jev Rerank Bench",
+            "project_configuration": "csn-python"
+          },
+          "adapter_sha256": "c5f4194ae9018caf7532d4bccbbda13c51a5317266f04a2ee5b2a88c8a0fb96d",
+          "retries": 5,
+          "delay": 0.02,
+          "timeout": 120.0,
+          "workers": 16,
+          "reporting": {
+            "project": "Jev Rerank Bench",
+            "configuration": "csn-python",
+            "expected_suites": [
+              "passage-rerank-csn-python"
+            ],
+            "partitions": [
+              {
+                "id": "passage-rerank-csn-python",
+                "category": "coding",
+                "subcategory": "ranking",
+                "modality": "text",
+                "language_group": "english"
+              }
+            ]
+          },
+          "started_at_unix": 1789968341.783257,
+          "runner_sha256": "60b26b661a3f99f89eef22bf89744d78d14b56068945f19e020c951fd7ce42d3",
+          "scoring_rows_sha256": "ed88707b1315a71db7b21f8cb6e2ce8a910463f3261116d321d09b45d06cc64d"
+        },
+        "sha256": {
+          "manifest.json": "b0d5aeef173813f5d122193e4e524b09dd7dbe5b3a176f4939380f8d79e9bc41",
+          "predictions.jsonl": "1ec10732cd0e9879c993e2cd46d133fc869a3ffb4fb0b008fd71af13a1209bd8",
+          "scoring_rows.jsonl": "ed88707b1315a71db7b21f8cb6e2ce8a910463f3261116d321d09b45d06cc64d",
+          "summary.json": "7e6ca593bfd6e33478e9df027cbcdb298565369c5408779d23742bde0c00ed89"
+        }
+      },
+      {
+        "suite": "passage-rerank-fiqa",
+        "directory": "eval/results/jev-1.13-2026-09-20/runs/passage-rerank-fiqa/passage-rerank-fiqa",
+        "manifest": {
+          "endpoint": "https://openrouter.ai/api/v1/systemone",
+          "model": "typesafe/jev-1.13",
+          "dataset_sha256": "cecacdd97b3dd2b1f4c044faa49ba2494c32de5f319d041bb040f09807c0da93",
+          "rows": 648,
+          "suite": {
+            "schema_version": 1,
+            "id": "passage-rerank-fiqa",
+            "version": "1",
+            "adapter": "passage-rerank-v1",
+            "dataset": "../../data/passage-rerank-fiqa.jsonl",
+            "language_group": "english",
+            "languages": [
+              "en"
+            ],
+            "headline_metric": "ndcg_at_10",
+            "source": {
+              "repository": "anessbelbati/jev-rerank-bench",
+              "revision": "cd9a35b22aeb4187334f7018a0ee1960a7470586"
+            },
+            "scope": "present candidate list, rubric batch; per-dataset results",
+            "category": "corporate-documents",
+            "subcategory": "ranking",
+            "modality": "text",
+            "task_detail": "financial",
+            "project": "Jev Rerank Bench",
+            "project_configuration": "fiqa"
+          },
+          "adapter_sha256": "c5f4194ae9018caf7532d4bccbbda13c51a5317266f04a2ee5b2a88c8a0fb96d",
+          "retries": 5,
+          "delay": 0.02,
+          "timeout": 120.0,
+          "workers": 16,
+          "reporting": {
+            "project": "Jev Rerank Bench",
+            "configuration": "fiqa",
+            "expected_suites": [
+              "passage-rerank-fiqa"
+            ],
+            "partitions": [
+              {
+                "id": "passage-rerank-fiqa",
+                "category": "corporate-documents",
+                "subcategory": "ranking",
+                "modality": "text",
+                "language_group": "english"
+              }
+            ]
+          },
+          "started_at_unix": 1789968344.11532,
+          "runner_sha256": "60b26b661a3f99f89eef22bf89744d78d14b56068945f19e020c951fd7ce42d3",
+          "scoring_rows_sha256": "cecacdd97b3dd2b1f4c044faa49ba2494c32de5f319d041bb040f09807c0da93"
+        },
+        "sha256": {
+          "manifest.json": "0b4560552eacc69a7ff836e541501116cb34397a586dc8173f55abee21f23898",
+          "predictions.jsonl": "195be989218dcdc5bd18d30c33cff2e8bb553979d659d652c25f72487d05478c",
+          "scoring_rows.jsonl": "cecacdd97b3dd2b1f4c044faa49ba2494c32de5f319d041bb040f09807c0da93",
+          "summary.json": "13f223e364d23ffd27d80661af9d28e66c690dcd65855c13752bd4f374a6efe9"
+        }
+      },
+      {
+        "suite": "passage-rerank-miracl-fr",
+        "directory": "eval/results/jev-1.13-2026-09-20/runs/passage-rerank-miracl-fr/passage-rerank-miracl-fr",
+        "manifest": {
+          "endpoint": "https://openrouter.ai/api/v1/systemone",
+          "model": "typesafe/jev-1.13",
+          "dataset_sha256": "d6bb56c13e88db3b487babce314da9b230fe52581534f10a6809b61a1388e24c",
+          "rows": 269,
+          "suite": {
+            "schema_version": 1,
+            "id": "passage-rerank-miracl-fr",
+            "version": "1",
+            "adapter": "passage-rerank-v1",
+            "dataset": "../../data/passage-rerank-miracl-fr.jsonl",
+            "language_group": "non-english",
+            "languages": [
+              "fr",
+              "en"
+            ],
+            "headline_metric": "ndcg_at_10",
+            "source": {
+              "repository": "anessbelbati/jev-rerank-bench",
+              "revision": "cd9a35b22aeb4187334f7018a0ee1960a7470586"
+            },
+            "scope": "present candidate list, rubric batch; per-dataset results",
+            "category": "general-language",
+            "subcategory": "ranking",
+            "modality": "text",
+            "task_detail": "general-qa",
+            "project": "Jev Rerank Bench",
+            "project_configuration": "miracl-fr"
+          },
+          "adapter_sha256": "c5f4194ae9018caf7532d4bccbbda13c51a5317266f04a2ee5b2a88c8a0fb96d",
+          "retries": 5,
+          "delay": 0.02,
+          "timeout": 120.0,
+          "workers": 16,
+          "reporting": {
+            "project": "Jev Rerank Bench",
+            "configuration": "miracl-fr",
+            "expected_suites": [
+              "passage-rerank-miracl-fr"
+            ],
+            "partitions": [
+              {
+                "id": "passage-rerank-miracl-fr",
+                "category": "general-language",
+                "subcategory": "ranking",
+                "modality": "text",
+                "language_group": "non-english"
+              }
+            ]
+          },
+          "started_at_unix": 1789968351.761312,
+          "runner_sha256": "60b26b661a3f99f89eef22bf89744d78d14b56068945f19e020c951fd7ce42d3",
+          "scoring_rows_sha256": "d6bb56c13e88db3b487babce314da9b230fe52581534f10a6809b61a1388e24c"
+        },
+        "sha256": {
+          "manifest.json": "7dc4d4c41649b974767140a474b546ea66604127c0a81b28d156c7d8e4a5de92",
+          "predictions.jsonl": "163bfab78d47664d48b8f0ee1c7e2632df45c295ac3edb264ffb6840eefab16f",
+          "scoring_rows.jsonl": "d6bb56c13e88db3b487babce314da9b230fe52581534f10a6809b61a1388e24c",
+          "summary.json": "a9130dfe770b78d9f33f994bd7c00069a55b5954b78780f63509c2adfe0929c1"
+        }
+      },
+      {
+        "suite": "passage-rerank-nfcorpus",
+        "directory": "eval/results/jev-1.13-2026-09-20/runs/passage-rerank-nfcorpus/passage-rerank-nfcorpus",
+        "manifest": {
+          "endpoint": "https://openrouter.ai/api/v1/systemone",
+          "model": "typesafe/jev-1.13",
+          "dataset_sha256": "acea48015c30013519583b61c1d28849e2d796f4fd6b095810b2f553ed1dd067",
+          "rows": 323,
+          "suite": {
+            "schema_version": 1,
+            "id": "passage-rerank-nfcorpus",
+            "version": "1",
+            "adapter": "passage-rerank-v1",
+            "dataset": "../../data/passage-rerank-nfcorpus.jsonl",
+            "language_group": "english",
+            "languages": [
+              "en"
+            ],
+            "headline_metric": "ndcg_at_10",
+            "source": {
+              "repository": "anessbelbati/jev-rerank-bench",
+              "revision": "cd9a35b22aeb4187334f7018a0ee1960a7470586"
+            },
+            "scope": "present candidate list, rubric batch; per-dataset results",
+            "category": "general-language",
+            "subcategory": "ranking",
+            "modality": "text",
+            "task_detail": "medical",
+            "project": "Jev Rerank Bench",
+            "project_configuration": "nfcorpus"
+          },
+          "adapter_sha256": "c5f4194ae9018caf7532d4bccbbda13c51a5317266f04a2ee5b2a88c8a0fb96d",
+          "retries": 5,
+          "delay": 0.02,
+          "timeout": 120.0,
+          "workers": 16,
+          "reporting": {
+            "project": "Jev Rerank Bench",
+            "configuration": "nfcorpus",
+            "expected_suites": [
+              "passage-rerank-nfcorpus"
+            ],
+            "partitions": [
+              {
+                "id": "passage-rerank-nfcorpus",
+                "category": "general-language",
+                "subcategory": "ranking",
+                "modality": "text",
+                "language_group": "english"
+              }
+            ]
+          },
+          "started_at_unix": 1789968360.608895,
+          "runner_sha256": "60b26b661a3f99f89eef22bf89744d78d14b56068945f19e020c951fd7ce42d3",
+          "scoring_rows_sha256": "acea48015c30013519583b61c1d28849e2d796f4fd6b095810b2f553ed1dd067"
+        },
+        "sha256": {
+          "manifest.json": "437603b51cab1167eb9beaaa85c105f56f4793a0c9203868d9f904215bf8c055",
+          "predictions.jsonl": "31f362d4d55568df95f65e0384cbdfea1e5c1f59c162bd323f2ccb593ed046b2",
+          "scoring_rows.jsonl": "acea48015c30013519583b61c1d28849e2d796f4fd6b095810b2f553ed1dd067",
+          "summary.json": "a2d492530725cf8ed78e25ac33be5126db4dc17391f626784ac0ec6abc4d4046"
+        }
+      },
+      {
+        "suite": "passage-rerank-nq",
+        "directory": "eval/results/jev-1.13-2026-09-20/runs/passage-rerank-nq/passage-rerank-nq",
+        "manifest": {
+          "endpoint": "https://openrouter.ai/api/v1/systemone",
+          "model": "typesafe/jev-1.13",
+          "dataset_sha256": "6c532c5b89f78454396af4a8beeb8d023beecd1f2172dd3a6767a7e9ae9b5bdb",
+          "rows": 500,
+          "suite": {
+            "schema_version": 1,
+            "id": "passage-rerank-nq",
+            "version": "1",
+            "adapter": "passage-rerank-v1",
+            "dataset": "../../data/passage-rerank-nq.jsonl",
+            "language_group": "english",
+            "languages": [
+              "en"
+            ],
+            "headline_metric": "ndcg_at_10",
+            "source": {
+              "repository": "anessbelbati/jev-rerank-bench",
+              "revision": "cd9a35b22aeb4187334f7018a0ee1960a7470586"
+            },
+            "scope": "present candidate list, rubric batch; per-dataset results",
+            "category": "general-language",
+            "subcategory": "ranking",
+            "modality": "text",
+            "task_detail": "general-qa",
+            "project": "Jev Rerank Bench",
+            "project_configuration": "nq"
+          },
+          "adapter_sha256": "c5f4194ae9018caf7532d4bccbbda13c51a5317266f04a2ee5b2a88c8a0fb96d",
+          "retries": 5,
+          "delay": 0.02,
+          "timeout": 120.0,
+          "workers": 16,
+          "reporting": {
+            "project": "Jev Rerank Bench",
+            "configuration": "nq",
+            "expected_suites": [
+              "passage-rerank-nq"
+            ],
+            "partitions": [
+              {
+                "id": "passage-rerank-nq",
+                "category": "general-language",
+                "subcategory": "ranking",
+                "modality": "text",
+                "language_group": "english"
+              }
+            ]
+          },
+          "started_at_unix": 1789968364.363803,
+          "runner_sha256": "60b26b661a3f99f89eef22bf89744d78d14b56068945f19e020c951fd7ce42d3",
+          "scoring_rows_sha256": "6c532c5b89f78454396af4a8beeb8d023beecd1f2172dd3a6767a7e9ae9b5bdb"
+        },
+        "sha256": {
+          "manifest.json": "c63fd701036afcaafeee32d8c079aedb75d7879db610e51ef41044241b409ab7",
+          "predictions.jsonl": "ccc54761b34b48bd74477986ae2f5f8c0e3bb56e6cc6a27d9cd466e7debdc434",
+          "scoring_rows.jsonl": "6c532c5b89f78454396af4a8beeb8d023beecd1f2172dd3a6767a7e9ae9b5bdb",
+          "summary.json": "9aefc6cd5016acab824f045a8325aaf175c523bca8f39ba1aa64e66708c2e673"
+        }
+      },
+      {
+        "suite": "passage-rerank-scifact",
+        "directory": "eval/results/jev-1.13-2026-09-20/runs/passage-rerank-scifact/passage-rerank-scifact",
+        "manifest": {
+          "endpoint": "https://openrouter.ai/api/v1/systemone",
+          "model": "typesafe/jev-1.13",
+          "dataset_sha256": "62c1d8708220cd4b7d76284af6bb5206cb4658bb958b72185b0ac50128cbfdcc",
+          "rows": 300,
+          "suite": {
+            "schema_version": 1,
+            "id": "passage-rerank-scifact",
+            "version": "1",
+            "adapter": "passage-rerank-v1",
+            "dataset": "../../data/passage-rerank-scifact.jsonl",
+            "language_group": "english",
+            "languages": [
+              "en"
+            ],
+            "headline_metric": "ndcg_at_10",
+            "source": {
+              "repository": "anessbelbati/jev-rerank-bench",
+              "revision": "cd9a35b22aeb4187334f7018a0ee1960a7470586"
+            },
+            "scope": "present candidate list, rubric batch; per-dataset results",
+            "category": "general-language",
+            "subcategory": "ranking",
+            "modality": "text",
+            "task_detail": "scientific",
+            "project": "Jev Rerank Bench",
+            "project_configuration": "scifact"
+          },
+          "adapter_sha256": "c5f4194ae9018caf7532d4bccbbda13c51a5317266f04a2ee5b2a88c8a0fb96d",
+          "retries": 5,
+          "delay": 0.02,
+          "timeout": 120.0,
+          "workers": 16,
+          "reporting": {
+            "project": "Jev Rerank Bench",
+            "configuration": "scifact",
+            "expected_suites": [
+              "passage-rerank-scifact"
+            ],
+            "partitions": [
+              {
+                "id": "passage-rerank-scifact",
+                "category": "general-language",
+                "subcategory": "ranking",
+                "modality": "text",
+                "language_group": "english"
+              }
+            ]
+          },
+          "started_at_unix": 1789968372.144057,
+          "runner_sha256": "60b26b661a3f99f89eef22bf89744d78d14b56068945f19e020c951fd7ce42d3",
+          "scoring_rows_sha256": "62c1d8708220cd4b7d76284af6bb5206cb4658bb958b72185b0ac50128cbfdcc"
+        },
+        "sha256": {
+          "manifest.json": "6c1451e1c9b3a16d9eb832283b71d3c911736e3adcd6e024974dcf0327bc57f9",
+          "predictions.jsonl": "fac31b84a37f1a79d10183787e3a14248a4905215a5a59b83b4ef9f0af412b8c",
+          "scoring_rows.jsonl": "62c1d8708220cd4b7d76284af6bb5206cb4658bb958b72185b0ac50128cbfdcc",
+          "summary.json": "6c9a2dba10d2b30ccbfabfc09e5e2a173c0112c1d57d6b01b316349ff63dbd86"
+        }
+      },
+      {
+        "suite": "passage-rerank-trec-covid",
+        "directory": "eval/results/jev-1.13-2026-09-20/runs/passage-rerank-trec-covid/passage-rerank-trec-covid",
+        "manifest": {
+          "endpoint": "https://openrouter.ai/api/v1/systemone",
+          "model": "typesafe/jev-1.13",
+          "dataset_sha256": "f89e973422c3c7cbf364f6f78d0b3a31c14dc68925c9ea532d8e3c2cbadff891",
+          "rows": 50,
+          "suite": {
+            "schema_version": 1,
+            "id": "passage-rerank-trec-covid",
+            "version": "1",
+            "adapter": "passage-rerank-v1",
+            "dataset": "../../data/passage-rerank-trec-covid.jsonl",
+            "language_group": "english",
+            "languages": [
+              "en"
+            ],
+            "headline_metric": "ndcg_at_10",
+            "source": {
+              "repository": "anessbelbati/jev-rerank-bench",
+              "revision": "cd9a35b22aeb4187334f7018a0ee1960a7470586"
+            },
+            "scope": "present candidate list, rubric batch; per-dataset results",
+            "category": "general-language",
+            "subcategory": "ranking",
+            "modality": "text",
+            "task_detail": "medical",
+            "project": "Jev Rerank Bench",
+            "project_configuration": "trec-covid"
+          },
+          "adapter_sha256": "c5f4194ae9018caf7532d4bccbbda13c51a5317266f04a2ee5b2a88c8a0fb96d",
+          "retries": 5,
+          "delay": 0.02,
+          "timeout": 120.0,
+          "workers": 16,
+          "reporting": {
+            "project": "Jev Rerank Bench",
+            "configuration": "trec-covid",
+            "expected_suites": [
+              "passage-rerank-trec-covid"
+            ],
+            "partitions": [
+              {
+                "id": "passage-rerank-trec-covid",
+                "category": "general-language",
+                "subcategory": "ranking",
+                "modality": "text",
+                "language_group": "english"
+              }
+            ]
+          },
+          "started_at_unix": 1789968379.2184582,
+          "runner_sha256": "60b26b661a3f99f89eef22bf89744d78d14b56068945f19e020c951fd7ce42d3",
+          "scoring_rows_sha256": "f89e973422c3c7cbf364f6f78d0b3a31c14dc68925c9ea532d8e3c2cbadff891"
+        },
+        "sha256": {
+          "manifest.json": "bfdea241c9ad39974bf1d11f98600197d7781799dd247ccb0443c86f611997fd",
+          "predictions.jsonl": "cde2c13c2fba1d71bfbeb4dcfe018e7785d2676276a4200f5dbba46e8e5b2efe",
+          "scoring_rows.jsonl": "f89e973422c3c7cbf364f6f78d0b3a31c14dc68925c9ea532d8e3c2cbadff891",
+          "summary.json": "7f5dbf24af4aed974c770c852a125942d072ebddaee3fd10c72f1c604f825b03"
+        }
+      }
+    ],
+    "cost_scope": "Sum of usage.cost in saved responses; excludes probes, discarded attempts, and any billed requests without saved responses."
+  }
+}

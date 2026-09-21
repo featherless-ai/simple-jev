@@ -1,0 +1,899 @@
+{
+  "model": "typesafe/jev-1.13",
+  "endpoint": "https://openrouter.ai/api/v1/systemone",
+  "by_project": [
+    {
+      "project": "Jev Search Rerank",
+      "configuration": "en-final",
+      "metric": "ndcg_at_10",
+      "score": 0.8282481182938933,
+      "metrics": {
+        "rows": 45,
+        "failed_rows": 0,
+        "ndcg_at_10": 0.8282481182938933,
+        "mrr": 0.9777777777777777,
+        "precision_at_3": 0.8962962962962964
+      },
+      "suites": [
+        "search-rerank-en-final"
+      ],
+      "missing_suites": [],
+      "coverage": "complete"
+    },
+    {
+      "project": "Jev Search Rerank",
+      "configuration": "en-llm",
+      "metric": "ndcg_at_10",
+      "score": 0.8246457112051306,
+      "metrics": {
+        "rows": 45,
+        "failed_rows": 0,
+        "ndcg_at_10": 0.8246457112051306,
+        "mrr": 0.9777777777777777,
+        "precision_at_3": 0.8962962962962961
+      },
+      "suites": [
+        "search-rerank-en-llm"
+      ],
+      "missing_suites": [],
+      "coverage": "complete"
+    },
+    {
+      "project": "Jev Search Rerank",
+      "configuration": "mix-final",
+      "metric": "ndcg_at_10",
+      "score": 0.7912116086422735,
+      "metrics": {
+        "rows": 38,
+        "failed_rows": 0,
+        "ndcg_at_10": 0.7912116086422735,
+        "mrr": 0.9561403508771928,
+        "precision_at_3": 0.868421052631579
+      },
+      "suites": [
+        "search-rerank-mix-final"
+      ],
+      "missing_suites": [],
+      "coverage": "complete"
+    },
+    {
+      "project": "Jev Search Rerank",
+      "configuration": "mix-llm",
+      "metric": "ndcg_at_10",
+      "score": 0.7864145625473866,
+      "metrics": {
+        "rows": 38,
+        "failed_rows": 0,
+        "ndcg_at_10": 0.7864145625473866,
+        "mrr": 0.9473684210526315,
+        "precision_at_3": 0.8596491228070177
+      },
+      "suites": [
+        "search-rerank-mix-llm"
+      ],
+      "missing_suites": [],
+      "coverage": "complete"
+    },
+    {
+      "project": "Jev Search Rerank",
+      "configuration": "sim-final",
+      "metric": "ndcg_at_10",
+      "score": 1.0,
+      "metrics": {
+        "rows": 1,
+        "failed_rows": 0,
+        "ndcg_at_10": 1.0,
+        "mrr": 1.0,
+        "precision_at_3": 1.0
+      },
+      "suites": [
+        "search-rerank-sim-final"
+      ],
+      "missing_suites": [],
+      "coverage": "complete"
+    },
+    {
+      "project": "Jev Search Rerank",
+      "configuration": "sim-llm",
+      "metric": "ndcg_at_10",
+      "score": 1.0,
+      "metrics": {
+        "rows": 1,
+        "failed_rows": 0,
+        "ndcg_at_10": 1.0,
+        "mrr": 1.0,
+        "precision_at_3": 1.0
+      },
+      "suites": [
+        "search-rerank-sim-llm"
+      ],
+      "missing_suites": [],
+      "coverage": "complete"
+    },
+    {
+      "project": "Jev Search Rerank",
+      "configuration": "syn-final",
+      "metric": "ndcg_at_10",
+      "score": 0.7532922960002926,
+      "metrics": {
+        "rows": 80,
+        "failed_rows": 0,
+        "ndcg_at_10": 0.7532922960002926,
+        "mrr": 0.940625,
+        "precision_at_3": 0.8541666666666666
+      },
+      "suites": [
+        "search-rerank-syn-final"
+      ],
+      "missing_suites": [],
+      "coverage": "complete"
+    },
+    {
+      "project": "Jev Search Rerank",
+      "configuration": "syn-llm",
+      "metric": "ndcg_at_10",
+      "score": 0.753862137271373,
+      "metrics": {
+        "rows": 80,
+        "failed_rows": 0,
+        "ndcg_at_10": 0.753862137271373,
+        "mrr": 0.9416666666666667,
+        "precision_at_3": 0.8583333333333331
+      },
+      "suites": [
+        "search-rerank-syn-llm"
+      ],
+      "missing_suites": [],
+      "coverage": "complete"
+    }
+  ],
+  "by_category": [
+    {
+      "project": "Jev Search Rerank",
+      "configuration": "en-final",
+      "metric": "ndcg_at_10",
+      "score": 0.8282481182938933,
+      "metrics": {
+        "rows": 45,
+        "failed_rows": 0,
+        "ndcg_at_10": 0.8282481182938933,
+        "mrr": 0.9777777777777777,
+        "precision_at_3": 0.8962962962962964
+      },
+      "suites": [
+        "search-rerank-en-final"
+      ],
+      "missing_suites": [],
+      "coverage": "complete",
+      "placement": [
+        "text",
+        "multilingual",
+        "agentic",
+        "ranking"
+      ]
+    },
+    {
+      "project": "Jev Search Rerank",
+      "configuration": "en-llm",
+      "metric": "ndcg_at_10",
+      "score": 0.8246457112051306,
+      "metrics": {
+        "rows": 45,
+        "failed_rows": 0,
+        "ndcg_at_10": 0.8246457112051306,
+        "mrr": 0.9777777777777777,
+        "precision_at_3": 0.8962962962962961
+      },
+      "suites": [
+        "search-rerank-en-llm"
+      ],
+      "missing_suites": [],
+      "coverage": "complete",
+      "placement": [
+        "text",
+        "multilingual",
+        "agentic",
+        "ranking"
+      ]
+    },
+    {
+      "project": "Jev Search Rerank",
+      "configuration": "mix-final",
+      "metric": "ndcg_at_10",
+      "score": 0.7912116086422735,
+      "metrics": {
+        "rows": 38,
+        "failed_rows": 0,
+        "ndcg_at_10": 0.7912116086422735,
+        "mrr": 0.9561403508771928,
+        "precision_at_3": 0.868421052631579
+      },
+      "suites": [
+        "search-rerank-mix-final"
+      ],
+      "missing_suites": [],
+      "coverage": "complete",
+      "placement": [
+        "text",
+        "multilingual",
+        "agentic",
+        "ranking"
+      ]
+    },
+    {
+      "project": "Jev Search Rerank",
+      "configuration": "mix-llm",
+      "metric": "ndcg_at_10",
+      "score": 0.7864145625473866,
+      "metrics": {
+        "rows": 38,
+        "failed_rows": 0,
+        "ndcg_at_10": 0.7864145625473866,
+        "mrr": 0.9473684210526315,
+        "precision_at_3": 0.8596491228070177
+      },
+      "suites": [
+        "search-rerank-mix-llm"
+      ],
+      "missing_suites": [],
+      "coverage": "complete",
+      "placement": [
+        "text",
+        "multilingual",
+        "agentic",
+        "ranking"
+      ]
+    },
+    {
+      "project": "Jev Search Rerank",
+      "configuration": "sim-final",
+      "metric": "ndcg_at_10",
+      "score": 1.0,
+      "metrics": {
+        "rows": 1,
+        "failed_rows": 0,
+        "ndcg_at_10": 1.0,
+        "mrr": 1.0,
+        "precision_at_3": 1.0
+      },
+      "suites": [
+        "search-rerank-sim-final"
+      ],
+      "missing_suites": [],
+      "coverage": "complete",
+      "placement": [
+        "text",
+        "multilingual",
+        "agentic",
+        "ranking"
+      ]
+    },
+    {
+      "project": "Jev Search Rerank",
+      "configuration": "sim-llm",
+      "metric": "ndcg_at_10",
+      "score": 1.0,
+      "metrics": {
+        "rows": 1,
+        "failed_rows": 0,
+        "ndcg_at_10": 1.0,
+        "mrr": 1.0,
+        "precision_at_3": 1.0
+      },
+      "suites": [
+        "search-rerank-sim-llm"
+      ],
+      "missing_suites": [],
+      "coverage": "complete",
+      "placement": [
+        "text",
+        "multilingual",
+        "agentic",
+        "ranking"
+      ]
+    },
+    {
+      "project": "Jev Search Rerank",
+      "configuration": "syn-final",
+      "metric": "ndcg_at_10",
+      "score": 0.7532922960002926,
+      "metrics": {
+        "rows": 80,
+        "failed_rows": 0,
+        "ndcg_at_10": 0.7532922960002926,
+        "mrr": 0.940625,
+        "precision_at_3": 0.8541666666666666
+      },
+      "suites": [
+        "search-rerank-syn-final"
+      ],
+      "missing_suites": [],
+      "coverage": "complete",
+      "placement": [
+        "text",
+        "multilingual",
+        "agentic",
+        "ranking"
+      ]
+    },
+    {
+      "project": "Jev Search Rerank",
+      "configuration": "syn-llm",
+      "metric": "ndcg_at_10",
+      "score": 0.753862137271373,
+      "metrics": {
+        "rows": 80,
+        "failed_rows": 0,
+        "ndcg_at_10": 0.753862137271373,
+        "mrr": 0.9416666666666667,
+        "precision_at_3": 0.8583333333333331
+      },
+      "suites": [
+        "search-rerank-syn-llm"
+      ],
+      "missing_suites": [],
+      "coverage": "complete",
+      "placement": [
+        "text",
+        "multilingual",
+        "agentic",
+        "ranking"
+      ]
+    }
+  ],
+  "provenance": {
+    "export_git_revision": "b6f63bb11a4319e39afff35a9e6e8a04e8d294ea",
+    "evaluator_sha256": {
+      "catalog.py": "f69e435c11f1d35cefca32075db31858ff9ef7c2c360507b8ac0259d452c0ef9",
+      "run.py": "60b26b661a3f99f89eef22bf89744d78d14b56068945f19e020c951fd7ce42d3",
+      "retry.py": "ed3ed9b31152d62bd20705501391557b2b6f128edd84be96e8f71609ec8770c6",
+      "suites.py": "85f443ba008dc2d83b6777e5906a30de37d925bcb4abc9829c63ce325d9f218a",
+      "report.py": "a002bc6d2cddd4f2c0309861c822ef487818ed9dc25f7ecef6785e824c6a6ff0",
+      "prepare.py": "ccbfafde1bb1fa2fe227b9e44525042e487e49abf5dedcb81c22dd7b95db97f8",
+      "adapters/typed.py": "9f1ab94e0fe312fcbb4c0872260fac051fbe27430e38e2723f4924a1454eabf8",
+      "adapters/mmlu.py": "de4432175d2e66d19b10f5743524b33cea5d874ddc20aac81478ac7078dc8f81",
+      "adapters/fields.py": "de77fcdaa13266b14492e361c5ce6d5a48c27d9498ed7de60ae9327f72e4a357",
+      "adapters/vision.py": "9e7856043a82e19df4f039fbb0abf7421110b0bc6eb3cbe5f1ddf3e408b8f327",
+      "adapters/binary_battery.py": "6909af0c264d1222079c6f9c49ca7699227469a45dae385577d2303c53c81458",
+      "adapters/choice.py": "c088c9277435df01845009b36e270731754a1558748a84b990ea7c3e11c2fe8c",
+      "adapters/__init__.py": "2dda3c52d95dc2b8b259271a286bfc9e7155ace75784e486b77fc105aa2c3ea9",
+      "adapters/passage_rerank.py": "c5f4194ae9018caf7532d4bccbbda13c51a5317266f04a2ee5b2a88c8a0fb96d",
+      "adapters/rag.py": "f67507426adbacd4f74739f3223f6280d8fe0762cd1c0fbd936a08d9fef62055",
+      "adapters/graded_rag.py": "d411f8a1aaa245aeb72b1dd87ca6175489a38efe9a0ba1b45ecd15e8bc12ffc8",
+      "adapters/visual_qa.py": "d806c360f7aafb8abe70c255523a3f5e8b10cb523883a707a06e8265fae04991",
+      "adapters/domain_ranking.py": "b32c10e3d550bf571dbb381e315748b3f8d8e81eab9602299367bc9f3537cd08"
+    },
+    "returned_models": [
+      "typesafe/jev-1.13-20260917"
+    ],
+    "usage": {
+      "input_tokens": 1595628,
+      "output_tokens": 145960,
+      "reported_cost_usd": 0.06701637599999997,
+      "responses_with_cost": 328
+    },
+    "artifacts": [
+      {
+        "suite": "search-rerank-en-final",
+        "directory": "eval/results/jev-1.13-2026-09-20/runs/search-rerank-en-final/search-rerank-en-final",
+        "manifest": {
+          "endpoint": "https://openrouter.ai/api/v1/systemone",
+          "model": "typesafe/jev-1.13",
+          "dataset_sha256": "33d6c3415a4642e4211548ed2df86ee845e75a9d45c7ca6839867bb05996e1b9",
+          "rows": 45,
+          "suite": {
+            "schema_version": 1,
+            "id": "search-rerank-en-final",
+            "version": "1",
+            "adapter": "graded-rag-v1",
+            "dataset": "../../data/search-rerank-en-final.jsonl",
+            "language_group": "multilingual",
+            "languages": [
+              "en",
+              "zh"
+            ],
+            "headline_metric": "ndcg_at_10",
+            "source": {
+              "repository": "zhuyansen/jev-search-rerank-eval",
+              "revision": "c896f14e944182e17a002dd7546f06ba3788d586"
+            },
+            "query_form": "en",
+            "label_set": "final",
+            "category": "agentic",
+            "subcategory": "ranking",
+            "modality": "text",
+            "task_detail": "catalog-search",
+            "project": "Jev Search Rerank",
+            "project_configuration": "en-final"
+          },
+          "adapter_sha256": "d411f8a1aaa245aeb72b1dd87ca6175489a38efe9a0ba1b45ecd15e8bc12ffc8",
+          "retries": 5,
+          "delay": 0.02,
+          "timeout": 120.0,
+          "workers": 16,
+          "reporting": {
+            "project": "Jev Search Rerank",
+            "configuration": "en-final",
+            "expected_suites": [
+              "search-rerank-en-final"
+            ],
+            "partitions": [
+              {
+                "id": "search-rerank-en-final",
+                "category": "agentic",
+                "subcategory": "ranking",
+                "modality": "text",
+                "language_group": "multilingual"
+              }
+            ]
+          },
+          "started_at_unix": 1789968412.701458,
+          "runner_sha256": "60b26b661a3f99f89eef22bf89744d78d14b56068945f19e020c951fd7ce42d3",
+          "scoring_rows_sha256": "33d6c3415a4642e4211548ed2df86ee845e75a9d45c7ca6839867bb05996e1b9"
+        },
+        "sha256": {
+          "manifest.json": "0d1b347b51b15f42c4e9328d01bb369b8264a6a24efbbd1cfe99d2ea9db0220d",
+          "predictions.jsonl": "4760b1cf1842382679f0c43a22bb5a07746ec92502f5c230faa0c1b6d67c60df",
+          "scoring_rows.jsonl": "33d6c3415a4642e4211548ed2df86ee845e75a9d45c7ca6839867bb05996e1b9",
+          "summary.json": "830f879c68126cdf47c9312054a2ee6933fa004087d48fb17766ee4067dcac5a"
+        }
+      },
+      {
+        "suite": "search-rerank-en-llm",
+        "directory": "eval/results/jev-1.13-2026-09-20/runs/search-rerank-en-llm/search-rerank-en-llm",
+        "manifest": {
+          "endpoint": "https://openrouter.ai/api/v1/systemone",
+          "model": "typesafe/jev-1.13",
+          "dataset_sha256": "fa5bc3ef4c5054c5fd8206a8bc8d73a157fff77863bc2aa3048a3187a8a6d880",
+          "rows": 45,
+          "suite": {
+            "schema_version": 1,
+            "id": "search-rerank-en-llm",
+            "version": "1",
+            "adapter": "graded-rag-v1",
+            "dataset": "../../data/search-rerank-en-llm.jsonl",
+            "language_group": "multilingual",
+            "languages": [
+              "en",
+              "zh"
+            ],
+            "headline_metric": "ndcg_at_10",
+            "source": {
+              "repository": "zhuyansen/jev-search-rerank-eval",
+              "revision": "c896f14e944182e17a002dd7546f06ba3788d586"
+            },
+            "query_form": "en",
+            "label_set": "llm",
+            "category": "agentic",
+            "subcategory": "ranking",
+            "modality": "text",
+            "task_detail": "catalog-search",
+            "project": "Jev Search Rerank",
+            "project_configuration": "en-llm"
+          },
+          "adapter_sha256": "d411f8a1aaa245aeb72b1dd87ca6175489a38efe9a0ba1b45ecd15e8bc12ffc8",
+          "retries": 5,
+          "delay": 0.02,
+          "timeout": 120.0,
+          "workers": 16,
+          "reporting": {
+            "project": "Jev Search Rerank",
+            "configuration": "en-llm",
+            "expected_suites": [
+              "search-rerank-en-llm"
+            ],
+            "partitions": [
+              {
+                "id": "search-rerank-en-llm",
+                "category": "agentic",
+                "subcategory": "ranking",
+                "modality": "text",
+                "language_group": "multilingual"
+              }
+            ]
+          },
+          "started_at_unix": 1789968414.891876,
+          "runner_sha256": "60b26b661a3f99f89eef22bf89744d78d14b56068945f19e020c951fd7ce42d3",
+          "scoring_rows_sha256": "fa5bc3ef4c5054c5fd8206a8bc8d73a157fff77863bc2aa3048a3187a8a6d880"
+        },
+        "sha256": {
+          "manifest.json": "0f60fdc8fcfb889dc28b816a423b2a23e39cc3bd4d06b73cacad541e483105b8",
+          "predictions.jsonl": "991e63ab5f20a766e3264896aa29f9d16fe6807ccafb49993e002f735a5abcf2",
+          "scoring_rows.jsonl": "fa5bc3ef4c5054c5fd8206a8bc8d73a157fff77863bc2aa3048a3187a8a6d880",
+          "summary.json": "0983a62f2c35f9853bfb45beca0c8984eb4e6a212e76ba5e82557f4868f43919"
+        }
+      },
+      {
+        "suite": "search-rerank-mix-final",
+        "directory": "eval/results/jev-1.13-2026-09-20/runs/search-rerank-mix-final/search-rerank-mix-final",
+        "manifest": {
+          "endpoint": "https://openrouter.ai/api/v1/systemone",
+          "model": "typesafe/jev-1.13",
+          "dataset_sha256": "2797980b80e4f77cd0372fdd76142cbbf0415cc4c288d9baf3232e5e0f6dbed1",
+          "rows": 38,
+          "suite": {
+            "schema_version": 1,
+            "id": "search-rerank-mix-final",
+            "version": "1",
+            "adapter": "graded-rag-v1",
+            "dataset": "../../data/search-rerank-mix-final.jsonl",
+            "language_group": "multilingual",
+            "languages": [
+              "en",
+              "zh"
+            ],
+            "headline_metric": "ndcg_at_10",
+            "source": {
+              "repository": "zhuyansen/jev-search-rerank-eval",
+              "revision": "c896f14e944182e17a002dd7546f06ba3788d586"
+            },
+            "query_form": "mix",
+            "label_set": "final",
+            "category": "agentic",
+            "subcategory": "ranking",
+            "modality": "text",
+            "task_detail": "catalog-search",
+            "project": "Jev Search Rerank",
+            "project_configuration": "mix-final"
+          },
+          "adapter_sha256": "d411f8a1aaa245aeb72b1dd87ca6175489a38efe9a0ba1b45ecd15e8bc12ffc8",
+          "retries": 5,
+          "delay": 0.02,
+          "timeout": 120.0,
+          "workers": 16,
+          "reporting": {
+            "project": "Jev Search Rerank",
+            "configuration": "mix-final",
+            "expected_suites": [
+              "search-rerank-mix-final"
+            ],
+            "partitions": [
+              {
+                "id": "search-rerank-mix-final",
+                "category": "agentic",
+                "subcategory": "ranking",
+                "modality": "text",
+                "language_group": "multilingual"
+              }
+            ]
+          },
+          "started_at_unix": 1789968416.498701,
+          "runner_sha256": "60b26b661a3f99f89eef22bf89744d78d14b56068945f19e020c951fd7ce42d3",
+          "scoring_rows_sha256": "2797980b80e4f77cd0372fdd76142cbbf0415cc4c288d9baf3232e5e0f6dbed1"
+        },
+        "sha256": {
+          "manifest.json": "0b9c7f45014161a2536703665f1756bae2a26baee284007d51899344a48200ea",
+          "predictions.jsonl": "670087cdd22de402fb733e5de019b98d11d60b3aa0b1d414712a952baf224cfe",
+          "scoring_rows.jsonl": "2797980b80e4f77cd0372fdd76142cbbf0415cc4c288d9baf3232e5e0f6dbed1",
+          "summary.json": "4385cfa026f46a9ba957a56cf15bbd37bb0f66bd0ddc3c71473ed73c34390ae6"
+        }
+      },
+      {
+        "suite": "search-rerank-mix-llm",
+        "directory": "eval/results/jev-1.13-2026-09-20/runs/search-rerank-mix-llm/search-rerank-mix-llm",
+        "manifest": {
+          "endpoint": "https://openrouter.ai/api/v1/systemone",
+          "model": "typesafe/jev-1.13",
+          "dataset_sha256": "f85e05e9aebeef01ca75b49a9ed2fdcac1be766be01e9df38274d9be815c2948",
+          "rows": 38,
+          "suite": {
+            "schema_version": 1,
+            "id": "search-rerank-mix-llm",
+            "version": "1",
+            "adapter": "graded-rag-v1",
+            "dataset": "../../data/search-rerank-mix-llm.jsonl",
+            "language_group": "multilingual",
+            "languages": [
+              "en",
+              "zh"
+            ],
+            "headline_metric": "ndcg_at_10",
+            "source": {
+              "repository": "zhuyansen/jev-search-rerank-eval",
+              "revision": "c896f14e944182e17a002dd7546f06ba3788d586"
+            },
+            "query_form": "mix",
+            "label_set": "llm",
+            "category": "agentic",
+            "subcategory": "ranking",
+            "modality": "text",
+            "task_detail": "catalog-search",
+            "project": "Jev Search Rerank",
+            "project_configuration": "mix-llm"
+          },
+          "adapter_sha256": "d411f8a1aaa245aeb72b1dd87ca6175489a38efe9a0ba1b45ecd15e8bc12ffc8",
+          "retries": 5,
+          "delay": 0.02,
+          "timeout": 120.0,
+          "workers": 16,
+          "reporting": {
+            "project": "Jev Search Rerank",
+            "configuration": "mix-llm",
+            "expected_suites": [
+              "search-rerank-mix-llm"
+            ],
+            "partitions": [
+              {
+                "id": "search-rerank-mix-llm",
+                "category": "agentic",
+                "subcategory": "ranking",
+                "modality": "text",
+                "language_group": "multilingual"
+              }
+            ]
+          },
+          "started_at_unix": 1789968417.879916,
+          "runner_sha256": "60b26b661a3f99f89eef22bf89744d78d14b56068945f19e020c951fd7ce42d3",
+          "scoring_rows_sha256": "f85e05e9aebeef01ca75b49a9ed2fdcac1be766be01e9df38274d9be815c2948"
+        },
+        "sha256": {
+          "manifest.json": "cd5200cb1d06ac208feb4fb9f2eb1d4f225d93fe8c8d6cfac804e1824a8e8ba0",
+          "predictions.jsonl": "fc38af64389f4aede90233c93b248b584d1e7b61f0bf6b52b2df9c6a88f1b472",
+          "scoring_rows.jsonl": "f85e05e9aebeef01ca75b49a9ed2fdcac1be766be01e9df38274d9be815c2948",
+          "summary.json": "227a7a201dc72d181d22150440bb71553461b5f27854289aa0fc2449328a42b0"
+        }
+      },
+      {
+        "suite": "search-rerank-sim-final",
+        "directory": "eval/results/jev-1.13-2026-09-20/runs/search-rerank-sim-final/search-rerank-sim-final",
+        "manifest": {
+          "endpoint": "https://openrouter.ai/api/v1/systemone",
+          "model": "typesafe/jev-1.13",
+          "dataset_sha256": "88c2d2d34b2abbed7590bba0b7faac825852631dc4efb42daed0a25f33f757bd",
+          "rows": 1,
+          "suite": {
+            "schema_version": 1,
+            "id": "search-rerank-sim-final",
+            "version": "1",
+            "adapter": "graded-rag-v1",
+            "dataset": "../../data/search-rerank-sim-final.jsonl",
+            "language_group": "multilingual",
+            "languages": [
+              "en",
+              "zh"
+            ],
+            "headline_metric": "ndcg_at_10",
+            "source": {
+              "repository": "zhuyansen/jev-search-rerank-eval",
+              "revision": "c896f14e944182e17a002dd7546f06ba3788d586"
+            },
+            "query_form": "sim",
+            "label_set": "final",
+            "category": "agentic",
+            "subcategory": "ranking",
+            "modality": "text",
+            "task_detail": "catalog-search",
+            "project": "Jev Search Rerank",
+            "project_configuration": "sim-final"
+          },
+          "adapter_sha256": "d411f8a1aaa245aeb72b1dd87ca6175489a38efe9a0ba1b45ecd15e8bc12ffc8",
+          "retries": 5,
+          "delay": 0.02,
+          "timeout": 120.0,
+          "workers": 16,
+          "reporting": {
+            "project": "Jev Search Rerank",
+            "configuration": "sim-final",
+            "expected_suites": [
+              "search-rerank-sim-final"
+            ],
+            "partitions": [
+              {
+                "id": "search-rerank-sim-final",
+                "category": "agentic",
+                "subcategory": "ranking",
+                "modality": "text",
+                "language_group": "multilingual"
+              }
+            ]
+          },
+          "started_at_unix": 1789968420.39834,
+          "runner_sha256": "60b26b661a3f99f89eef22bf89744d78d14b56068945f19e020c951fd7ce42d3",
+          "scoring_rows_sha256": "88c2d2d34b2abbed7590bba0b7faac825852631dc4efb42daed0a25f33f757bd"
+        },
+        "sha256": {
+          "manifest.json": "79e9c285286d83d3e83feb815b32e343f87bb9ff258093b1f904ea8f7cfb71e2",
+          "predictions.jsonl": "6bcb479dd1e64c7f665341eb6b9cb53cf59404a7d3f7e1df3e94083a4fbffd3e",
+          "scoring_rows.jsonl": "88c2d2d34b2abbed7590bba0b7faac825852631dc4efb42daed0a25f33f757bd",
+          "summary.json": "0863b065781cfd292d1ca3b50df08f28c361cbc2fa0d3b0e7135e99eba7ccbcf"
+        }
+      },
+      {
+        "suite": "search-rerank-sim-llm",
+        "directory": "eval/results/jev-1.13-2026-09-20/runs/search-rerank-sim-llm/search-rerank-sim-llm",
+        "manifest": {
+          "endpoint": "https://openrouter.ai/api/v1/systemone",
+          "model": "typesafe/jev-1.13",
+          "dataset_sha256": "2ace1778c8c7796eef961c941d29fcbfcea0cbd31fb3143d61d70c879c6bb002",
+          "rows": 1,
+          "suite": {
+            "schema_version": 1,
+            "id": "search-rerank-sim-llm",
+            "version": "1",
+            "adapter": "graded-rag-v1",
+            "dataset": "../../data/search-rerank-sim-llm.jsonl",
+            "language_group": "multilingual",
+            "languages": [
+              "en",
+              "zh"
+            ],
+            "headline_metric": "ndcg_at_10",
+            "source": {
+              "repository": "zhuyansen/jev-search-rerank-eval",
+              "revision": "c896f14e944182e17a002dd7546f06ba3788d586"
+            },
+            "query_form": "sim",
+            "label_set": "llm",
+            "category": "agentic",
+            "subcategory": "ranking",
+            "modality": "text",
+            "task_detail": "catalog-search",
+            "project": "Jev Search Rerank",
+            "project_configuration": "sim-llm"
+          },
+          "adapter_sha256": "d411f8a1aaa245aeb72b1dd87ca6175489a38efe9a0ba1b45ecd15e8bc12ffc8",
+          "retries": 5,
+          "delay": 0.02,
+          "timeout": 120.0,
+          "workers": 16,
+          "reporting": {
+            "project": "Jev Search Rerank",
+            "configuration": "sim-llm",
+            "expected_suites": [
+              "search-rerank-sim-llm"
+            ],
+            "partitions": [
+              {
+                "id": "search-rerank-sim-llm",
+                "category": "agentic",
+                "subcategory": "ranking",
+                "modality": "text",
+                "language_group": "multilingual"
+              }
+            ]
+          },
+          "started_at_unix": 1789968420.9130309,
+          "runner_sha256": "60b26b661a3f99f89eef22bf89744d78d14b56068945f19e020c951fd7ce42d3",
+          "scoring_rows_sha256": "2ace1778c8c7796eef961c941d29fcbfcea0cbd31fb3143d61d70c879c6bb002"
+        },
+        "sha256": {
+          "manifest.json": "c2e21191458148879d41cdf102dda7392c4eb9b6ee89f617bad401564cb1b94f",
+          "predictions.jsonl": "48e9467e26d188ae04a27d953cde89008fb452a639c3b724d7950617d42bc264",
+          "scoring_rows.jsonl": "2ace1778c8c7796eef961c941d29fcbfcea0cbd31fb3143d61d70c879c6bb002",
+          "summary.json": "0863b065781cfd292d1ca3b50df08f28c361cbc2fa0d3b0e7135e99eba7ccbcf"
+        }
+      },
+      {
+        "suite": "search-rerank-syn-final",
+        "directory": "eval/results/jev-1.13-2026-09-20/runs/search-rerank-syn-final/search-rerank-syn-final",
+        "manifest": {
+          "endpoint": "https://openrouter.ai/api/v1/systemone",
+          "model": "typesafe/jev-1.13",
+          "dataset_sha256": "38cb9724f9062a13218c70f7af4621f05b6b9f0373c6379f523a1e48db63501b",
+          "rows": 80,
+          "suite": {
+            "schema_version": 1,
+            "id": "search-rerank-syn-final",
+            "version": "1",
+            "adapter": "graded-rag-v1",
+            "dataset": "../../data/search-rerank-syn-final.jsonl",
+            "language_group": "multilingual",
+            "languages": [
+              "en",
+              "zh"
+            ],
+            "headline_metric": "ndcg_at_10",
+            "source": {
+              "repository": "zhuyansen/jev-search-rerank-eval",
+              "revision": "c896f14e944182e17a002dd7546f06ba3788d586"
+            },
+            "query_form": "syn",
+            "label_set": "final",
+            "category": "agentic",
+            "subcategory": "ranking",
+            "modality": "text",
+            "task_detail": "catalog-search",
+            "project": "Jev Search Rerank",
+            "project_configuration": "syn-final"
+          },
+          "adapter_sha256": "d411f8a1aaa245aeb72b1dd87ca6175489a38efe9a0ba1b45ecd15e8bc12ffc8",
+          "retries": 5,
+          "delay": 0.02,
+          "timeout": 120.0,
+          "workers": 16,
+          "reporting": {
+            "project": "Jev Search Rerank",
+            "configuration": "syn-final",
+            "expected_suites": [
+              "search-rerank-syn-final"
+            ],
+            "partitions": [
+              {
+                "id": "search-rerank-syn-final",
+                "category": "agentic",
+                "subcategory": "ranking",
+                "modality": "text",
+                "language_group": "multilingual"
+              }
+            ]
+          },
+          "started_at_unix": 1789968421.407475,
+          "runner_sha256": "60b26b661a3f99f89eef22bf89744d78d14b56068945f19e020c951fd7ce42d3",
+          "scoring_rows_sha256": "38cb9724f9062a13218c70f7af4621f05b6b9f0373c6379f523a1e48db63501b"
+        },
+        "sha256": {
+          "manifest.json": "843843de62f9d22026f8815a0bba520373e290a9947ae39ed6955dbcb3650879",
+          "predictions.jsonl": "6f372695cf3c7698f3760d208f2eb8f5c20667f5c54bedc6f3f6b23a3b1fe95d",
+          "scoring_rows.jsonl": "38cb9724f9062a13218c70f7af4621f05b6b9f0373c6379f523a1e48db63501b",
+          "summary.json": "a11c1a3d0a1ad70a81da072145b1024ee6aabcc5a2dcd42aef01421cd8d311f2"
+        }
+      },
+      {
+        "suite": "search-rerank-syn-llm",
+        "directory": "eval/results/jev-1.13-2026-09-20/runs/search-rerank-syn-llm/search-rerank-syn-llm",
+        "manifest": {
+          "endpoint": "https://openrouter.ai/api/v1/systemone",
+          "model": "typesafe/jev-1.13",
+          "dataset_sha256": "9e2b8fdd18e2be132085f9880f3fb2581b0030b821f0c0b6ed184a691684cff3",
+          "rows": 80,
+          "suite": {
+            "schema_version": 1,
+            "id": "search-rerank-syn-llm",
+            "version": "1",
+            "adapter": "graded-rag-v1",
+            "dataset": "../../data/search-rerank-syn-llm.jsonl",
+            "language_group": "multilingual",
+            "languages": [
+              "en",
+              "zh"
+            ],
+            "headline_metric": "ndcg_at_10",
+            "source": {
+              "repository": "zhuyansen/jev-search-rerank-eval",
+              "revision": "c896f14e944182e17a002dd7546f06ba3788d586"
+            },
+            "query_form": "syn",
+            "label_set": "llm",
+            "category": "agentic",
+            "subcategory": "ranking",
+            "modality": "text",
+            "task_detail": "catalog-search",
+            "project": "Jev Search Rerank",
+            "project_configuration": "syn-llm"
+          },
+          "adapter_sha256": "d411f8a1aaa245aeb72b1dd87ca6175489a38efe9a0ba1b45ecd15e8bc12ffc8",
+          "retries": 5,
+          "delay": 0.02,
+          "timeout": 120.0,
+          "workers": 16,
+          "reporting": {
+            "project": "Jev Search Rerank",
+            "configuration": "syn-llm",
+            "expected_suites": [
+              "search-rerank-syn-llm"
+            ],
+            "partitions": [
+              {
+                "id": "search-rerank-syn-llm",
+                "category": "agentic",
+                "subcategory": "ranking",
+                "modality": "text",
+                "language_group": "multilingual"
+              }
+            ]
+          },
+          "started_at_unix": 1789968424.0024881,
+          "runner_sha256": "60b26b661a3f99f89eef22bf89744d78d14b56068945f19e020c951fd7ce42d3",
+          "scoring_rows_sha256": "9e2b8fdd18e2be132085f9880f3fb2581b0030b821f0c0b6ed184a691684cff3"
+        },
+        "sha256": {
+          "manifest.json": "565420a983dec48e43b409992b8e7354b85ff82979245784ef9b61122cbfe591",
+          "predictions.jsonl": "82bfa4f27488cc56e237199dbd1e99effd360ecee65100eef037210ac65b89ad",
+          "scoring_rows.jsonl": "9e2b8fdd18e2be132085f9880f3fb2581b0030b821f0c0b6ed184a691684cff3",
+          "summary.json": "275e1d4485ca60657c1eb36d9eb89137b85ab68f34a368ef920270d9915bf95e"
+        }
+      }
+    ],
+    "cost_scope": "Sum of usage.cost in saved responses; excludes probes, discarded attempts, and any billed requests without saved responses."
+  }
+}

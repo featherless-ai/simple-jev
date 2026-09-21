@@ -1,0 +1,287 @@
+{
+  "model": "typesafe/jev-1.13",
+  "endpoint": "https://openrouter.ai/api/v1/systemone",
+  "by_project": [
+    {
+      "project": "LexGLUE",
+      "configuration": "casehold",
+      "metric": "accuracy",
+      "score": 0.7744444444444445,
+      "metrics": {
+        "rows": 3600,
+        "successful_rows": 3600,
+        "failed_rows": 0,
+        "accuracy": 0.7744444444444445,
+        "equal_case_modal_agreement": 0.7744444444444445,
+        "mean_family_balanced_accuracy": 0.7745101390299559,
+        "equal_case_total_variation_successful_only": null,
+        "total_variation_rows": 0
+      },
+      "suites": [
+        "legal-casehold"
+      ],
+      "missing_suites": [],
+      "coverage": "complete"
+    },
+    {
+      "project": "LexGLUE",
+      "configuration": "unfair-tos",
+      "metric": "f1",
+      "score": 0.3552769070010449,
+      "metrics": {
+        "rows": 1607,
+        "failed_rows": 0,
+        "targets": 12856,
+        "coverage": 1.0,
+        "accuracy": 0.9520068450528936,
+        "exact_set_accuracy": 0.6963285625388923,
+        "successful_targets": 12856,
+        "precision": 0.2204928664072633,
+        "recall": 0.9139784946236559,
+        "false_positive_rate": 0.04743488555643252,
+        "f1": 0.3552769070010449,
+        "brier_successful_only": 0.04462708462974487,
+        "ece_successful_only": 0.13914903546981952,
+        "auroc_successful_only": 0.9853485076083544
+      },
+      "suites": [
+        "legal-unfair-tos"
+      ],
+      "missing_suites": [],
+      "coverage": "complete"
+    }
+  ],
+  "by_category": [
+    {
+      "project": "LexGLUE",
+      "configuration": "casehold",
+      "metric": "accuracy",
+      "score": 0.7744444444444445,
+      "metrics": {
+        "rows": 3600,
+        "successful_rows": 3600,
+        "failed_rows": 0,
+        "accuracy": 0.7744444444444445,
+        "equal_case_modal_agreement": 0.7744444444444445,
+        "mean_family_balanced_accuracy": 0.7745101390299559,
+        "equal_case_total_variation_successful_only": null,
+        "total_variation_rows": 0
+      },
+      "suites": [
+        "legal-casehold"
+      ],
+      "missing_suites": [],
+      "coverage": "complete",
+      "placement": [
+        "text",
+        "english",
+        "legal",
+        "classification-decision"
+      ]
+    },
+    {
+      "project": "LexGLUE",
+      "configuration": "unfair-tos",
+      "metric": "f1",
+      "score": 0.3552769070010449,
+      "metrics": {
+        "rows": 1607,
+        "failed_rows": 0,
+        "targets": 12856,
+        "coverage": 1.0,
+        "accuracy": 0.9520068450528936,
+        "exact_set_accuracy": 0.6963285625388923,
+        "successful_targets": 12856,
+        "precision": 0.2204928664072633,
+        "recall": 0.9139784946236559,
+        "false_positive_rate": 0.04743488555643252,
+        "f1": 0.3552769070010449,
+        "brier_successful_only": 0.04462708462974487,
+        "ece_successful_only": 0.13914903546981952,
+        "auroc_successful_only": 0.9853485076083544
+      },
+      "suites": [
+        "legal-unfair-tos"
+      ],
+      "missing_suites": [],
+      "coverage": "complete",
+      "placement": [
+        "text",
+        "english",
+        "legal",
+        "classification-decision"
+      ]
+    }
+  ],
+  "provenance": {
+    "export_git_revision": "b6f63bb11a4319e39afff35a9e6e8a04e8d294ea",
+    "evaluator_sha256": {
+      "catalog.py": "f69e435c11f1d35cefca32075db31858ff9ef7c2c360507b8ac0259d452c0ef9",
+      "run.py": "60b26b661a3f99f89eef22bf89744d78d14b56068945f19e020c951fd7ce42d3",
+      "retry.py": "ed3ed9b31152d62bd20705501391557b2b6f128edd84be96e8f71609ec8770c6",
+      "suites.py": "85f443ba008dc2d83b6777e5906a30de37d925bcb4abc9829c63ce325d9f218a",
+      "report.py": "a002bc6d2cddd4f2c0309861c822ef487818ed9dc25f7ecef6785e824c6a6ff0",
+      "prepare.py": "ccbfafde1bb1fa2fe227b9e44525042e487e49abf5dedcb81c22dd7b95db97f8",
+      "adapters/typed.py": "9f1ab94e0fe312fcbb4c0872260fac051fbe27430e38e2723f4924a1454eabf8",
+      "adapters/mmlu.py": "de4432175d2e66d19b10f5743524b33cea5d874ddc20aac81478ac7078dc8f81",
+      "adapters/fields.py": "de77fcdaa13266b14492e361c5ce6d5a48c27d9498ed7de60ae9327f72e4a357",
+      "adapters/vision.py": "9e7856043a82e19df4f039fbb0abf7421110b0bc6eb3cbe5f1ddf3e408b8f327",
+      "adapters/binary_battery.py": "6909af0c264d1222079c6f9c49ca7699227469a45dae385577d2303c53c81458",
+      "adapters/choice.py": "c088c9277435df01845009b36e270731754a1558748a84b990ea7c3e11c2fe8c",
+      "adapters/__init__.py": "2dda3c52d95dc2b8b259271a286bfc9e7155ace75784e486b77fc105aa2c3ea9",
+      "adapters/passage_rerank.py": "c5f4194ae9018caf7532d4bccbbda13c51a5317266f04a2ee5b2a88c8a0fb96d",
+      "adapters/rag.py": "f67507426adbacd4f74739f3223f6280d8fe0762cd1c0fbd936a08d9fef62055",
+      "adapters/graded_rag.py": "d411f8a1aaa245aeb72b1dd87ca6175489a38efe9a0ba1b45ecd15e8bc12ffc8",
+      "adapters/visual_qa.py": "d806c360f7aafb8abe70c255523a3f5e8b10cb523883a707a06e8265fae04991",
+      "adapters/domain_ranking.py": "b32c10e3d550bf571dbb381e315748b3f8d8e81eab9602299367bc9f3537cd08"
+    },
+    "returned_models": [
+      "typesafe/jev-1.13-20260917"
+    ],
+    "usage": {
+      "input_tokens": 3399949,
+      "output_tokens": 399324,
+      "reported_cost_usd": 0.14279785799999997,
+      "responses_with_cost": 5207
+    },
+    "artifacts": [
+      {
+        "suite": "legal-casehold",
+        "directory": "eval/results/jev-1.13-2026-09-20/runs/legal-casehold/legal-casehold",
+        "manifest": {
+          "endpoint": "https://openrouter.ai/api/v1/systemone",
+          "model": "typesafe/jev-1.13",
+          "dataset_sha256": "9e70a4d7df3ecc8d979ab0ea5ef8ac0a85df10f68df33c3d22ea60dd98fcd3ae",
+          "rows": 3600,
+          "suite": {
+            "schema_version": 1,
+            "id": "legal-casehold",
+            "version": "1",
+            "adapter": "choice-v1",
+            "dataset": "../../data/legal-casehold.jsonl",
+            "language_group": "english",
+            "languages": [
+              "en"
+            ],
+            "modality": "text",
+            "category": "legal",
+            "subcategory": "classification-decision",
+            "task_detail": "legal-casehold",
+            "headline_metric": "accuracy",
+            "source": {
+              "repository": "coastalcph/lex_glue",
+              "revision": "c23fdff1a6bf74e0e1a71cb86f1e781d37da888c",
+              "files": [
+                "case_hold/test-00000-of-00001.parquet",
+                "unfair_tos/test-00000-of-00001.parquet"
+              ],
+              "url": "https://huggingface.co/datasets/coastalcph/lex_glue"
+            },
+            "scope_note": "Original test split; classification adaptation through the Jev endpoint.",
+            "project": "LexGLUE",
+            "project_configuration": "casehold"
+          },
+          "adapter_sha256": "c088c9277435df01845009b36e270731754a1558748a84b990ea7c3e11c2fe8c",
+          "retries": 5,
+          "delay": 0.02,
+          "timeout": 120.0,
+          "workers": 16,
+          "reporting": {
+            "project": "LexGLUE",
+            "configuration": "casehold",
+            "expected_suites": [
+              "legal-casehold"
+            ],
+            "partitions": [
+              {
+                "id": "legal-casehold",
+                "category": "legal",
+                "subcategory": "classification-decision",
+                "modality": "text",
+                "language_group": "english"
+              }
+            ]
+          },
+          "started_at_unix": 1789967898.097982,
+          "runner_sha256": "cf1d35b8368e75343a3f70c883a843e4ecc52af2ea803c4412fbfabc48e0caf1",
+          "scoring_rows_sha256": "9e70a4d7df3ecc8d979ab0ea5ef8ac0a85df10f68df33c3d22ea60dd98fcd3ae"
+        },
+        "sha256": {
+          "manifest.json": "d5df583501eac05dbd5d6d75ff88e494f388ff416431ef773daead6314865f2a",
+          "predictions.jsonl": "a73bcd9d4ee862b388e25b015e848953c50b28997b73b1dd4c09baa53b4fac3e",
+          "scoring_rows.jsonl": "9e70a4d7df3ecc8d979ab0ea5ef8ac0a85df10f68df33c3d22ea60dd98fcd3ae",
+          "summary.json": "d4c209589f54ff5c72fa6546a872dafc260442ca567f900b651a22c38a6c9819"
+        }
+      },
+      {
+        "suite": "legal-unfair-tos",
+        "directory": "eval/results/jev-1.13-2026-09-20/runs/legal-unfair-tos/legal-unfair-tos",
+        "manifest": {
+          "endpoint": "https://openrouter.ai/api/v1/systemone",
+          "model": "typesafe/jev-1.13",
+          "dataset_sha256": "bee8fb35e968ab47bad7eda6e62f13aa5fc6e76067a018481b145d1494098f42",
+          "rows": 1607,
+          "suite": {
+            "schema_version": 1,
+            "id": "legal-unfair-tos",
+            "version": "1",
+            "adapter": "binary-battery-v1",
+            "dataset": "../../data/legal-unfair-tos.jsonl",
+            "language_group": "english",
+            "languages": [
+              "en"
+            ],
+            "modality": "text",
+            "category": "legal",
+            "subcategory": "classification-decision",
+            "task_detail": "legal-unfair-tos",
+            "headline_metric": "f1",
+            "source": {
+              "repository": "coastalcph/lex_glue",
+              "revision": "c23fdff1a6bf74e0e1a71cb86f1e781d37da888c",
+              "files": [
+                "case_hold/test-00000-of-00001.parquet",
+                "unfair_tos/test-00000-of-00001.parquet"
+              ],
+              "url": "https://huggingface.co/datasets/coastalcph/lex_glue"
+            },
+            "scope_note": "Original test split; classification adaptation through the Jev endpoint.",
+            "project": "LexGLUE",
+            "project_configuration": "unfair-tos"
+          },
+          "adapter_sha256": "6909af0c264d1222079c6f9c49ca7699227469a45dae385577d2303c53c81458",
+          "retries": 5,
+          "delay": 0.02,
+          "timeout": 120.0,
+          "workers": 16,
+          "reporting": {
+            "project": "LexGLUE",
+            "configuration": "unfair-tos",
+            "expected_suites": [
+              "legal-unfair-tos"
+            ],
+            "partitions": [
+              {
+                "id": "legal-unfair-tos",
+                "category": "legal",
+                "subcategory": "classification-decision",
+                "modality": "text",
+                "language_group": "english"
+              }
+            ]
+          },
+          "started_at_unix": 1789968276.853127,
+          "runner_sha256": "60b26b661a3f99f89eef22bf89744d78d14b56068945f19e020c951fd7ce42d3",
+          "scoring_rows_sha256": "bee8fb35e968ab47bad7eda6e62f13aa5fc6e76067a018481b145d1494098f42"
+        },
+        "sha256": {
+          "manifest.json": "c38b7d3d6ee2e6892cff588e0d757eef826dce830d79f467a5847558f12c055e",
+          "predictions.jsonl": "d6a90a3b7918cead6c800bb596267aab7f50dcf9ce6a62041f8512d36b214322",
+          "scoring_rows.jsonl": "bee8fb35e968ab47bad7eda6e62f13aa5fc6e76067a018481b145d1494098f42",
+          "summary.json": "dbd4666a37c5a8f9fcafc04165068842d0b1a6e07127db6e6d63cf9de40c8757"
+        }
+      }
+    ],
+    "cost_scope": "Sum of usage.cost in saved responses; excludes probes, discarded attempts, and any billed requests without saved responses."
+  }
+}

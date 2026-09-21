@@ -1,0 +1,401 @@
+{
+  "model": "typesafe/jev-1.13",
+  "endpoint": "https://openrouter.ai/api/v1/systemone",
+  "by_project": [
+    {
+      "project": "CodeMMLU",
+      "configuration": "valid-choice release",
+      "metric": "accuracy",
+      "score": 0.7049056603773585,
+      "metrics": {
+        "rows": 19875,
+        "successful_rows": 19875,
+        "failed_rows": 0,
+        "accuracy": 0.7049056603773585,
+        "equal_case_modal_agreement": 0.7049056603773585,
+        "mean_family_balanced_accuracy": 0.7563602691865132,
+        "equal_case_total_variation_successful_only": null,
+        "total_variation_rows": 0
+      },
+      "suites": [
+        "codemmlu-api-frameworks",
+        "codemmlu-code-completion",
+        "codemmlu-code-repair",
+        "codemmlu-dbms-sql",
+        "codemmlu-execution-prediction",
+        "codemmlu-fill-in-the-middle",
+        "codemmlu-others",
+        "codemmlu-programming-syntax",
+        "codemmlu-software-principles"
+      ],
+      "missing_suites": [],
+      "coverage": "complete"
+    }
+  ],
+  "by_category": [
+    {
+      "project": "CodeMMLU",
+      "configuration": "valid-choice release",
+      "metric": "accuracy",
+      "score": 0.6628851206114162,
+      "metrics": {
+        "rows": 8374,
+        "successful_rows": 8374,
+        "failed_rows": 0,
+        "accuracy": 0.6628851206114162,
+        "equal_case_modal_agreement": 0.6628851206114162,
+        "mean_family_balanced_accuracy": 0.7086343543294622,
+        "equal_case_total_variation_successful_only": null,
+        "total_variation_rows": 0
+      },
+      "suites": [
+        "codemmlu-code-completion",
+        "codemmlu-code-repair",
+        "codemmlu-execution-prediction",
+        "codemmlu-fill-in-the-middle"
+      ],
+      "missing_suites": [],
+      "coverage": "complete",
+      "placement": [
+        "text",
+        "english",
+        "coding",
+        "classification-decision"
+      ]
+    },
+    {
+      "project": "CodeMMLU",
+      "configuration": "valid-choice release",
+      "metric": "accuracy",
+      "score": 0.7355012607599339,
+      "metrics": {
+        "rows": 11501,
+        "successful_rows": 11501,
+        "failed_rows": 0,
+        "accuracy": 0.7355012607599339,
+        "equal_case_modal_agreement": 0.7355012607599339,
+        "mean_family_balanced_accuracy": 0.7945410010721541,
+        "equal_case_total_variation_successful_only": null,
+        "total_variation_rows": 0
+      },
+      "suites": [
+        "codemmlu-api-frameworks",
+        "codemmlu-dbms-sql",
+        "codemmlu-others",
+        "codemmlu-programming-syntax",
+        "codemmlu-software-principles"
+      ],
+      "missing_suites": [],
+      "coverage": "complete",
+      "placement": [
+        "text",
+        "english",
+        "coding",
+        "model-knowledge"
+      ]
+    }
+  ],
+  "provenance": {
+    "export_git_revision": "b6f63bb11a4319e39afff35a9e6e8a04e8d294ea",
+    "evaluator_sha256": {
+      "catalog.py": "f69e435c11f1d35cefca32075db31858ff9ef7c2c360507b8ac0259d452c0ef9",
+      "run.py": "60b26b661a3f99f89eef22bf89744d78d14b56068945f19e020c951fd7ce42d3",
+      "retry.py": "ed3ed9b31152d62bd20705501391557b2b6f128edd84be96e8f71609ec8770c6",
+      "suites.py": "85f443ba008dc2d83b6777e5906a30de37d925bcb4abc9829c63ce325d9f218a",
+      "report.py": "a002bc6d2cddd4f2c0309861c822ef487818ed9dc25f7ecef6785e824c6a6ff0",
+      "prepare.py": "ccbfafde1bb1fa2fe227b9e44525042e487e49abf5dedcb81c22dd7b95db97f8",
+      "adapters/typed.py": "9f1ab94e0fe312fcbb4c0872260fac051fbe27430e38e2723f4924a1454eabf8",
+      "adapters/mmlu.py": "de4432175d2e66d19b10f5743524b33cea5d874ddc20aac81478ac7078dc8f81",
+      "adapters/fields.py": "de77fcdaa13266b14492e361c5ce6d5a48c27d9498ed7de60ae9327f72e4a357",
+      "adapters/vision.py": "9e7856043a82e19df4f039fbb0abf7421110b0bc6eb3cbe5f1ddf3e408b8f327",
+      "adapters/binary_battery.py": "6909af0c264d1222079c6f9c49ca7699227469a45dae385577d2303c53c81458",
+      "adapters/choice.py": "c088c9277435df01845009b36e270731754a1558748a84b990ea7c3e11c2fe8c",
+      "adapters/__init__.py": "2dda3c52d95dc2b8b259271a286bfc9e7155ace75784e486b77fc105aa2c3ea9",
+      "adapters/passage_rerank.py": "c5f4194ae9018caf7532d4bccbbda13c51a5317266f04a2ee5b2a88c8a0fb96d",
+      "adapters/rag.py": "f67507426adbacd4f74739f3223f6280d8fe0762cd1c0fbd936a08d9fef62055",
+      "adapters/graded_rag.py": "d411f8a1aaa245aeb72b1dd87ca6175489a38efe9a0ba1b45ecd15e8bc12ffc8",
+      "adapters/visual_qa.py": "d806c360f7aafb8abe70c255523a3f5e8b10cb523883a707a06e8265fae04991",
+      "adapters/domain_ranking.py": "b32c10e3d550bf571dbb381e315748b3f8d8e81eab9602299367bc9f3537cd08"
+    },
+    "returned_models": [
+      "typesafe/jev-1.13-20260917"
+    ],
+    "usage": {
+      "input_tokens": 10199055,
+      "output_tokens": 889608,
+      "reported_cost_usd": 0.4283603100000085,
+      "responses_with_cost": 19875
+    },
+    "artifacts": [
+      {
+        "suite": "codemmlu-full",
+        "directory": "eval/results/jev-1.13-2026-09-20/runs/codemmlu-full/codemmlu-full",
+        "manifest": {
+          "endpoint": "https://openrouter.ai/api/v1/systemone",
+          "model": "typesafe/jev-1.13",
+          "dataset_sha256": "ce45aa661476258bf30a0640daeac0aebb22d4029ab0dfaf003625d803969d55",
+          "rows": 19875,
+          "suite": {
+            "schema_version": 1,
+            "id": "codemmlu-full",
+            "version": "1",
+            "adapter": "choice-v1",
+            "dataset": "../../data/codemmlu-full.jsonl",
+            "headline_metric": "accuracy",
+            "language_group": "english",
+            "languages": [
+              "en"
+            ],
+            "modality": "text",
+            "category": "coding",
+            "subcategory": "model-knowledge",
+            "task_detail": "codemmlu-full",
+            "source": {
+              "codemmlu-api_frameworks": {
+                "url": "https://huggingface.co/datasets/Fsoft-AIC/CodeMMLU/resolve/f7c1221269df3609eb5c3023770126839e24e608/api_frameworks/test-00000-of-00001.parquet",
+                "file": "codemmlu-api_frameworks.parquet",
+                "sha256": "d06e58a4429fc6d8b14acbc70009a57c2bd466e9d81697d6dc27676928362abb",
+                "source_rows": 701,
+                "excluded_ids": []
+              },
+              "codemmlu-code_completion": {
+                "url": "https://huggingface.co/datasets/Fsoft-AIC/CodeMMLU/resolve/f7c1221269df3609eb5c3023770126839e24e608/code_completion/test-00000-of-00001.parquet",
+                "file": "codemmlu-code_completion.parquet",
+                "sha256": "a787cc64fdf43faca5a0314681643017654d281d6c653420243684a53b9ebf0d",
+                "source_rows": 164,
+                "excluded_ids": []
+              },
+              "codemmlu-code_repair": {
+                "url": "https://huggingface.co/datasets/Fsoft-AIC/CodeMMLU/resolve/f7c1221269df3609eb5c3023770126839e24e608/code_repair/test-00000-of-00001.parquet",
+                "file": "codemmlu-code_repair.parquet",
+                "sha256": "d902acefc58836df433166171be1b354c88c7eae8eb5c50761787f44c10dfa92",
+                "source_rows": 76,
+                "excluded_ids": []
+              },
+              "codemmlu-dbms_sql": {
+                "url": "https://huggingface.co/datasets/Fsoft-AIC/CodeMMLU/resolve/f7c1221269df3609eb5c3023770126839e24e608/dbms_sql/test-00000-of-00001.parquet",
+                "file": "codemmlu-dbms_sql.parquet",
+                "sha256": "d467c85e924ff40a1ade447badfe1411cb05f9806db261ff569ee774fa62ccb8",
+                "source_rows": 389,
+                "excluded_ids": []
+              },
+              "codemmlu-execution_prediction": {
+                "url": "https://huggingface.co/datasets/Fsoft-AIC/CodeMMLU/resolve/f7c1221269df3609eb5c3023770126839e24e608/execution_prediction/test-00000-of-00001.parquet",
+                "file": "codemmlu-execution_prediction.parquet",
+                "sha256": "e56abc6a34a982b04656f9882929f4787fd6a42e29912d4b7c06a4f8f98bc21d",
+                "source_rows": 6006,
+                "excluded_ids": []
+              },
+              "codemmlu-fill_in_the_middle": {
+                "url": "https://huggingface.co/datasets/Fsoft-AIC/CodeMMLU/resolve/f7c1221269df3609eb5c3023770126839e24e608/fill_in_the_middle/test-00000-of-00001.parquet",
+                "file": "codemmlu-fill_in_the_middle.parquet",
+                "sha256": "b422b251fb8a9659623ad1d139d7017ea8aead40ea46f7adb6cde90b66b94540",
+                "source_rows": 2129,
+                "excluded_ids": [
+                  "rt01749"
+                ]
+              },
+              "codemmlu-others": {
+                "url": "https://huggingface.co/datasets/Fsoft-AIC/CodeMMLU/resolve/f7c1221269df3609eb5c3023770126839e24e608/others/test-00000-of-00001.parquet",
+                "file": "codemmlu-others.parquet",
+                "sha256": "050e8894b70eec82a5ac9b3a9984137b35d6f9671f57fe539fbbf54324033c87",
+                "source_rows": 1371,
+                "excluded_ids": [
+                  "k10418"
+                ]
+              },
+              "codemmlu-programming_syntax": {
+                "url": "https://huggingface.co/datasets/Fsoft-AIC/CodeMMLU/resolve/f7c1221269df3609eb5c3023770126839e24e608/programming_syntax/test-00000-of-00001.parquet",
+                "file": "codemmlu-programming_syntax.parquet",
+                "sha256": "ceee643a6663effa6aff3758bec0a2c258e5896c926df70de713a34900a81c70",
+                "source_rows": 6216,
+                "excluded_ids": [
+                  "k05719"
+                ]
+              },
+              "codemmlu-software_principles": {
+                "url": "https://huggingface.co/datasets/Fsoft-AIC/CodeMMLU/resolve/f7c1221269df3609eb5c3023770126839e24e608/software_principles/test-00000-of-00001.parquet",
+                "file": "codemmlu-software_principles.parquet",
+                "sha256": "c033cf08c1ae9d6661fc33263888ace7e02bda748d412e1622d2fe1776f8c813",
+                "source_rows": 2826,
+                "excluded_ids": []
+              }
+            },
+            "expected_rows": 19875,
+            "aggregate_children": [
+              "codemmlu-api-frameworks",
+              "codemmlu-code-completion",
+              "codemmlu-code-repair",
+              "codemmlu-dbms-sql",
+              "codemmlu-execution-prediction",
+              "codemmlu-fill-in-the-middle",
+              "codemmlu-others",
+              "codemmlu-programming-syntax",
+              "codemmlu-software-principles"
+            ],
+            "project": "CodeMMLU",
+            "project_configuration": "valid-choice release"
+          },
+          "adapter_sha256": "c088c9277435df01845009b36e270731754a1558748a84b990ea7c3e11c2fe8c",
+          "retries": 5,
+          "delay": 0.02,
+          "timeout": 120.0,
+          "workers": 16,
+          "reporting": {
+            "project": "CodeMMLU",
+            "configuration": "valid-choice release",
+            "expected_suites": [
+              "codemmlu-api-frameworks",
+              "codemmlu-code-completion",
+              "codemmlu-code-repair",
+              "codemmlu-dbms-sql",
+              "codemmlu-execution-prediction",
+              "codemmlu-fill-in-the-middle",
+              "codemmlu-others",
+              "codemmlu-programming-syntax",
+              "codemmlu-software-principles"
+            ],
+            "partitions": [
+              {
+                "id": "codemmlu-api-frameworks",
+                "category": "coding",
+                "subcategory": "model-knowledge",
+                "modality": "text",
+                "language_group": "english",
+                "row_filter": {
+                  "field": "family",
+                  "values": [
+                    "api_frameworks"
+                  ]
+                }
+              },
+              {
+                "id": "codemmlu-code-completion",
+                "category": "coding",
+                "subcategory": "classification-decision",
+                "modality": "text",
+                "language_group": "english",
+                "row_filter": {
+                  "field": "family",
+                  "values": [
+                    "code_completion"
+                  ]
+                }
+              },
+              {
+                "id": "codemmlu-code-repair",
+                "category": "coding",
+                "subcategory": "classification-decision",
+                "modality": "text",
+                "language_group": "english",
+                "row_filter": {
+                  "field": "family",
+                  "values": [
+                    "code_repair"
+                  ]
+                }
+              },
+              {
+                "id": "codemmlu-dbms-sql",
+                "category": "coding",
+                "subcategory": "model-knowledge",
+                "modality": "text",
+                "language_group": "english",
+                "row_filter": {
+                  "field": "family",
+                  "values": [
+                    "dbms_sql"
+                  ]
+                }
+              },
+              {
+                "id": "codemmlu-execution-prediction",
+                "category": "coding",
+                "subcategory": "classification-decision",
+                "modality": "text",
+                "language_group": "english",
+                "row_filter": {
+                  "field": "family",
+                  "values": [
+                    "execution_prediction"
+                  ]
+                }
+              },
+              {
+                "id": "codemmlu-fill-in-the-middle",
+                "category": "coding",
+                "subcategory": "classification-decision",
+                "modality": "text",
+                "language_group": "english",
+                "row_filter": {
+                  "field": "family",
+                  "values": [
+                    "fill_in_the_middle"
+                  ]
+                }
+              },
+              {
+                "id": "codemmlu-others",
+                "category": "coding",
+                "subcategory": "model-knowledge",
+                "modality": "text",
+                "language_group": "english",
+                "row_filter": {
+                  "field": "family",
+                  "values": [
+                    "others"
+                  ]
+                }
+              },
+              {
+                "id": "codemmlu-programming-syntax",
+                "category": "coding",
+                "subcategory": "model-knowledge",
+                "modality": "text",
+                "language_group": "english",
+                "row_filter": {
+                  "field": "family",
+                  "values": [
+                    "programming_syntax"
+                  ]
+                }
+              },
+              {
+                "id": "codemmlu-software-principles",
+                "category": "coding",
+                "subcategory": "model-knowledge",
+                "modality": "text",
+                "language_group": "english",
+                "row_filter": {
+                  "field": "family",
+                  "values": [
+                    "software_principles"
+                  ]
+                }
+              }
+            ]
+          },
+          "started_at_unix": 1789966976.038395,
+          "runner_sha256": "cf1d35b8368e75343a3f70c883a843e4ecc52af2ea803c4412fbfabc48e0caf1",
+          "scoring_rows_sha256": "ce45aa661476258bf30a0640daeac0aebb22d4029ab0dfaf003625d803969d55",
+          "server_retry_runs": [
+            {
+              "time_unix": 1789968278.0578408,
+              "rows": 13,
+              "workers": 16,
+              "retry_statuses": "HTTP 500-599",
+              "runner_sha256": "60b26b661a3f99f89eef22bf89744d78d14b56068945f19e020c951fd7ce42d3"
+            }
+          ]
+        },
+        "sha256": {
+          "manifest.json": "dfcf014197037d5a0999217cf7c4778f89594cdfe6aaa47c4d7a6e422ef503d7",
+          "predictions.jsonl": "b3504c96f178018a8e47a122ffb0998c4b5c1ee0d7ebf6fe5051a0592a012eba",
+          "scoring_rows.jsonl": "ce45aa661476258bf30a0640daeac0aebb22d4029ab0dfaf003625d803969d55",
+          "summary.json": "4e7dc03f774ea81bead3fb9b94b338085442958e109e7d5152ceccc2a496f9b8"
+        }
+      }
+    ],
+    "cost_scope": "Sum of usage.cost in saved responses; excludes probes, discarded attempts, and any billed requests without saved responses."
+  }
+}

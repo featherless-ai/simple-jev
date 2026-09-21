@@ -1,0 +1,303 @@
+{
+  "model": "typesafe/jev-1.13",
+  "endpoint": "https://openrouter.ai/api/v1/systemone",
+  "by_project": [
+    {
+      "project": "ToolRet",
+      "configuration": "query-only BM25 reranking",
+      "metric": "ndcg_at_10",
+      "score": 0.40886046639058105,
+      "metrics": {
+        "rows": 2731,
+        "failed_rows": 0,
+        "recall_at_5": 0.4266830569650062,
+        "mrr_at_10": 0.4482389147530119,
+        "ndcg_at_10": 0.40886046639058105,
+        "candidate_recall": 0.44847343551115204,
+        "recall_at_10": 0.44378563582152014
+      },
+      "suites": [
+        "toolret-code",
+        "toolret-customized"
+      ],
+      "missing_suites": [
+        "toolret-web"
+      ],
+      "coverage": "partial"
+    }
+  ],
+  "by_category": [
+    {
+      "project": "ToolRet",
+      "configuration": "query-only BM25 reranking",
+      "metric": "ndcg_at_10",
+      "score": 0.40886046639058105,
+      "metrics": {
+        "rows": 2731,
+        "failed_rows": 0,
+        "recall_at_5": 0.4266830569650062,
+        "mrr_at_10": 0.4482389147530119,
+        "ndcg_at_10": 0.40886046639058105,
+        "candidate_recall": 0.44847343551115204,
+        "recall_at_10": 0.44378563582152014
+      },
+      "suites": [
+        "toolret-code",
+        "toolret-customized"
+      ],
+      "missing_suites": [
+        "toolret-web"
+      ],
+      "coverage": "partial",
+      "placement": [
+        "text",
+        "multilingual",
+        "agentic",
+        "ranking"
+      ]
+    }
+  ],
+  "provenance": {
+    "export_git_revision": "b6f63bb11a4319e39afff35a9e6e8a04e8d294ea",
+    "evaluator_sha256": {
+      "catalog.py": "f69e435c11f1d35cefca32075db31858ff9ef7c2c360507b8ac0259d452c0ef9",
+      "run.py": "60b26b661a3f99f89eef22bf89744d78d14b56068945f19e020c951fd7ce42d3",
+      "retry.py": "ed3ed9b31152d62bd20705501391557b2b6f128edd84be96e8f71609ec8770c6",
+      "suites.py": "85f443ba008dc2d83b6777e5906a30de37d925bcb4abc9829c63ce325d9f218a",
+      "report.py": "a002bc6d2cddd4f2c0309861c822ef487818ed9dc25f7ecef6785e824c6a6ff0",
+      "prepare.py": "ccbfafde1bb1fa2fe227b9e44525042e487e49abf5dedcb81c22dd7b95db97f8",
+      "adapters/typed.py": "9f1ab94e0fe312fcbb4c0872260fac051fbe27430e38e2723f4924a1454eabf8",
+      "adapters/mmlu.py": "de4432175d2e66d19b10f5743524b33cea5d874ddc20aac81478ac7078dc8f81",
+      "adapters/fields.py": "de77fcdaa13266b14492e361c5ce6d5a48c27d9498ed7de60ae9327f72e4a357",
+      "adapters/vision.py": "9e7856043a82e19df4f039fbb0abf7421110b0bc6eb3cbe5f1ddf3e408b8f327",
+      "adapters/binary_battery.py": "6909af0c264d1222079c6f9c49ca7699227469a45dae385577d2303c53c81458",
+      "adapters/choice.py": "c088c9277435df01845009b36e270731754a1558748a84b990ea7c3e11c2fe8c",
+      "adapters/__init__.py": "2dda3c52d95dc2b8b259271a286bfc9e7155ace75784e486b77fc105aa2c3ea9",
+      "adapters/passage_rerank.py": "c5f4194ae9018caf7532d4bccbbda13c51a5317266f04a2ee5b2a88c8a0fb96d",
+      "adapters/rag.py": "f67507426adbacd4f74739f3223f6280d8fe0762cd1c0fbd936a08d9fef62055",
+      "adapters/graded_rag.py": "d411f8a1aaa245aeb72b1dd87ca6175489a38efe9a0ba1b45ecd15e8bc12ffc8",
+      "adapters/visual_qa.py": "d806c360f7aafb8abe70c255523a3f5e8b10cb523883a707a06e8265fae04991",
+      "adapters/domain_ranking.py": "b32c10e3d550bf571dbb381e315748b3f8d8e81eab9602299367bc9f3537cd08"
+    },
+    "returned_models": [
+      "typesafe/jev-1.13-20260917"
+    ],
+    "usage": {
+      "input_tokens": 14558364,
+      "output_tokens": 1021394,
+      "reported_cost_usd": 0.6114512879999991,
+      "responses_with_cost": 2731
+    },
+    "artifacts": [
+      {
+        "suite": "toolret-code",
+        "directory": "eval/results/jev-1.13-2026-09-20/runs/toolret-code/toolret-code",
+        "manifest": {
+          "endpoint": "https://openrouter.ai/api/v1/systemone",
+          "model": "typesafe/jev-1.13",
+          "dataset_sha256": "6c5e295ec6e0259ad6751d4949ea1ccedb6e716b88981649da7989db5c2e0070",
+          "rows": 1749,
+          "suite": {
+            "schema_version": 1,
+            "id": "toolret-code",
+            "version": "1",
+            "adapter": "domain-ranking-v1",
+            "dataset": "../../data/toolret-code.jsonl",
+            "language_group": "multilingual",
+            "languages": [
+              "en",
+              "zh"
+            ],
+            "modality": "text",
+            "category": "agentic",
+            "subcategory": "ranking",
+            "task_detail": "toolret-code",
+            "headline_metric": "ndcg_at_10",
+            "source": {
+              "repository": "mangopy/ToolRet-Queries",
+              "revision": "b8c76ad3349ff17497b6bdb28bb5b8f61a0f6445",
+              "files": [
+                "apibank/queries-00000-of-00001.parquet",
+                "apigen/queries-00000-of-00001.parquet",
+                "appbench/queries-00000-of-00001.parquet",
+                "autotools-food/queries-00000-of-00001.parquet",
+                "autotools-music/queries-00000-of-00001.parquet",
+                "autotools-weather/queries-00000-of-00001.parquet",
+                "craft-math-algebra/queries-00000-of-00001.parquet",
+                "craft-tabmwp/queries-00000-of-00001.parquet",
+                "craft-vqa/queries-00000-of-00001.parquet",
+                "gorilla-huggingface/queries-00000-of-00001.parquet",
+                "gorilla-pytorch/queries-00000-of-00001.parquet",
+                "gorilla-tensor/queries-00000-of-00001.parquet",
+                "gpt4tools/queries-00000-of-00001.parquet",
+                "gta/queries-00000-of-00001.parquet",
+                "metatool/queries-00000-of-00001.parquet",
+                "mnms/queries-00000-of-00001.parquet",
+                "restgpt-spotify/queries-00000-of-00001.parquet",
+                "restgpt-tmdb/queries-00000-of-00001.parquet",
+                "reversechain/queries-00000-of-00001.parquet",
+                "rotbench/queries-00000-of-00001.parquet",
+                "t-eval-dialog/queries-00000-of-00001.parquet",
+                "t-eval-step/queries-00000-of-00001.parquet",
+                "taskbench-daily/queries-00000-of-00001.parquet",
+                "taskbench-huggingface/queries-00000-of-00001.parquet",
+                "taskbench-multimedia/queries-00000-of-00001.parquet",
+                "tool-be-honest/queries-00000-of-00001.parquet",
+                "toolace/queries-00000-of-00001.parquet",
+                "toolalpaca/queries-00000-of-00001.parquet",
+                "toolbench-sam/queries-00000-of-00001.parquet",
+                "toolbench/queries-00000-of-00001.parquet",
+                "toolemu/queries-00000-of-00001.parquet",
+                "tooleyes/queries-00000-of-00001.parquet",
+                "toolink/queries-00000-of-00001.parquet",
+                "toollens/queries-00000-of-00001.parquet",
+                "ultratool/queries-00000-of-00001.parquet"
+              ],
+              "url": "https://huggingface.co/datasets/mangopy/ToolRet-Queries"
+            },
+            "scope_note": "Frozen BM25 candidate reranking adaptation; all queries count; no gold injection. English queries with mixed-language tool metadata; query-only, synthetic instruction excluded.",
+            "project": "ToolRet",
+            "project_configuration": "query-only BM25 reranking"
+          },
+          "adapter_sha256": "b32c10e3d550bf571dbb381e315748b3f8d8e81eab9602299367bc9f3537cd08",
+          "retries": 5,
+          "delay": 0.02,
+          "timeout": 120.0,
+          "workers": 16,
+          "reporting": {
+            "project": "ToolRet",
+            "configuration": "query-only BM25 reranking",
+            "expected_suites": [
+              "toolret-code",
+              "toolret-customized",
+              "toolret-web"
+            ],
+            "partitions": [
+              {
+                "id": "toolret-code",
+                "category": "agentic",
+                "subcategory": "ranking",
+                "modality": "text",
+                "language_group": "multilingual"
+              }
+            ]
+          },
+          "started_at_unix": 1789968458.852876,
+          "runner_sha256": "60b26b661a3f99f89eef22bf89744d78d14b56068945f19e020c951fd7ce42d3",
+          "scoring_rows_sha256": "6c5e295ec6e0259ad6751d4949ea1ccedb6e716b88981649da7989db5c2e0070"
+        },
+        "sha256": {
+          "manifest.json": "28105e5de904529e5ab94dcc4fb8927c8da43c2d4314f61479d0cc5b32435c0a",
+          "predictions.jsonl": "63143f52ba27b7aa919a1dc2a3e0f7ae789b642482a3d6afdfbe840516118cea",
+          "scoring_rows.jsonl": "6c5e295ec6e0259ad6751d4949ea1ccedb6e716b88981649da7989db5c2e0070",
+          "summary.json": "5eb44a44cefbae87f7b8afb02fd0d6af6ae6e510b7a46c9db5d5ce9f01382c89"
+        }
+      },
+      {
+        "suite": "toolret-customized",
+        "directory": "eval/results/jev-1.13-2026-09-20/runs/toolret-customized/toolret-customized",
+        "manifest": {
+          "endpoint": "https://openrouter.ai/api/v1/systemone",
+          "model": "typesafe/jev-1.13",
+          "dataset_sha256": "502ef2b9f8bedaf7d15afae894db6394b06ceb270173ed7a1e5161c1fbd7f6bc",
+          "rows": 982,
+          "suite": {
+            "schema_version": 1,
+            "id": "toolret-customized",
+            "version": "1",
+            "adapter": "domain-ranking-v1",
+            "dataset": "../../data/toolret-customized.jsonl",
+            "language_group": "multilingual",
+            "languages": [
+              "en",
+              "zh"
+            ],
+            "modality": "text",
+            "category": "agentic",
+            "subcategory": "ranking",
+            "task_detail": "toolret-customized",
+            "headline_metric": "ndcg_at_10",
+            "source": {
+              "repository": "mangopy/ToolRet-Queries",
+              "revision": "b8c76ad3349ff17497b6bdb28bb5b8f61a0f6445",
+              "files": [
+                "apibank/queries-00000-of-00001.parquet",
+                "apigen/queries-00000-of-00001.parquet",
+                "appbench/queries-00000-of-00001.parquet",
+                "autotools-food/queries-00000-of-00001.parquet",
+                "autotools-music/queries-00000-of-00001.parquet",
+                "autotools-weather/queries-00000-of-00001.parquet",
+                "craft-math-algebra/queries-00000-of-00001.parquet",
+                "craft-tabmwp/queries-00000-of-00001.parquet",
+                "craft-vqa/queries-00000-of-00001.parquet",
+                "gorilla-huggingface/queries-00000-of-00001.parquet",
+                "gorilla-pytorch/queries-00000-of-00001.parquet",
+                "gorilla-tensor/queries-00000-of-00001.parquet",
+                "gpt4tools/queries-00000-of-00001.parquet",
+                "gta/queries-00000-of-00001.parquet",
+                "metatool/queries-00000-of-00001.parquet",
+                "mnms/queries-00000-of-00001.parquet",
+                "restgpt-spotify/queries-00000-of-00001.parquet",
+                "restgpt-tmdb/queries-00000-of-00001.parquet",
+                "reversechain/queries-00000-of-00001.parquet",
+                "rotbench/queries-00000-of-00001.parquet",
+                "t-eval-dialog/queries-00000-of-00001.parquet",
+                "t-eval-step/queries-00000-of-00001.parquet",
+                "taskbench-daily/queries-00000-of-00001.parquet",
+                "taskbench-huggingface/queries-00000-of-00001.parquet",
+                "taskbench-multimedia/queries-00000-of-00001.parquet",
+                "tool-be-honest/queries-00000-of-00001.parquet",
+                "toolace/queries-00000-of-00001.parquet",
+                "toolalpaca/queries-00000-of-00001.parquet",
+                "toolbench-sam/queries-00000-of-00001.parquet",
+                "toolbench/queries-00000-of-00001.parquet",
+                "toolemu/queries-00000-of-00001.parquet",
+                "tooleyes/queries-00000-of-00001.parquet",
+                "toolink/queries-00000-of-00001.parquet",
+                "toollens/queries-00000-of-00001.parquet",
+                "ultratool/queries-00000-of-00001.parquet"
+              ],
+              "url": "https://huggingface.co/datasets/mangopy/ToolRet-Queries"
+            },
+            "scope_note": "Frozen BM25 candidate reranking adaptation; all queries count; no gold injection. English queries with mixed-language tool metadata; query-only, synthetic instruction excluded.",
+            "project": "ToolRet",
+            "project_configuration": "query-only BM25 reranking"
+          },
+          "adapter_sha256": "b32c10e3d550bf571dbb381e315748b3f8d8e81eab9602299367bc9f3537cd08",
+          "retries": 5,
+          "delay": 0.02,
+          "timeout": 120.0,
+          "workers": 16,
+          "reporting": {
+            "project": "ToolRet",
+            "configuration": "query-only BM25 reranking",
+            "expected_suites": [
+              "toolret-code",
+              "toolret-customized",
+              "toolret-web"
+            ],
+            "partitions": [
+              {
+                "id": "toolret-customized",
+                "category": "agentic",
+                "subcategory": "ranking",
+                "modality": "text",
+                "language_group": "multilingual"
+              }
+            ]
+          },
+          "started_at_unix": 1789968460.198832,
+          "runner_sha256": "60b26b661a3f99f89eef22bf89744d78d14b56068945f19e020c951fd7ce42d3",
+          "scoring_rows_sha256": "502ef2b9f8bedaf7d15afae894db6394b06ceb270173ed7a1e5161c1fbd7f6bc"
+        },
+        "sha256": {
+          "manifest.json": "06463878974dbb65934e5369624d0deee20f39da9c9aa6ee1fea02f5066806bb",
+          "predictions.jsonl": "0e0b6d81ccfbe9fe1f0e92c2786917acf91a02c8d6a46d823e2c1cad1942a4c2",
+          "scoring_rows.jsonl": "502ef2b9f8bedaf7d15afae894db6394b06ceb270173ed7a1e5161c1fbd7f6bc",
+          "summary.json": "8dc6a2b71675b15ebbb3889d3819f895dfc7873576b723a341a26d09c7de957d"
+        }
+      }
+    ],
+    "cost_scope": "Sum of usage.cost in saved responses; excludes probes, discarded attempts, and any billed requests without saved responses."
+  }
+}

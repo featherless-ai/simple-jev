@@ -1,0 +1,652 @@
+{
+  "model": "typesafe/jev-1.13-20260917",
+  "language_group": "english",
+  "weighting": "Arithmetic mean of project/configuration/category/task items; equal weight per item, not per example or per category.",
+  "metric_notes": "Knowledge and decision use accuracy; multi-label tasks use per-label accuracy. Ranking uses nDCG@10 and is never combined into accuracy. Variants remain separate and may share examples.",
+  "totals": {
+    "model-knowledge": {
+      "items": 13,
+      "score": 0.8858688231085619
+    },
+    "classification-decision": {
+      "items": 26,
+      "score": 0.8714721142744242
+    },
+    "ranking": {
+      "items": 15,
+      "score": 0.6086087000604928
+    }
+  },
+  "combined_accuracy": {
+    "items": 39,
+    "score": 0.8762710172191367
+  },
+  "by_category": {
+    "corporate-documents": {
+      "model-knowledge": {
+        "items": 2,
+        "score": 0.8640821024835579
+      },
+      "classification-decision": {
+        "items": 3,
+        "score": 0.8494152046783626
+      },
+      "ranking": {
+        "items": 1,
+        "score": 0.6159890493879656
+      }
+    },
+    "coding": {
+      "model-knowledge": {
+        "items": 3,
+        "score": 0.8612646478955878
+      },
+      "classification-decision": {
+        "items": 2,
+        "score": 0.6855241929587694
+      },
+      "ranking": {
+        "items": 2,
+        "score": 0.6845121325122384
+      }
+    },
+    "security": {
+      "model-knowledge": {
+        "items": 4,
+        "score": 0.9556827111984283
+      },
+      "classification-decision": {
+        "items": 3,
+        "score": 0.7795
+      },
+      "ranking": {
+        "items": 1,
+        "score": 0.8459094042229718
+      }
+    },
+    "agentic": {
+      "model-knowledge": {
+        "items": 0,
+        "score": null
+      },
+      "classification-decision": {
+        "items": 7,
+        "score": 0.9518343997774378
+      },
+      "ranking": {
+        "items": 0,
+        "score": null
+      }
+    },
+    "legal": {
+      "model-knowledge": {
+        "items": 2,
+        "score": 0.8130107059894501
+      },
+      "classification-decision": {
+        "items": 3,
+        "score": 0.8350087113564376
+      },
+      "ranking": {
+        "items": 1,
+        "score": 0.29147649645086066
+      }
+    },
+    "general-language": {
+      "model-knowledge": {
+        "items": 2,
+        "score": 0.8777921474924057
+      },
+      "classification-decision": {
+        "items": 8,
+        "score": 0.904076754833878
+      },
+      "ranking": {
+        "items": 10,
+        "score": 0.6006731285821119
+      }
+    }
+  },
+  "items": [
+    {
+      "project": "CodeComplex",
+      "configuration": "codecomplex-test",
+      "category": "coding",
+      "task": "classification-decision",
+      "metric": "accuracy",
+      "score": 0.7081632653061225,
+      "rows": 980,
+      "source": "codecomplex/results.json"
+    },
+    {
+      "project": "CodeMMLU",
+      "configuration": "valid-choice release",
+      "category": "coding",
+      "task": "classification-decision",
+      "metric": "accuracy",
+      "score": 0.6628851206114162,
+      "rows": 8374,
+      "source": "codemmlu/results.json"
+    },
+    {
+      "project": "CodeMMLU",
+      "configuration": "valid-choice release",
+      "category": "coding",
+      "task": "model-knowledge",
+      "metric": "accuracy",
+      "score": 0.7355012607599339,
+      "rows": 11501,
+      "source": "codemmlu/results.json"
+    },
+    {
+      "project": "ContractNLI",
+      "configuration": "contractnli",
+      "category": "legal",
+      "task": "classification-decision",
+      "metric": "accuracy",
+      "score": 0.7785748445719751,
+      "rows": 2091,
+      "source": "contractnli/results.json"
+    },
+    {
+      "project": "CyberMetric",
+      "configuration": "10000-v1 released rows",
+      "category": "security",
+      "task": "model-knowledge",
+      "metric": "accuracy",
+      "score": 0.8927308447937131,
+      "rows": 10180,
+      "source": "cybermetric/results.json"
+    },
+    {
+      "project": "CyberSec Retrieval",
+      "configuration": "frozen BM25 reranking",
+      "category": "security",
+      "task": "ranking",
+      "metric": "ndcg_at_10",
+      "score": 0.8459094042229718,
+      "rows": 1350,
+      "source": "cybersec-retrieval/results.json"
+    },
+    {
+      "project": "Jev Korean benchmark",
+      "configuration": "en-en",
+      "category": "general-language",
+      "task": "classification-decision",
+      "metric": "accuracy",
+      "score": 0.895,
+      "rows": 200,
+      "source": "jev-korean-benchmark/results.json"
+    },
+    {
+      "project": "Jev Phishing Bench",
+      "configuration": "phishing-verdict",
+      "category": "security",
+      "task": "classification-decision",
+      "metric": "accuracy",
+      "score": 0.6285,
+      "rows": 2000,
+      "source": "jev-phishing-bench/results.json"
+    },
+    {
+      "project": "Jev Rerank Bench",
+      "configuration": "bright-stackoverflow",
+      "category": "coding",
+      "task": "ranking",
+      "metric": "ndcg_at_10",
+      "score": 0.3869586746154206,
+      "rows": 117,
+      "source": "jev-rerank-bench/results.json"
+    },
+    {
+      "project": "Jev Rerank Bench",
+      "configuration": "csn-python",
+      "category": "coding",
+      "task": "ranking",
+      "metric": "ndcg_at_10",
+      "score": 0.9820655904090562,
+      "rows": 300,
+      "source": "jev-rerank-bench/results.json"
+    },
+    {
+      "project": "Jev Rerank Bench",
+      "configuration": "fiqa",
+      "category": "corporate-documents",
+      "task": "ranking",
+      "metric": "ndcg_at_10",
+      "score": 0.6159890493879656,
+      "rows": 648,
+      "source": "jev-rerank-bench/results.json"
+    },
+    {
+      "project": "Jev Rerank Bench",
+      "configuration": "bright-biology",
+      "category": "general-language",
+      "task": "ranking",
+      "metric": "ndcg_at_10",
+      "score": 0.4325548046175666,
+      "rows": 103,
+      "source": "jev-rerank-bench/results.json"
+    },
+    {
+      "project": "Jev Rerank Bench",
+      "configuration": "bright-earth_science",
+      "category": "general-language",
+      "task": "ranking",
+      "metric": "ndcg_at_10",
+      "score": 0.4673805645426405,
+      "rows": 116,
+      "source": "jev-rerank-bench/results.json"
+    },
+    {
+      "project": "Jev Rerank Bench",
+      "configuration": "bright-economics",
+      "category": "general-language",
+      "task": "ranking",
+      "metric": "ndcg_at_10",
+      "score": 0.5194261764909158,
+      "rows": 103,
+      "source": "jev-rerank-bench/results.json"
+    },
+    {
+      "project": "Jev Rerank Bench",
+      "configuration": "bright-psychology",
+      "category": "general-language",
+      "task": "ranking",
+      "metric": "ndcg_at_10",
+      "score": 0.637042057628861,
+      "rows": 101,
+      "source": "jev-rerank-bench/results.json"
+    },
+    {
+      "project": "Jev Rerank Bench",
+      "configuration": "bright-robotics",
+      "category": "general-language",
+      "task": "ranking",
+      "metric": "ndcg_at_10",
+      "score": 0.4779107496321768,
+      "rows": 101,
+      "source": "jev-rerank-bench/results.json"
+    },
+    {
+      "project": "Jev Rerank Bench",
+      "configuration": "bright-sustainable_living",
+      "category": "general-language",
+      "task": "ranking",
+      "metric": "ndcg_at_10",
+      "score": 0.5065729637533545,
+      "rows": 108,
+      "source": "jev-rerank-bench/results.json"
+    },
+    {
+      "project": "Jev Rerank Bench",
+      "configuration": "nfcorpus",
+      "category": "general-language",
+      "task": "ranking",
+      "metric": "ndcg_at_10",
+      "score": 0.5024929261554457,
+      "rows": 323,
+      "source": "jev-rerank-bench/results.json"
+    },
+    {
+      "project": "Jev Rerank Bench",
+      "configuration": "nq",
+      "category": "general-language",
+      "task": "ranking",
+      "metric": "ndcg_at_10",
+      "score": 0.8027227239846185,
+      "rows": 500,
+      "source": "jev-rerank-bench/results.json"
+    },
+    {
+      "project": "Jev Rerank Bench",
+      "configuration": "scifact",
+      "category": "general-language",
+      "task": "ranking",
+      "metric": "ndcg_at_10",
+      "score": 0.8855260840444031,
+      "rows": 300,
+      "source": "jev-rerank-bench/results.json"
+    },
+    {
+      "project": "Jev Rerank Bench",
+      "configuration": "trec-covid",
+      "category": "general-language",
+      "task": "ranking",
+      "metric": "ndcg_at_10",
+      "score": 0.7751022349711353,
+      "rows": 50,
+      "source": "jev-rerank-bench/results.json"
+    },
+    {
+      "project": "Jev Sec Bench",
+      "configuration": "code",
+      "category": "security",
+      "task": "classification-decision",
+      "metric": "accuracy",
+      "score": 0.71,
+      "rows": 400,
+      "source": "jev-sec-bench/results.json"
+    },
+    {
+      "project": "JevBench",
+      "configuration": "easy",
+      "category": "agentic",
+      "task": "classification-decision",
+      "metric": "accuracy",
+      "score": 1.0,
+      "rows": 12,
+      "source": "jevbench/results.json"
+    },
+    {
+      "project": "JevBench",
+      "configuration": "hard",
+      "category": "agentic",
+      "task": "classification-decision",
+      "metric": "accuracy",
+      "score": 1.0,
+      "rows": 5,
+      "source": "jevbench/results.json"
+    },
+    {
+      "project": "JevBench",
+      "configuration": "original",
+      "category": "agentic",
+      "task": "classification-decision",
+      "metric": "accuracy",
+      "score": 1.0,
+      "rows": 12,
+      "source": "jevbench/results.json"
+    },
+    {
+      "project": "JevBench",
+      "configuration": "hard",
+      "category": "corporate-documents",
+      "task": "classification-decision",
+      "metric": "accuracy",
+      "score": 0.631578947368421,
+      "rows": 19,
+      "source": "jevbench/results.json"
+    },
+    {
+      "project": "JevBench",
+      "configuration": "original",
+      "category": "corporate-documents",
+      "task": "classification-decision",
+      "metric": "accuracy",
+      "score": 0.9166666666666666,
+      "rows": 12,
+      "source": "jevbench/results.json"
+    },
+    {
+      "project": "JevBench",
+      "configuration": "easy",
+      "category": "general-language",
+      "task": "classification-decision",
+      "metric": "accuracy",
+      "score": 1.0,
+      "rows": 36,
+      "source": "jevbench/results.json"
+    },
+    {
+      "project": "JevBench",
+      "configuration": "hard",
+      "category": "general-language",
+      "task": "classification-decision",
+      "metric": "accuracy",
+      "score": 0.7037037037037037,
+      "rows": 81,
+      "source": "jevbench/results.json"
+    },
+    {
+      "project": "JevBench",
+      "configuration": "original",
+      "category": "general-language",
+      "task": "classification-decision",
+      "metric": "accuracy",
+      "score": 1.0,
+      "rows": 48,
+      "source": "jevbench/results.json"
+    },
+    {
+      "project": "JevBench",
+      "configuration": "hard",
+      "category": "security",
+      "task": "classification-decision",
+      "metric": "accuracy",
+      "score": 1.0,
+      "rows": 6,
+      "source": "jevbench/results.json"
+    },
+    {
+      "project": "Jevtest",
+      "configuration": "jevtest-support-subset",
+      "category": "corporate-documents",
+      "task": "classification-decision",
+      "metric": "accuracy",
+      "score": 1.0,
+      "rows": 6,
+      "source": "jevtest/results.json"
+    },
+    {
+      "project": "LegalBench-RAG",
+      "configuration": "frozen BM25 reranking",
+      "category": "legal",
+      "task": "ranking",
+      "metric": "ndcg_at_10",
+      "score": 0.29147649645086066,
+      "rows": 6889,
+      "source": "legalbench-rag/results.json"
+    },
+    {
+      "project": "LexGLUE",
+      "configuration": "casehold",
+      "category": "legal",
+      "task": "classification-decision",
+      "metric": "accuracy",
+      "score": 0.7744444444444445,
+      "rows": 3600,
+      "source": "lexglue/results.json"
+    },
+    {
+      "project": "LexGLUE",
+      "configuration": "unfair-tos",
+      "category": "legal",
+      "task": "classification-decision",
+      "metric": "accuracy",
+      "score": 0.9520068450528936,
+      "rows": 1607,
+      "source": "lexglue/results.json"
+    },
+    {
+      "project": "MetaTool",
+      "configuration": "tool awareness",
+      "category": "agentic",
+      "task": "classification-decision",
+      "metric": "accuracy",
+      "score": 0.7894230769230769,
+      "rows": 1040,
+      "source": "metatool/results.json"
+    },
+    {
+      "project": "MMLU",
+      "configuration": "full test",
+      "category": "coding",
+      "task": "model-knowledge",
+      "metric": "accuracy",
+      "score": 0.98,
+      "rows": 200,
+      "source": "mmlu/results.json"
+    },
+    {
+      "project": "MMLU",
+      "configuration": "full test",
+      "category": "corporate-documents",
+      "task": "model-knowledge",
+      "metric": "accuracy",
+      "score": 0.9360222531293463,
+      "rows": 719,
+      "source": "mmlu/results.json"
+    },
+    {
+      "project": "MMLU",
+      "configuration": "full test",
+      "category": "general-language",
+      "task": "model-knowledge",
+      "metric": "accuracy",
+      "score": 0.9245115452930728,
+      "rows": 11260,
+      "source": "mmlu/results.json"
+    },
+    {
+      "project": "MMLU",
+      "configuration": "full test",
+      "category": "legal",
+      "task": "model-knowledge",
+      "metric": "accuracy",
+      "score": 0.8576290414066932,
+      "rows": 1763,
+      "source": "mmlu/results.json"
+    },
+    {
+      "project": "MMLU",
+      "configuration": "full test",
+      "category": "security",
+      "task": "model-knowledge",
+      "metric": "accuracy",
+      "score": 0.93,
+      "rows": 100,
+      "source": "mmlu/results.json"
+    },
+    {
+      "project": "MMLU-Pro",
+      "configuration": "full test",
+      "category": "coding",
+      "task": "model-knowledge",
+      "metric": "accuracy",
+      "score": 0.8682926829268293,
+      "rows": 410,
+      "source": "mmlu-pro/results.json"
+    },
+    {
+      "project": "MMLU-Pro",
+      "configuration": "full test",
+      "category": "corporate-documents",
+      "task": "model-knowledge",
+      "metric": "accuracy",
+      "score": 0.7921419518377694,
+      "rows": 789,
+      "source": "mmlu-pro/results.json"
+    },
+    {
+      "project": "MMLU-Pro",
+      "configuration": "full test",
+      "category": "general-language",
+      "task": "model-knowledge",
+      "metric": "accuracy",
+      "score": 0.8310727496917386,
+      "rows": 9732,
+      "source": "mmlu-pro/results.json"
+    },
+    {
+      "project": "MMLU-Pro",
+      "configuration": "full test",
+      "category": "legal",
+      "task": "model-knowledge",
+      "metric": "accuracy",
+      "score": 0.7683923705722071,
+      "rows": 1101,
+      "source": "mmlu-pro/results.json"
+    },
+    {
+      "project": "SecQA",
+      "configuration": "v1",
+      "category": "security",
+      "task": "model-knowledge",
+      "metric": "accuracy",
+      "score": 1.0,
+      "rows": 110,
+      "source": "secqa/results.json"
+    },
+    {
+      "project": "SecQA",
+      "configuration": "v2",
+      "category": "security",
+      "task": "model-knowledge",
+      "metric": "accuracy",
+      "score": 1.0,
+      "rows": 100,
+      "source": "secqa/results.json"
+    },
+    {
+      "project": "SemIf",
+      "configuration": "authored",
+      "category": "general-language",
+      "task": "classification-decision",
+      "metric": "accuracy",
+      "score": 0.9722222222222222,
+      "rows": 144,
+      "source": "semif/results.json"
+    },
+    {
+      "project": "SemIf",
+      "configuration": "perturbations",
+      "category": "general-language",
+      "task": "classification-decision",
+      "metric": "accuracy",
+      "score": 1.0,
+      "rows": 108,
+      "source": "semif/results.json"
+    },
+    {
+      "project": "SemIf",
+      "configuration": "typesafe",
+      "category": "general-language",
+      "task": "classification-decision",
+      "metric": "accuracy",
+      "score": 0.8921568627450981,
+      "rows": 102,
+      "source": "semif/results.json"
+    },
+    {
+      "project": "SemIf",
+      "configuration": "wanli",
+      "category": "general-language",
+      "task": "classification-decision",
+      "metric": "accuracy",
+      "score": 0.76953125,
+      "rows": 256,
+      "source": "semif/results.json"
+    },
+    {
+      "project": "wondertwins/jev-benchmark",
+      "configuration": "clean",
+      "category": "agentic",
+      "task": "classification-decision",
+      "metric": "accuracy",
+      "score": 0.9704641350210971,
+      "rows": 75,
+      "source": "wondertwins-jev-benchmark/results.json"
+    },
+    {
+      "project": "wondertwins/jev-benchmark",
+      "configuration": "stt",
+      "category": "agentic",
+      "task": "classification-decision",
+      "metric": "accuracy",
+      "score": 0.9535864978902954,
+      "rows": 75,
+      "source": "wondertwins-jev-benchmark/results.json"
+    },
+    {
+      "project": "wondertwins/jev-benchmark",
+      "configuration": "stt-misheard",
+      "category": "agentic",
+      "task": "classification-decision",
+      "metric": "accuracy",
+      "score": 0.9493670886075949,
+      "rows": 75,
+      "source": "wondertwins-jev-benchmark/results.json"
+    }
+  ]
+}

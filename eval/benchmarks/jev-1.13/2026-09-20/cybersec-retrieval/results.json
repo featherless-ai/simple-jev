@@ -1,0 +1,543 @@
+{
+  "model": "typesafe/jev-1.13",
+  "endpoint": "https://openrouter.ai/api/v1/systemone",
+  "by_project": [
+    {
+      "project": "CyberSec Retrieval",
+      "configuration": "frozen BM25 reranking",
+      "metric": "ndcg_at_10",
+      "score": 0.8459094042229718,
+      "metrics": {
+        "rows": 1350,
+        "failed_rows": 0,
+        "recall_at_5": 0.882962962962963,
+        "mrr_at_10": 0.8196208112874782,
+        "ndcg_at_10": 0.8459094042229718,
+        "candidate_recall": 0.9718518518518519,
+        "recall_at_10": 0.9296296296296296
+      },
+      "suites": [
+        "cybersec-attack-retrieval",
+        "cybersec-cve-similarity",
+        "cybersec-cwe-retrieval",
+        "cybersec-sigma-retrieval",
+        "cybersec-soc-playbook",
+        "cybersec-threat-report-retrieval"
+      ],
+      "missing_suites": [],
+      "coverage": "complete"
+    }
+  ],
+  "by_category": [
+    {
+      "project": "CyberSec Retrieval",
+      "configuration": "frozen BM25 reranking",
+      "metric": "ndcg_at_10",
+      "score": 0.8459094042229718,
+      "metrics": {
+        "rows": 1350,
+        "failed_rows": 0,
+        "recall_at_5": 0.882962962962963,
+        "mrr_at_10": 0.8196208112874782,
+        "ndcg_at_10": 0.8459094042229718,
+        "candidate_recall": 0.9718518518518519,
+        "recall_at_10": 0.9296296296296296
+      },
+      "suites": [
+        "cybersec-attack-retrieval",
+        "cybersec-cve-similarity",
+        "cybersec-cwe-retrieval",
+        "cybersec-sigma-retrieval",
+        "cybersec-soc-playbook",
+        "cybersec-threat-report-retrieval"
+      ],
+      "missing_suites": [],
+      "coverage": "complete",
+      "placement": [
+        "text",
+        "english",
+        "security",
+        "ranking"
+      ]
+    }
+  ],
+  "provenance": {
+    "export_git_revision": "b6f63bb11a4319e39afff35a9e6e8a04e8d294ea",
+    "evaluator_sha256": {
+      "catalog.py": "f69e435c11f1d35cefca32075db31858ff9ef7c2c360507b8ac0259d452c0ef9",
+      "run.py": "60b26b661a3f99f89eef22bf89744d78d14b56068945f19e020c951fd7ce42d3",
+      "retry.py": "ed3ed9b31152d62bd20705501391557b2b6f128edd84be96e8f71609ec8770c6",
+      "suites.py": "85f443ba008dc2d83b6777e5906a30de37d925bcb4abc9829c63ce325d9f218a",
+      "report.py": "a002bc6d2cddd4f2c0309861c822ef487818ed9dc25f7ecef6785e824c6a6ff0",
+      "prepare.py": "ccbfafde1bb1fa2fe227b9e44525042e487e49abf5dedcb81c22dd7b95db97f8",
+      "adapters/typed.py": "9f1ab94e0fe312fcbb4c0872260fac051fbe27430e38e2723f4924a1454eabf8",
+      "adapters/mmlu.py": "de4432175d2e66d19b10f5743524b33cea5d874ddc20aac81478ac7078dc8f81",
+      "adapters/fields.py": "de77fcdaa13266b14492e361c5ce6d5a48c27d9498ed7de60ae9327f72e4a357",
+      "adapters/vision.py": "9e7856043a82e19df4f039fbb0abf7421110b0bc6eb3cbe5f1ddf3e408b8f327",
+      "adapters/binary_battery.py": "6909af0c264d1222079c6f9c49ca7699227469a45dae385577d2303c53c81458",
+      "adapters/choice.py": "c088c9277435df01845009b36e270731754a1558748a84b990ea7c3e11c2fe8c",
+      "adapters/__init__.py": "2dda3c52d95dc2b8b259271a286bfc9e7155ace75784e486b77fc105aa2c3ea9",
+      "adapters/passage_rerank.py": "c5f4194ae9018caf7532d4bccbbda13c51a5317266f04a2ee5b2a88c8a0fb96d",
+      "adapters/rag.py": "f67507426adbacd4f74739f3223f6280d8fe0762cd1c0fbd936a08d9fef62055",
+      "adapters/graded_rag.py": "d411f8a1aaa245aeb72b1dd87ca6175489a38efe9a0ba1b45ecd15e8bc12ffc8",
+      "adapters/visual_qa.py": "d806c360f7aafb8abe70c255523a3f5e8b10cb523883a707a06e8265fae04991",
+      "adapters/domain_ranking.py": "b32c10e3d550bf571dbb381e315748b3f8d8e81eab9602299367bc9f3537cd08"
+    },
+    "returned_models": [
+      "typesafe/jev-1.13-20260917"
+    ],
+    "usage": {
+      "input_tokens": 7862762,
+      "output_tokens": 504900,
+      "reported_cost_usd": 0.3302360039999997,
+      "responses_with_cost": 1350
+    },
+    "artifacts": [
+      {
+        "suite": "cybersec-attack-retrieval",
+        "directory": "eval/results/jev-1.13-2026-09-20/runs/cybersec-attack-retrieval/cybersec-attack-retrieval",
+        "manifest": {
+          "endpoint": "https://openrouter.ai/api/v1/systemone",
+          "model": "typesafe/jev-1.13",
+          "dataset_sha256": "9953e32e9151955e499b4a83b0bb29719ecb7e18d2d347d9783e70426797a2ac",
+          "rows": 250,
+          "suite": {
+            "schema_version": 1,
+            "id": "cybersec-attack-retrieval",
+            "version": "1",
+            "adapter": "domain-ranking-v1",
+            "dataset": "../../data/cybersec-attack-retrieval.jsonl",
+            "language_group": "english",
+            "languages": [
+              "en"
+            ],
+            "modality": "text",
+            "category": "security",
+            "subcategory": "ranking",
+            "task_detail": "cybersec-attack-retrieval",
+            "headline_metric": "ndcg_at_10",
+            "source": {
+              "repository": "alirezaaminzadeh/cybersec-retrieval-benchmark",
+              "revision": "cdb8f3f2b88f03383a1f433a28dad89afe52e4a4",
+              "files": [
+                "corpus/train-00000-of-00001.parquet",
+                "qrels/train-00000-of-00001.parquet",
+                "queries/train-00000-of-00001.parquet"
+              ],
+              "url": "https://huggingface.co/datasets/alirezaaminzadeh/cybersec-retrieval-benchmark"
+            },
+            "scope_note": "Frozen BM25 candidate reranking adaptation; all queries count; no gold injection.",
+            "project": "CyberSec Retrieval",
+            "project_configuration": "frozen BM25 reranking"
+          },
+          "adapter_sha256": "b32c10e3d550bf571dbb381e315748b3f8d8e81eab9602299367bc9f3537cd08",
+          "retries": 5,
+          "delay": 0.02,
+          "timeout": 120.0,
+          "workers": 16,
+          "reporting": {
+            "project": "CyberSec Retrieval",
+            "configuration": "frozen BM25 reranking",
+            "expected_suites": [
+              "cybersec-attack-retrieval",
+              "cybersec-cve-similarity",
+              "cybersec-cwe-retrieval",
+              "cybersec-sigma-retrieval",
+              "cybersec-soc-playbook",
+              "cybersec-threat-report-retrieval"
+            ],
+            "partitions": [
+              {
+                "id": "cybersec-attack-retrieval",
+                "category": "security",
+                "subcategory": "ranking",
+                "modality": "text",
+                "language_group": "english"
+              }
+            ]
+          },
+          "started_at_unix": 1789967829.752974,
+          "runner_sha256": "cf1d35b8368e75343a3f70c883a843e4ecc52af2ea803c4412fbfabc48e0caf1",
+          "scoring_rows_sha256": "9953e32e9151955e499b4a83b0bb29719ecb7e18d2d347d9783e70426797a2ac"
+        },
+        "sha256": {
+          "manifest.json": "f0d000a284028fe5e96512dcd5873dd736179acf2c99fcfb6d104b50b8129c51",
+          "predictions.jsonl": "fcd14dcfd2d6b255ac090775b3a632223bc8872ea2e11cfd4b63b763fcd51dd1",
+          "scoring_rows.jsonl": "9953e32e9151955e499b4a83b0bb29719ecb7e18d2d347d9783e70426797a2ac",
+          "summary.json": "6dcff3f084321f989df9c083e6baaee4e0ef15d485670757a283eb32426a8141"
+        }
+      },
+      {
+        "suite": "cybersec-cve-similarity",
+        "directory": "eval/results/jev-1.13-2026-09-20/runs/cybersec-cve-similarity/cybersec-cve-similarity",
+        "manifest": {
+          "endpoint": "https://openrouter.ai/api/v1/systemone",
+          "model": "typesafe/jev-1.13",
+          "dataset_sha256": "040474066448afd703109a01628a19c0e6301675fa46d6cdf7f11f853088197e",
+          "rows": 250,
+          "suite": {
+            "schema_version": 1,
+            "id": "cybersec-cve-similarity",
+            "version": "1",
+            "adapter": "domain-ranking-v1",
+            "dataset": "../../data/cybersec-cve-similarity.jsonl",
+            "language_group": "english",
+            "languages": [
+              "en"
+            ],
+            "modality": "text",
+            "category": "security",
+            "subcategory": "ranking",
+            "task_detail": "cybersec-cve-similarity",
+            "headline_metric": "ndcg_at_10",
+            "source": {
+              "repository": "alirezaaminzadeh/cybersec-retrieval-benchmark",
+              "revision": "cdb8f3f2b88f03383a1f433a28dad89afe52e4a4",
+              "files": [
+                "corpus/train-00000-of-00001.parquet",
+                "qrels/train-00000-of-00001.parquet",
+                "queries/train-00000-of-00001.parquet"
+              ],
+              "url": "https://huggingface.co/datasets/alirezaaminzadeh/cybersec-retrieval-benchmark"
+            },
+            "scope_note": "Frozen BM25 candidate reranking adaptation; all queries count; no gold injection.",
+            "project": "CyberSec Retrieval",
+            "project_configuration": "frozen BM25 reranking"
+          },
+          "adapter_sha256": "b32c10e3d550bf571dbb381e315748b3f8d8e81eab9602299367bc9f3537cd08",
+          "retries": 5,
+          "delay": 0.02,
+          "timeout": 120.0,
+          "workers": 16,
+          "reporting": {
+            "project": "CyberSec Retrieval",
+            "configuration": "frozen BM25 reranking",
+            "expected_suites": [
+              "cybersec-attack-retrieval",
+              "cybersec-cve-similarity",
+              "cybersec-cwe-retrieval",
+              "cybersec-sigma-retrieval",
+              "cybersec-soc-playbook",
+              "cybersec-threat-report-retrieval"
+            ],
+            "partitions": [
+              {
+                "id": "cybersec-cve-similarity",
+                "category": "security",
+                "subcategory": "ranking",
+                "modality": "text",
+                "language_group": "english"
+              }
+            ]
+          },
+          "started_at_unix": 1789967838.043044,
+          "runner_sha256": "cf1d35b8368e75343a3f70c883a843e4ecc52af2ea803c4412fbfabc48e0caf1",
+          "scoring_rows_sha256": "040474066448afd703109a01628a19c0e6301675fa46d6cdf7f11f853088197e"
+        },
+        "sha256": {
+          "manifest.json": "ac6bfa93edf551c88e5c89babd5c716d19d939ea842fbd67b8861026231a15cd",
+          "predictions.jsonl": "28f1617c45f99e9976c076bda838446d14d9764e05c74cab293719b324b25201",
+          "scoring_rows.jsonl": "040474066448afd703109a01628a19c0e6301675fa46d6cdf7f11f853088197e",
+          "summary.json": "056b7882afc7113263b1f1fe0403d9b4f4f79c8727c98be9a8f52cbf74c8435e"
+        }
+      },
+      {
+        "suite": "cybersec-cwe-retrieval",
+        "directory": "eval/results/jev-1.13-2026-09-20/runs/cybersec-cwe-retrieval/cybersec-cwe-retrieval",
+        "manifest": {
+          "endpoint": "https://openrouter.ai/api/v1/systemone",
+          "model": "typesafe/jev-1.13",
+          "dataset_sha256": "6ff327a7a39bced1a15d0bfb5f0bb9b4ba2ba7be9a7633c10f0b97ee648117fd",
+          "rows": 150,
+          "suite": {
+            "schema_version": 1,
+            "id": "cybersec-cwe-retrieval",
+            "version": "1",
+            "adapter": "domain-ranking-v1",
+            "dataset": "../../data/cybersec-cwe-retrieval.jsonl",
+            "language_group": "english",
+            "languages": [
+              "en"
+            ],
+            "modality": "text",
+            "category": "security",
+            "subcategory": "ranking",
+            "task_detail": "cybersec-cwe-retrieval",
+            "headline_metric": "ndcg_at_10",
+            "source": {
+              "repository": "alirezaaminzadeh/cybersec-retrieval-benchmark",
+              "revision": "cdb8f3f2b88f03383a1f433a28dad89afe52e4a4",
+              "files": [
+                "corpus/train-00000-of-00001.parquet",
+                "qrels/train-00000-of-00001.parquet",
+                "queries/train-00000-of-00001.parquet"
+              ],
+              "url": "https://huggingface.co/datasets/alirezaaminzadeh/cybersec-retrieval-benchmark"
+            },
+            "scope_note": "Frozen BM25 candidate reranking adaptation; all queries count; no gold injection.",
+            "project": "CyberSec Retrieval",
+            "project_configuration": "frozen BM25 reranking"
+          },
+          "adapter_sha256": "b32c10e3d550bf571dbb381e315748b3f8d8e81eab9602299367bc9f3537cd08",
+          "retries": 5,
+          "delay": 0.02,
+          "timeout": 120.0,
+          "workers": 16,
+          "reporting": {
+            "project": "CyberSec Retrieval",
+            "configuration": "frozen BM25 reranking",
+            "expected_suites": [
+              "cybersec-attack-retrieval",
+              "cybersec-cve-similarity",
+              "cybersec-cwe-retrieval",
+              "cybersec-sigma-retrieval",
+              "cybersec-soc-playbook",
+              "cybersec-threat-report-retrieval"
+            ],
+            "partitions": [
+              {
+                "id": "cybersec-cwe-retrieval",
+                "category": "security",
+                "subcategory": "ranking",
+                "modality": "text",
+                "language_group": "english"
+              }
+            ]
+          },
+          "started_at_unix": 1789967845.418367,
+          "runner_sha256": "cf1d35b8368e75343a3f70c883a843e4ecc52af2ea803c4412fbfabc48e0caf1",
+          "scoring_rows_sha256": "6ff327a7a39bced1a15d0bfb5f0bb9b4ba2ba7be9a7633c10f0b97ee648117fd"
+        },
+        "sha256": {
+          "manifest.json": "f51c479d01115299a231e265a7cc687f533b9f89dc6ce95c8b34513ff41045f7",
+          "predictions.jsonl": "1935363f0571675bf2c0a9f1ec1fcca662512501920d3681d423ca02669d9b0c",
+          "scoring_rows.jsonl": "6ff327a7a39bced1a15d0bfb5f0bb9b4ba2ba7be9a7633c10f0b97ee648117fd",
+          "summary.json": "149b7952d7640d03d15665453fb610902fb71ec0c99c06a8abae3c2ed06bfab1"
+        }
+      },
+      {
+        "suite": "cybersec-sigma-retrieval",
+        "directory": "eval/results/jev-1.13-2026-09-20/runs/cybersec-sigma-retrieval/cybersec-sigma-retrieval",
+        "manifest": {
+          "endpoint": "https://openrouter.ai/api/v1/systemone",
+          "model": "typesafe/jev-1.13",
+          "dataset_sha256": "a509ef52498e0e02205dfd576e9d620fe4cb473a87a9f8e359447dded714a8b7",
+          "rows": 200,
+          "suite": {
+            "schema_version": 1,
+            "id": "cybersec-sigma-retrieval",
+            "version": "1",
+            "adapter": "domain-ranking-v1",
+            "dataset": "../../data/cybersec-sigma-retrieval.jsonl",
+            "language_group": "english",
+            "languages": [
+              "en"
+            ],
+            "modality": "text",
+            "category": "security",
+            "subcategory": "ranking",
+            "task_detail": "cybersec-sigma-retrieval",
+            "headline_metric": "ndcg_at_10",
+            "source": {
+              "repository": "alirezaaminzadeh/cybersec-retrieval-benchmark",
+              "revision": "cdb8f3f2b88f03383a1f433a28dad89afe52e4a4",
+              "files": [
+                "corpus/train-00000-of-00001.parquet",
+                "qrels/train-00000-of-00001.parquet",
+                "queries/train-00000-of-00001.parquet"
+              ],
+              "url": "https://huggingface.co/datasets/alirezaaminzadeh/cybersec-retrieval-benchmark"
+            },
+            "scope_note": "Frozen BM25 candidate reranking adaptation; all queries count; no gold injection.",
+            "project": "CyberSec Retrieval",
+            "project_configuration": "frozen BM25 reranking"
+          },
+          "adapter_sha256": "b32c10e3d550bf571dbb381e315748b3f8d8e81eab9602299367bc9f3537cd08",
+          "retries": 5,
+          "delay": 0.02,
+          "timeout": 120.0,
+          "workers": 16,
+          "reporting": {
+            "project": "CyberSec Retrieval",
+            "configuration": "frozen BM25 reranking",
+            "expected_suites": [
+              "cybersec-attack-retrieval",
+              "cybersec-cve-similarity",
+              "cybersec-cwe-retrieval",
+              "cybersec-sigma-retrieval",
+              "cybersec-soc-playbook",
+              "cybersec-threat-report-retrieval"
+            ],
+            "partitions": [
+              {
+                "id": "cybersec-sigma-retrieval",
+                "category": "security",
+                "subcategory": "ranking",
+                "modality": "text",
+                "language_group": "english"
+              }
+            ]
+          },
+          "started_at_unix": 1789967851.167972,
+          "runner_sha256": "cf1d35b8368e75343a3f70c883a843e4ecc52af2ea803c4412fbfabc48e0caf1",
+          "scoring_rows_sha256": "a509ef52498e0e02205dfd576e9d620fe4cb473a87a9f8e359447dded714a8b7"
+        },
+        "sha256": {
+          "manifest.json": "ca19bdb3305a668f38ef67141ef57951f52835aa5e76d31d95530524b5875ca9",
+          "predictions.jsonl": "184927c0755ec1cce4384787d555b15200051e926f34bba9c4f4a7c800358495",
+          "scoring_rows.jsonl": "a509ef52498e0e02205dfd576e9d620fe4cb473a87a9f8e359447dded714a8b7",
+          "summary.json": "9f70a1d5312cd36535963d1ac833deea32b220a5277025901ca91842225a81c3"
+        }
+      },
+      {
+        "suite": "cybersec-soc-playbook",
+        "directory": "eval/results/jev-1.13-2026-09-20/runs/cybersec-soc-playbook/cybersec-soc-playbook",
+        "manifest": {
+          "endpoint": "https://openrouter.ai/api/v1/systemone",
+          "model": "typesafe/jev-1.13",
+          "dataset_sha256": "eced9e45dd6f12ae449f6fdd417f641ab010d3494a320fc1277e5f3cbe10e2bb",
+          "rows": 250,
+          "suite": {
+            "schema_version": 1,
+            "id": "cybersec-soc-playbook",
+            "version": "1",
+            "adapter": "domain-ranking-v1",
+            "dataset": "../../data/cybersec-soc-playbook.jsonl",
+            "language_group": "english",
+            "languages": [
+              "en"
+            ],
+            "modality": "text",
+            "category": "security",
+            "subcategory": "ranking",
+            "task_detail": "cybersec-soc-playbook",
+            "headline_metric": "ndcg_at_10",
+            "source": {
+              "repository": "alirezaaminzadeh/cybersec-retrieval-benchmark",
+              "revision": "cdb8f3f2b88f03383a1f433a28dad89afe52e4a4",
+              "files": [
+                "corpus/train-00000-of-00001.parquet",
+                "qrels/train-00000-of-00001.parquet",
+                "queries/train-00000-of-00001.parquet"
+              ],
+              "url": "https://huggingface.co/datasets/alirezaaminzadeh/cybersec-retrieval-benchmark"
+            },
+            "scope_note": "Frozen BM25 candidate reranking adaptation; all queries count; no gold injection.",
+            "project": "CyberSec Retrieval",
+            "project_configuration": "frozen BM25 reranking"
+          },
+          "adapter_sha256": "b32c10e3d550bf571dbb381e315748b3f8d8e81eab9602299367bc9f3537cd08",
+          "retries": 5,
+          "delay": 0.02,
+          "timeout": 120.0,
+          "workers": 16,
+          "reporting": {
+            "project": "CyberSec Retrieval",
+            "configuration": "frozen BM25 reranking",
+            "expected_suites": [
+              "cybersec-attack-retrieval",
+              "cybersec-cve-similarity",
+              "cybersec-cwe-retrieval",
+              "cybersec-sigma-retrieval",
+              "cybersec-soc-playbook",
+              "cybersec-threat-report-retrieval"
+            ],
+            "partitions": [
+              {
+                "id": "cybersec-soc-playbook",
+                "category": "security",
+                "subcategory": "ranking",
+                "modality": "text",
+                "language_group": "english"
+              }
+            ]
+          },
+          "started_at_unix": 1789967857.422652,
+          "runner_sha256": "cf1d35b8368e75343a3f70c883a843e4ecc52af2ea803c4412fbfabc48e0caf1",
+          "scoring_rows_sha256": "eced9e45dd6f12ae449f6fdd417f641ab010d3494a320fc1277e5f3cbe10e2bb"
+        },
+        "sha256": {
+          "manifest.json": "538d47891369cc5da3f7bd3dfbf73b2abc37ede2658a196ba8a807b25eb20bda",
+          "predictions.jsonl": "4fa7ddc136fb2d37155b88a2ea90ef8fc849b6e11106f347c739524a4e630983",
+          "scoring_rows.jsonl": "eced9e45dd6f12ae449f6fdd417f641ab010d3494a320fc1277e5f3cbe10e2bb",
+          "summary.json": "8d1f5d3ace830e8afc8bae94d2e4b59a2d55bcf47d4f8a5b67fae63c881063de"
+        }
+      },
+      {
+        "suite": "cybersec-threat-report-retrieval",
+        "directory": "eval/results/jev-1.13-2026-09-20/runs/cybersec-threat-report-retrieval/cybersec-threat-report-retrieval",
+        "manifest": {
+          "endpoint": "https://openrouter.ai/api/v1/systemone",
+          "model": "typesafe/jev-1.13",
+          "dataset_sha256": "2f289d02327a1449389bc41c8c3a32ac04e117209e170e5993e033b28455d1d4",
+          "rows": 250,
+          "suite": {
+            "schema_version": 1,
+            "id": "cybersec-threat-report-retrieval",
+            "version": "1",
+            "adapter": "domain-ranking-v1",
+            "dataset": "../../data/cybersec-threat-report-retrieval.jsonl",
+            "language_group": "english",
+            "languages": [
+              "en"
+            ],
+            "modality": "text",
+            "category": "security",
+            "subcategory": "ranking",
+            "task_detail": "cybersec-threat-report-retrieval",
+            "headline_metric": "ndcg_at_10",
+            "source": {
+              "repository": "alirezaaminzadeh/cybersec-retrieval-benchmark",
+              "revision": "cdb8f3f2b88f03383a1f433a28dad89afe52e4a4",
+              "files": [
+                "corpus/train-00000-of-00001.parquet",
+                "qrels/train-00000-of-00001.parquet",
+                "queries/train-00000-of-00001.parquet"
+              ],
+              "url": "https://huggingface.co/datasets/alirezaaminzadeh/cybersec-retrieval-benchmark"
+            },
+            "scope_note": "Frozen BM25 candidate reranking adaptation; all queries count; no gold injection.",
+            "project": "CyberSec Retrieval",
+            "project_configuration": "frozen BM25 reranking"
+          },
+          "adapter_sha256": "b32c10e3d550bf571dbb381e315748b3f8d8e81eab9602299367bc9f3537cd08",
+          "retries": 5,
+          "delay": 0.02,
+          "timeout": 120.0,
+          "workers": 16,
+          "reporting": {
+            "project": "CyberSec Retrieval",
+            "configuration": "frozen BM25 reranking",
+            "expected_suites": [
+              "cybersec-attack-retrieval",
+              "cybersec-cve-similarity",
+              "cybersec-cwe-retrieval",
+              "cybersec-sigma-retrieval",
+              "cybersec-soc-playbook",
+              "cybersec-threat-report-retrieval"
+            ],
+            "partitions": [
+              {
+                "id": "cybersec-threat-report-retrieval",
+                "category": "security",
+                "subcategory": "ranking",
+                "modality": "text",
+                "language_group": "english"
+              }
+            ]
+          },
+          "started_at_unix": 1789967865.164452,
+          "runner_sha256": "cf1d35b8368e75343a3f70c883a843e4ecc52af2ea803c4412fbfabc48e0caf1",
+          "scoring_rows_sha256": "2f289d02327a1449389bc41c8c3a32ac04e117209e170e5993e033b28455d1d4"
+        },
+        "sha256": {
+          "manifest.json": "9ed6d8cc5c91a47add94beeadc1a0480dcd4d5f343c30bb419c7b80437fd139e",
+          "predictions.jsonl": "2e3a9de08d04440123ceb44f7f810e26f01520096b616d1ef14ce5a60d0813b5",
+          "scoring_rows.jsonl": "2f289d02327a1449389bc41c8c3a32ac04e117209e170e5993e033b28455d1d4",
+          "summary.json": "de2b66a99310cb6a078e2e1f69e4f3d40cf83c646f34ec674abce67f1d54f25c"
+        }
+      }
+    ],
+    "cost_scope": "Sum of usage.cost in saved responses; excludes probes, discarded attempts, and any billed requests without saved responses."
+  }
+}

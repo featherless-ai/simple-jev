@@ -161,3 +161,13 @@ Prepare all selected data first. No model evaluation is part of this addition.
   on macOS and Linux. Document text and character offsets are unchanged.
 
 These are data preparation and validation checks, not model results.
+
+## ToolRet Web context limit
+
+`toolret-web` is disabled by default (`default_enabled: false`). In the Jev 1.13
+run, 157 of 5,230 requests were rejected with HTTP 400; a reproduced rejection
+reported `max_tokens_exceeded`. Full candidate descriptions can exceed 32K context.
+Its results are excluded from the published run, with raw evidence preserved.
+ToolRet Code and Customized remain enabled. Their combined ToolRet report remains
+labelled partial against the original frozen three-subset protocol. Explicit suite
+selection is available for endpoints with sufficient context capacity.

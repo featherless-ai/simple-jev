@@ -1,0 +1,1715 @@
+{
+  "model": "typesafe/jev-1.13",
+  "endpoint": "https://openrouter.ai/api/v1/systemone",
+  "by_project": [
+    {
+      "project": "MMLU",
+      "configuration": "full test",
+      "metric": "accuracy",
+      "score": 0.9175331149408916,
+      "metrics": {
+        "rows": 14042,
+        "failed_rows": 0,
+        "accuracy": 0.9175331149408916,
+        "subject_macro_accuracy": 0.9206137166517132,
+        "per_subject": {
+          "abstract_algebra": {
+            "rows": 100,
+            "accuracy": 0.96
+          },
+          "anatomy": {
+            "rows": 135,
+            "accuracy": 0.9259259259259259
+          },
+          "astronomy": {
+            "rows": 152,
+            "accuracy": 0.9671052631578947
+          },
+          "business_ethics": {
+            "rows": 100,
+            "accuracy": 0.84
+          },
+          "clinical_knowledge": {
+            "rows": 265,
+            "accuracy": 0.9584905660377359
+          },
+          "college_biology": {
+            "rows": 144,
+            "accuracy": 0.9861111111111112
+          },
+          "college_chemistry": {
+            "rows": 100,
+            "accuracy": 0.77
+          },
+          "college_computer_science": {
+            "rows": 100,
+            "accuracy": 0.98
+          },
+          "college_mathematics": {
+            "rows": 100,
+            "accuracy": 0.97
+          },
+          "college_medicine": {
+            "rows": 173,
+            "accuracy": 0.9075144508670521
+          },
+          "college_physics": {
+            "rows": 102,
+            "accuracy": 0.9901960784313726
+          },
+          "computer_security": {
+            "rows": 100,
+            "accuracy": 0.93
+          },
+          "conceptual_physics": {
+            "rows": 235,
+            "accuracy": 0.9531914893617022
+          },
+          "econometrics": {
+            "rows": 114,
+            "accuracy": 0.8508771929824561
+          },
+          "electrical_engineering": {
+            "rows": 145,
+            "accuracy": 0.903448275862069
+          },
+          "elementary_mathematics": {
+            "rows": 378,
+            "accuracy": 0.9735449735449735
+          },
+          "formal_logic": {
+            "rows": 126,
+            "accuracy": 0.9682539682539683
+          },
+          "global_facts": {
+            "rows": 100,
+            "accuracy": 0.72
+          },
+          "high_school_biology": {
+            "rows": 310,
+            "accuracy": 0.9548387096774194
+          },
+          "high_school_chemistry": {
+            "rows": 203,
+            "accuracy": 0.9507389162561576
+          },
+          "high_school_computer_science": {
+            "rows": 100,
+            "accuracy": 0.98
+          },
+          "high_school_european_history": {
+            "rows": 165,
+            "accuracy": 0.9151515151515152
+          },
+          "high_school_geography": {
+            "rows": 198,
+            "accuracy": 0.9343434343434344
+          },
+          "high_school_government_and_politics": {
+            "rows": 193,
+            "accuracy": 0.9844559585492227
+          },
+          "high_school_macroeconomics": {
+            "rows": 390,
+            "accuracy": 0.9461538461538461
+          },
+          "high_school_mathematics": {
+            "rows": 270,
+            "accuracy": 0.9518518518518518
+          },
+          "high_school_microeconomics": {
+            "rows": 238,
+            "accuracy": 0.9831932773109243
+          },
+          "high_school_physics": {
+            "rows": 151,
+            "accuracy": 0.9403973509933775
+          },
+          "high_school_psychology": {
+            "rows": 545,
+            "accuracy": 0.9651376146788991
+          },
+          "high_school_statistics": {
+            "rows": 216,
+            "accuracy": 0.9212962962962963
+          },
+          "high_school_us_history": {
+            "rows": 204,
+            "accuracy": 0.9509803921568627
+          },
+          "high_school_world_history": {
+            "rows": 237,
+            "accuracy": 0.9620253164556962
+          },
+          "human_aging": {
+            "rows": 223,
+            "accuracy": 0.852017937219731
+          },
+          "human_sexuality": {
+            "rows": 131,
+            "accuracy": 0.9312977099236641
+          },
+          "international_law": {
+            "rows": 121,
+            "accuracy": 0.9338842975206612
+          },
+          "jurisprudence": {
+            "rows": 108,
+            "accuracy": 0.9166666666666666
+          },
+          "logical_fallacies": {
+            "rows": 163,
+            "accuracy": 0.9263803680981595
+          },
+          "machine_learning": {
+            "rows": 112,
+            "accuracy": 0.9107142857142857
+          },
+          "management": {
+            "rows": 103,
+            "accuracy": 0.9223300970873787
+          },
+          "marketing": {
+            "rows": 234,
+            "accuracy": 0.9700854700854701
+          },
+          "medical_genetics": {
+            "rows": 100,
+            "accuracy": 1.0
+          },
+          "miscellaneous": {
+            "rows": 783,
+            "accuracy": 0.9744572158365262
+          },
+          "moral_disputes": {
+            "rows": 346,
+            "accuracy": 0.8670520231213873
+          },
+          "moral_scenarios": {
+            "rows": 895,
+            "accuracy": 0.8592178770949721
+          },
+          "nutrition": {
+            "rows": 306,
+            "accuracy": 0.9411764705882353
+          },
+          "philosophy": {
+            "rows": 311,
+            "accuracy": 0.9356913183279743
+          },
+          "prehistory": {
+            "rows": 324,
+            "accuracy": 0.9320987654320988
+          },
+          "professional_accounting": {
+            "rows": 282,
+            "accuracy": 0.9468085106382979
+          },
+          "professional_law": {
+            "rows": 1534,
+            "accuracy": 0.847457627118644
+          },
+          "professional_medicine": {
+            "rows": 272,
+            "accuracy": 0.9669117647058824
+          },
+          "professional_psychology": {
+            "rows": 612,
+            "accuracy": 0.9264705882352942
+          },
+          "public_relations": {
+            "rows": 110,
+            "accuracy": 0.8181818181818182
+          },
+          "security_studies": {
+            "rows": 245,
+            "accuracy": 0.8285714285714286
+          },
+          "sociology": {
+            "rows": 201,
+            "accuracy": 0.9303482587064676
+          },
+          "us_foreign_policy": {
+            "rows": 100,
+            "accuracy": 0.94
+          },
+          "virology": {
+            "rows": 166,
+            "accuracy": 0.5662650602409639
+          },
+          "world_religions": {
+            "rows": 171,
+            "accuracy": 0.935672514619883
+          }
+        },
+        "per_category": {
+          "coding": {
+            "rows": 200,
+            "accuracy": 0.98
+          },
+          "corporate-documents": {
+            "rows": 719,
+            "accuracy": 0.9360222531293463
+          },
+          "general-language": {
+            "rows": 11260,
+            "accuracy": 0.9245115452930728
+          },
+          "legal": {
+            "rows": 1763,
+            "accuracy": 0.8576290414066932
+          },
+          "security": {
+            "rows": 100,
+            "accuracy": 0.93
+          }
+        }
+      },
+      "suites": [
+        "mmlu-abstract-algebra",
+        "mmlu-anatomy",
+        "mmlu-astronomy",
+        "mmlu-business-ethics",
+        "mmlu-clinical-knowledge",
+        "mmlu-college-biology",
+        "mmlu-college-chemistry",
+        "mmlu-college-computer-science",
+        "mmlu-college-mathematics",
+        "mmlu-college-medicine",
+        "mmlu-college-physics",
+        "mmlu-computer-security",
+        "mmlu-conceptual-physics",
+        "mmlu-econometrics",
+        "mmlu-electrical-engineering",
+        "mmlu-elementary-mathematics",
+        "mmlu-formal-logic",
+        "mmlu-global-facts",
+        "mmlu-high-school-biology",
+        "mmlu-high-school-chemistry",
+        "mmlu-high-school-computer-science",
+        "mmlu-high-school-european-history",
+        "mmlu-high-school-geography",
+        "mmlu-high-school-government-and-politics",
+        "mmlu-high-school-macroeconomics",
+        "mmlu-high-school-mathematics",
+        "mmlu-high-school-microeconomics",
+        "mmlu-high-school-physics",
+        "mmlu-high-school-psychology",
+        "mmlu-high-school-statistics",
+        "mmlu-high-school-us-history",
+        "mmlu-high-school-world-history",
+        "mmlu-human-aging",
+        "mmlu-human-sexuality",
+        "mmlu-international-law",
+        "mmlu-jurisprudence",
+        "mmlu-logical-fallacies",
+        "mmlu-machine-learning",
+        "mmlu-management",
+        "mmlu-marketing",
+        "mmlu-medical-genetics",
+        "mmlu-miscellaneous",
+        "mmlu-moral-disputes",
+        "mmlu-moral-scenarios",
+        "mmlu-nutrition",
+        "mmlu-philosophy",
+        "mmlu-prehistory",
+        "mmlu-professional-accounting",
+        "mmlu-professional-law",
+        "mmlu-professional-medicine",
+        "mmlu-professional-psychology",
+        "mmlu-public-relations",
+        "mmlu-security-studies",
+        "mmlu-sociology",
+        "mmlu-us-foreign-policy",
+        "mmlu-virology",
+        "mmlu-world-religions"
+      ],
+      "missing_suites": [],
+      "coverage": "complete"
+    }
+  ],
+  "by_category": [
+    {
+      "project": "MMLU",
+      "configuration": "full test",
+      "metric": "accuracy",
+      "score": 0.98,
+      "metrics": {
+        "rows": 200,
+        "failed_rows": 0,
+        "accuracy": 0.98,
+        "subject_macro_accuracy": 0.98,
+        "per_subject": {
+          "college_computer_science": {
+            "rows": 100,
+            "accuracy": 0.98
+          },
+          "high_school_computer_science": {
+            "rows": 100,
+            "accuracy": 0.98
+          }
+        },
+        "per_category": {
+          "coding": {
+            "rows": 200,
+            "accuracy": 0.98
+          }
+        }
+      },
+      "suites": [
+        "mmlu-college-computer-science",
+        "mmlu-high-school-computer-science"
+      ],
+      "missing_suites": [],
+      "coverage": "complete",
+      "placement": [
+        "text",
+        "english",
+        "coding",
+        "model-knowledge"
+      ]
+    },
+    {
+      "project": "MMLU",
+      "configuration": "full test",
+      "metric": "accuracy",
+      "score": 0.9360222531293463,
+      "metrics": {
+        "rows": 719,
+        "failed_rows": 0,
+        "accuracy": 0.9360222531293463,
+        "subject_macro_accuracy": 0.9198060194527866,
+        "per_subject": {
+          "business_ethics": {
+            "rows": 100,
+            "accuracy": 0.84
+          },
+          "management": {
+            "rows": 103,
+            "accuracy": 0.9223300970873787
+          },
+          "marketing": {
+            "rows": 234,
+            "accuracy": 0.9700854700854701
+          },
+          "professional_accounting": {
+            "rows": 282,
+            "accuracy": 0.9468085106382979
+          }
+        },
+        "per_category": {
+          "corporate-documents": {
+            "rows": 719,
+            "accuracy": 0.9360222531293463
+          }
+        }
+      },
+      "suites": [
+        "mmlu-business-ethics",
+        "mmlu-management",
+        "mmlu-marketing",
+        "mmlu-professional-accounting"
+      ],
+      "missing_suites": [],
+      "coverage": "complete",
+      "placement": [
+        "text",
+        "english",
+        "corporate-documents",
+        "model-knowledge"
+      ]
+    },
+    {
+      "project": "MMLU",
+      "configuration": "full test",
+      "metric": "accuracy",
+      "score": 0.9245115452930728,
+      "metrics": {
+        "rows": 11260,
+        "failed_rows": 0,
+        "accuracy": 0.9245115452930728,
+        "subject_macro_accuracy": 0.9193138123410753,
+        "per_subject": {
+          "abstract_algebra": {
+            "rows": 100,
+            "accuracy": 0.96
+          },
+          "anatomy": {
+            "rows": 135,
+            "accuracy": 0.9259259259259259
+          },
+          "astronomy": {
+            "rows": 152,
+            "accuracy": 0.9671052631578947
+          },
+          "clinical_knowledge": {
+            "rows": 265,
+            "accuracy": 0.9584905660377359
+          },
+          "college_biology": {
+            "rows": 144,
+            "accuracy": 0.9861111111111112
+          },
+          "college_chemistry": {
+            "rows": 100,
+            "accuracy": 0.77
+          },
+          "college_mathematics": {
+            "rows": 100,
+            "accuracy": 0.97
+          },
+          "college_medicine": {
+            "rows": 173,
+            "accuracy": 0.9075144508670521
+          },
+          "college_physics": {
+            "rows": 102,
+            "accuracy": 0.9901960784313726
+          },
+          "conceptual_physics": {
+            "rows": 235,
+            "accuracy": 0.9531914893617022
+          },
+          "econometrics": {
+            "rows": 114,
+            "accuracy": 0.8508771929824561
+          },
+          "electrical_engineering": {
+            "rows": 145,
+            "accuracy": 0.903448275862069
+          },
+          "elementary_mathematics": {
+            "rows": 378,
+            "accuracy": 0.9735449735449735
+          },
+          "formal_logic": {
+            "rows": 126,
+            "accuracy": 0.9682539682539683
+          },
+          "global_facts": {
+            "rows": 100,
+            "accuracy": 0.72
+          },
+          "high_school_biology": {
+            "rows": 310,
+            "accuracy": 0.9548387096774194
+          },
+          "high_school_chemistry": {
+            "rows": 203,
+            "accuracy": 0.9507389162561576
+          },
+          "high_school_european_history": {
+            "rows": 165,
+            "accuracy": 0.9151515151515152
+          },
+          "high_school_geography": {
+            "rows": 198,
+            "accuracy": 0.9343434343434344
+          },
+          "high_school_government_and_politics": {
+            "rows": 193,
+            "accuracy": 0.9844559585492227
+          },
+          "high_school_macroeconomics": {
+            "rows": 390,
+            "accuracy": 0.9461538461538461
+          },
+          "high_school_mathematics": {
+            "rows": 270,
+            "accuracy": 0.9518518518518518
+          },
+          "high_school_microeconomics": {
+            "rows": 238,
+            "accuracy": 0.9831932773109243
+          },
+          "high_school_physics": {
+            "rows": 151,
+            "accuracy": 0.9403973509933775
+          },
+          "high_school_psychology": {
+            "rows": 545,
+            "accuracy": 0.9651376146788991
+          },
+          "high_school_statistics": {
+            "rows": 216,
+            "accuracy": 0.9212962962962963
+          },
+          "high_school_us_history": {
+            "rows": 204,
+            "accuracy": 0.9509803921568627
+          },
+          "high_school_world_history": {
+            "rows": 237,
+            "accuracy": 0.9620253164556962
+          },
+          "human_aging": {
+            "rows": 223,
+            "accuracy": 0.852017937219731
+          },
+          "human_sexuality": {
+            "rows": 131,
+            "accuracy": 0.9312977099236641
+          },
+          "logical_fallacies": {
+            "rows": 163,
+            "accuracy": 0.9263803680981595
+          },
+          "machine_learning": {
+            "rows": 112,
+            "accuracy": 0.9107142857142857
+          },
+          "medical_genetics": {
+            "rows": 100,
+            "accuracy": 1.0
+          },
+          "miscellaneous": {
+            "rows": 783,
+            "accuracy": 0.9744572158365262
+          },
+          "moral_disputes": {
+            "rows": 346,
+            "accuracy": 0.8670520231213873
+          },
+          "moral_scenarios": {
+            "rows": 895,
+            "accuracy": 0.8592178770949721
+          },
+          "nutrition": {
+            "rows": 306,
+            "accuracy": 0.9411764705882353
+          },
+          "philosophy": {
+            "rows": 311,
+            "accuracy": 0.9356913183279743
+          },
+          "prehistory": {
+            "rows": 324,
+            "accuracy": 0.9320987654320988
+          },
+          "professional_medicine": {
+            "rows": 272,
+            "accuracy": 0.9669117647058824
+          },
+          "professional_psychology": {
+            "rows": 612,
+            "accuracy": 0.9264705882352942
+          },
+          "public_relations": {
+            "rows": 110,
+            "accuracy": 0.8181818181818182
+          },
+          "security_studies": {
+            "rows": 245,
+            "accuracy": 0.8285714285714286
+          },
+          "sociology": {
+            "rows": 201,
+            "accuracy": 0.9303482587064676
+          },
+          "us_foreign_policy": {
+            "rows": 100,
+            "accuracy": 0.94
+          },
+          "virology": {
+            "rows": 166,
+            "accuracy": 0.5662650602409639
+          },
+          "world_religions": {
+            "rows": 171,
+            "accuracy": 0.935672514619883
+          }
+        },
+        "per_category": {
+          "general-language": {
+            "rows": 11260,
+            "accuracy": 0.9245115452930728
+          }
+        }
+      },
+      "suites": [
+        "mmlu-abstract-algebra",
+        "mmlu-anatomy",
+        "mmlu-astronomy",
+        "mmlu-clinical-knowledge",
+        "mmlu-college-biology",
+        "mmlu-college-chemistry",
+        "mmlu-college-mathematics",
+        "mmlu-college-medicine",
+        "mmlu-college-physics",
+        "mmlu-conceptual-physics",
+        "mmlu-econometrics",
+        "mmlu-electrical-engineering",
+        "mmlu-elementary-mathematics",
+        "mmlu-formal-logic",
+        "mmlu-global-facts",
+        "mmlu-high-school-biology",
+        "mmlu-high-school-chemistry",
+        "mmlu-high-school-european-history",
+        "mmlu-high-school-geography",
+        "mmlu-high-school-government-and-politics",
+        "mmlu-high-school-macroeconomics",
+        "mmlu-high-school-mathematics",
+        "mmlu-high-school-microeconomics",
+        "mmlu-high-school-physics",
+        "mmlu-high-school-psychology",
+        "mmlu-high-school-statistics",
+        "mmlu-high-school-us-history",
+        "mmlu-high-school-world-history",
+        "mmlu-human-aging",
+        "mmlu-human-sexuality",
+        "mmlu-logical-fallacies",
+        "mmlu-machine-learning",
+        "mmlu-medical-genetics",
+        "mmlu-miscellaneous",
+        "mmlu-moral-disputes",
+        "mmlu-moral-scenarios",
+        "mmlu-nutrition",
+        "mmlu-philosophy",
+        "mmlu-prehistory",
+        "mmlu-professional-medicine",
+        "mmlu-professional-psychology",
+        "mmlu-public-relations",
+        "mmlu-security-studies",
+        "mmlu-sociology",
+        "mmlu-us-foreign-policy",
+        "mmlu-virology",
+        "mmlu-world-religions"
+      ],
+      "missing_suites": [],
+      "coverage": "complete",
+      "placement": [
+        "text",
+        "english",
+        "general-language",
+        "model-knowledge"
+      ]
+    },
+    {
+      "project": "MMLU",
+      "configuration": "full test",
+      "metric": "accuracy",
+      "score": 0.8576290414066932,
+      "metrics": {
+        "rows": 1763,
+        "failed_rows": 0,
+        "accuracy": 0.8576290414066932,
+        "subject_macro_accuracy": 0.8993361971019906,
+        "per_subject": {
+          "international_law": {
+            "rows": 121,
+            "accuracy": 0.9338842975206612
+          },
+          "jurisprudence": {
+            "rows": 108,
+            "accuracy": 0.9166666666666666
+          },
+          "professional_law": {
+            "rows": 1534,
+            "accuracy": 0.847457627118644
+          }
+        },
+        "per_category": {
+          "legal": {
+            "rows": 1763,
+            "accuracy": 0.8576290414066932
+          }
+        }
+      },
+      "suites": [
+        "mmlu-international-law",
+        "mmlu-jurisprudence",
+        "mmlu-professional-law"
+      ],
+      "missing_suites": [],
+      "coverage": "complete",
+      "placement": [
+        "text",
+        "english",
+        "legal",
+        "model-knowledge"
+      ]
+    },
+    {
+      "project": "MMLU",
+      "configuration": "full test",
+      "metric": "accuracy",
+      "score": 0.93,
+      "metrics": {
+        "rows": 100,
+        "failed_rows": 0,
+        "accuracy": 0.93,
+        "subject_macro_accuracy": 0.93,
+        "per_subject": {
+          "computer_security": {
+            "rows": 100,
+            "accuracy": 0.93
+          }
+        },
+        "per_category": {
+          "security": {
+            "rows": 100,
+            "accuracy": 0.93
+          }
+        }
+      },
+      "suites": [
+        "mmlu-computer-security"
+      ],
+      "missing_suites": [],
+      "coverage": "complete",
+      "placement": [
+        "text",
+        "english",
+        "security",
+        "model-knowledge"
+      ]
+    }
+  ],
+  "provenance": {
+    "export_git_revision": "b6f63bb11a4319e39afff35a9e6e8a04e8d294ea",
+    "evaluator_sha256": {
+      "catalog.py": "f69e435c11f1d35cefca32075db31858ff9ef7c2c360507b8ac0259d452c0ef9",
+      "run.py": "60b26b661a3f99f89eef22bf89744d78d14b56068945f19e020c951fd7ce42d3",
+      "retry.py": "ed3ed9b31152d62bd20705501391557b2b6f128edd84be96e8f71609ec8770c6",
+      "suites.py": "85f443ba008dc2d83b6777e5906a30de37d925bcb4abc9829c63ce325d9f218a",
+      "report.py": "a002bc6d2cddd4f2c0309861c822ef487818ed9dc25f7ecef6785e824c6a6ff0",
+      "prepare.py": "ccbfafde1bb1fa2fe227b9e44525042e487e49abf5dedcb81c22dd7b95db97f8",
+      "adapters/typed.py": "9f1ab94e0fe312fcbb4c0872260fac051fbe27430e38e2723f4924a1454eabf8",
+      "adapters/mmlu.py": "de4432175d2e66d19b10f5743524b33cea5d874ddc20aac81478ac7078dc8f81",
+      "adapters/fields.py": "de77fcdaa13266b14492e361c5ce6d5a48c27d9498ed7de60ae9327f72e4a357",
+      "adapters/vision.py": "9e7856043a82e19df4f039fbb0abf7421110b0bc6eb3cbe5f1ddf3e408b8f327",
+      "adapters/binary_battery.py": "6909af0c264d1222079c6f9c49ca7699227469a45dae385577d2303c53c81458",
+      "adapters/choice.py": "c088c9277435df01845009b36e270731754a1558748a84b990ea7c3e11c2fe8c",
+      "adapters/__init__.py": "2dda3c52d95dc2b8b259271a286bfc9e7155ace75784e486b77fc105aa2c3ea9",
+      "adapters/passage_rerank.py": "c5f4194ae9018caf7532d4bccbbda13c51a5317266f04a2ee5b2a88c8a0fb96d",
+      "adapters/rag.py": "f67507426adbacd4f74739f3223f6280d8fe0762cd1c0fbd936a08d9fef62055",
+      "adapters/graded_rag.py": "d411f8a1aaa245aeb72b1dd87ca6175489a38efe9a0ba1b45ecd15e8bc12ffc8",
+      "adapters/visual_qa.py": "d806c360f7aafb8abe70c255523a3f5e8b10cb523883a707a06e8265fae04991",
+      "adapters/domain_ranking.py": "b32c10e3d550bf571dbb381e315748b3f8d8e81eab9602299367bc9f3537cd08"
+    },
+    "returned_models": [
+      "typesafe/jev-1.13-20260917"
+    ],
+    "usage": {
+      "input_tokens": 5851408,
+      "output_tokens": 631890,
+      "reported_cost_usd": 0.2457591359999998,
+      "responses_with_cost": 14042
+    },
+    "artifacts": [
+      {
+        "suite": "mmlu-full",
+        "directory": "eval/results/jev-1.13-2026-09-20/runs/mmlu-full/mmlu-full",
+        "manifest": {
+          "endpoint": "https://openrouter.ai/api/v1/systemone",
+          "model": "typesafe/jev-1.13",
+          "dataset_sha256": "4573e7d2eadd997f913e9662f52a3afe2a7326b137dbe62c99a8bdd3dad84b9e",
+          "rows": 14042,
+          "suite": {
+            "schema_version": 1,
+            "id": "mmlu-full",
+            "version": "1",
+            "adapter": "mmlu-v1",
+            "dataset": "../../data/mmlu-test.jsonl",
+            "language_group": "english",
+            "languages": [
+              "en"
+            ],
+            "category": "general-language",
+            "subcategory": "model-knowledge",
+            "modality": "text",
+            "task_detail": "All 57 subjects, original test split",
+            "headline_metric": "accuracy",
+            "source": {
+              "repository": "cais/mmlu",
+              "revision": "c30699e8356da336a370243923dbaf21066bb9fe"
+            },
+            "aggregate_children": [
+              "mmlu-abstract-algebra",
+              "mmlu-anatomy",
+              "mmlu-astronomy",
+              "mmlu-business-ethics",
+              "mmlu-clinical-knowledge",
+              "mmlu-college-biology",
+              "mmlu-college-chemistry",
+              "mmlu-college-computer-science",
+              "mmlu-college-mathematics",
+              "mmlu-college-medicine",
+              "mmlu-college-physics",
+              "mmlu-computer-security",
+              "mmlu-conceptual-physics",
+              "mmlu-econometrics",
+              "mmlu-electrical-engineering",
+              "mmlu-elementary-mathematics",
+              "mmlu-formal-logic",
+              "mmlu-global-facts",
+              "mmlu-high-school-biology",
+              "mmlu-high-school-chemistry",
+              "mmlu-high-school-computer-science",
+              "mmlu-high-school-european-history",
+              "mmlu-high-school-geography",
+              "mmlu-high-school-government-and-politics",
+              "mmlu-high-school-macroeconomics",
+              "mmlu-high-school-mathematics",
+              "mmlu-high-school-microeconomics",
+              "mmlu-high-school-physics",
+              "mmlu-high-school-psychology",
+              "mmlu-high-school-statistics",
+              "mmlu-high-school-us-history",
+              "mmlu-high-school-world-history",
+              "mmlu-human-aging",
+              "mmlu-human-sexuality",
+              "mmlu-international-law",
+              "mmlu-jurisprudence",
+              "mmlu-logical-fallacies",
+              "mmlu-machine-learning",
+              "mmlu-management",
+              "mmlu-marketing",
+              "mmlu-medical-genetics",
+              "mmlu-miscellaneous",
+              "mmlu-moral-disputes",
+              "mmlu-moral-scenarios",
+              "mmlu-nutrition",
+              "mmlu-philosophy",
+              "mmlu-prehistory",
+              "mmlu-professional-accounting",
+              "mmlu-professional-law",
+              "mmlu-professional-medicine",
+              "mmlu-professional-psychology",
+              "mmlu-public-relations",
+              "mmlu-security-studies",
+              "mmlu-sociology",
+              "mmlu-us-foreign-policy",
+              "mmlu-virology",
+              "mmlu-world-religions"
+            ],
+            "project": "MMLU",
+            "project_configuration": "full test",
+            "expected_rows": 14042
+          },
+          "adapter_sha256": "de4432175d2e66d19b10f5743524b33cea5d874ddc20aac81478ac7078dc8f81",
+          "retries": 5,
+          "delay": 0.02,
+          "timeout": 120.0,
+          "workers": 16,
+          "reporting": {
+            "project": "MMLU",
+            "configuration": "full test",
+            "expected_suites": [
+              "mmlu-abstract-algebra",
+              "mmlu-anatomy",
+              "mmlu-astronomy",
+              "mmlu-business-ethics",
+              "mmlu-clinical-knowledge",
+              "mmlu-college-biology",
+              "mmlu-college-chemistry",
+              "mmlu-college-computer-science",
+              "mmlu-college-mathematics",
+              "mmlu-college-medicine",
+              "mmlu-college-physics",
+              "mmlu-computer-security",
+              "mmlu-conceptual-physics",
+              "mmlu-econometrics",
+              "mmlu-electrical-engineering",
+              "mmlu-elementary-mathematics",
+              "mmlu-formal-logic",
+              "mmlu-global-facts",
+              "mmlu-high-school-biology",
+              "mmlu-high-school-chemistry",
+              "mmlu-high-school-computer-science",
+              "mmlu-high-school-european-history",
+              "mmlu-high-school-geography",
+              "mmlu-high-school-government-and-politics",
+              "mmlu-high-school-macroeconomics",
+              "mmlu-high-school-mathematics",
+              "mmlu-high-school-microeconomics",
+              "mmlu-high-school-physics",
+              "mmlu-high-school-psychology",
+              "mmlu-high-school-statistics",
+              "mmlu-high-school-us-history",
+              "mmlu-high-school-world-history",
+              "mmlu-human-aging",
+              "mmlu-human-sexuality",
+              "mmlu-international-law",
+              "mmlu-jurisprudence",
+              "mmlu-logical-fallacies",
+              "mmlu-machine-learning",
+              "mmlu-management",
+              "mmlu-marketing",
+              "mmlu-medical-genetics",
+              "mmlu-miscellaneous",
+              "mmlu-moral-disputes",
+              "mmlu-moral-scenarios",
+              "mmlu-nutrition",
+              "mmlu-philosophy",
+              "mmlu-prehistory",
+              "mmlu-professional-accounting",
+              "mmlu-professional-law",
+              "mmlu-professional-medicine",
+              "mmlu-professional-psychology",
+              "mmlu-public-relations",
+              "mmlu-security-studies",
+              "mmlu-sociology",
+              "mmlu-us-foreign-policy",
+              "mmlu-virology",
+              "mmlu-world-religions"
+            ],
+            "partitions": [
+              {
+                "id": "mmlu-abstract-algebra",
+                "category": "general-language",
+                "subcategory": "model-knowledge",
+                "modality": "text",
+                "language_group": "english",
+                "row_filter": {
+                  "field": "family",
+                  "values": [
+                    "abstract_algebra"
+                  ]
+                }
+              },
+              {
+                "id": "mmlu-anatomy",
+                "category": "general-language",
+                "subcategory": "model-knowledge",
+                "modality": "text",
+                "language_group": "english",
+                "row_filter": {
+                  "field": "family",
+                  "values": [
+                    "anatomy"
+                  ]
+                }
+              },
+              {
+                "id": "mmlu-astronomy",
+                "category": "general-language",
+                "subcategory": "model-knowledge",
+                "modality": "text",
+                "language_group": "english",
+                "row_filter": {
+                  "field": "family",
+                  "values": [
+                    "astronomy"
+                  ]
+                }
+              },
+              {
+                "id": "mmlu-business-ethics",
+                "category": "corporate-documents",
+                "subcategory": "model-knowledge",
+                "modality": "text",
+                "language_group": "english",
+                "row_filter": {
+                  "field": "family",
+                  "values": [
+                    "business_ethics"
+                  ]
+                }
+              },
+              {
+                "id": "mmlu-clinical-knowledge",
+                "category": "general-language",
+                "subcategory": "model-knowledge",
+                "modality": "text",
+                "language_group": "english",
+                "row_filter": {
+                  "field": "family",
+                  "values": [
+                    "clinical_knowledge"
+                  ]
+                }
+              },
+              {
+                "id": "mmlu-college-biology",
+                "category": "general-language",
+                "subcategory": "model-knowledge",
+                "modality": "text",
+                "language_group": "english",
+                "row_filter": {
+                  "field": "family",
+                  "values": [
+                    "college_biology"
+                  ]
+                }
+              },
+              {
+                "id": "mmlu-college-chemistry",
+                "category": "general-language",
+                "subcategory": "model-knowledge",
+                "modality": "text",
+                "language_group": "english",
+                "row_filter": {
+                  "field": "family",
+                  "values": [
+                    "college_chemistry"
+                  ]
+                }
+              },
+              {
+                "id": "mmlu-college-computer-science",
+                "category": "coding",
+                "subcategory": "model-knowledge",
+                "modality": "text",
+                "language_group": "english",
+                "row_filter": {
+                  "field": "family",
+                  "values": [
+                    "college_computer_science"
+                  ]
+                }
+              },
+              {
+                "id": "mmlu-college-mathematics",
+                "category": "general-language",
+                "subcategory": "model-knowledge",
+                "modality": "text",
+                "language_group": "english",
+                "row_filter": {
+                  "field": "family",
+                  "values": [
+                    "college_mathematics"
+                  ]
+                }
+              },
+              {
+                "id": "mmlu-college-medicine",
+                "category": "general-language",
+                "subcategory": "model-knowledge",
+                "modality": "text",
+                "language_group": "english",
+                "row_filter": {
+                  "field": "family",
+                  "values": [
+                    "college_medicine"
+                  ]
+                }
+              },
+              {
+                "id": "mmlu-college-physics",
+                "category": "general-language",
+                "subcategory": "model-knowledge",
+                "modality": "text",
+                "language_group": "english",
+                "row_filter": {
+                  "field": "family",
+                  "values": [
+                    "college_physics"
+                  ]
+                }
+              },
+              {
+                "id": "mmlu-computer-security",
+                "category": "security",
+                "subcategory": "model-knowledge",
+                "modality": "text",
+                "language_group": "english",
+                "row_filter": {
+                  "field": "family",
+                  "values": [
+                    "computer_security"
+                  ]
+                }
+              },
+              {
+                "id": "mmlu-conceptual-physics",
+                "category": "general-language",
+                "subcategory": "model-knowledge",
+                "modality": "text",
+                "language_group": "english",
+                "row_filter": {
+                  "field": "family",
+                  "values": [
+                    "conceptual_physics"
+                  ]
+                }
+              },
+              {
+                "id": "mmlu-econometrics",
+                "category": "general-language",
+                "subcategory": "model-knowledge",
+                "modality": "text",
+                "language_group": "english",
+                "row_filter": {
+                  "field": "family",
+                  "values": [
+                    "econometrics"
+                  ]
+                }
+              },
+              {
+                "id": "mmlu-electrical-engineering",
+                "category": "general-language",
+                "subcategory": "model-knowledge",
+                "modality": "text",
+                "language_group": "english",
+                "row_filter": {
+                  "field": "family",
+                  "values": [
+                    "electrical_engineering"
+                  ]
+                }
+              },
+              {
+                "id": "mmlu-elementary-mathematics",
+                "category": "general-language",
+                "subcategory": "model-knowledge",
+                "modality": "text",
+                "language_group": "english",
+                "row_filter": {
+                  "field": "family",
+                  "values": [
+                    "elementary_mathematics"
+                  ]
+                }
+              },
+              {
+                "id": "mmlu-formal-logic",
+                "category": "general-language",
+                "subcategory": "model-knowledge",
+                "modality": "text",
+                "language_group": "english",
+                "row_filter": {
+                  "field": "family",
+                  "values": [
+                    "formal_logic"
+                  ]
+                }
+              },
+              {
+                "id": "mmlu-global-facts",
+                "category": "general-language",
+                "subcategory": "model-knowledge",
+                "modality": "text",
+                "language_group": "english",
+                "row_filter": {
+                  "field": "family",
+                  "values": [
+                    "global_facts"
+                  ]
+                }
+              },
+              {
+                "id": "mmlu-high-school-biology",
+                "category": "general-language",
+                "subcategory": "model-knowledge",
+                "modality": "text",
+                "language_group": "english",
+                "row_filter": {
+                  "field": "family",
+                  "values": [
+                    "high_school_biology"
+                  ]
+                }
+              },
+              {
+                "id": "mmlu-high-school-chemistry",
+                "category": "general-language",
+                "subcategory": "model-knowledge",
+                "modality": "text",
+                "language_group": "english",
+                "row_filter": {
+                  "field": "family",
+                  "values": [
+                    "high_school_chemistry"
+                  ]
+                }
+              },
+              {
+                "id": "mmlu-high-school-computer-science",
+                "category": "coding",
+                "subcategory": "model-knowledge",
+                "modality": "text",
+                "language_group": "english",
+                "row_filter": {
+                  "field": "family",
+                  "values": [
+                    "high_school_computer_science"
+                  ]
+                }
+              },
+              {
+                "id": "mmlu-high-school-european-history",
+                "category": "general-language",
+                "subcategory": "model-knowledge",
+                "modality": "text",
+                "language_group": "english",
+                "row_filter": {
+                  "field": "family",
+                  "values": [
+                    "high_school_european_history"
+                  ]
+                }
+              },
+              {
+                "id": "mmlu-high-school-geography",
+                "category": "general-language",
+                "subcategory": "model-knowledge",
+                "modality": "text",
+                "language_group": "english",
+                "row_filter": {
+                  "field": "family",
+                  "values": [
+                    "high_school_geography"
+                  ]
+                }
+              },
+              {
+                "id": "mmlu-high-school-government-and-politics",
+                "category": "general-language",
+                "subcategory": "model-knowledge",
+                "modality": "text",
+                "language_group": "english",
+                "row_filter": {
+                  "field": "family",
+                  "values": [
+                    "high_school_government_and_politics"
+                  ]
+                }
+              },
+              {
+                "id": "mmlu-high-school-macroeconomics",
+                "category": "general-language",
+                "subcategory": "model-knowledge",
+                "modality": "text",
+                "language_group": "english",
+                "row_filter": {
+                  "field": "family",
+                  "values": [
+                    "high_school_macroeconomics"
+                  ]
+                }
+              },
+              {
+                "id": "mmlu-high-school-mathematics",
+                "category": "general-language",
+                "subcategory": "model-knowledge",
+                "modality": "text",
+                "language_group": "english",
+                "row_filter": {
+                  "field": "family",
+                  "values": [
+                    "high_school_mathematics"
+                  ]
+                }
+              },
+              {
+                "id": "mmlu-high-school-microeconomics",
+                "category": "general-language",
+                "subcategory": "model-knowledge",
+                "modality": "text",
+                "language_group": "english",
+                "row_filter": {
+                  "field": "family",
+                  "values": [
+                    "high_school_microeconomics"
+                  ]
+                }
+              },
+              {
+                "id": "mmlu-high-school-physics",
+                "category": "general-language",
+                "subcategory": "model-knowledge",
+                "modality": "text",
+                "language_group": "english",
+                "row_filter": {
+                  "field": "family",
+                  "values": [
+                    "high_school_physics"
+                  ]
+                }
+              },
+              {
+                "id": "mmlu-high-school-psychology",
+                "category": "general-language",
+                "subcategory": "model-knowledge",
+                "modality": "text",
+                "language_group": "english",
+                "row_filter": {
+                  "field": "family",
+                  "values": [
+                    "high_school_psychology"
+                  ]
+                }
+              },
+              {
+                "id": "mmlu-high-school-statistics",
+                "category": "general-language",
+                "subcategory": "model-knowledge",
+                "modality": "text",
+                "language_group": "english",
+                "row_filter": {
+                  "field": "family",
+                  "values": [
+                    "high_school_statistics"
+                  ]
+                }
+              },
+              {
+                "id": "mmlu-high-school-us-history",
+                "category": "general-language",
+                "subcategory": "model-knowledge",
+                "modality": "text",
+                "language_group": "english",
+                "row_filter": {
+                  "field": "family",
+                  "values": [
+                    "high_school_us_history"
+                  ]
+                }
+              },
+              {
+                "id": "mmlu-high-school-world-history",
+                "category": "general-language",
+                "subcategory": "model-knowledge",
+                "modality": "text",
+                "language_group": "english",
+                "row_filter": {
+                  "field": "family",
+                  "values": [
+                    "high_school_world_history"
+                  ]
+                }
+              },
+              {
+                "id": "mmlu-human-aging",
+                "category": "general-language",
+                "subcategory": "model-knowledge",
+                "modality": "text",
+                "language_group": "english",
+                "row_filter": {
+                  "field": "family",
+                  "values": [
+                    "human_aging"
+                  ]
+                }
+              },
+              {
+                "id": "mmlu-human-sexuality",
+                "category": "general-language",
+                "subcategory": "model-knowledge",
+                "modality": "text",
+                "language_group": "english",
+                "row_filter": {
+                  "field": "family",
+                  "values": [
+                    "human_sexuality"
+                  ]
+                }
+              },
+              {
+                "id": "mmlu-international-law",
+                "category": "legal",
+                "subcategory": "model-knowledge",
+                "modality": "text",
+                "language_group": "english",
+                "row_filter": {
+                  "field": "family",
+                  "values": [
+                    "international_law"
+                  ]
+                }
+              },
+              {
+                "id": "mmlu-jurisprudence",
+                "category": "legal",
+                "subcategory": "model-knowledge",
+                "modality": "text",
+                "language_group": "english",
+                "row_filter": {
+                  "field": "family",
+                  "values": [
+                    "jurisprudence"
+                  ]
+                }
+              },
+              {
+                "id": "mmlu-logical-fallacies",
+                "category": "general-language",
+                "subcategory": "model-knowledge",
+                "modality": "text",
+                "language_group": "english",
+                "row_filter": {
+                  "field": "family",
+                  "values": [
+                    "logical_fallacies"
+                  ]
+                }
+              },
+              {
+                "id": "mmlu-machine-learning",
+                "category": "general-language",
+                "subcategory": "model-knowledge",
+                "modality": "text",
+                "language_group": "english",
+                "row_filter": {
+                  "field": "family",
+                  "values": [
+                    "machine_learning"
+                  ]
+                }
+              },
+              {
+                "id": "mmlu-management",
+                "category": "corporate-documents",
+                "subcategory": "model-knowledge",
+                "modality": "text",
+                "language_group": "english",
+                "row_filter": {
+                  "field": "family",
+                  "values": [
+                    "management"
+                  ]
+                }
+              },
+              {
+                "id": "mmlu-marketing",
+                "category": "corporate-documents",
+                "subcategory": "model-knowledge",
+                "modality": "text",
+                "language_group": "english",
+                "row_filter": {
+                  "field": "family",
+                  "values": [
+                    "marketing"
+                  ]
+                }
+              },
+              {
+                "id": "mmlu-medical-genetics",
+                "category": "general-language",
+                "subcategory": "model-knowledge",
+                "modality": "text",
+                "language_group": "english",
+                "row_filter": {
+                  "field": "family",
+                  "values": [
+                    "medical_genetics"
+                  ]
+                }
+              },
+              {
+                "id": "mmlu-miscellaneous",
+                "category": "general-language",
+                "subcategory": "model-knowledge",
+                "modality": "text",
+                "language_group": "english",
+                "row_filter": {
+                  "field": "family",
+                  "values": [
+                    "miscellaneous"
+                  ]
+                }
+              },
+              {
+                "id": "mmlu-moral-disputes",
+                "category": "general-language",
+                "subcategory": "model-knowledge",
+                "modality": "text",
+                "language_group": "english",
+                "row_filter": {
+                  "field": "family",
+                  "values": [
+                    "moral_disputes"
+                  ]
+                }
+              },
+              {
+                "id": "mmlu-moral-scenarios",
+                "category": "general-language",
+                "subcategory": "model-knowledge",
+                "modality": "text",
+                "language_group": "english",
+                "row_filter": {
+                  "field": "family",
+                  "values": [
+                    "moral_scenarios"
+                  ]
+                }
+              },
+              {
+                "id": "mmlu-nutrition",
+                "category": "general-language",
+                "subcategory": "model-knowledge",
+                "modality": "text",
+                "language_group": "english",
+                "row_filter": {
+                  "field": "family",
+                  "values": [
+                    "nutrition"
+                  ]
+                }
+              },
+              {
+                "id": "mmlu-philosophy",
+                "category": "general-language",
+                "subcategory": "model-knowledge",
+                "modality": "text",
+                "language_group": "english",
+                "row_filter": {
+                  "field": "family",
+                  "values": [
+                    "philosophy"
+                  ]
+                }
+              },
+              {
+                "id": "mmlu-prehistory",
+                "category": "general-language",
+                "subcategory": "model-knowledge",
+                "modality": "text",
+                "language_group": "english",
+                "row_filter": {
+                  "field": "family",
+                  "values": [
+                    "prehistory"
+                  ]
+                }
+              },
+              {
+                "id": "mmlu-professional-accounting",
+                "category": "corporate-documents",
+                "subcategory": "model-knowledge",
+                "modality": "text",
+                "language_group": "english",
+                "row_filter": {
+                  "field": "family",
+                  "values": [
+                    "professional_accounting"
+                  ]
+                }
+              },
+              {
+                "id": "mmlu-professional-law",
+                "category": "legal",
+                "subcategory": "model-knowledge",
+                "modality": "text",
+                "language_group": "english",
+                "row_filter": {
+                  "field": "family",
+                  "values": [
+                    "professional_law"
+                  ]
+                }
+              },
+              {
+                "id": "mmlu-professional-medicine",
+                "category": "general-language",
+                "subcategory": "model-knowledge",
+                "modality": "text",
+                "language_group": "english",
+                "row_filter": {
+                  "field": "family",
+                  "values": [
+                    "professional_medicine"
+                  ]
+                }
+              },
+              {
+                "id": "mmlu-professional-psychology",
+                "category": "general-language",
+                "subcategory": "model-knowledge",
+                "modality": "text",
+                "language_group": "english",
+                "row_filter": {
+                  "field": "family",
+                  "values": [
+                    "professional_psychology"
+                  ]
+                }
+              },
+              {
+                "id": "mmlu-public-relations",
+                "category": "general-language",
+                "subcategory": "model-knowledge",
+                "modality": "text",
+                "language_group": "english",
+                "row_filter": {
+                  "field": "family",
+                  "values": [
+                    "public_relations"
+                  ]
+                }
+              },
+              {
+                "id": "mmlu-security-studies",
+                "category": "general-language",
+                "subcategory": "model-knowledge",
+                "modality": "text",
+                "language_group": "english",
+                "row_filter": {
+                  "field": "family",
+                  "values": [
+                    "security_studies"
+                  ]
+                }
+              },
+              {
+                "id": "mmlu-sociology",
+                "category": "general-language",
+                "subcategory": "model-knowledge",
+                "modality": "text",
+                "language_group": "english",
+                "row_filter": {
+                  "field": "family",
+                  "values": [
+                    "sociology"
+                  ]
+                }
+              },
+              {
+                "id": "mmlu-us-foreign-policy",
+                "category": "general-language",
+                "subcategory": "model-knowledge",
+                "modality": "text",
+                "language_group": "english",
+                "row_filter": {
+                  "field": "family",
+                  "values": [
+                    "us_foreign_policy"
+                  ]
+                }
+              },
+              {
+                "id": "mmlu-virology",
+                "category": "general-language",
+                "subcategory": "model-knowledge",
+                "modality": "text",
+                "language_group": "english",
+                "row_filter": {
+                  "field": "family",
+                  "values": [
+                    "virology"
+                  ]
+                }
+              },
+              {
+                "id": "mmlu-world-religions",
+                "category": "general-language",
+                "subcategory": "model-knowledge",
+                "modality": "text",
+                "language_group": "english",
+                "row_filter": {
+                  "field": "family",
+                  "values": [
+                    "world_religions"
+                  ]
+                }
+              }
+            ]
+          },
+          "started_at_unix": 1789968311.7633522,
+          "runner_sha256": "60b26b661a3f99f89eef22bf89744d78d14b56068945f19e020c951fd7ce42d3",
+          "scoring_rows_sha256": "4573e7d2eadd997f913e9662f52a3afe2a7326b137dbe62c99a8bdd3dad84b9e"
+        },
+        "sha256": {
+          "manifest.json": "c7eecde07e68bd2846daf55cca4bce2db3061fd801c9fb82d7f235796d5e4714",
+          "predictions.jsonl": "aa1db91d110d862f022a47dba07fa99735a00b09bc4da4f5c9e0b74b14068f77",
+          "scoring_rows.jsonl": "4573e7d2eadd997f913e9662f52a3afe2a7326b137dbe62c99a8bdd3dad84b9e",
+          "summary.json": "f1ab347ec50d9f07da16e7bdd566a68722704555e806033f88d0606b777175cc"
+        }
+      }
+    ],
+    "cost_scope": "Sum of usage.cost in saved responses; excludes probes, discarded attempts, and any billed requests without saved responses."
+  }
+}

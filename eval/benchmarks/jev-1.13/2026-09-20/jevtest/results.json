@@ -1,0 +1,153 @@
+{
+  "model": "typesafe/jev-1.13",
+  "endpoint": "https://openrouter.ai/api/v1/systemone",
+  "by_project": [
+    {
+      "project": "Jevtest",
+      "configuration": "jevtest-support-subset",
+      "metric": "accuracy",
+      "score": 1.0,
+      "metrics": {
+        "rows": 6,
+        "successful_rows": 6,
+        "failed_rows": 0,
+        "accuracy": 1.0,
+        "equal_case_modal_agreement": 1,
+        "mean_family_balanced_accuracy": 1,
+        "equal_case_total_variation_successful_only": null,
+        "total_variation_rows": 0
+      },
+      "suites": [
+        "jevtest-support-subset"
+      ],
+      "missing_suites": [],
+      "coverage": "complete"
+    }
+  ],
+  "by_category": [
+    {
+      "project": "Jevtest",
+      "configuration": "jevtest-support-subset",
+      "metric": "accuracy",
+      "score": 1.0,
+      "metrics": {
+        "rows": 6,
+        "successful_rows": 6,
+        "failed_rows": 0,
+        "accuracy": 1.0,
+        "equal_case_modal_agreement": 1,
+        "mean_family_balanced_accuracy": 1,
+        "equal_case_total_variation_successful_only": null,
+        "total_variation_rows": 0
+      },
+      "suites": [
+        "jevtest-support-subset"
+      ],
+      "missing_suites": [],
+      "coverage": "complete",
+      "placement": [
+        "text",
+        "english",
+        "corporate-documents",
+        "classification-decision"
+      ]
+    }
+  ],
+  "provenance": {
+    "export_git_revision": "b6f63bb11a4319e39afff35a9e6e8a04e8d294ea",
+    "evaluator_sha256": {
+      "catalog.py": "f69e435c11f1d35cefca32075db31858ff9ef7c2c360507b8ac0259d452c0ef9",
+      "run.py": "60b26b661a3f99f89eef22bf89744d78d14b56068945f19e020c951fd7ce42d3",
+      "retry.py": "ed3ed9b31152d62bd20705501391557b2b6f128edd84be96e8f71609ec8770c6",
+      "suites.py": "85f443ba008dc2d83b6777e5906a30de37d925bcb4abc9829c63ce325d9f218a",
+      "report.py": "a002bc6d2cddd4f2c0309861c822ef487818ed9dc25f7ecef6785e824c6a6ff0",
+      "prepare.py": "ccbfafde1bb1fa2fe227b9e44525042e487e49abf5dedcb81c22dd7b95db97f8",
+      "adapters/typed.py": "9f1ab94e0fe312fcbb4c0872260fac051fbe27430e38e2723f4924a1454eabf8",
+      "adapters/mmlu.py": "de4432175d2e66d19b10f5743524b33cea5d874ddc20aac81478ac7078dc8f81",
+      "adapters/fields.py": "de77fcdaa13266b14492e361c5ce6d5a48c27d9498ed7de60ae9327f72e4a357",
+      "adapters/vision.py": "9e7856043a82e19df4f039fbb0abf7421110b0bc6eb3cbe5f1ddf3e408b8f327",
+      "adapters/binary_battery.py": "6909af0c264d1222079c6f9c49ca7699227469a45dae385577d2303c53c81458",
+      "adapters/choice.py": "c088c9277435df01845009b36e270731754a1558748a84b990ea7c3e11c2fe8c",
+      "adapters/__init__.py": "2dda3c52d95dc2b8b259271a286bfc9e7155ace75784e486b77fc105aa2c3ea9",
+      "adapters/passage_rerank.py": "c5f4194ae9018caf7532d4bccbbda13c51a5317266f04a2ee5b2a88c8a0fb96d",
+      "adapters/rag.py": "f67507426adbacd4f74739f3223f6280d8fe0762cd1c0fbd936a08d9fef62055",
+      "adapters/graded_rag.py": "d411f8a1aaa245aeb72b1dd87ca6175489a38efe9a0ba1b45ecd15e8bc12ffc8",
+      "adapters/visual_qa.py": "d806c360f7aafb8abe70c255523a3f5e8b10cb523883a707a06e8265fae04991",
+      "adapters/domain_ranking.py": "b32c10e3d550bf571dbb381e315748b3f8d8e81eab9602299367bc9f3537cd08"
+    },
+    "returned_models": [
+      "typesafe/jev-1.13-20260917"
+    ],
+    "usage": {
+      "input_tokens": 2424,
+      "output_tokens": 120,
+      "reported_cost_usd": 0.00010180800000000001,
+      "responses_with_cost": 6
+    },
+    "artifacts": [
+      {
+        "suite": "jevtest-support-subset",
+        "directory": "eval/results/jev-1.13-2026-09-20/baseline-v2/jevtest-support-subset",
+        "manifest": {
+          "endpoint": "https://openrouter.ai/api/v1/systemone",
+          "model": "typesafe/jev-1.13",
+          "dataset_sha256": "84f31605949d8a5dc2ce4f11bb7b27780f5b367971eec1b6aa0f785cfaa220ca",
+          "rows": 6,
+          "suite": {
+            "schema_version": 1,
+            "id": "jevtest-support-subset",
+            "version": "1",
+            "adapter": "typed-v1",
+            "dataset": "../../data/jevtest-support-subset.jsonl",
+            "language_group": "english",
+            "languages": [
+              "en"
+            ],
+            "headline_metric": "accuracy",
+            "source": {
+              "repository": "realZachi/jevtest",
+              "revision": "07fa7128e1861ad65c9a660f599bd07431fa48ef"
+            },
+            "scope": "6 derived semantic assertions; not the entire jevtest suite or threshold matcher behavior",
+            "category": "corporate-documents",
+            "subcategory": "classification-decision",
+            "modality": "text",
+            "task_detail": "semantic-assertions",
+            "project": "Jevtest",
+            "project_configuration": "jevtest-support-subset"
+          },
+          "adapter_sha256": "9f1ab94e0fe312fcbb4c0872260fac051fbe27430e38e2723f4924a1454eabf8",
+          "retries": 3,
+          "delay": 0.0,
+          "timeout": 120,
+          "started_at_unix": 1789966770.115975,
+          "runner_sha256": "aef77b24dc04e1672bfcbcd994c5d47d2fc73cc07d2dc2017ce586d58feecaab",
+          "reporting": {
+            "project": "Jevtest",
+            "configuration": "jevtest-support-subset",
+            "expected_suites": [
+              "jevtest-support-subset"
+            ],
+            "partitions": [
+              {
+                "id": "jevtest-support-subset",
+                "category": "corporate-documents",
+                "subcategory": "classification-decision",
+                "modality": "text",
+                "language_group": "english"
+              }
+            ]
+          },
+          "scoring_rows_sha256": "84f31605949d8a5dc2ce4f11bb7b27780f5b367971eec1b6aa0f785cfaa220ca"
+        },
+        "sha256": {
+          "manifest.json": "cd05f6423efb464bd8ad58ab984801c24bbe4fc9470ebd3a5ef0ae377792b415",
+          "predictions.jsonl": "30c9109ca6f67298c780c7b12139009c0029d8fda7a8ae68b3fab9e8a4b92c6c",
+          "scoring_rows.jsonl": "84f31605949d8a5dc2ce4f11bb7b27780f5b367971eec1b6aa0f785cfaa220ca",
+          "summary.json": "6c38428582226b425b1c70879b737b1d1fa430c51c819e53efe937d18791381f"
+        }
+      }
+    ],
+    "cost_scope": "Sum of usage.cost in saved responses; excludes probes, discarded attempts, and any billed requests without saved responses."
+  }
+}

@@ -23,5 +23,7 @@
   },
   "task_detail": "clone-detection",
   "project": "BigCloneBench",
-  "project_configuration": "bigclonebench-test"
+  "project_configuration": "bigclonebench-test",
+  "default_enabled": false,
+  "default_exclusion_reason": "415,416 examples; opt-in due to size. Other coding suites remain enabled."
 }

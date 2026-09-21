@@ -58,5 +58,7 @@
   },
   "scope_note": "Frozen BM25 candidate reranking adaptation; all queries count; no gold injection. English queries with mixed-language tool metadata; query-only, synthetic instruction excluded.",
   "project": "ToolRet",
-  "project_configuration": "query-only BM25 reranking"
+  "project_configuration": "query-only BM25 reranking",
+  "default_enabled": false,
+  "default_exclusion_reason": "Full 20-candidate requests can exceed the 32K context limit; disabled by default without truncating tool descriptions."
 }

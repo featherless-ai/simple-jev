@@ -1,0 +1,157 @@
+{
+  "model": "typesafe/jev-1.13",
+  "endpoint": "https://openrouter.ai/api/v1/systemone",
+  "by_project": [
+    {
+      "project": "CodeComplex",
+      "configuration": "codecomplex-test",
+      "metric": "accuracy",
+      "score": 0.7081632653061225,
+      "metrics": {
+        "rows": 980,
+        "successful_rows": 980,
+        "failed_rows": 0,
+        "accuracy": 0.7081632653061225,
+        "equal_case_modal_agreement": 0.7081632653061225,
+        "mean_family_balanced_accuracy": 0.7163507708743017,
+        "equal_case_total_variation_successful_only": null,
+        "total_variation_rows": 0
+      },
+      "suites": [
+        "codecomplex-test"
+      ],
+      "missing_suites": [],
+      "coverage": "complete"
+    }
+  ],
+  "by_category": [
+    {
+      "project": "CodeComplex",
+      "configuration": "codecomplex-test",
+      "metric": "accuracy",
+      "score": 0.7081632653061225,
+      "metrics": {
+        "rows": 980,
+        "successful_rows": 980,
+        "failed_rows": 0,
+        "accuracy": 0.7081632653061225,
+        "equal_case_modal_agreement": 0.7081632653061225,
+        "mean_family_balanced_accuracy": 0.7163507708743017,
+        "equal_case_total_variation_successful_only": null,
+        "total_variation_rows": 0
+      },
+      "suites": [
+        "codecomplex-test"
+      ],
+      "missing_suites": [],
+      "coverage": "complete",
+      "placement": [
+        "text",
+        "english",
+        "coding",
+        "classification-decision"
+      ]
+    }
+  ],
+  "provenance": {
+    "export_git_revision": "b6f63bb11a4319e39afff35a9e6e8a04e8d294ea",
+    "evaluator_sha256": {
+      "catalog.py": "f69e435c11f1d35cefca32075db31858ff9ef7c2c360507b8ac0259d452c0ef9",
+      "run.py": "60b26b661a3f99f89eef22bf89744d78d14b56068945f19e020c951fd7ce42d3",
+      "retry.py": "ed3ed9b31152d62bd20705501391557b2b6f128edd84be96e8f71609ec8770c6",
+      "suites.py": "85f443ba008dc2d83b6777e5906a30de37d925bcb4abc9829c63ce325d9f218a",
+      "report.py": "a002bc6d2cddd4f2c0309861c822ef487818ed9dc25f7ecef6785e824c6a6ff0",
+      "prepare.py": "ccbfafde1bb1fa2fe227b9e44525042e487e49abf5dedcb81c22dd7b95db97f8",
+      "adapters/typed.py": "9f1ab94e0fe312fcbb4c0872260fac051fbe27430e38e2723f4924a1454eabf8",
+      "adapters/mmlu.py": "de4432175d2e66d19b10f5743524b33cea5d874ddc20aac81478ac7078dc8f81",
+      "adapters/fields.py": "de77fcdaa13266b14492e361c5ce6d5a48c27d9498ed7de60ae9327f72e4a357",
+      "adapters/vision.py": "9e7856043a82e19df4f039fbb0abf7421110b0bc6eb3cbe5f1ddf3e408b8f327",
+      "adapters/binary_battery.py": "6909af0c264d1222079c6f9c49ca7699227469a45dae385577d2303c53c81458",
+      "adapters/choice.py": "c088c9277435df01845009b36e270731754a1558748a84b990ea7c3e11c2fe8c",
+      "adapters/__init__.py": "2dda3c52d95dc2b8b259271a286bfc9e7155ace75784e486b77fc105aa2c3ea9",
+      "adapters/passage_rerank.py": "c5f4194ae9018caf7532d4bccbbda13c51a5317266f04a2ee5b2a88c8a0fb96d",
+      "adapters/rag.py": "f67507426adbacd4f74739f3223f6280d8fe0762cd1c0fbd936a08d9fef62055",
+      "adapters/graded_rag.py": "d411f8a1aaa245aeb72b1dd87ca6175489a38efe9a0ba1b45ecd15e8bc12ffc8",
+      "adapters/visual_qa.py": "d806c360f7aafb8abe70c255523a3f5e8b10cb523883a707a06e8265fae04991",
+      "adapters/domain_ranking.py": "b32c10e3d550bf571dbb381e315748b3f8d8e81eab9602299367bc9f3537cd08"
+    },
+    "returned_models": [
+      "typesafe/jev-1.13-20260917"
+    ],
+    "usage": {
+      "input_tokens": 1111807,
+      "output_tokens": 74674,
+      "reported_cost_usd": 0.04669589400000008,
+      "responses_with_cost": 980
+    },
+    "artifacts": [
+      {
+        "suite": "codecomplex-test",
+        "directory": "eval/results/jev-1.13-2026-09-20/runs/codecomplex-test/codecomplex-test",
+        "manifest": {
+          "endpoint": "https://openrouter.ai/api/v1/systemone",
+          "model": "typesafe/jev-1.13",
+          "dataset_sha256": "104ee9c83809b1cc861c4e7fe42c119a46833f339700fe951afc4395dfc95b7d",
+          "rows": 980,
+          "suite": {
+            "schema_version": 1,
+            "id": "codecomplex-test",
+            "version": "1",
+            "adapter": "choice-v1",
+            "dataset": "../../data/codecomplex-test.jsonl",
+            "category": "coding",
+            "subcategory": "classification-decision",
+            "language_group": "english",
+            "languages": [
+              "en"
+            ],
+            "modality": "text",
+            "headline_metric": "accuracy",
+            "source": {
+              "repository": "sybaik1/CodeComplex",
+              "revision": "75ec12fc611349dfb051d86ae86e6ab368dc8978",
+              "rows": 980,
+              "files": {
+                "LLM-qlora/codecomplex-simple/test_dataset.json": "e8a7d6044ae4e7d72d503afaaeaad54c3fe36ed5c6c456eb6ec5e13eabd64fc6"
+              }
+            },
+            "task_detail": "complexity",
+            "project": "CodeComplex",
+            "project_configuration": "codecomplex-test"
+          },
+          "adapter_sha256": "c088c9277435df01845009b36e270731754a1558748a84b990ea7c3e11c2fe8c",
+          "retries": 5,
+          "delay": 0.02,
+          "timeout": 120.0,
+          "workers": 16,
+          "reporting": {
+            "project": "CodeComplex",
+            "configuration": "codecomplex-test",
+            "expected_suites": [
+              "codecomplex-test"
+            ],
+            "partitions": [
+              {
+                "id": "codecomplex-test",
+                "category": "coding",
+                "subcategory": "classification-decision",
+                "modality": "text",
+                "language_group": "english"
+              }
+            ]
+          },
+          "started_at_unix": 1789966834.047041,
+          "runner_sha256": "aef77b24dc04e1672bfcbcd994c5d47d2fc73cc07d2dc2017ce586d58feecaab",
+          "scoring_rows_sha256": "104ee9c83809b1cc861c4e7fe42c119a46833f339700fe951afc4395dfc95b7d"
+        },
+        "sha256": {
+          "manifest.json": "0ae4c41d5b0d3400daca30014128624719d5fdbea88cafdd4899c2711e11a911",
+          "predictions.jsonl": "4f4e995d6262e6d5330f7d31216c549286d2be5b6813bd8de9daed7f99f1a9f7",
+          "scoring_rows.jsonl": "104ee9c83809b1cc861c4e7fe42c119a46833f339700fe951afc4395dfc95b7d",
+          "summary.json": "43fc4afe8e341633d890272b257e133659d45b9ed91998aff4ebdf01328183c8"
+        }
+      }
+    ],
+    "cost_scope": "Sum of usage.cost in saved responses; excludes probes, discarded attempts, and any billed requests without saved responses."
+  }
+}

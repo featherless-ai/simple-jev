@@ -9,6 +9,8 @@ import argparse
 from collections import defaultdict
 import hashlib
 import json
+import re
+import subprocess
 from pathlib import Path
 from catalog import entries
 from suites import ADAPTERS
@@ -38,12 +40,14 @@ def route(row, meta):
     return matches[0]
 
 
-def collect(runs):
+def collect(runs, project_filter=None):
     projects, categories = {}, {}
     identity = None
     for root in runs:
         for manifest_path in sorted(Path(root).glob('*/manifest.json')):
             manifest = json.loads(manifest_path.read_text())
+            if project_filter is not None and manifest['suite']['project'] != project_filter:
+                continue
             current = (manifest['model'], manifest['endpoint'])
             if identity is None: identity = current
             if identity != current: raise ValueError('Do not combine different models/endpoints')
@@ -129,12 +133,80 @@ def write_reports(root):
     return report
 
 
+def export_projects(runs, destination):
+    """Export small, reviewable project reports; keep raw datasets outside Git.
+
+Only supplied runs are represented. Artifact hashes link reports to the local
+raw evidence, and returned model IDs identify the actual provider release.
+"""
+    destination = Path(destination)
+    destination.mkdir(parents=True, exist_ok=True)
+    projects = defaultdict(list)
+    for root in runs:
+        for path in sorted(Path(root).glob('*/manifest.json')):
+            manifest = json.loads(path.read_text())
+            projects[manifest['suite']['project']].append((path,manifest))
+    index = ['# Jev endpoint benchmark results', '',
+        'Only completed runs supplied to this export are listed. This is not a claim that all catalog benchmarks have finished.', '',
+        '| Project | Report |', '| --- | --- |']
+    revision = subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip()
+    for project, manifests in sorted(projects.items()):
+        slug = re.sub(r'[^a-z0-9]+','-',project.lower()).strip('-')
+        folder = destination/slug
+        folder.mkdir(exist_ok=True)
+        report = collect(runs, project)
+        artifacts = []
+        usage = {'input_tokens':0,'output_tokens':0,'reported_cost_usd':0,'responses_with_cost':0}
+        returned_models = set()
+        for path, manifest in manifests:
+            evidence = {'suite':manifest['suite']['id'],'directory':str(path.parent),
+                        'manifest':manifest,'sha256':{}}
+            for name in ('manifest.json','predictions.jsonl','scoring_rows.jsonl','summary.json'):
+                file = path.parent/name
+                with file.open('rb') as stream:
+                    hasher = hashlib.sha256()
+                    for chunk in iter(lambda: stream.read(1024*1024), b''):
+                        hasher.update(chunk)
+                    digest = hasher.hexdigest()
+                evidence['sha256'][name] = digest
+            with (path.parent/'predictions.jsonl').open() as stream:
+                for line in stream:
+                    response = json.loads(line).get('response',{})
+                    if response.get('model'): returned_models.add(response['model'])
+                    billed = response.get('usage',{})
+                    for field in ('input_tokens','output_tokens'):
+                        usage[field] += billed.get(field,0)
+                    if 'cost' in billed:
+                        usage['reported_cost_usd'] += billed['cost']
+                        usage['responses_with_cost'] += 1
+            artifacts.append(evidence)
+        report['provenance'] = {'export_git_revision':revision,
+            'evaluator_sha256':{str(p.relative_to(Path(__file__).parent)):hashlib.sha256(p.read_bytes()).hexdigest()
+                for p in [*Path(__file__).parent.glob('*.py'),*Path(__file__).parent.glob('adapters/*.py')]} ,'returned_models':sorted(returned_models),
+            'usage':usage,'artifacts':artifacts,
+            'cost_scope':'Sum of usage.cost in saved responses; excludes probes, discarded attempts, and any billed requests without saved responses.'}
+        (folder/'results.json').write_text(json.dumps(report,indent=2)+'\n')
+        text = markdown(report,'project')+'\n'+markdown(report,'category')
+        text += ('\n## Provenance\n\nActual returned models: '+', '.join(sorted(returned_models))+
+                 f". Recorded response cost: ${usage['reported_cost_usd']:.6f}.\n\n"+
+                 'See [results.json](results.json) for settings, source hashes, raw artifact locations, and cost scope. '+
+                 'Raw predictions and scoring inputs remain in the ignored run archive.\n')
+        (folder/'report.md').write_text(text)
+        index.append(f'| {project} | [Results]({slug}/report.md) |')
+    (destination/'README.md').write_text('\n'.join(index)+'\n')
+
+
 def main():
     p=argparse.ArgumentParser(description=__doc__)
     p.add_argument('--run',type=Path,action='append',required=True)
     p.add_argument('--view',choices=['category','project'],default='project')
     p.add_argument('--json',action='store_true')
-    a=p.parse_args();report=collect(a.run)
+    p.add_argument('--export',type=Path,help='Write one small report folder per named project')
+    a=p.parse_args()
+    if a.export:
+        export_projects(a.run,a.export)
+        return
+    report=collect(a.run)
     print(json.dumps(report,indent=2) if a.json else markdown(report,a.view))
 
 

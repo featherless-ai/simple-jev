@@ -1,0 +1,467 @@
+{
+  "model": "typesafe/jev-1.13",
+  "endpoint": "https://openrouter.ai/api/v1/systemone",
+  "by_project": [
+    {
+      "project": "MMLU-Pro",
+      "configuration": "full test",
+      "metric": "accuracy",
+      "score": 0.8240525265957447,
+      "metrics": {
+        "rows": 12032,
+        "successful_rows": 12032,
+        "failed_rows": 0,
+        "accuracy": 0.8240525265957447,
+        "equal_case_modal_agreement": 0.8240525265957447,
+        "mean_family_balanced_accuracy": 0.8243735806515964,
+        "equal_case_total_variation_successful_only": null,
+        "total_variation_rows": 0
+      },
+      "suites": [
+        "mmlu-pro-biology",
+        "mmlu-pro-business",
+        "mmlu-pro-chemistry",
+        "mmlu-pro-computer-science",
+        "mmlu-pro-economics",
+        "mmlu-pro-engineering",
+        "mmlu-pro-health",
+        "mmlu-pro-history",
+        "mmlu-pro-law",
+        "mmlu-pro-math",
+        "mmlu-pro-other",
+        "mmlu-pro-philosophy",
+        "mmlu-pro-physics",
+        "mmlu-pro-psychology"
+      ],
+      "missing_suites": [],
+      "coverage": "complete"
+    }
+  ],
+  "by_category": [
+    {
+      "project": "MMLU-Pro",
+      "configuration": "full test",
+      "metric": "accuracy",
+      "score": 0.8682926829268293,
+      "metrics": {
+        "rows": 410,
+        "successful_rows": 410,
+        "failed_rows": 0,
+        "accuracy": 0.8682926829268293,
+        "equal_case_modal_agreement": 0.8682926829268293,
+        "mean_family_balanced_accuracy": 0.8686209976723691,
+        "equal_case_total_variation_successful_only": null,
+        "total_variation_rows": 0
+      },
+      "suites": [
+        "mmlu-pro-computer-science"
+      ],
+      "missing_suites": [],
+      "coverage": "complete",
+      "placement": [
+        "text",
+        "english",
+        "coding",
+        "model-knowledge"
+      ]
+    },
+    {
+      "project": "MMLU-Pro",
+      "configuration": "full test",
+      "metric": "accuracy",
+      "score": 0.7921419518377694,
+      "metrics": {
+        "rows": 789,
+        "successful_rows": 789,
+        "failed_rows": 0,
+        "accuracy": 0.7921419518377694,
+        "equal_case_modal_agreement": 0.7921419518377694,
+        "mean_family_balanced_accuracy": 0.7926035078682582,
+        "equal_case_total_variation_successful_only": null,
+        "total_variation_rows": 0
+      },
+      "suites": [
+        "mmlu-pro-business"
+      ],
+      "missing_suites": [],
+      "coverage": "complete",
+      "placement": [
+        "text",
+        "english",
+        "corporate-documents",
+        "model-knowledge"
+      ]
+    },
+    {
+      "project": "MMLU-Pro",
+      "configuration": "full test",
+      "metric": "accuracy",
+      "score": 0.8310727496917386,
+      "metrics": {
+        "rows": 9732,
+        "successful_rows": 9732,
+        "failed_rows": 0,
+        "accuracy": 0.8310727496917386,
+        "equal_case_modal_agreement": 0.8310727496917386,
+        "mean_family_balanced_accuracy": 0.8290373924446846,
+        "equal_case_total_variation_successful_only": null,
+        "total_variation_rows": 0
+      },
+      "suites": [
+        "mmlu-pro-biology",
+        "mmlu-pro-chemistry",
+        "mmlu-pro-economics",
+        "mmlu-pro-engineering",
+        "mmlu-pro-health",
+        "mmlu-pro-history",
+        "mmlu-pro-math",
+        "mmlu-pro-other",
+        "mmlu-pro-philosophy",
+        "mmlu-pro-physics",
+        "mmlu-pro-psychology"
+      ],
+      "missing_suites": [],
+      "coverage": "complete",
+      "placement": [
+        "text",
+        "english",
+        "general-language",
+        "model-knowledge"
+      ]
+    },
+    {
+      "project": "MMLU-Pro",
+      "configuration": "full test",
+      "metric": "accuracy",
+      "score": 0.7683923705722071,
+      "metrics": {
+        "rows": 1101,
+        "successful_rows": 1101,
+        "failed_rows": 0,
+        "accuracy": 0.7683923705722071,
+        "equal_case_modal_agreement": 0.7683923705722071,
+        "mean_family_balanced_accuracy": 0.7605943066901925,
+        "equal_case_total_variation_successful_only": null,
+        "total_variation_rows": 0
+      },
+      "suites": [
+        "mmlu-pro-law"
+      ],
+      "missing_suites": [],
+      "coverage": "complete",
+      "placement": [
+        "text",
+        "english",
+        "legal",
+        "model-knowledge"
+      ]
+    }
+  ],
+  "provenance": {
+    "export_git_revision": "b6f63bb11a4319e39afff35a9e6e8a04e8d294ea",
+    "evaluator_sha256": {
+      "catalog.py": "f69e435c11f1d35cefca32075db31858ff9ef7c2c360507b8ac0259d452c0ef9",
+      "run.py": "60b26b661a3f99f89eef22bf89744d78d14b56068945f19e020c951fd7ce42d3",
+      "retry.py": "ed3ed9b31152d62bd20705501391557b2b6f128edd84be96e8f71609ec8770c6",
+      "suites.py": "85f443ba008dc2d83b6777e5906a30de37d925bcb4abc9829c63ce325d9f218a",
+      "report.py": "a002bc6d2cddd4f2c0309861c822ef487818ed9dc25f7ecef6785e824c6a6ff0",
+      "prepare.py": "ccbfafde1bb1fa2fe227b9e44525042e487e49abf5dedcb81c22dd7b95db97f8",
+      "adapters/typed.py": "9f1ab94e0fe312fcbb4c0872260fac051fbe27430e38e2723f4924a1454eabf8",
+      "adapters/mmlu.py": "de4432175d2e66d19b10f5743524b33cea5d874ddc20aac81478ac7078dc8f81",
+      "adapters/fields.py": "de77fcdaa13266b14492e361c5ce6d5a48c27d9498ed7de60ae9327f72e4a357",
+      "adapters/vision.py": "9e7856043a82e19df4f039fbb0abf7421110b0bc6eb3cbe5f1ddf3e408b8f327",
+      "adapters/binary_battery.py": "6909af0c264d1222079c6f9c49ca7699227469a45dae385577d2303c53c81458",
+      "adapters/choice.py": "c088c9277435df01845009b36e270731754a1558748a84b990ea7c3e11c2fe8c",
+      "adapters/__init__.py": "2dda3c52d95dc2b8b259271a286bfc9e7155ace75784e486b77fc105aa2c3ea9",
+      "adapters/passage_rerank.py": "c5f4194ae9018caf7532d4bccbbda13c51a5317266f04a2ee5b2a88c8a0fb96d",
+      "adapters/rag.py": "f67507426adbacd4f74739f3223f6280d8fe0762cd1c0fbd936a08d9fef62055",
+      "adapters/graded_rag.py": "d411f8a1aaa245aeb72b1dd87ca6175489a38efe9a0ba1b45ecd15e8bc12ffc8",
+      "adapters/visual_qa.py": "d806c360f7aafb8abe70c255523a3f5e8b10cb523883a707a06e8265fae04991",
+      "adapters/domain_ranking.py": "b32c10e3d550bf571dbb381e315748b3f8d8e81eab9602299367bc9f3537cd08"
+    },
+    "returned_models": [
+      "typesafe/jev-1.13-20260917"
+    ],
+    "usage": {
+      "input_tokens": 6590572,
+      "output_tokens": 1002474,
+      "reported_cost_usd": 0.27680402399999876,
+      "responses_with_cost": 12032
+    },
+    "artifacts": [
+      {
+        "suite": "mmlu-pro",
+        "directory": "eval/results/jev-1.13-2026-09-20/runs/mmlu-pro/mmlu-pro",
+        "manifest": {
+          "endpoint": "https://openrouter.ai/api/v1/systemone",
+          "model": "typesafe/jev-1.13",
+          "dataset_sha256": "ddcefaf24fee0f647701e9ae11bd010267e0cd038b010b1dbdc1502fc687d1a3",
+          "rows": 12032,
+          "suite": {
+            "schema_version": 1,
+            "id": "mmlu-pro",
+            "version": "1",
+            "adapter": "choice-v1",
+            "dataset": "../../data/mmlu-pro.jsonl",
+            "headline_metric": "accuracy",
+            "language_group": "english",
+            "languages": [
+              "en"
+            ],
+            "modality": "text",
+            "category": "general-language",
+            "subcategory": "model-knowledge",
+            "task_detail": "mmlu-pro",
+            "source": {
+              "mmlu-pro": {
+                "url": "https://huggingface.co/datasets/TIGER-Lab/MMLU-Pro/resolve/b189ec765aa7ed75c8acfea42df31fdae71f97be/data/test-00000-of-00001.parquet",
+                "file": "mmlu-pro.parquet",
+                "sha256": "0e24a191921c2f453518a537a8b2117bd137e7714d4ef1565e9ba06c1ecb9ad8",
+                "source_rows": 12032,
+                "excluded_ids": []
+              }
+            },
+            "expected_rows": 12032,
+            "aggregate_children": [
+              "mmlu-pro-biology",
+              "mmlu-pro-business",
+              "mmlu-pro-chemistry",
+              "mmlu-pro-computer-science",
+              "mmlu-pro-economics",
+              "mmlu-pro-engineering",
+              "mmlu-pro-health",
+              "mmlu-pro-history",
+              "mmlu-pro-law",
+              "mmlu-pro-math",
+              "mmlu-pro-other",
+              "mmlu-pro-philosophy",
+              "mmlu-pro-physics",
+              "mmlu-pro-psychology"
+            ],
+            "project": "MMLU-Pro",
+            "project_configuration": "full test"
+          },
+          "adapter_sha256": "c088c9277435df01845009b36e270731754a1558748a84b990ea7c3e11c2fe8c",
+          "retries": 5,
+          "delay": 0.02,
+          "timeout": 120.0,
+          "workers": 16,
+          "reporting": {
+            "project": "MMLU-Pro",
+            "configuration": "full test",
+            "expected_suites": [
+              "mmlu-pro-biology",
+              "mmlu-pro-business",
+              "mmlu-pro-chemistry",
+              "mmlu-pro-computer-science",
+              "mmlu-pro-economics",
+              "mmlu-pro-engineering",
+              "mmlu-pro-health",
+              "mmlu-pro-history",
+              "mmlu-pro-law",
+              "mmlu-pro-math",
+              "mmlu-pro-other",
+              "mmlu-pro-philosophy",
+              "mmlu-pro-physics",
+              "mmlu-pro-psychology"
+            ],
+            "partitions": [
+              {
+                "id": "mmlu-pro-biology",
+                "category": "general-language",
+                "subcategory": "model-knowledge",
+                "modality": "text",
+                "language_group": "english",
+                "row_filter": {
+                  "field": "family",
+                  "values": [
+                    "biology"
+                  ]
+                }
+              },
+              {
+                "id": "mmlu-pro-business",
+                "category": "corporate-documents",
+                "subcategory": "model-knowledge",
+                "modality": "text",
+                "language_group": "english",
+                "row_filter": {
+                  "field": "family",
+                  "values": [
+                    "business"
+                  ]
+                }
+              },
+              {
+                "id": "mmlu-pro-chemistry",
+                "category": "general-language",
+                "subcategory": "model-knowledge",
+                "modality": "text",
+                "language_group": "english",
+                "row_filter": {
+                  "field": "family",
+                  "values": [
+                    "chemistry"
+                  ]
+                }
+              },
+              {
+                "id": "mmlu-pro-computer-science",
+                "category": "coding",
+                "subcategory": "model-knowledge",
+                "modality": "text",
+                "language_group": "english",
+                "row_filter": {
+                  "field": "family",
+                  "values": [
+                    "computer science"
+                  ]
+                }
+              },
+              {
+                "id": "mmlu-pro-economics",
+                "category": "general-language",
+                "subcategory": "model-knowledge",
+                "modality": "text",
+                "language_group": "english",
+                "row_filter": {
+                  "field": "family",
+                  "values": [
+                    "economics"
+                  ]
+                }
+              },
+              {
+                "id": "mmlu-pro-engineering",
+                "category": "general-language",
+                "subcategory": "model-knowledge",
+                "modality": "text",
+                "language_group": "english",
+                "row_filter": {
+                  "field": "family",
+                  "values": [
+                    "engineering"
+                  ]
+                }
+              },
+              {
+                "id": "mmlu-pro-health",
+                "category": "general-language",
+                "subcategory": "model-knowledge",
+                "modality": "text",
+                "language_group": "english",
+                "row_filter": {
+                  "field": "family",
+                  "values": [
+                    "health"
+                  ]
+                }
+              },
+              {
+                "id": "mmlu-pro-history",
+                "category": "general-language",
+                "subcategory": "model-knowledge",
+                "modality": "text",
+                "language_group": "english",
+                "row_filter": {
+                  "field": "family",
+                  "values": [
+                    "history"
+                  ]
+                }
+              },
+              {
+                "id": "mmlu-pro-law",
+                "category": "legal",
+                "subcategory": "model-knowledge",
+                "modality": "text",
+                "language_group": "english",
+                "row_filter": {
+                  "field": "family",
+                  "values": [
+                    "law"
+                  ]
+                }
+              },
+              {
+                "id": "mmlu-pro-math",
+                "category": "general-language",
+                "subcategory": "model-knowledge",
+                "modality": "text",
+                "language_group": "english",
+                "row_filter": {
+                  "field": "family",
+                  "values": [
+                    "math"
+                  ]
+                }
+              },
+              {
+                "id": "mmlu-pro-other",
+                "category": "general-language",
+                "subcategory": "model-knowledge",
+                "modality": "text",
+                "language_group": "english",
+                "row_filter": {
+                  "field": "family",
+                  "values": [
+                    "other"
+                  ]
+                }
+              },
+              {
+                "id": "mmlu-pro-philosophy",
+                "category": "general-language",
+                "subcategory": "model-knowledge",
+                "modality": "text",
+                "language_group": "english",
+                "row_filter": {
+                  "field": "family",
+                  "values": [
+                    "philosophy"
+                  ]
+                }
+              },
+              {
+                "id": "mmlu-pro-physics",
+                "category": "general-language",
+                "subcategory": "model-knowledge",
+                "modality": "text",
+                "language_group": "english",
+                "row_filter": {
+                  "field": "family",
+                  "values": [
+                    "physics"
+                  ]
+                }
+              },
+              {
+                "id": "mmlu-pro-psychology",
+                "category": "general-language",
+                "subcategory": "model-knowledge",
+                "modality": "text",
+                "language_group": "english",
+                "row_filter": {
+                  "field": "family",
+                  "values": [
+                    "psychology"
+                  ]
+                }
+              }
+            ]
+          },
+          "started_at_unix": 1789968319.244132,
+          "runner_sha256": "60b26b661a3f99f89eef22bf89744d78d14b56068945f19e020c951fd7ce42d3",
+          "scoring_rows_sha256": "ddcefaf24fee0f647701e9ae11bd010267e0cd038b010b1dbdc1502fc687d1a3"
+        },
+        "sha256": {
+          "manifest.json": "78e650f3f09f0d691604aee7f93cc22e0bb2063ce1ad72048c6dcff9dce4d676",
+          "predictions.jsonl": "2d4dc586578c515a7847a90342206e2e7bf5ee6d3d7f64e9b135ae27ce046b9c",
+          "scoring_rows.jsonl": "ddcefaf24fee0f647701e9ae11bd010267e0cd038b010b1dbdc1502fc687d1a3",
+          "summary.json": "f8d5e49f38079c371dc6a510cb31441a3896d23de0e0bfb4ed771c74e6597fb6"
+        }
+      }
+    ],
+    "cost_scope": "Sum of usage.cost in saved responses; excludes probes, discarded attempts, and any billed requests without saved responses."
+  }
+}

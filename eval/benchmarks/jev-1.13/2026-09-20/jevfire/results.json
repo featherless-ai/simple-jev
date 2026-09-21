@@ -1,0 +1,148 @@
+{
+  "model": "typesafe/jev-1.13",
+  "endpoint": "https://openrouter.ai/api/v1/systemone",
+  "by_project": [
+    {
+      "project": "JEVfire",
+      "configuration": "jevfire-fields",
+      "metric": "exact_case_accuracy",
+      "score": 0.9230769230769231,
+      "metrics": {
+        "rows": 13,
+        "failed_rows": 0,
+        "fields": 85,
+        "field_accuracy": 0.9882352941176471,
+        "exact_case_accuracy": 0.9230769230769231
+      },
+      "suites": [
+        "jevfire-fields"
+      ],
+      "missing_suites": [],
+      "coverage": "complete"
+    }
+  ],
+  "by_category": [
+    {
+      "project": "JEVfire",
+      "configuration": "jevfire-fields",
+      "metric": "exact_case_accuracy",
+      "score": 0.9230769230769231,
+      "metrics": {
+        "rows": 13,
+        "failed_rows": 0,
+        "fields": 85,
+        "field_accuracy": 0.9882352941176471,
+        "exact_case_accuracy": 0.9230769230769231
+      },
+      "suites": [
+        "jevfire-fields"
+      ],
+      "missing_suites": [],
+      "coverage": "complete",
+      "placement": [
+        "text",
+        "multilingual",
+        "corporate-documents",
+        "classification-decision"
+      ]
+    }
+  ],
+  "provenance": {
+    "export_git_revision": "b6f63bb11a4319e39afff35a9e6e8a04e8d294ea",
+    "evaluator_sha256": {
+      "catalog.py": "f69e435c11f1d35cefca32075db31858ff9ef7c2c360507b8ac0259d452c0ef9",
+      "run.py": "60b26b661a3f99f89eef22bf89744d78d14b56068945f19e020c951fd7ce42d3",
+      "retry.py": "ed3ed9b31152d62bd20705501391557b2b6f128edd84be96e8f71609ec8770c6",
+      "suites.py": "85f443ba008dc2d83b6777e5906a30de37d925bcb4abc9829c63ce325d9f218a",
+      "report.py": "a002bc6d2cddd4f2c0309861c822ef487818ed9dc25f7ecef6785e824c6a6ff0",
+      "prepare.py": "ccbfafde1bb1fa2fe227b9e44525042e487e49abf5dedcb81c22dd7b95db97f8",
+      "adapters/typed.py": "9f1ab94e0fe312fcbb4c0872260fac051fbe27430e38e2723f4924a1454eabf8",
+      "adapters/mmlu.py": "de4432175d2e66d19b10f5743524b33cea5d874ddc20aac81478ac7078dc8f81",
+      "adapters/fields.py": "de77fcdaa13266b14492e361c5ce6d5a48c27d9498ed7de60ae9327f72e4a357",
+      "adapters/vision.py": "9e7856043a82e19df4f039fbb0abf7421110b0bc6eb3cbe5f1ddf3e408b8f327",
+      "adapters/binary_battery.py": "6909af0c264d1222079c6f9c49ca7699227469a45dae385577d2303c53c81458",
+      "adapters/choice.py": "c088c9277435df01845009b36e270731754a1558748a84b990ea7c3e11c2fe8c",
+      "adapters/__init__.py": "2dda3c52d95dc2b8b259271a286bfc9e7155ace75784e486b77fc105aa2c3ea9",
+      "adapters/passage_rerank.py": "c5f4194ae9018caf7532d4bccbbda13c51a5317266f04a2ee5b2a88c8a0fb96d",
+      "adapters/rag.py": "f67507426adbacd4f74739f3223f6280d8fe0762cd1c0fbd936a08d9fef62055",
+      "adapters/graded_rag.py": "d411f8a1aaa245aeb72b1dd87ca6175489a38efe9a0ba1b45ecd15e8bc12ffc8",
+      "adapters/visual_qa.py": "d806c360f7aafb8abe70c255523a3f5e8b10cb523883a707a06e8265fae04991",
+      "adapters/domain_ranking.py": "b32c10e3d550bf571dbb381e315748b3f8d8e81eab9602299367bc9f3537cd08"
+    },
+    "returned_models": [
+      "typesafe/jev-1.13-20260917"
+    ],
+    "usage": {
+      "input_tokens": 23202,
+      "output_tokens": 6052,
+      "reported_cost_usd": 0.000974484,
+      "responses_with_cost": 13
+    },
+    "artifacts": [
+      {
+        "suite": "jevfire-fields",
+        "directory": "eval/results/jev-1.13-2026-09-20/runs/jevfire-fields/jevfire-fields",
+        "manifest": {
+          "endpoint": "https://openrouter.ai/api/v1/systemone",
+          "model": "typesafe/jev-1.13",
+          "dataset_sha256": "0c4fbb7bd7f62e6032ae2962ff4bc7dc6c1107e60e65d2fbcab532e4c1a0d0b1",
+          "rows": 13,
+          "suite": {
+            "schema_version": 1,
+            "id": "jevfire-fields",
+            "version": "1",
+            "adapter": "fields-v1",
+            "dataset": "../../data/jevfire-fields.jsonl",
+            "headline_metric": "exact_case_accuracy",
+            "source": {
+              "repository": "kikoncuo/jevfire",
+              "revision": "5df83b558bf635e006d31f8f2fc2798d0e3ff051"
+            },
+            "language_group": "multilingual",
+            "languages": [
+              "en",
+              "es"
+            ],
+            "category": "corporate-documents",
+            "subcategory": "classification-decision",
+            "modality": "text",
+            "task_detail": "structured-extraction",
+            "project": "JEVfire",
+            "project_configuration": "jevfire-fields"
+          },
+          "adapter_sha256": "de77fcdaa13266b14492e361c5ce6d5a48c27d9498ed7de60ae9327f72e4a357",
+          "retries": 5,
+          "delay": 0.02,
+          "timeout": 120.0,
+          "workers": 16,
+          "reporting": {
+            "project": "JEVfire",
+            "configuration": "jevfire-fields",
+            "expected_suites": [
+              "jevfire-fields"
+            ],
+            "partitions": [
+              {
+                "id": "jevfire-fields",
+                "category": "corporate-documents",
+                "subcategory": "classification-decision",
+                "modality": "text",
+                "language_group": "multilingual"
+              }
+            ]
+          },
+          "started_at_unix": 1789967872.824227,
+          "runner_sha256": "cf1d35b8368e75343a3f70c883a843e4ecc52af2ea803c4412fbfabc48e0caf1",
+          "scoring_rows_sha256": "0c4fbb7bd7f62e6032ae2962ff4bc7dc6c1107e60e65d2fbcab532e4c1a0d0b1"
+        },
+        "sha256": {
+          "manifest.json": "b4c874a2ad69a4e8092ed478722d75d5d01b9170db02f8192a79b12e0d3af870",
+          "predictions.jsonl": "ec8058762399b241102a304b728a1b0b9cda9a1598ab630fa1c6596dad1d13e5",
+          "scoring_rows.jsonl": "0c4fbb7bd7f62e6032ae2962ff4bc7dc6c1107e60e65d2fbcab532e4c1a0d0b1",
+          "summary.json": "9a214350d1d5daff071e0445ecdbd5cd130e6e42b2f180295f2d3e43c20ed08e"
+        }
+      }
+    ],
+    "cost_scope": "Sum of usage.cost in saved responses; excludes probes, discarded attempts, and any billed requests without saved responses."
+  }
+}

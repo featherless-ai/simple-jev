@@ -1,0 +1,486 @@
+{
+  "model": "typesafe/jev-1.13",
+  "endpoint": "https://openrouter.ai/api/v1/systemone",
+  "by_project": [
+    {
+      "project": "SemIf",
+      "configuration": "authored",
+      "metric": "mean_family_balanced_accuracy",
+      "score": 0.9713345864661654,
+      "metrics": {
+        "rows": 144,
+        "successful_rows": 144,
+        "failed_rows": 0,
+        "accuracy": 0.9722222222222222,
+        "equal_case_modal_agreement": 0.9722222222222222,
+        "mean_family_balanced_accuracy": 0.9713345864661654,
+        "equal_case_total_variation_successful_only": null,
+        "total_variation_rows": 0
+      },
+      "suites": [
+        "semif-authored"
+      ],
+      "missing_suites": [],
+      "coverage": "complete"
+    },
+    {
+      "project": "SemIf",
+      "configuration": "perturbations",
+      "metric": "mean_family_balanced_accuracy",
+      "score": 1,
+      "metrics": {
+        "rows": 108,
+        "successful_rows": 108,
+        "failed_rows": 0,
+        "accuracy": 1.0,
+        "equal_case_modal_agreement": 1,
+        "mean_family_balanced_accuracy": 1,
+        "equal_case_total_variation_successful_only": null,
+        "total_variation_rows": 0
+      },
+      "suites": [
+        "semif-perturbations"
+      ],
+      "missing_suites": [],
+      "coverage": "complete"
+    },
+    {
+      "project": "SemIf",
+      "configuration": "typesafe",
+      "metric": "equal_case_modal_agreement",
+      "score": 0.891474358974359,
+      "metrics": {
+        "rows": 102,
+        "successful_rows": 102,
+        "failed_rows": 0,
+        "accuracy": 0.8921568627450981,
+        "equal_case_modal_agreement": 0.891474358974359,
+        "mean_family_balanced_accuracy": 0.797275641025641,
+        "equal_case_total_variation_successful_only": 0.11302917596292596,
+        "total_variation_rows": 102
+      },
+      "suites": [
+        "semif-typesafe"
+      ],
+      "missing_suites": [],
+      "coverage": "complete"
+    },
+    {
+      "project": "SemIf",
+      "configuration": "wanli",
+      "metric": "mean_family_balanced_accuracy",
+      "score": 0.771005049222871,
+      "metrics": {
+        "rows": 256,
+        "successful_rows": 256,
+        "failed_rows": 0,
+        "accuracy": 0.76953125,
+        "equal_case_modal_agreement": 0.76953125,
+        "mean_family_balanced_accuracy": 0.771005049222871,
+        "equal_case_total_variation_successful_only": null,
+        "total_variation_rows": 0
+      },
+      "suites": [
+        "semif-wanli"
+      ],
+      "missing_suites": [],
+      "coverage": "complete"
+    }
+  ],
+  "by_category": [
+    {
+      "project": "SemIf",
+      "configuration": "authored",
+      "metric": "mean_family_balanced_accuracy",
+      "score": 0.9713345864661654,
+      "metrics": {
+        "rows": 144,
+        "successful_rows": 144,
+        "failed_rows": 0,
+        "accuracy": 0.9722222222222222,
+        "equal_case_modal_agreement": 0.9722222222222222,
+        "mean_family_balanced_accuracy": 0.9713345864661654,
+        "equal_case_total_variation_successful_only": null,
+        "total_variation_rows": 0
+      },
+      "suites": [
+        "semif-authored"
+      ],
+      "missing_suites": [],
+      "coverage": "complete",
+      "placement": [
+        "text",
+        "english",
+        "general-language",
+        "classification-decision"
+      ]
+    },
+    {
+      "project": "SemIf",
+      "configuration": "perturbations",
+      "metric": "mean_family_balanced_accuracy",
+      "score": 1,
+      "metrics": {
+        "rows": 108,
+        "successful_rows": 108,
+        "failed_rows": 0,
+        "accuracy": 1.0,
+        "equal_case_modal_agreement": 1,
+        "mean_family_balanced_accuracy": 1,
+        "equal_case_total_variation_successful_only": null,
+        "total_variation_rows": 0
+      },
+      "suites": [
+        "semif-perturbations"
+      ],
+      "missing_suites": [],
+      "coverage": "complete",
+      "placement": [
+        "text",
+        "english",
+        "general-language",
+        "classification-decision"
+      ]
+    },
+    {
+      "project": "SemIf",
+      "configuration": "typesafe",
+      "metric": "equal_case_modal_agreement",
+      "score": 0.891474358974359,
+      "metrics": {
+        "rows": 102,
+        "successful_rows": 102,
+        "failed_rows": 0,
+        "accuracy": 0.8921568627450981,
+        "equal_case_modal_agreement": 0.891474358974359,
+        "mean_family_balanced_accuracy": 0.797275641025641,
+        "equal_case_total_variation_successful_only": 0.11302917596292596,
+        "total_variation_rows": 102
+      },
+      "suites": [
+        "semif-typesafe"
+      ],
+      "missing_suites": [],
+      "coverage": "complete",
+      "placement": [
+        "text",
+        "english",
+        "general-language",
+        "classification-decision"
+      ]
+    },
+    {
+      "project": "SemIf",
+      "configuration": "wanli",
+      "metric": "mean_family_balanced_accuracy",
+      "score": 0.771005049222871,
+      "metrics": {
+        "rows": 256,
+        "successful_rows": 256,
+        "failed_rows": 0,
+        "accuracy": 0.76953125,
+        "equal_case_modal_agreement": 0.76953125,
+        "mean_family_balanced_accuracy": 0.771005049222871,
+        "equal_case_total_variation_successful_only": null,
+        "total_variation_rows": 0
+      },
+      "suites": [
+        "semif-wanli"
+      ],
+      "missing_suites": [],
+      "coverage": "complete",
+      "placement": [
+        "text",
+        "english",
+        "general-language",
+        "classification-decision"
+      ]
+    }
+  ],
+  "provenance": {
+    "export_git_revision": "b6f63bb11a4319e39afff35a9e6e8a04e8d294ea",
+    "evaluator_sha256": {
+      "catalog.py": "f69e435c11f1d35cefca32075db31858ff9ef7c2c360507b8ac0259d452c0ef9",
+      "run.py": "60b26b661a3f99f89eef22bf89744d78d14b56068945f19e020c951fd7ce42d3",
+      "retry.py": "ed3ed9b31152d62bd20705501391557b2b6f128edd84be96e8f71609ec8770c6",
+      "suites.py": "85f443ba008dc2d83b6777e5906a30de37d925bcb4abc9829c63ce325d9f218a",
+      "report.py": "a002bc6d2cddd4f2c0309861c822ef487818ed9dc25f7ecef6785e824c6a6ff0",
+      "prepare.py": "ccbfafde1bb1fa2fe227b9e44525042e487e49abf5dedcb81c22dd7b95db97f8",
+      "adapters/typed.py": "9f1ab94e0fe312fcbb4c0872260fac051fbe27430e38e2723f4924a1454eabf8",
+      "adapters/mmlu.py": "de4432175d2e66d19b10f5743524b33cea5d874ddc20aac81478ac7078dc8f81",
+      "adapters/fields.py": "de77fcdaa13266b14492e361c5ce6d5a48c27d9498ed7de60ae9327f72e4a357",
+      "adapters/vision.py": "9e7856043a82e19df4f039fbb0abf7421110b0bc6eb3cbe5f1ddf3e408b8f327",
+      "adapters/binary_battery.py": "6909af0c264d1222079c6f9c49ca7699227469a45dae385577d2303c53c81458",
+      "adapters/choice.py": "c088c9277435df01845009b36e270731754a1558748a84b990ea7c3e11c2fe8c",
+      "adapters/__init__.py": "2dda3c52d95dc2b8b259271a286bfc9e7155ace75784e486b77fc105aa2c3ea9",
+      "adapters/passage_rerank.py": "c5f4194ae9018caf7532d4bccbbda13c51a5317266f04a2ee5b2a88c8a0fb96d",
+      "adapters/rag.py": "f67507426adbacd4f74739f3223f6280d8fe0762cd1c0fbd936a08d9fef62055",
+      "adapters/graded_rag.py": "d411f8a1aaa245aeb72b1dd87ca6175489a38efe9a0ba1b45ecd15e8bc12ffc8",
+      "adapters/visual_qa.py": "d806c360f7aafb8abe70c255523a3f5e8b10cb523883a707a06e8265fae04991",
+      "adapters/domain_ranking.py": "b32c10e3d550bf571dbb381e315748b3f8d8e81eab9602299367bc9f3537cd08"
+    },
+    "returned_models": [
+      "typesafe/jev-1.13-20260917"
+    ],
+    "usage": {
+      "input_tokens": 598846,
+      "output_tokens": 27315,
+      "reported_cost_usd": 0.025151531999999976,
+      "responses_with_cost": 610
+    },
+    "artifacts": [
+      {
+        "suite": "semif-authored",
+        "directory": "eval/results/jev-1.13-2026-09-20/baseline-v2/semif-authored",
+        "manifest": {
+          "endpoint": "https://openrouter.ai/api/v1/systemone",
+          "model": "typesafe/jev-1.13",
+          "dataset_sha256": "8162d1c73f925af64453f1ec05ef36d583b3815bf698e60f0d454bd11537e079",
+          "rows": 144,
+          "suite": {
+            "schema_version": 1,
+            "id": "semif-authored",
+            "version": "1",
+            "adapter": "choice-v1",
+            "dataset": "../../data/authored144.jsonl",
+            "headline_metric": "mean_family_balanced_accuracy",
+            "source": {
+              "url": "https://github.com/TheoLeeCJ/SemIf",
+              "revision": "ca3ba65f142967030ecb453346e94d6f476a69df"
+            },
+            "language_group": "english",
+            "languages": [
+              "en"
+            ],
+            "category": "general-language",
+            "subcategory": "classification-decision",
+            "modality": "text",
+            "task_detail": "mixed-reasoning",
+            "project": "SemIf",
+            "project_configuration": "authored"
+          },
+          "adapter_sha256": "c088c9277435df01845009b36e270731754a1558748a84b990ea7c3e11c2fe8c",
+          "retries": 3,
+          "delay": 0.0,
+          "timeout": 120,
+          "started_at_unix": 1789966673.823654,
+          "runner_sha256": "db66306b9bdbfeafbaaeb15698ddd28da2146808f86802e51c5cd0479afe4b31",
+          "reporting": {
+            "project": "SemIf",
+            "configuration": "authored",
+            "expected_suites": [
+              "semif-authored"
+            ],
+            "partitions": [
+              {
+                "id": "semif-authored",
+                "category": "general-language",
+                "subcategory": "classification-decision",
+                "modality": "text",
+                "language_group": "english"
+              }
+            ]
+          },
+          "scoring_rows_sha256": "8162d1c73f925af64453f1ec05ef36d583b3815bf698e60f0d454bd11537e079"
+        },
+        "sha256": {
+          "manifest.json": "80052e1365b5a43d898df1de41641c5a09cc861dfd7e4f548df21b0e52fa69bd",
+          "predictions.jsonl": "0f49aebbb03f1a6730ea2e6c8489771658995218791b0ef5932a1dc4d2ff690b",
+          "scoring_rows.jsonl": "8162d1c73f925af64453f1ec05ef36d583b3815bf698e60f0d454bd11537e079",
+          "summary.json": "a0272626d56393e3097810db199a04f12817499937b2a536e5442034ce2f7702"
+        }
+      },
+      {
+        "suite": "semif-perturbations",
+        "directory": "eval/results/jev-1.13-2026-09-20/baseline-v2/semif-perturbations",
+        "manifest": {
+          "endpoint": "https://openrouter.ai/api/v1/systemone",
+          "model": "typesafe/jev-1.13",
+          "dataset_sha256": "1dd7ccf80518d0e34886478ca23982aa726e9daccd343b9e95cedaf6b569bec4",
+          "rows": 108,
+          "suite": {
+            "schema_version": 1,
+            "id": "semif-perturbations",
+            "version": "1",
+            "adapter": "choice-v1",
+            "dataset": "../../data/perturbations108.jsonl",
+            "headline_metric": "mean_family_balanced_accuracy",
+            "source": {
+              "url": "https://github.com/TheoLeeCJ/SemIf",
+              "revision": "ca3ba65f142967030ecb453346e94d6f476a69df"
+            },
+            "description": "108 perturbations of 36 authored originals; not independent from authored144.",
+            "language_group": "english",
+            "languages": [
+              "en"
+            ],
+            "category": "general-language",
+            "subcategory": "classification-decision",
+            "modality": "text",
+            "task_detail": "mixed-reasoning",
+            "project": "SemIf",
+            "project_configuration": "perturbations"
+          },
+          "adapter_sha256": "c088c9277435df01845009b36e270731754a1558748a84b990ea7c3e11c2fe8c",
+          "retries": 3,
+          "delay": 0.0,
+          "timeout": 120,
+          "started_at_unix": 1789966728.2734652,
+          "runner_sha256": "db66306b9bdbfeafbaaeb15698ddd28da2146808f86802e51c5cd0479afe4b31",
+          "reporting": {
+            "project": "SemIf",
+            "configuration": "perturbations",
+            "expected_suites": [
+              "semif-perturbations"
+            ],
+            "partitions": [
+              {
+                "id": "semif-perturbations",
+                "category": "general-language",
+                "subcategory": "classification-decision",
+                "modality": "text",
+                "language_group": "english"
+              }
+            ]
+          },
+          "scoring_rows_sha256": "1dd7ccf80518d0e34886478ca23982aa726e9daccd343b9e95cedaf6b569bec4"
+        },
+        "sha256": {
+          "manifest.json": "a95bf379fe44bb49e9900d84f929b333badc8cf6cf681f8b5ed4bc24f1871885",
+          "predictions.jsonl": "31b424f3563dccb0f8f10c64d2443003673e61d38e85cfbab95cbb46fb5017dd",
+          "scoring_rows.jsonl": "1dd7ccf80518d0e34886478ca23982aa726e9daccd343b9e95cedaf6b569bec4",
+          "summary.json": "cc3b33bbff8ecdde35d63b609050d0064cfd8c95731d1de231ea6a611b2406b6"
+        }
+      },
+      {
+        "suite": "semif-typesafe",
+        "directory": "eval/results/jev-1.13-2026-09-20/runs/semif-typesafe/semif-typesafe",
+        "manifest": {
+          "endpoint": "https://openrouter.ai/api/v1/systemone",
+          "model": "typesafe/jev-1.13",
+          "dataset_sha256": "734bfa7c56a1e4616e3dee56a71b3dd44b2717def0644622f00c6006d3e80f75",
+          "rows": 102,
+          "suite": {
+            "schema_version": 1,
+            "id": "semif-typesafe",
+            "version": "1",
+            "adapter": "choice-v1",
+            "dataset": "../../data/typesafe102.jsonl",
+            "headline_metric": "equal_case_modal_agreement",
+            "source": {
+              "url": "https://github.com/TheoLeeCJ/SemIf",
+              "revision": "ca3ba65f142967030ecb453346e94d6f476a69df"
+            },
+            "language_group": "english",
+            "languages": [
+              "en"
+            ],
+            "category": "general-language",
+            "subcategory": "classification-decision",
+            "modality": "text",
+            "task_detail": "mixed-reasoning",
+            "project": "SemIf",
+            "project_configuration": "typesafe"
+          },
+          "adapter_sha256": "c088c9277435df01845009b36e270731754a1558748a84b990ea7c3e11c2fe8c",
+          "retries": 5,
+          "delay": 0.02,
+          "timeout": 120.0,
+          "workers": 16,
+          "reporting": {
+            "project": "SemIf",
+            "configuration": "typesafe",
+            "expected_suites": [
+              "semif-typesafe"
+            ],
+            "partitions": [
+              {
+                "id": "semif-typesafe",
+                "category": "general-language",
+                "subcategory": "classification-decision",
+                "modality": "text",
+                "language_group": "english"
+              }
+            ]
+          },
+          "started_at_unix": 1789968450.2512178,
+          "runner_sha256": "60b26b661a3f99f89eef22bf89744d78d14b56068945f19e020c951fd7ce42d3",
+          "scoring_rows_sha256": "734bfa7c56a1e4616e3dee56a71b3dd44b2717def0644622f00c6006d3e80f75"
+        },
+        "sha256": {
+          "manifest.json": "2ffac5455cc891e0a50babc5dbcdc940913cf0aab8d84c5bd84f4530b129d454",
+          "predictions.jsonl": "6063395799808d39ca4c1d31e5f6e20b602b8d3abcd63ae78213e2524e74b5a4",
+          "scoring_rows.jsonl": "734bfa7c56a1e4616e3dee56a71b3dd44b2717def0644622f00c6006d3e80f75",
+          "summary.json": "41cb6ad998d8dfb6c62e873e226997862f31feb0a67edea2a507a33288b8e5f6"
+        }
+      },
+      {
+        "suite": "semif-wanli",
+        "directory": "eval/results/jev-1.13-2026-09-20/runs/semif-wanli/semif-wanli",
+        "manifest": {
+          "endpoint": "https://openrouter.ai/api/v1/systemone",
+          "model": "typesafe/jev-1.13",
+          "dataset_sha256": "40b795d82c8e53c0dbae132f5fc87c33bf0517340c69169474049e784f311c0f",
+          "rows": 256,
+          "suite": {
+            "schema_version": 1,
+            "id": "semif-wanli",
+            "version": "1",
+            "adapter": "choice-v1",
+            "dataset": "../../data/wanli256.jsonl",
+            "headline_metric": "mean_family_balanced_accuracy",
+            "source": {
+              "url": "https://github.com/TheoLeeCJ/SemIf",
+              "revision": "ca3ba65f142967030ecb453346e94d6f476a69df",
+              "dataset_url": "https://huggingface.co/datasets/alisawuffles/WANLI",
+              "dataset_revision": "61c95318fd71c55b6ba355d76253254615f387ec",
+              "license": "CC-BY-4.0"
+            },
+            "description": "Frozen 256-row WANLI test subset; run prepare.py wanli first.",
+            "language_group": "english",
+            "languages": [
+              "en"
+            ],
+            "category": "general-language",
+            "subcategory": "classification-decision",
+            "modality": "text",
+            "task_detail": "natural-language-inference",
+            "project": "SemIf",
+            "project_configuration": "wanli"
+          },
+          "adapter_sha256": "c088c9277435df01845009b36e270731754a1558748a84b990ea7c3e11c2fe8c",
+          "retries": 5,
+          "delay": 0.02,
+          "timeout": 120.0,
+          "workers": 16,
+          "reporting": {
+            "project": "SemIf",
+            "configuration": "wanli",
+            "expected_suites": [
+              "semif-wanli"
+            ],
+            "partitions": [
+              {
+                "id": "semif-wanli",
+                "category": "general-language",
+                "subcategory": "classification-decision",
+                "modality": "text",
+                "language_group": "english"
+              }
+            ]
+          },
+          "started_at_unix": 1789968453.385098,
+          "runner_sha256": "60b26b661a3f99f89eef22bf89744d78d14b56068945f19e020c951fd7ce42d3",
+          "scoring_rows_sha256": "40b795d82c8e53c0dbae132f5fc87c33bf0517340c69169474049e784f311c0f"
+        },
+        "sha256": {
+          "manifest.json": "f64bb81036c691c5d732fd4de1e51ccddb2d009117337f8924adf808cc5ecb28",
+          "predictions.jsonl": "08ccff1e91802d99770c43e5140bfd5df01e53a4dfb217bfbc4806a02ffb0a5d",
+          "scoring_rows.jsonl": "40b795d82c8e53c0dbae132f5fc87c33bf0517340c69169474049e784f311c0f",
+          "summary.json": "97e0708f9a181102cf3aa6f29deaed30e98e094150456685376de3fac01fb82f"
+        }
+      }
+    ],
+    "cost_scope": "Sum of usage.cost in saved responses; excludes probes, discarded attempts, and any billed requests without saved responses."
+  }
+}
