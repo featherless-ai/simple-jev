@@ -13,9 +13,8 @@ ROOT=Path(__file__).resolve().parent
 
 
 def entries():
-    for pattern in ('suites/*/*.json',):
-        for path in sorted(ROOT.glob(pattern)):
-            yield path,json.loads(path.read_text())
+    for path in sorted(ROOT.glob('suites/*/*.json')):
+        yield path,json.loads(path.read_text())
 
 
 def render(category=None,language_group=None):
@@ -52,9 +51,9 @@ def render(category=None,language_group=None):
                     lines+=['| Suite | Task detail | Language group | Main metric / execution |',
                             '| --- | --- | --- | --- |']
                     for p,d in rows:
-                        metric=d.get('headline_metric','Workflow only; separate browser harness required')
+                        metric=d['headline_metric']
                         detail=d.get('task_detail',sub).replace('-',' ')
-                        lines.append(f"| [{d['id']}]({p.relative_to(ROOT).as_posix()}) | {detail} | {d['language_group']} | {metric} |")
+                        lines.append(f"| [{d['id']}](../{p.relative_to(ROOT).as_posix()}) | {detail} | {d['language_group']} | {metric} |")
                     lines+=['']
     lines+=['## Grouping rules','',
       '- **One placement per eval.** Text uses a domain category followed by model knowledge, classification/decision, or ranking. Original task detail remains metadata.',
@@ -68,7 +67,7 @@ def render(category=None,language_group=None):
       '- **Availability is independent of classification.** Suites may need local data preparation before execution.',
       '', '## Scope and preparation','',
       '- [Availability audit and removed entries](AVAILABILITY_AUDIT.md)',
-      '- [Core eval framework and SemIf](README.md)',
+      '- [Core eval framework and SemIf](../README.md)',
       '- [Knowledge benchmarks](KNOWLEDGE_SUITES.md)',
       '- [Category and project reporting](REPORTING.md)',
       '- [Code classification](CODING_SUITES.md)',
@@ -97,7 +96,7 @@ def render_projects():
     for (name,config),members in sorted(groups.items()):
         parents=[(p,d) for p,d in members if d.get('aggregate_children')]
         selected=parents or members
-        links=', '.join(f"[{d['id']}]({p.relative_to(ROOT).as_posix()})" for p,d in selected)
+        links=', '.join(f"[{d['id']}](../{p.relative_to(ROOT).as_posix()})" for p,d in selected)
         metrics=', '.join(sorted({d['headline_metric'] for _,d in selected}))
         lines.append(f'| {name} | {config} | {links} | {metrics} |')
     return '\n'.join(lines)+'\n'
@@ -115,8 +114,8 @@ def main():
     if a.view=='project' and (a.category or a.language_group): p.error('Project view does not accept category filters')
     text=render_projects() if a.view=='project' else render(a.category,a.language_group)
     if a.write_doc:
-        (ROOT/'EVAL_CATALOG.md').write_text(render())
-        (ROOT/'PROJECT_CATALOG.md').write_text(render_projects())
+        (ROOT/'notes/EVAL_CATALOG.md').write_text(render())
+        (ROOT/'notes/PROJECT_CATALOG.md').write_text(render_projects())
     else: print(text)
 
 

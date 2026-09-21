@@ -12,7 +12,7 @@
     "dataset_revision": "61c95318fd71c55b6ba355d76253254615f387ec",
     "license": "CC-BY-4.0"
   },
-  "description": "Frozen 256-row WANLI test subset; run prepare_wanli.py first.",
+  "description": "Frozen 256-row WANLI test subset; run prepare.py wanli first.",
   "language_group": "english",
   "languages": [
     "en"
