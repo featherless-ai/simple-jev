@@ -1,0 +1,41 @@
+{
+  "cybermetric": {
+    "cybermetric": 10180
+  },
+  "secqa-v1": {
+    "secqa-v1": 110
+  },
+  "secqa-v2": {
+    "secqa-v2": 100
+  },
+  "metatool-awareness": {
+    "metatool-awareness": 1040
+  },
+  "mmlu-pro": {
+    "business": 789,
+    "law": 1101,
+    "psychology": 798,
+    "biology": 717,
+    "chemistry": 1132,
+    "history": 381,
+    "other": 924,
+    "health": 818,
+    "economics": 844,
+    "math": 1351,
+    "physics": 1299,
+    "computer science": 410,
+    "philosophy": 499,
+    "engineering": 969
+  },
+  "codemmlu-full": {
+    "api_frameworks": 701,
+    "code_completion": 164,
+    "code_repair": 76,
+    "dbms_sql": 389,
+    "execution_prediction": 6006,
+    "fill_in_the_middle": 2128,
+    "others": 1370,
+    "programming_syntax": 6215,
+    "software_principles": 2826
+  }
+}

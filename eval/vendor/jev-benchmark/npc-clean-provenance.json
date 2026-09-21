@@ -1,0 +1,12 @@
+{
+  "source": {
+    "repository": "wondertwins/jev-benchmark",
+    "revision": "1c2509ac7d5508b8a7ce00ae4df6d7652d05de8b"
+  },
+  "dataset_sha256": "ee14bf520c62f11da2124a22745677db09da4deb2d40dc46f5ff095e98237073",
+  "rows": 75,
+  "excluded_ambiguous": 4,
+  "variant": "npc-clean",
+  "preparation": "Original cached requests and dataset gold; missing STT requests use deterministic upstream transcript transform. Only addr_* targets scored.",
+  "fixture_sha256": "6bc796037af1a35d39a284b168771b9d280e7062c93df52841d2789a42a3cf40"
+}

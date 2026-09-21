@@ -1,0 +1,10 @@
+{
+  "repository": "alirezaaminzadeh/cybersec-retrieval-benchmark",
+  "revision": "cdb8f3f2b88f03383a1f433a28dad89afe52e4a4",
+  "files": [
+    "corpus/train-00000-of-00001.parquet",
+    "qrels/train-00000-of-00001.parquet",
+    "queries/train-00000-of-00001.parquet"
+  ],
+  "url": "https://huggingface.co/datasets/alirezaaminzadeh/cybersec-retrieval-benchmark"
+}

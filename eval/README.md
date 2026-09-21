@@ -1,9 +1,35 @@
 # Endpoint evaluation suites
 
-Run SemIf-derived fixtures against any implementation accepting the Jev-shaped
-`model`, `state`, `questions` request and returning `answers.decision.probabilities`.
+Run evaluation suites against any implementation accepting the Jev-shaped
+`model`, `state`, `questions` request. Adapters interpret native Choice, Noul,
+and Score answers as required by each suite.
 Python 3.10+, standard library only. No Transformers, GPU runtime, or weights are
 required on the evaluator machine. The model runs on the endpoint's machine.
+
+## Organization
+
+Browse the complete [evaluation catalog](EVAL_CATALOG.md), grouped by capability
+and subcategory. [taxonomy.json](taxonomy.json) defines the shared categories.
+Language-based suite paths remain unchanged. Every suite and workflow has
+`category`, `subcategory` and `modality` metadata; endpoint summaries retain them.
+
+```sh
+python3 eval/catalog.py --category vision
+python3 eval/catalog.py --category retrieval --language-group english
+```
+
+Listing suites does not load datasets or call models. When adding a benchmark,
+assign an existing category/subcategory (or extend the taxonomy), then regenerate
+the catalog with `python3 eval/catalog.py --write-doc`.
+
+## SemIf baseline suites
+
+| Suite | Rows | Purpose | Preparation |
+|---|---:|---|---|
+| `semif-authored` | 144 | Authored semantic decisions | Included |
+| `semif-perturbations` | 108 | Option order, rephrasing, distracting context | Included |
+| `semif-wanli` | 256 | Entailment, neutral, contradiction | `python eval/prepare_wanli.py` |
+| `semif-typesafe` | 102 | Selected published TypeSafe judgments | See below |
 
 ## Included baseline
 
@@ -28,12 +54,12 @@ another Qwen generation or use endpoint aliases.
 
 ```sh
 python eval/run.py --endpoint http://127.0.0.1:8000/v1/classifier \
-  --suite eval/suites/semif-authored.json \
+  --suite eval/suites/english/semif-authored.json \
   --model Qwen/Qwen3.5-2B --output eval/results/qwen35-2b-authored
 
 # After loading the 4B model, or use a second endpoint:
 python eval/run.py --endpoint http://127.0.0.1:8000/v1/classifier \
-  --suite eval/suites/semif-authored.json \
+  --suite eval/suites/english/semif-authored.json \
   --model Qwen/Qwen3.5-4B --output eval/results/qwen35-4b-authored
 ```
 
@@ -42,9 +68,9 @@ For authentication, export the key in your shell and pass `--key-env JEV_API_KEY
 Keys are never written to run files. Use HTTPS for remote authenticated services.
 
 The runner sends only state, question, and option descriptions. Gold labels,
-reference distributions and provenance are never sent. All rows use `choice`,
+reference distributions and provenance are never sent. All SemIf rows use `choice`,
 including binary rows, preserving SemIf's candidate-probability experiment.
-This does **not** evaluate the endpoint's native Noul or Score primitives or
+The SemIf adapter does **not** evaluate native Noul or Score primitives or
 force SemIf's internal prompts. Backend prompting remains implementation-specific.
 One row per call makes this a quality baseline, not a shared-prefix throughput test.
 
@@ -69,7 +95,7 @@ python eval/vendor/semif/build_typesafe.py \
   --output eval/data/typesafe102.jsonl
 
 python eval/run.py --endpoint http://127.0.0.1:8000/v1/classifier \
-  --suite eval/suites/semif-typesafe.json \
+  --suite eval/suites/english/semif-typesafe.json \
   --model Qwen/Qwen3.5-4B \
   --output eval/results/qwen35-4b-typesafe
 ```
@@ -126,8 +152,8 @@ Run multiple prepared suites against one model:
 ```sh
 python eval/run.py --endpoint http://gpu-node:8000/v1/classifier \
   --model Qwen/Qwen3.5-4B \
-  --suite eval/suites/semif-authored.json \
-  --suite eval/suites/semif-typesafe.json \
+  --suite eval/suites/english/semif-authored.json \
+  --suite eval/suites/english/semif-typesafe.json \
   --output eval/results/qwen35-4b-multiple
 ```
 
@@ -138,7 +164,7 @@ directory to compare models on exactly the same suite versions and dataset hashe
 For a new choice benchmark:
 
 1. Add a JSONL file with the row format below (or a preparation script).
-2. Add a JSON manifest under `suites/`, selecting `choice-v1`.
+2. Add a JSON manifest under the appropriate language directory in `suites/`, selecting `choice-v1`.
 3. Specify its source/revision and meaningful headline metric. Increment the suite
    version when changing selection, label mapping or scoring interpretation.
 4. Pass its manifest via `--suite`; no runner edits are needed.
@@ -161,7 +187,9 @@ Suite manifest (dataset path is relative to this manifest):
   "id": "support-routing",
   "version": "1",
   "adapter": "choice-v1",
-  "dataset": "../data/support-routing.jsonl",
+  "dataset": "../../data/support-routing.jsonl",
+  "language_group": "english",
+  "languages": ["en"],
   "headline_metric": "mean_family_balanced_accuracy",
   "source": {"description": "Our held-out support routing cases"}
 }
@@ -177,5 +205,96 @@ it in `suites.py`'s `ADAPTERS`. Its interface is:
 
 Rows must have a unique string `id`; other fields belong to the adapter. Responses
 and errors are retained in records. Native Noul, ordinal scores, chat histories,
-or composed workflow evals can use their own adapters. Currently only `choice-v1`
-is implemented; the extension point does not imply these tasks are supported yet.
+or composed workflow evals can use their own adapters. Implemented adapters now include `choice-v1`, `typed-v1` (native Choice/Noul/Score),
+`fields-v1` (batched fields), `rag-v1` (batched Noul reranking), and
+`domain-ranking-v1` (legal, tool and security retrieval). See EXTERNAL_SUITES.md for scope.
+
+## Additional suites: perturbations and WANLI
+
+The perturbation fixture and builder are vendored unchanged from the same pinned
+SemIf revision. Its 108 rows come from 36 authored originals, so it is a related
+robustness slice, **not an independent test population**. Current metrics measure
+correctness on perturbed inputs; they do not measure paired prediction-flip rates
+against a prior authored run. Do not pool its score with authored144.
+
+WANLI provides external natural-language-inference examples. The subset uses
+SemIf's exact frozen IDs, option order, label mapping and state/question conversion.
+The dataset authors' source is https://huggingface.co/datasets/alisawuffles/WANLI
+(CC-BY-4.0). Labels map entailment → supported, neutral → insufficient, and
+contradiction → contradicted. Attribution and source revision remain in each row.
+This is a 256-row subset, not the complete WANLI test set.
+
+Prepare on the evaluation machine (downloads data only, not weights):
+
+```sh
+python eval/prepare_wanli.py
+```
+
+Both newly downloaded and existing cached source files must match the pinned
+SHA-256. Changed snapshots fail; no automatic substitution. Existing generated
+outputs are never overwritten. The generated dataset and source cache are ignored
+by Git. The suite loader will report a missing file until preparation is complete.
+
+Run all three prepared quality suites against your endpoint:
+
+```sh
+python eval/run.py --endpoint http://gpu-node:8000/v1/classifier \
+  --model Qwen/Qwen3.5-2B \
+  --suite eval/suites/english/semif-authored.json \
+  --suite eval/suites/english/semif-perturbations.json \
+  --suite eval/suites/english/semif-wanli.json \
+  --output eval/results/qwen35-2b-quality
+```
+
+Repeat with `Qwen/Qwen3.5-4B` and a distinct output directory. Use the exact IDs
+served by your backend. No new evaluation results are included in this change.
+
+## Community benchmark integrations
+
+See [EXTERNAL_SUITES.md](EXTERNAL_SUITES.md) for pinned integrations of
+**JevBench public tiers**, **JEVfire multi-field fixtures**,
+and **jev-rag-benchmark frozen reranking**. Preparation commands, endpoint capacity
+requirements, licenses and differences from upstream scoring are documented there.
+
+## Language groups and further community suites
+
+Suite paths are separated into `suites/english/`, `suites/non-english/` and
+`suites/multilingual/`. Reports retain these language labels and never combine
+all suites into one score. Existing flat manifest paths have moved.
+
+See [ADDITIONAL_SUITES.md](ADDITIONAL_SUITES.md) for the Korean study importer,
+graded search reranking and a small jevtest
+semantic assertion subset. It documents preparation, dataset access and licensing,
+and which portions of each upstream project are supported.
+
+See [SECURITY_AND_WORKFLOW_SUITES.md](SECURITY_AND_WORKFLOW_SUITES.md) for NPC
+addressee detection, security and phishing batteries, and passage reranking.
+
+## Vision classification
+
+[Existing vision benchmarks](VISION_SUITES.md): full CIFAR-10 and Oxford-IIIT
+Pet test sets, original labels, and image transport through the same endpoint
+runner. Preparation downloads images separately; no vision evaluations have
+been run. These require an image-capable model and server.
+
+[Visual question benchmarks](VISUAL_QA_SUITES.md) add MME perception, the three
+original POPE COCO conditions, and TallyQA counting. They retain original
+questions and labels, with benchmark-specific metrics and native Noul/Choice
+answers. Download image corpora separately on the evaluation node.
+
+[Coding suites](CODING_SUITES.md) add CodeComplex time-complexity classification,
+BigCloneBench semantic equivalence.
+
+## Legal, tool and security benchmarks
+
+See [DOMAIN_BENCHMARKS.md](DOMAIN_BENCHMARKS.md) for ContractNLI, LexGLUE
+classification, LegalBench-RAG, ToolRet and six security retrieval tasks.
+Preparation preserves gold labels, freezes candidates without gold injection,
+and records source hashes. Model evaluations are run separately.
+
+## Knowledge benchmarks and reporting views
+
+[Knowledge suites](KNOWLEDGE_SUITES.md) include MMLU, MMLU-Pro, CodeMMLU,
+CyberMetric, SecQA and MetaTool awareness. [Reporting](REPORTING.md) provides
+both our category breakdown and named-project scores from the same predictions.
+See the [project index](PROJECT_CATALOG.md) for full-run manifests.

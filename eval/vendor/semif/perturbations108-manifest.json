@@ -1,0 +1,14 @@
+{
+  "version": "rebase-perturbations-v1",
+  "source_sha256": "8162d1c73f925af64453f1ec05ef36d583b3815bf698e60f0d454bd11537e079",
+  "fixture_sha256": "1dd7ccf80518d0e34886478ca23982aa726e9daccd343b9e95cedaf6b569bec4",
+  "source_originals": 36,
+  "rows": 108,
+  "variants": [
+    "option_reversal",
+    "criterion_wrapper",
+    "irrelevant_context"
+  ],
+  "frozen_before_outputs": true,
+  "missing_evidence": "Use the 36 existing missing variants in the source fixture."
+}

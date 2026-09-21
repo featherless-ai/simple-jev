@@ -7,7 +7,7 @@ def request_for(row, model):
     """Send only state, question, and candidates; never gold or provenance."""
     return {'model': model, 'state': row['state'], 'questions': {'decision': {
         'type': 'choice', 'instructions': row['question'],
-        'criteria': {o['id']: o['description'] for o in row['options']}}}
+        'criteria': {o['id']: o['description'] for o in row['options']}}}}
 
 
 def probabilities(row, response):

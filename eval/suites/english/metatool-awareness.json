@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "id": "metatool-awareness",
+  "version": "1",
+  "adapter": "choice-v1",
+  "dataset": "../../data/metatool-awareness.jsonl",
+  "headline_metric": "accuracy",
+  "language_group": "english",
+  "languages": [
+    "en"
+  ],
+  "modality": "text",
+  "category": "agentic",
+  "subcategory": "classification-decision",
+  "task_detail": "metatool-awareness",
+  "source": {
+    "metatool-awareness": {
+      "url": "https://raw.githubusercontent.com/HowieHwong/MetaTool/35e81bb7576826e980c80fed8f8c0a2b4a1e6fbb/dataset/tmp_dataset/Task1.json",
+      "file": "metatool.json",
+      "sha256": "3b5966d92acb28be4e61c877d9b9c2d4b42a0fe720b925db432bf82441ceefac",
+      "source_rows": 1040,
+      "excluded_ids": []
+    }
+  },
+  "expected_rows": 1040,
+  "project": "MetaTool",
+  "project_configuration": "tool awareness"
+}

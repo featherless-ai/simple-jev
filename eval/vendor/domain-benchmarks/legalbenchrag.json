@@ -1,0 +1,14 @@
+{
+  "repository": "zeroentropy-ai/legalbenchrag",
+  "revision": "431bc8f2488a81569ab7259fa633dcc50ab77f9a",
+  "url": "https://github.com/zeroentropy-ai/legalbenchrag",
+  "release_url": "https://www.dropbox.com/scl/fo/r7xfa5i3hdsbxex1w6amw/AID389Olvtm-ZLTKAPrw6k4?rlkey=5n8zrbk4c08lbit3iiexofmwg&dl=1",
+  "observed_archive_sha256": "27431be37db9b1db23f8ab790a42d076adb1f72d7f9e7562e36a10573405f88d",
+  "observed_query_counts": {
+    "cuad": 4042,
+    "maud": 1676,
+    "contractnli": 977,
+    "privacy_qa": 194
+  },
+  "note": "Published archive observed during integration; extracted file hashes are recorded on each preparation. Counts differ from the paper; no rows discarded to match it."
+}

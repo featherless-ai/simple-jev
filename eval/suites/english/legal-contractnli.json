@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "id": "legal-contractnli",
+  "version": "1",
+  "adapter": "choice-v1",
+  "dataset": "../../data/legal-contractnli.jsonl",
+  "language_group": "english",
+  "languages": [
+    "en"
+  ],
+  "modality": "text",
+  "category": "legal",
+  "subcategory": "classification-decision",
+  "task_detail": "legal-contractnli",
+  "headline_metric": "accuracy",
+  "source": {
+    "repository": "stanfordnlp/contract-nli",
+    "revision": "eced6528dd3c1d14d73f9a87df8f7bdbc03126f9",
+    "url": "https://github.com/stanfordnlp/contract-nli"
+  },
+  "scope_note": "Original test split; classification adaptation through the Jev endpoint.",
+  "project": "ContractNLI",
+  "project_configuration": "contractnli"
+}

@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "id": "phishing-verdict",
+  "version": "1",
+  "adapter": "binary-battery-v1",
+  "dataset": "../../data/phishing-verdict.jsonl",
+  "language_group": "english",
+  "languages": [
+    "en"
+  ],
+  "headline_metric": "accuracy",
+  "source": {
+    "repository": "anisselbd/jev-phishing-bench",
+    "revision": "1d56e8c64d029a9554a0874e2ef2901ed196e230"
+  },
+  "scope": "whole nine-question request; primary verdict scored",
+  "category": "security",
+  "subcategory": "classification-decision",
+  "modality": "text",
+  "task_detail": "phishing",
+  "project": "Jev Phishing Bench",
+  "project_configuration": "phishing-verdict"
+}

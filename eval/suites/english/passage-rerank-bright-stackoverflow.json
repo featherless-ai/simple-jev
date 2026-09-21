@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "id": "passage-rerank-bright-stackoverflow",
+  "version": "1",
+  "adapter": "passage-rerank-v1",
+  "dataset": "../../data/passage-rerank-bright-stackoverflow.jsonl",
+  "language_group": "english",
+  "languages": [
+    "en"
+  ],
+  "headline_metric": "ndcg_at_10",
+  "source": {
+    "repository": "anessbelbati/jev-rerank-bench",
+    "revision": "cd9a35b22aeb4187334f7018a0ee1960a7470586"
+  },
+  "scope": "present candidate list, rubric batch; per-dataset results",
+  "category": "coding",
+  "subcategory": "ranking",
+  "modality": "text",
+  "task_detail": "reasoning-intensive",
+  "project": "Jev Rerank Bench",
+  "project_configuration": "bright-stackoverflow"
+}

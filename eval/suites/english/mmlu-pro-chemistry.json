@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "id": "mmlu-pro-chemistry",
+  "version": "1",
+  "adapter": "choice-v1",
+  "dataset": "../../data/mmlu-pro.jsonl",
+  "headline_metric": "accuracy",
+  "language_group": "english",
+  "languages": [
+    "en"
+  ],
+  "modality": "text",
+  "category": "general-language",
+  "subcategory": "model-knowledge",
+  "task_detail": "chemistry",
+  "source": {
+    "mmlu-pro": {
+      "url": "https://huggingface.co/datasets/TIGER-Lab/MMLU-Pro/resolve/b189ec765aa7ed75c8acfea42df31fdae71f97be/data/test-00000-of-00001.parquet",
+      "file": "mmlu-pro.parquet",
+      "sha256": "0e24a191921c2f453518a537a8b2117bd137e7714d4ef1565e9ba06c1ecb9ad8",
+      "source_rows": 12032,
+      "excluded_ids": []
+    }
+  },
+  "expected_rows": 1132,
+  "parent_suite": "mmlu-pro",
+  "row_filter": {
+    "field": "family",
+    "values": [
+      "chemistry"
+    ]
+  },
+  "project": "MMLU-Pro",
+  "project_configuration": "full test"
+}

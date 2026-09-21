@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "id": "vision-pope-adversarial",
+  "version": "1",
+  "adapter": "visual-qa-v1",
+  "dataset": "../../data/vision-pope-adversarial/rows.jsonl",
+  "language_group": "english",
+  "languages": [
+    "en"
+  ],
+  "modality": "image",
+  "headline_metric": "f1",
+  "source": {
+    "url": "https://github.com/RUCAIBox/POPE",
+    "revision": "08d957b917e5a378a2f99d35b6293c536a66298b",
+    "annotation_file": "coco_pope_adversarial.json",
+    "annotation_sha256": "420b3407db1fa9f1187a805dca41cb7b97fd91504e6c2179706188c107fb8ef8"
+  },
+  "category": "vision",
+  "subcategory": "object-presence",
+  "task_detail": "object-presence",
+  "project": "POPE",
+  "project_configuration": "adversarial"
+}

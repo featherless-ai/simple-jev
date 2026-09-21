@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "id": "vision-pope-random",
+  "version": "1",
+  "adapter": "visual-qa-v1",
+  "dataset": "../../data/vision-pope-random/rows.jsonl",
+  "language_group": "english",
+  "languages": [
+    "en"
+  ],
+  "modality": "image",
+  "headline_metric": "f1",
+  "source": {
+    "url": "https://github.com/RUCAIBox/POPE",
+    "revision": "08d957b917e5a378a2f99d35b6293c536a66298b",
+    "annotation_file": "coco_pope_random.json",
+    "annotation_sha256": "ac25245170b975a5bdf9080b23fd431dfe6be458bc038259c1f4f09a6bef7994"
+  },
+  "category": "vision",
+  "subcategory": "object-presence",
+  "task_detail": "object-presence",
+  "project": "POPE",
+  "project_configuration": "random"
+}

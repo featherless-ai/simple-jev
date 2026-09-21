@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "description": "One placement per suite: modality, language group, task category, then classification/decision or ranking for text. Non-English suites are displayed under Multilingual; original language metadata is retained. Mixed benchmark aggregates are excluded from category tables; disjoint child suites have one placement.",
+  "categories": {
+    "corporate-documents": {
+      "title": "Corporate Policies & Documents",
+      "subcategories": {
+        "model-knowledge": "Model knowledge",
+        "classification-decision": "Classification / decision",
+        "ranking": "Ranking \u2014 supplied context"
+      }
+    },
+    "coding": {
+      "title": "Coding",
+      "subcategories": {
+        "model-knowledge": "Model knowledge",
+        "classification-decision": "Classification / decision",
+        "ranking": "Ranking \u2014 supplied context"
+      }
+    },
+    "security": {
+      "title": "Security",
+      "subcategories": {
+        "model-knowledge": "Model knowledge",
+        "classification-decision": "Classification / decision",
+        "ranking": "Ranking \u2014 supplied context"
+      }
+    },
+    "agentic": {
+      "title": "Agentic",
+      "subcategories": {
+        "model-knowledge": "Model knowledge",
+        "classification-decision": "Classification / decision",
+        "ranking": "Ranking \u2014 supplied context"
+      }
+    },
+    "legal": {
+      "title": "Legal",
+      "subcategories": {
+        "model-knowledge": "Model knowledge",
+        "classification-decision": "Classification / decision",
+        "ranking": "Ranking \u2014 supplied context"
+      }
+    },
+    "general-language": {
+      "title": "General language & Others",
+      "subcategories": {
+        "model-knowledge": "Model knowledge",
+        "classification-decision": "Classification / decision",
+        "ranking": "Ranking \u2014 supplied context"
+      }
+    },
+    "vision": {
+      "title": "Vision",
+      "subcategories": {
+        "object-presence": "Object presence / detection",
+        "counting": "Counting",
+        "identification": "Identification",
+        "spatial-attributes": "Spatial reasoning & attributes",
+        "ocr": "OCR"
+      }
+    }
+  }
+}

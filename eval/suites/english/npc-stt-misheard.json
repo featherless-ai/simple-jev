@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "id": "npc-stt-misheard",
+  "version": "1",
+  "adapter": "binary-battery-v1",
+  "dataset": "../../data/npc-stt-misheard.jsonl",
+  "language_group": "english",
+  "languages": [
+    "en"
+  ],
+  "headline_metric": "exact_set_accuracy",
+  "source": {
+    "repository": "wondertwins/jev-benchmark",
+    "revision": "1c2509ac7d5508b8a7ce00ae4df6d7652d05de8b"
+  },
+  "scope": "strict addressee labels; full auxiliary battery sent",
+  "rows": 75,
+  "category": "agentic",
+  "subcategory": "classification-decision",
+  "modality": "text",
+  "task_detail": "dialogue-addressing",
+  "project": "wondertwins/jev-benchmark",
+  "project_configuration": "stt-misheard"
+}

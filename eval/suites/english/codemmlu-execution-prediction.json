@@ -1,0 +1,97 @@
+{
+  "schema_version": 1,
+  "id": "codemmlu-execution-prediction",
+  "version": "1",
+  "adapter": "choice-v1",
+  "dataset": "../../data/codemmlu-full.jsonl",
+  "headline_metric": "accuracy",
+  "language_group": "english",
+  "languages": [
+    "en"
+  ],
+  "modality": "text",
+  "category": "coding",
+  "subcategory": "classification-decision",
+  "task_detail": "execution_prediction",
+  "source": {
+    "codemmlu-api_frameworks": {
+      "url": "https://huggingface.co/datasets/Fsoft-AIC/CodeMMLU/resolve/f7c1221269df3609eb5c3023770126839e24e608/api_frameworks/test-00000-of-00001.parquet",
+      "file": "codemmlu-api_frameworks.parquet",
+      "sha256": "d06e58a4429fc6d8b14acbc70009a57c2bd466e9d81697d6dc27676928362abb",
+      "source_rows": 701,
+      "excluded_ids": []
+    },
+    "codemmlu-code_completion": {
+      "url": "https://huggingface.co/datasets/Fsoft-AIC/CodeMMLU/resolve/f7c1221269df3609eb5c3023770126839e24e608/code_completion/test-00000-of-00001.parquet",
+      "file": "codemmlu-code_completion.parquet",
+      "sha256": "a787cc64fdf43faca5a0314681643017654d281d6c653420243684a53b9ebf0d",
+      "source_rows": 164,
+      "excluded_ids": []
+    },
+    "codemmlu-code_repair": {
+      "url": "https://huggingface.co/datasets/Fsoft-AIC/CodeMMLU/resolve/f7c1221269df3609eb5c3023770126839e24e608/code_repair/test-00000-of-00001.parquet",
+      "file": "codemmlu-code_repair.parquet",
+      "sha256": "d902acefc58836df433166171be1b354c88c7eae8eb5c50761787f44c10dfa92",
+      "source_rows": 76,
+      "excluded_ids": []
+    },
+    "codemmlu-dbms_sql": {
+      "url": "https://huggingface.co/datasets/Fsoft-AIC/CodeMMLU/resolve/f7c1221269df3609eb5c3023770126839e24e608/dbms_sql/test-00000-of-00001.parquet",
+      "file": "codemmlu-dbms_sql.parquet",
+      "sha256": "d467c85e924ff40a1ade447badfe1411cb05f9806db261ff569ee774fa62ccb8",
+      "source_rows": 389,
+      "excluded_ids": []
+    },
+    "codemmlu-execution_prediction": {
+      "url": "https://huggingface.co/datasets/Fsoft-AIC/CodeMMLU/resolve/f7c1221269df3609eb5c3023770126839e24e608/execution_prediction/test-00000-of-00001.parquet",
+      "file": "codemmlu-execution_prediction.parquet",
+      "sha256": "e56abc6a34a982b04656f9882929f4787fd6a42e29912d4b7c06a4f8f98bc21d",
+      "source_rows": 6006,
+      "excluded_ids": []
+    },
+    "codemmlu-fill_in_the_middle": {
+      "url": "https://huggingface.co/datasets/Fsoft-AIC/CodeMMLU/resolve/f7c1221269df3609eb5c3023770126839e24e608/fill_in_the_middle/test-00000-of-00001.parquet",
+      "file": "codemmlu-fill_in_the_middle.parquet",
+      "sha256": "b422b251fb8a9659623ad1d139d7017ea8aead40ea46f7adb6cde90b66b94540",
+      "source_rows": 2129,
+      "excluded_ids": [
+        "rt01749"
+      ]
+    },
+    "codemmlu-others": {
+      "url": "https://huggingface.co/datasets/Fsoft-AIC/CodeMMLU/resolve/f7c1221269df3609eb5c3023770126839e24e608/others/test-00000-of-00001.parquet",
+      "file": "codemmlu-others.parquet",
+      "sha256": "050e8894b70eec82a5ac9b3a9984137b35d6f9671f57fe539fbbf54324033c87",
+      "source_rows": 1371,
+      "excluded_ids": [
+        "k10418"
+      ]
+    },
+    "codemmlu-programming_syntax": {
+      "url": "https://huggingface.co/datasets/Fsoft-AIC/CodeMMLU/resolve/f7c1221269df3609eb5c3023770126839e24e608/programming_syntax/test-00000-of-00001.parquet",
+      "file": "codemmlu-programming_syntax.parquet",
+      "sha256": "ceee643a6663effa6aff3758bec0a2c258e5896c926df70de713a34900a81c70",
+      "source_rows": 6216,
+      "excluded_ids": [
+        "k05719"
+      ]
+    },
+    "codemmlu-software_principles": {
+      "url": "https://huggingface.co/datasets/Fsoft-AIC/CodeMMLU/resolve/f7c1221269df3609eb5c3023770126839e24e608/software_principles/test-00000-of-00001.parquet",
+      "file": "codemmlu-software_principles.parquet",
+      "sha256": "c033cf08c1ae9d6661fc33263888ace7e02bda748d412e1622d2fe1776f8c813",
+      "source_rows": 2826,
+      "excluded_ids": []
+    }
+  },
+  "expected_rows": 6006,
+  "parent_suite": "codemmlu-full",
+  "row_filter": {
+    "field": "family",
+    "values": [
+      "execution_prediction"
+    ]
+  },
+  "project": "CodeMMLU",
+  "project_configuration": "valid-choice release"
+}

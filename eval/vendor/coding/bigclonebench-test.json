@@ -1,0 +1,9 @@
+{
+  "repository": "microsoft/CodeXGLUE",
+  "revision": "ac74a62802a0dd159b3258c78a2df8ad36cdf2b9",
+  "rows": 415416,
+  "files": {
+    "Code-Code/Clone-detection-BigCloneBench/dataset/data.jsonl": "d8bc51e62deddcc45bd26c5b57f5add2a2cf377f13b9f6c2fb656fbc8fca4dd2",
+    "Code-Code/Clone-detection-BigCloneBench/dataset/test.txt": "a6c0cf79be34e582fdc64007aa894ed094e4f9ff2e5395a8d2b5c39eeef2737a"
+  }
+}

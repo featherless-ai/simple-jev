@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "id": "rag-frozen",
+  "version": "1",
+  "adapter": "rag-v1",
+  "dataset": "../../data/rag-frozen.jsonl",
+  "headline_metric": "recall_at_5",
+  "source": {
+    "repository": "erendikmenn/jev-rag-benchmark",
+    "revision": "7c7fd8afc30a6fe4e54236e6d65835858cf7393a"
+  },
+  "language_group": "non-english",
+  "languages": [
+    "tr"
+  ],
+  "category": "corporate-documents",
+  "subcategory": "ranking",
+  "modality": "text",
+  "task_detail": "rag-evidence",
+  "project": "Jev RAG Benchmark",
+  "project_configuration": "rag-frozen"
+}

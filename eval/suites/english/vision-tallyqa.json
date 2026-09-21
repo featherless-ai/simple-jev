@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "id": "vision-tallyqa",
+  "version": "1",
+  "adapter": "visual-qa-v1",
+  "dataset": "../../data/vision-tallyqa/rows.jsonl",
+  "language_group": "english",
+  "languages": [
+    "en"
+  ],
+  "modality": "image",
+  "headline_metric": "accuracy",
+  "source": {
+    "url": "https://github.com/manoja328/TallyQA_dataset",
+    "revision": "46cdc649ec79c3dcc2720ff227ad07d7ee51da6f",
+    "annotation_sha256": "e805199fa25c91d2f9df964920c6c36ce8d6cb941c970176f38a92f971bab5ea",
+    "split": "test",
+    "rows": 38589,
+    "count_options": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15
+    ]
+  },
+  "category": "vision",
+  "subcategory": "counting",
+  "task_detail": "counting",
+  "project": "TallyQA",
+  "project_configuration": "test"
+}

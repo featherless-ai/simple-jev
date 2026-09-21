@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "id": "jevbench-hard-general",
+  "version": "1",
+  "adapter": "typed-v1",
+  "dataset": "../../data/jevbench-hard.jsonl",
+  "headline_metric": "accuracy",
+  "source": {
+    "repository": "fstandhartinger/jevbench",
+    "revision": "c6004e008ffba24aec091261ca1a5c02f7324702"
+  },
+  "language_group": "english",
+  "languages": [
+    "en"
+  ],
+  "category": "general-language",
+  "subcategory": "classification-decision",
+  "modality": "text",
+  "task_detail": "multi_hop, judge_hard, temporal_numeric, probability, trap, ambiguous, tradeoff",
+  "row_filter": {
+    "field": "family",
+    "values": [
+      "multi_hop",
+      "judge_hard",
+      "temporal_numeric",
+      "probability",
+      "trap",
+      "ambiguous",
+      "tradeoff"
+    ]
+  },
+  "parent_suite": "jevbench-hard",
+  "project": "JevBench",
+  "project_configuration": "hard"
+}

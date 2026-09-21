@@ -1,0 +1,25 @@
+{
+  "url": "https://github.com/manoja328/TallyQA_dataset",
+  "revision": "46cdc649ec79c3dcc2720ff227ad07d7ee51da6f",
+  "annotation_sha256": "e805199fa25c91d2f9df964920c6c36ce8d6cb941c970176f38a92f971bab5ea",
+  "split": "test",
+  "rows": 38589,
+  "count_options": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15
+  ]
+}

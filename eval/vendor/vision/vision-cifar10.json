@@ -1,0 +1,27 @@
+{
+  "id": "vision-cifar10",
+  "repository": "uoft-cs/cifar10",
+  "revision": "0b2714987fa478483af9968de7c934580d0bb9a2",
+  "split": "test",
+  "config": "plain_text",
+  "image_column": "img",
+  "label_column": "label",
+  "source_labels": [
+    "airplane",
+    "automobile",
+    "bird",
+    "cat",
+    "deer",
+    "dog",
+    "frog",
+    "horse",
+    "ship",
+    "truck"
+  ],
+  "license_metadata": [
+    "unknown"
+  ],
+  "source_rows": 10000,
+  "preprocessing": "EXIF transpose, RGB, lossless PNG; no resize or crop",
+  "question": "Which category best describes the main subject in this image?"
+}

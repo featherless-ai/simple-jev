@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "id": "korean-public-ko-en",
+  "version": "1",
+  "adapter": "typed-v1",
+  "dataset": "../../data/korean-public-ko-en.jsonl",
+  "language_group": "non-english",
+  "languages": [
+    "ko",
+    "en"
+  ],
+  "headline_metric": "accuracy",
+  "source": {
+    "repository": "mahlernim/jev-korean-benchmark",
+    "revision": "2c983b7f6e7f1c2baf7e078161eae3698420f3de"
+  },
+  "condition": "ko_en",
+  "category": "general-language",
+  "subcategory": "classification-decision",
+  "modality": "text",
+  "scope_note": "Mixed reading comprehension, paraphrase equivalence and Korean medical QA; task composition differs by language condition.",
+  "task_detail": "reading-and-equivalence",
+  "aggregate_children": [
+    "korean-public-ko-en-knowledge",
+    "korean-public-ko-en-context"
+  ],
+  "project": "Jev Korean benchmark",
+  "project_configuration": "ko-en"
+}

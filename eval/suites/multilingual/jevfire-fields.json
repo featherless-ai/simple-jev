@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "id": "jevfire-fields",
+  "version": "1",
+  "adapter": "fields-v1",
+  "dataset": "../../data/jevfire-fields.jsonl",
+  "headline_metric": "exact_case_accuracy",
+  "source": {
+    "repository": "kikoncuo/jevfire",
+    "revision": "5df83b558bf635e006d31f8f2fc2798d0e3ff051"
+  },
+  "language_group": "multilingual",
+  "languages": [
+    "en",
+    "es"
+  ],
+  "category": "corporate-documents",
+  "subcategory": "classification-decision",
+  "modality": "text",
+  "task_detail": "structured-extraction",
+  "project": "JEVfire",
+  "project_configuration": "jevfire-fields"
+}

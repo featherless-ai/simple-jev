@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "id": "secqa-v2",
+  "version": "1",
+  "adapter": "choice-v1",
+  "dataset": "../../data/secqa-v2.jsonl",
+  "headline_metric": "accuracy",
+  "language_group": "english",
+  "languages": [
+    "en"
+  ],
+  "modality": "text",
+  "category": "security",
+  "subcategory": "model-knowledge",
+  "task_detail": "secqa-v2",
+  "source": {
+    "secqa-v2": {
+      "url": "https://huggingface.co/datasets/zefang-liu/secqa/resolve/d00a07484283be5602e2bae36dbefdaaf555a9fb/data/secqa_v2_test.csv",
+      "file": "secqa-v2.csv",
+      "sha256": "b04f92a17b278e9765fa262103fa4127905fbae46d9eaf54f5444f986fc9c722",
+      "source_rows": 100,
+      "excluded_ids": []
+    }
+  },
+  "expected_rows": 100,
+  "project": "SecQA",
+  "project_configuration": "v2"
+}

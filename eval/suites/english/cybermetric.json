@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "id": "cybermetric",
+  "version": "1",
+  "adapter": "choice-v1",
+  "dataset": "../../data/cybermetric.jsonl",
+  "headline_metric": "accuracy",
+  "language_group": "english",
+  "languages": [
+    "en"
+  ],
+  "modality": "text",
+  "category": "security",
+  "subcategory": "model-knowledge",
+  "task_detail": "cybermetric",
+  "source": {
+    "cybermetric": {
+      "url": "https://raw.githubusercontent.com/cybermetric/CyberMetric/294662b03be73a9c7c73918f687882c1ba637c47/CyberMetric-10000-v1.json",
+      "file": "cybermetric.json",
+      "sha256": "bd4ff2a96a930211ebd2429639bc386833604c1de783806941541be6b6367ec1",
+      "source_rows": 10180,
+      "excluded_ids": []
+    }
+  },
+  "expected_rows": 10180,
+  "project": "CyberMetric",
+  "project_configuration": "10000-v1 released rows"
+}

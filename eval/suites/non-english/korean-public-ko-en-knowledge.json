@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "id": "korean-public-ko-en-knowledge",
+  "version": "1",
+  "adapter": "typed-v1",
+  "dataset": "../../data/korean-public-ko-en.jsonl",
+  "language_group": "non-english",
+  "languages": [
+    "ko",
+    "en"
+  ],
+  "headline_metric": "accuracy",
+  "source": {
+    "repository": "mahlernim/jev-korean-benchmark",
+    "revision": "2c983b7f6e7f1c2baf7e078161eae3698420f3de"
+  },
+  "condition": "ko_en",
+  "category": "general-language",
+  "subcategory": "model-knowledge",
+  "modality": "text",
+  "scope_note": "KorMedMCQA medical exam QA; factual/domain knowledge without a reference passage. Requires upstream input-completeness review.",
+  "task_detail": "kormed",
+  "parent_suite": "korean-public-ko-en",
+  "row_filter": {
+    "field": "family",
+    "values": [
+      "kormed"
+    ]
+  },
+  "project": "Jev Korean benchmark",
+  "project_configuration": "ko-en"
+}

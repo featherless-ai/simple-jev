@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "id": "semif-wanli",
+  "version": "1",
+  "adapter": "choice-v1",
+  "dataset": "../../data/wanli256.jsonl",
+  "headline_metric": "mean_family_balanced_accuracy",
+  "source": {
+    "url": "https://github.com/TheoLeeCJ/SemIf",
+    "revision": "ca3ba65f142967030ecb453346e94d6f476a69df",
+    "dataset_url": "https://huggingface.co/datasets/alisawuffles/WANLI",
+    "dataset_revision": "61c95318fd71c55b6ba355d76253254615f387ec",
+    "license": "CC-BY-4.0"
+  },
+  "description": "Frozen 256-row WANLI test subset; run prepare_wanli.py first.",
+  "language_group": "english",
+  "languages": [
+    "en"
+  ],
+  "category": "general-language",
+  "subcategory": "classification-decision",
+  "modality": "text",
+  "task_detail": "natural-language-inference",
+  "project": "SemIf",
+  "project_configuration": "wanli"
+}

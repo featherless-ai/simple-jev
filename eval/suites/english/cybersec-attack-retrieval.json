@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "id": "cybersec-attack-retrieval",
+  "version": "1",
+  "adapter": "domain-ranking-v1",
+  "dataset": "../../data/cybersec-attack-retrieval.jsonl",
+  "language_group": "english",
+  "languages": [
+    "en"
+  ],
+  "modality": "text",
+  "category": "security",
+  "subcategory": "ranking",
+  "task_detail": "cybersec-attack-retrieval",
+  "headline_metric": "ndcg_at_10",
+  "source": {
+    "repository": "alirezaaminzadeh/cybersec-retrieval-benchmark",
+    "revision": "cdb8f3f2b88f03383a1f433a28dad89afe52e4a4",
+    "files": [
+      "corpus/train-00000-of-00001.parquet",
+      "qrels/train-00000-of-00001.parquet",
+      "queries/train-00000-of-00001.parquet"
+    ],
+    "url": "https://huggingface.co/datasets/alirezaaminzadeh/cybersec-retrieval-benchmark"
+  },
+  "scope_note": "Frozen BM25 candidate reranking adaptation; all queries count; no gold injection.",
+  "project": "CyberSec Retrieval",
+  "project_configuration": "frozen BM25 reranking"
+}

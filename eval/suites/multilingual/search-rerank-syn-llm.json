@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "id": "search-rerank-syn-llm",
+  "version": "1",
+  "adapter": "graded-rag-v1",
+  "dataset": "../../data/search-rerank-syn-llm.jsonl",
+  "language_group": "multilingual",
+  "languages": [
+    "en",
+    "zh"
+  ],
+  "headline_metric": "ndcg_at_10",
+  "source": {
+    "repository": "zhuyansen/jev-search-rerank-eval",
+    "revision": "c896f14e944182e17a002dd7546f06ba3788d586"
+  },
+  "query_form": "syn",
+  "label_set": "llm",
+  "category": "agentic",
+  "subcategory": "ranking",
+  "modality": "text",
+  "task_detail": "catalog-search",
+  "project": "Jev Search Rerank",
+  "project_configuration": "syn-llm"
+}

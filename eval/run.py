@@ -39,11 +39,21 @@ def main():
     loaded = [load_suite(path,args.input) for path in args.suite]
     if len({suite['id'] for suite, _, _, _ in loaded}) != len(loaded):
         parser.error('Suite IDs must be unique within a run')
+    seen = set()
+    for suite, _, source, rows in loaded:
+        digest = hashlib.sha256(source).hexdigest()
+        for row in rows:
+            key = (suite['project'], suite['project_configuration'], digest, row['id'])
+            if key in seen:
+                parser.error('Overlapping parent/child suites: select either the parent or disjoint children')
+            seen.add(key)
     args.output.mkdir(parents=True,exist_ok=False)
     reports = {}
     for suite, adapter, source, rows in loaded:
         reports[suite['id']] = run_suite(args,key,suite,adapter,source,rows)
     (args.output/'summary.json').write_text(json.dumps(reports,indent=2)+'\n')
+    from report import write_reports
+    write_reports(args.output)
     if any(r['failed_rows'] for r in reports.values()):
         raise SystemExit(1)
 
@@ -55,6 +65,12 @@ def run_suite(args, key, suite, adapter, source, rows):
         'rows': len(rows), 'suite': suite, 'adapter_sha256': hashlib.sha256(Path(adapter.__file__).read_bytes()).hexdigest(), 'retries': args.retries,
         'delay': args.delay, 'timeout': args.timeout, 'started_at_unix': time.time(),
         'runner_sha256': hashlib.sha256(Path(__file__).read_bytes()).hexdigest()}
+    from report import snapshot
+    manifest['reporting'] = snapshot(suite)
+    # Keep portable scoring inputs: gold remains local, never in HTTP requests.
+    scoring = ''.join(json.dumps({k:v for k,v in row.items() if not k.startswith('_')}, ensure_ascii=False)+'\n' for row in rows)
+    (output_dir/'scoring_rows.jsonl').write_text(scoring)
+    manifest['scoring_rows_sha256'] = hashlib.sha256(scoring.encode()).hexdigest()
     (output_dir/'manifest.json').write_text(json.dumps(manifest, indent=2)+'\n')
     headers = {'Content-Type': 'application/json'}
     if key:
@@ -102,6 +118,11 @@ def run_suite(args, key, suite, adapter, source, rows):
             output.flush()
             print(f'{index+1}/{len(rows)} {row["id"]}: {record.get("error", "ok")}', flush=True)
     report = adapter.summarize(rows,records)
+    report['category'] = suite.get('category', 'unspecified')
+    report['subcategory'] = suite.get('subcategory', 'unspecified')
+    report['modality'] = suite.get('modality', 'unspecified')
+    report['language_group'] = suite.get('language_group', 'unspecified')
+    report['languages'] = suite.get('languages', [])
     (output_dir/'summary.json').write_text(json.dumps(report,indent=2)+'\n')
     print(json.dumps(report,indent=2))
     return report

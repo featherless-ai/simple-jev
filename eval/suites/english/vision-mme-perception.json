@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "id": "vision-mme-perception",
+  "version": "1",
+  "adapter": "visual-qa-v1",
+  "dataset": "../../data/vision-mme-perception/rows.jsonl",
+  "language_group": "english",
+  "languages": [
+    "en"
+  ],
+  "modality": "image",
+  "headline_metric": "mme_score",
+  "source": {
+    "url": "https://github.com/BradyFU/Awesome-Multimodal-Large-Language-Models/tree/Evaluation",
+    "revision": "dd2950902889cd614d4edf606827240166d29381",
+    "download": "https://huggingface.co/datasets/darkyarding/MME/blob/main/MME_Benchmark_release_version.zip",
+    "scope": "10 original perception categories; cognition excluded",
+    "annotation_policy": "Local release inputs hashed; no historical release identity asserted"
+  },
+  "category": "vision",
+  "subcategory": "mixed-perception",
+  "capabilities": [
+    "object-presence",
+    "counting",
+    "spatial-position",
+    "color",
+    "scene-identification",
+    "landmark-identification",
+    "artwork-identification",
+    "poster-identification",
+    "celebrity-identification",
+    "ocr"
+  ],
+  "task_detail": "mixed-perception",
+  "aggregate_children": [
+    "vision-mme-perception-presence",
+    "vision-mme-perception-counting",
+    "vision-mme-perception-identification",
+    "vision-mme-perception-spatial-attributes",
+    "vision-mme-perception-ocr"
+  ],
+  "project": "MME",
+  "project_configuration": "perception"
+}

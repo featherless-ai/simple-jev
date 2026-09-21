@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "id": "semif-typesafe",
+  "version": "1",
+  "adapter": "choice-v1",
+  "dataset": "../../data/typesafe102.jsonl",
+  "headline_metric": "equal_case_modal_agreement",
+  "source": {
+    "url": "https://github.com/TheoLeeCJ/SemIf",
+    "revision": "ca3ba65f142967030ecb453346e94d6f476a69df"
+  },
+  "language_group": "english",
+  "languages": [
+    "en"
+  ],
+  "category": "general-language",
+  "subcategory": "classification-decision",
+  "modality": "text",
+  "task_detail": "mixed-reasoning",
+  "project": "SemIf",
+  "project_configuration": "typesafe"
+}

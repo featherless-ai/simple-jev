@@ -1,0 +1,11 @@
+This project adapts the architecture of the MIT-licensed LlamaIndex example:
+run-llama/llama_index/docs/examples/usecases/fastapi_rag_ollama.ipynb
+upstream commit f475afd8a9bbda84f252567e045d89d07b5701b3.
+
+No source code is copied from deepset-ai/haystack-cookbook because that repository
+did not expose a root license during the 2026-09-19 candidate review.
+
+Downloaded benchmark data retains its own license:
+- SciFact claims/qrels: CC BY 4.0; corpus abstracts: ODC-By 1.0.
+- XQuAD: CC BY-SA 4.0.
+

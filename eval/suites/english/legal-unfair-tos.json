@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "id": "legal-unfair-tos",
+  "version": "1",
+  "adapter": "binary-battery-v1",
+  "dataset": "../../data/legal-unfair-tos.jsonl",
+  "language_group": "english",
+  "languages": [
+    "en"
+  ],
+  "modality": "text",
+  "category": "legal",
+  "subcategory": "classification-decision",
+  "task_detail": "legal-unfair-tos",
+  "headline_metric": "f1",
+  "source": {
+    "repository": "coastalcph/lex_glue",
+    "revision": "c23fdff1a6bf74e0e1a71cb86f1e781d37da888c",
+    "files": [
+      "case_hold/test-00000-of-00001.parquet",
+      "unfair_tos/test-00000-of-00001.parquet"
+    ],
+    "url": "https://huggingface.co/datasets/coastalcph/lex_glue"
+  },
+  "scope_note": "Original test split; classification adaptation through the Jev endpoint.",
+  "project": "LexGLUE",
+  "project_configuration": "unfair-tos"
+}

@@ -1,0 +1,7 @@
+{
+  "url": "https://github.com/BradyFU/Awesome-Multimodal-Large-Language-Models/tree/Evaluation",
+  "revision": "dd2950902889cd614d4edf606827240166d29381",
+  "download": "https://huggingface.co/datasets/darkyarding/MME/blob/main/MME_Benchmark_release_version.zip",
+  "scope": "10 original perception categories; cognition excluded",
+  "annotation_policy": "Local release inputs hashed; no historical release identity asserted"
+}

@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "id": "korean-public-ko-ko-context",
+  "version": "1",
+  "adapter": "typed-v1",
+  "dataset": "../../data/korean-public-ko-ko.jsonl",
+  "language_group": "non-english",
+  "languages": [
+    "ko"
+  ],
+  "headline_metric": "accuracy",
+  "source": {
+    "repository": "mahlernim/jev-korean-benchmark",
+    "revision": "2c983b7f6e7f1c2baf7e078161eae3698420f3de"
+  },
+  "condition": "ko_ko",
+  "category": "general-language",
+  "subcategory": "classification-decision",
+  "modality": "text",
+  "scope_note": "Belebele passage comprehension and PAWS-X sentence equivalence; evidence is supplied in the input.",
+  "task_detail": "belebele, pawsx",
+  "parent_suite": "korean-public-ko-ko",
+  "row_filter": {
+    "field": "family",
+    "values": [
+      "belebele",
+      "pawsx"
+    ]
+  },
+  "project": "Jev Korean benchmark",
+  "project_configuration": "ko-ko"
+}

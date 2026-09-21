@@ -1,0 +1,9 @@
+{
+  "repository": "coastalcph/lex_glue",
+  "revision": "c23fdff1a6bf74e0e1a71cb86f1e781d37da888c",
+  "files": [
+    "case_hold/test-00000-of-00001.parquet",
+    "unfair_tos/test-00000-of-00001.parquet"
+  ],
+  "url": "https://huggingface.co/datasets/coastalcph/lex_glue"
+}

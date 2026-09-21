@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "id": "security-code",
+  "version": "1",
+  "adapter": "binary-battery-v1",
+  "dataset": "../../data/security-code.jsonl",
+  "language_group": "english",
+  "languages": [
+    "en"
+  ],
+  "headline_metric": "auroc_successful_only",
+  "source": {
+    "repository": "Gaurav-Gosain/jev-sec-bench",
+    "revision": "fdb16b94d37535db9bad77f8ef0faa971bd7d69a"
+  },
+  "language_note": "Injection language list is non-exhaustive; code suite language means natural-language framing, not programming language.",
+  "category": "security",
+  "subcategory": "classification-decision",
+  "modality": "text",
+  "task_detail": "code-vulnerability",
+  "project": "Jev Sec Bench",
+  "project_configuration": "code"
+}

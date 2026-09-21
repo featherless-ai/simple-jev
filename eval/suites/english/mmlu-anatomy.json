@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "id": "mmlu-anatomy",
+  "version": "1",
+  "adapter": "mmlu-v1",
+  "dataset": "../../data/mmlu-test.jsonl",
+  "language_group": "english",
+  "languages": [
+    "en"
+  ],
+  "category": "general-language",
+  "subcategory": "model-knowledge",
+  "modality": "text",
+  "task_detail": "anatomy",
+  "headline_metric": "accuracy",
+  "source": {
+    "repository": "cais/mmlu",
+    "revision": "c30699e8356da336a370243923dbaf21066bb9fe"
+  },
+  "parent_suite": "mmlu-full",
+  "row_filter": {
+    "field": "family",
+    "values": [
+      "anatomy"
+    ]
+  },
+  "project": "MMLU",
+  "project_configuration": "full test",
+  "expected_rows": 135
+}

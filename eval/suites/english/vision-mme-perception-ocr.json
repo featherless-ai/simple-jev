@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "id": "vision-mme-perception-ocr",
+  "version": "1",
+  "adapter": "visual-qa-v1",
+  "dataset": "../../data/vision-mme-perception/rows.jsonl",
+  "language_group": "english",
+  "languages": [
+    "en"
+  ],
+  "modality": "image",
+  "headline_metric": "mme_score",
+  "source": {
+    "url": "https://github.com/BradyFU/Awesome-Multimodal-Large-Language-Models/tree/Evaluation",
+    "revision": "dd2950902889cd614d4edf606827240166d29381",
+    "download": "https://huggingface.co/datasets/darkyarding/MME/blob/main/MME_Benchmark_release_version.zip",
+    "scope": "10 original perception categories; cognition excluded",
+    "annotation_policy": "Local release inputs hashed; no historical release identity asserted"
+  },
+  "category": "vision",
+  "subcategory": "ocr",
+  "task_detail": "OCR",
+  "row_filter": {
+    "field": "category",
+    "values": [
+      "OCR"
+    ]
+  },
+  "parent_suite": "vision-mme-perception",
+  "project": "MME",
+  "project_configuration": "perception"
+}

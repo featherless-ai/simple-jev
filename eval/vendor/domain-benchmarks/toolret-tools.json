@@ -1,0 +1,10 @@
+{
+  "repository": "mangopy/ToolRet-Tools",
+  "revision": "e06c38c75612b6536bd959e08cdd345894aba6a7",
+  "files": [
+    "code/tools-00000-of-00001.parquet",
+    "customized/tools-00000-of-00001.parquet",
+    "web/tools-00000-of-00001.parquet"
+  ],
+  "url": "https://huggingface.co/datasets/mangopy/ToolRet-Tools"
+}

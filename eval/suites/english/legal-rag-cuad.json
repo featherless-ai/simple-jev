@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "id": "legal-rag-cuad",
+  "version": "1",
+  "adapter": "domain-ranking-v1",
+  "dataset": "../../data/legal-rag-cuad.jsonl",
+  "language_group": "english",
+  "languages": [
+    "en"
+  ],
+  "modality": "text",
+  "category": "legal",
+  "subcategory": "ranking",
+  "task_detail": "legal-rag-cuad",
+  "headline_metric": "ndcg_at_10",
+  "source": {
+    "repository": "zeroentropy-ai/legalbenchrag",
+    "revision": "431bc8f2488a81569ab7259fa633dcc50ab77f9a",
+    "url": "https://github.com/zeroentropy-ai/legalbenchrag"
+  },
+  "scope_note": "Frozen BM25 candidate reranking adaptation; all queries count; no gold injection.",
+  "project": "LegalBench-RAG",
+  "project_configuration": "frozen BM25 reranking"
+}
