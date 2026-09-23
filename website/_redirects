@@ -1,0 +1,26 @@
+# Serve the site under the /simple-jev/ URL prefix.
+# Static rules precede dynamic ones; specific rules precede the catch-all.
+
+# Add the trailing slash without losing the prefix.
+/simple-jev /simple-jev/ 301
+
+# Serve .html URLs in place; a redirect to extensionless paths would lose the prefix.
+/simple-jev/index.html / 200
+/simple-jev/docs.html /docs 200
+/simple-jev/demos.html /demos 200
+/simple-jev/how-it-works.html /how-it-works 200
+/simple-jev/playground.html /playground 200
+/simple-jev/evaluations.html /evaluations 200
+
+# Directory URLs: add the trailing slash without losing the prefix.
+/simple-jev/cool-demo /simple-jev/cool-demo/ 301
+/simple-jev/cool-demo/2048 /simple-jev/cool-demo/2048/ 301
+/simple-jev/cool-demo/bookmarks /simple-jev/cool-demo/bookmarks/ 301
+/simple-jev/cool-demo/drive /simple-jev/cool-demo/drive/ 301
+/simple-jev/cool-demo/vision /simple-jev/cool-demo/vision/ 301
+
+# Hand-typed index.html paths: canonical directory form, prefix kept.
+/simple-jev/cool-demo/*/index.html /simple-jev/cool-demo/:splat/ 301
+
+# Everything else under the prefix serves the site unchanged.
+/simple-jev/* /:splat 200

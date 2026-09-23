@@ -1,4 +1,6 @@
-/* Shared navigation for standalone games. Shadow DOM isolates game styles. */
+/* Shared navigation for standalone games. Shadow DOM isolates game styles.
+   Links resolve from this script's own URL so the header works from any path depth. */
+const SITE_ROOT = new URL("../", document.currentScript.src).href;
 class SimpleJevDemoHeader extends HTMLElement {
   connectedCallback() {
     if (this.shadowRoot) return;
@@ -15,9 +17,9 @@ class SimpleJevDemoHeader extends HTMLElement {
         nav { display:flex; gap:24px; align-items:center; font-weight:600; }
         a:focus-visible { outline:3px solid #d4792c; outline-offset:4px; border-radius:3px; }
         @media(max-width:760px) { .identity { gap:12px; } .built-by { gap:4px; } .built-by img { width:92px; } }
-        @media(max-width:560px) { header { padding:8px 12px; gap:8px; } .brand { font-size:16px; gap:6px; } nav { gap:10px; font-size:12px; } .docs { display:none; } .built-by { flex-direction:column; gap:0; font-size:9px; } .built-by img { width:80px; height:24px; } :host { height:100px; } header { height:100px; flex-wrap:wrap; align-content:center; row-gap:6px; } .identity { width:100%; justify-content:space-between; } nav { width:100%; justify-content:space-between; } nav a[href="/playground.html"] { display:none; } }
+        @media(max-width:560px) { header { padding:8px 12px; gap:8px; } .brand { font-size:16px; gap:6px; } nav { gap:10px; font-size:12px; } .docs { display:none; } .built-by { flex-direction:column; gap:0; font-size:9px; } .built-by img { width:80px; height:24px; } :host { height:100px; } header { height:100px; flex-wrap:wrap; align-content:center; row-gap:6px; } .identity { width:100%; justify-content:space-between; } nav { width:100%; justify-content:space-between; } nav a[href="${SITE_ROOT}playground.html"] { display:none; } }
       </style>
-      <header><div class="identity"><a class="brand" href="/index.html" aria-label="Simple Jev home"><img src="/assets/simple-jev.png" alt=""/><span>Simple Jev</span></a><a class="built-by" href="https://featherless.ai/" aria-label="Built by Featherless.ai"><span>Built by</span><img src="/assets/featherless_logo_dark.svg" alt="Featherless.ai"/></a></div><nav aria-label="Demo navigation"><a href="/demos.html">Cool demos</a><a href="/how-it-works.html">How it works</a><a href="/playground.html">Playground</a><a class="docs" href="/docs.html">API docs</a></nav></header>`;
+      <header><div class="identity"><a class="brand" href="${SITE_ROOT}index.html" aria-label="Simple Jev home"><img src="${SITE_ROOT}assets/simple-jev.png" alt=""/><span>Simple Jev</span></a><a class="built-by" href="https://featherless.ai/" aria-label="Built by Featherless.ai"><span>Built by</span><img src="${SITE_ROOT}assets/featherless_logo_dark.svg" alt="Featherless.ai"/></a></div><nav aria-label="Demo navigation"><a href="${SITE_ROOT}demos.html">Cool demos</a><a href="${SITE_ROOT}how-it-works.html">How it works</a><a href="${SITE_ROOT}playground.html">Playground</a><a class="docs" href="${SITE_ROOT}docs.html">API docs</a></nav></header>`;
     // Game keyboard shortcuts must not intercept navigation keyboard events.
     this.addEventListener('keydown', event => event.stopPropagation());
     this.addEventListener('keyup', event => event.stopPropagation());

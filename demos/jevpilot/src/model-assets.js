@@ -27,9 +27,9 @@ export function updateHeroWheels(model, signedDistance, steering, speed) {
 
 export async function loadHeroCar() {
   carAsset ||= (async () => {
-    const decoder = new DRACOLoader(assetManager).setDecoderPath("/cool-demo/drive/draco/");
+    const decoder = new DRACOLoader(assetManager).setDecoderPath("draco/");
     const loader = new GLTFLoader(assetManager).setDRACOLoader(decoder);
-    const { scene } = await loader.loadAsync("/cool-demo/drive/models/model-y/model-y.glb");
+    const { scene } = await loader.loadAsync("models/model-y/model-y.glb");
     decoder.dispose();
     const paint = physical("model-y-paint", {
       color: "#e1e4e8",

@@ -11,7 +11,7 @@ function loadAsset(name, file) {
     assets.set(
       name,
       new GLTFLoader(assetManager)
-        .loadAsync(`/cool-demo/drive/models/${name}/${file}.glb`)
+        .loadAsync(`models/${name}/${file}.glb`)
         .then(({ scene }) => {
           scene.updateMatrixWorld(true);
           const bounds = new THREE.Box3().setFromObject(scene),

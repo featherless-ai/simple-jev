@@ -8,7 +8,7 @@ const maps = new Map();
 function texture(name, kind) {
   const key = `${name}-${kind}`;
   if (!maps.has(key)) {
-    const value = loader.load(`/cool-demo/drive/textures/${key}.jpg`);
+    const value = loader.load(`textures/${key}.jpg`);
     value.wrapS = value.wrapT = THREE.RepeatWrapping;
     value.anisotropy = renderProfile.anisotropy;
     if (kind === "color") value.colorSpace = THREE.SRGBColorSpace;

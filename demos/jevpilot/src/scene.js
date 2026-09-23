@@ -22,7 +22,7 @@ import { renderProfile } from "./render-profile.js";
 let daylight;
 function daylightEnvironment() {
   return (daylight ||= new HDRLoader(assetManager)
-    .loadAsync("/cool-demo/drive/textures/daylight.hdr")
+    .loadAsync("textures/daylight.hdr")
     .then((texture) => {
       texture.mapping = THREE.EquirectangularReflectionMapping;
       return texture;
