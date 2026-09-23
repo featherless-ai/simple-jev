@@ -96,6 +96,13 @@ async def test_limits_and_model_validation(service):
         await service.classify(data)
 
 
+async def test_media_options_are_rejected(service):
+    data = request()
+    data["media_io_kwargs"] = {"video": {"fps": 1}}
+    with pytest.raises(ValueError, match="text state and text chat only"):
+        await service.classify(data)
+
+
 async def test_text_chat_and_media_rejection(service):
     data = request()
     del data["state"]
