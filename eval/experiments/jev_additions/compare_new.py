@@ -15,6 +15,7 @@ from audit import audit_run
 from reference_coverage import coverage, _archived
 
 ROOT = Path('/root/open-jev-experiments/jev-additions-v1')
+NATIVE = Path('/root/open-jev-experiments/jev-additions-native-v1')
 JEV = EVAL / 'results/jev-additions-v1/runs'
 SUITES = ('legal-contractnli-multi', 'legal-unfair-tos-multi',
           'decision-index-when2call', 'decision-index-banking77')
@@ -43,7 +44,8 @@ def suite_run(root, names, expected_model):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--require-models', action='store_true', help='Audit all five GPU runs before comparing')
+    parser.add_argument('--require-models', action='store_true', help='Require all five HF-server GPU runs')
+    parser.add_argument('--require-native', action='store_true', help='Require all four native-prompt GPU runs')
     args = parser.parse_args()
     history = coverage(data_root=EVAL / 'data')
     _, archived, historical_path = _archived('LexGLUE', 'unfair-tos')
@@ -61,35 +63,45 @@ def main():
             x = suite_run(JEV / name, (name,), 'typesafe/jev-1.13')[name]
             x['reference_provenance'] = 'new audited OpenRouter Jev 1.13 run'
             baseline[name] = x
-    plan = json.loads((ROOT / 'plan.json').read_text())
+    plans = [(ROOT, json.loads((ROOT / 'plan.json').read_text()), args.require_models)]
+    if (NATIVE / 'plan.json').exists():
+        plans.append((NATIVE, json.loads((NATIVE / 'plan.json').read_text()), args.require_native))
+    elif args.require_native:
+        raise ValueError('Native-prompt model plan is missing')
     scores = {'Jev 1.13': baseline}
     models = {}
-    for slug, cfg in plan['models'].items():
-        result_path = ROOT / 'results' / slug
-        status_path = result_path / 'status.json'
-        if not status_path.exists():
-            if args.require_models:
-                raise ValueError(f'Pending GPU model: {slug}')
-            models[slug] = 'pending'
-            continue
-        status = json.loads(status_path.read_text())
-        if status['evaluation_exit_code'] or status['audit_exit_code']:
-            if args.require_models:
-                raise ValueError(f'Unsuccessful GPU job: {slug}, {status}')
-            models[slug] = 'failed; not scored'
-            continue
-        results = suite_run(result_path / 'eval', SUITES, cfg['model'])
-        for name in SUITES:
-            for field in ('dataset_sha256', 'adapter_sha256'):
-                if results[name][field] != baseline[name][field]:
-                    raise ValueError(f'Nonmatching {field}: {slug}/{name}')
-            if 'scoring_rows_sha256' in baseline[name] and results[name]['scoring_rows_sha256'] != baseline[name]['scoring_rows_sha256']:
-                raise ValueError(f'Nonmatching scoring rows: {slug}/{name}')
-        scores[slug] = results
-        models[slug] = 'audited'
+    configurations = {}
+    for root, plan, required in plans:
+        for slug, cfg in plan['models'].items():
+            if slug in models:
+                raise ValueError(f'Duplicate model slug: {slug}')
+            configurations[slug] = {**cfg, 'runtime_family': 'native-prompt' if root == NATIVE else 'HF-server',
+                                    'plan_sha256': hashlib.sha256((root / 'plan.json').read_bytes()).hexdigest()}
+            result_path = root / 'results' / slug
+            status_path = result_path / 'status.json'
+            if not status_path.exists():
+                if required:
+                    raise ValueError(f'Pending GPU model: {slug}')
+                models[slug] = 'pending'
+                continue
+            status = json.loads(status_path.read_text())
+            if status.get('evaluation_exit_code') != 0 or status.get('audit_exit_code') != 0:
+                if required:
+                    raise ValueError(f'Unsuccessful GPU job: {slug}, {status}')
+                models[slug] = 'failed; not scored'
+                continue
+            results = suite_run(result_path / 'eval', SUITES, cfg['model'])
+            for name in SUITES:
+                for field in ('dataset_sha256', 'adapter_sha256'):
+                    if results[name][field] != baseline[name][field]:
+                        raise ValueError(f'Nonmatching {field}: {slug}/{name}')
+                if 'scoring_rows_sha256' in baseline[name] and results[name]['scoring_rows_sha256'] != baseline[name]['scoring_rows_sha256']:
+                    raise ValueError(f'Nonmatching scoring rows: {slug}/{name}')
+            scores[slug] = results
+            models[slug] = 'audited'
     output = {'protocol': 'distinct 4-suite outcomes; no overall pooled score',
               'historical_flat_contractnli_accuracy_NOT_grouped_reference': history['multi_decision']['contractnli']['historical_accuracy'],
-              'suites': list(SUITES), 'models': models, 'scores': scores}
+              'suites': list(SUITES), 'models': models, 'configurations': configurations, 'scores': scores}
     print(json.dumps(output, indent=2))
     (EVAL / 'results/jev-additions-v1/comparison.json').write_text(json.dumps(output, indent=2) + '\n')
 

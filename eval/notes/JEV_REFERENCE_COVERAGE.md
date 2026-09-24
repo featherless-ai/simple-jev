@@ -57,8 +57,14 @@ Five separate, pinned GPU jobs were also submitted concurrently for the supporte
 | Qwen 3.6 35B-A3B | 0.770923003 | 0.576388889 | 0.807502738 | 0.761154109 |
 | Gemma 4 12B | 0.833572453 | 0.617169374 | 0.748904710 | 0.781833431 |
 | Gemma 4 26B-A4B | 0.840746055 | 0.530864198 | 0.686746988 | 0.776298696 |
+| Qwen 3.5 0.8B (native) | 0.472022956 | 0.010638298 | 0.166757941 | 0.115219828 |
+| Qwen 3.5 2B (native) | 0.532281205 | 0.010695187 | 0.335706462 | 0.397485009 |
+| Qwen 3.5 9B (native) | 0.722620756 | 0.460508701 | 0.575848850 | 0.682585162 |
+| DiffusionGemma 26B-A4B (native) | 0.814921090 | 0.425041186 | 0.753285871 | 0.733692043 |
 
-**Do not average across these differently scored tasks or count grouped cases again alongside their flattened sources.** Differences here are descriptive benchmark observations, not significance claims. The SHA256 of the locally audited, Git-ignored `eval/results/jev-additions-v1/comparison.json` is `7896dd20c79bc55eda04140a1eca7193b0c00889902824a6b3521567b9a62232`. The raw per-request responses, cloud job logs and audit JSONs remain outside Git; rerun `compare_new.py --require-models` to verify the table.
+The final four entries were subsequently launched in parallel with their selected native policies (`verification_after`, `examples_binary`, `verification_both`, `typed_v3`, respectively). All four cloud jobs **succeeded** and each passed the same **4-suite / 8,462-request / 21,679-slot** audit with zero failed rows. Their runtime manifests, pinned image/model revisions, policy source hashes, job IDs and raw evidence are retained under `/root/open-jev-experiments/jev-additions-native-v1/`; see the [run instructions](../experiments/jev_additions/README.md). The union of both plans exactly matches all **nine model IDs and pinned revisions** in `simple-jev-prompt-lab/experiments/full_eval/models.json`. Across nine independent model runs this is **76,158 requests / 195,111 scored slots**, not additional unique dataset coverage. Native vLLM/diffusion policies and runtime limits differ from the HF-server runs: interpret results as model-plus-serving-configuration outcomes, not architecture-only comparisons.
+
+**Do not average across these differently scored tasks or count grouped cases again alongside their flattened sources.** Differences here are descriptive benchmark observations, not significance claims. The SHA256 of the final nine-model locally audited, Git-ignored `eval/results/jev-additions-v1/comparison.json` is `22fb3548046d1070cd6544db6970dee9d0e91703ed3a8fbf56499b4ec8fd7a5b`. The raw per-request responses, cloud job logs and audit JSONs remain outside Git; rerun `compare_new.py --require-models --require-native` to verify the full table. The earlier five-model-only report had SHA256 `7896dd20c79bc55eda04140a1eca7193b0c00889902824a6b3521567b9a62232`.
 
 Verify the stored historical summaries, artifact source hashes, unchanged adapters and
 new request counts locally (no credentials or inference):
