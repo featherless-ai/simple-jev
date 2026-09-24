@@ -1,0 +1,81 @@
+# Previous Jev 1.13 run versus the separated eval modes
+
+Reference: [`eval/benchmarks/jev-1.13/2026-09-20/`](../benchmarks/jev-1.13/2026-09-20/README.md).
+Those compact reports were **already present byte-for-byte** in the main-based
+eval worktree; nothing was copied from the older `simple-jev-eval` checkout.
+All **50 report files** in the original and main-based archive were checked
+for identical relative paths and SHA256 hashes.
+The old run's 65 distinct artifacts sum to **86,747 requests** across 23
+project reports, with no unresolved failures. These are historical TypeSafe Jev endpoint results, **not** new
+measurements. Its saved per-project reports and suite manifests contain hashes,
+counts and metrics; the raw per-request predictions are not shipped in Git.
+
+| New mode | Matching historical Jev coverage | What remains absent |
+| --- | --- | --- |
+| `knowledge` | **13 English items / 47,965 questions**; 88.5869% equal-item accuracy. Two further non-English Korean knowledge partitions of 100 items each: ko-en 81%, ko-ko 80%. Total **48,165 knowledge rows**. | No missing reference item in this preset. The two Korean scores are **not** folded into the English 13-item mean. |
+| `decision` | **26 English items / 21,364 requests**; 87.1472% equal-item accuracy. CodeMMLU's historical mixed parent partitions into exactly 8,374 decision and 11,501 knowledge records. | No missing historical decision item. Existing requests and labels, not a fresh run. |
+| `multi-decision`: Unfair ToS | **1,607 requests × 8 questions = 12,856 question slots** already evaluated on Jev. The new multi manifest uses the *same* dataset SHA256 and byte-identical `binary-battery-v1` adapter. Historical Jev F1 **35.5277%**, question accuracy **95.2007%**, exact-provision accuracy **69.6329%**. | No new Jev run required to use the historical report as a same-request-shape reference. Full raw response replay is not possible from the committed compact reports alone. |
+| `multi-decision`: ContractNLI | The same **2,091 published test hypotheses** were evaluated before, accuracy **77.8575%**, dataset SHA256 identical to the source of the grouped version. | **No directly matched multi-request reference.** Jev saw 2,091 separate one-question requests. The new suite sends **123 contracts × 17 questions in one request**; a new 123-request Jev run is needed to measure this protocol. Do not relabel the old score as grouped accuracy. |
+
+**Multi-decision overlap:** 1,607 / 1,730 contexts (12,856 / 14,947
+question slots) already have a same-request-shape historical Jev result. The
+remaining 123 contexts / 2,091 questions overlap in *content only*, not HTTP
+request shape. The two new multi manifests duplicate underlying source cases
+from the existing flattened evaluation; they must not be pooled as independent
+data. `eval/run.py` rejects selecting a multi manifest alongside its original.
+
+**Other baseline gaps and reuse candidates:** The opt-in public-source
+When2Call (3,652 cases) and BANKING77 (3,080 cases) were not in the old Jev
+run; benchmarking those against Jev would need **6,732 fresh requests** under
+the new adaptations. The immediate multi-decision gap is **123 new Jev
+requests**; closing that gap *and* benchmarking both opt-in public-source tasks
+would total **6,855 fresh requests**. **These requests were subsequently submitted and audited; see the dated addendum below.** An older JevFire report covers 13 cases / 85 fields, but
+five cases have only one field, so the whole suite is not in the strict
+`multi-decision` preset; its **8 multi-question cases** would need raw
+responses or a fresh run to obtain their own subset reference score. The old run also excluded ToolRet Web,
+BigCloneBench and all vision, so it cannot supply reference scores for those.
+
+## New Jev runs (2026-09-24)
+
+Using the credential from `keys/OPENROUTER_API_KEY` without storing its value in logs or manifests, three independent HTTP runs were launched in parallel against `typesafe/jev-1.13`. Their raw predictions, retry history, source hashes and audit outputs are retained **locally and Git-ignored** at `eval/results/jev-additions-v1/` (launcher: `eval/experiments/jev_additions/launch.py`). All three passed `eval/audit.py`; the single HTTP 429 on BANKING77 was retried explicitly with `eval/retry.py --retry-429`, preserving the original error in `prior_results` and the append-only retry journal. These are actual model results, not synthetic smoke responses:
+
+| New Jev suite | Requests | Scored units | Task-specific score | Failed rows after repair |
+| --- | ---: | ---: | ---: | ---: |
+| Grouped ContractNLI, 17 questions/request | 123 | 2,091 | question accuracy **0.7780966044954567** | 0 |
+| When2Call | 3,652 | 3,652 | accuracy **0.8069550930996714** | 0 |
+| BANKING77 | 3,080 | 3,080 | macro-F1 **0.7927911520554413** | 0 |
+
+The historical ContractNLI **0.7785748445719751** is a *different single-question-per-request protocol* and must not replace the newly measured grouped score. Historical grouped Unfair ToS F1 **0.3552769070010449** remains the matching fourth-suite reference; it was **not** resubmitted. To check these metrics and the archived Unfair ToS source/adapter hashes together, run `python3 eval/experiments/jev_additions/compare_new.py` from the worktree; it rejects failed/incomplete records and writes a local comparison under `eval/results/jev-additions-v1/`.
+
+Five separate, pinned GPU jobs were also submitted concurrently for the supported HF-server models (Qwen 4B, 27B, 35B-A3B; Gemma 12B, 26B-A4B). Each job evaluates the same four nonoverlapping request suites, including the historically covered Unfair ToS protocol, with an isolated output and no pooled/duplicate decision score. The immutable model revisions, frozen server/evaluation code hashes, dataset hashes, durable cloud job IDs and status are in `/root/open-jev-experiments/jev-additions-v1/plan.json` and `jobs/`; all status and numeric results must be audited before being reported as complete. `compare_new.py --require-models` refuses pending or failed runs. Model runs are **not** yet results in this dated addendum.
+
+Verify the stored historical summaries, artifact source hashes, unchanged adapters and
+new request counts locally (no credentials or inference):
+
+```sh
+python3 eval/reference_coverage.py --data-root eval/data \
+  --original-root /workspace/open-jev/simple-jev-eval/eval/benchmarks/jev-1.13/2026-09-20 \
+  --write-combined-report eval/results/jev-1.13-reference-report.json
+python3 eval/compare.py --mode knowledge \
+  --report Jev=eval/results/jev-1.13-reference-report.json
+python3 eval/compare.py --mode decision \
+  --report Jev=eval/results/jev-1.13-reference-report.json
+python3 -m unittest discover -s eval -p 'test_*.py' -q
+```
+
+`--data-root` is optional if those prepared files have not yet been generated;
+with it the audit checks prepared ContractNLI/Unfair ToS SHA256 against the
+archived Jev manifests, validates grouped 123×17 / 1607×8 shapes, and verifies
+every one of the 2,091 grouped ContractNLI IDs, states, options and gold labels
+against the original flat source. `--original-root` is optional outside this
+workspace; it checks that the entire older checkout's compact report archive
+matches the copy already included in this branch. `--write-combined-report`
+merges the 23 compact project reports into an ignored local comparison input,
+committing each file's SHA256; it does **not** invent or replay raw predictions.
+The tool recomputes the 13-item knowledge, 26-item decision and 54-item text
+comparison scores from this merged reference and checks the stored totals.
+The verified JSON output is saved at
+`/tmp/jev-reference-coverage-verified.json` in this workspace. See
+[dataset and protocol validation](PRESET_VALIDATION.md). Do not confuse
+this historical reference with the separately constructed Decision Index suite
+or JevBench's published-vs-endpoint-rerun distinction.

@@ -251,6 +251,25 @@ class PortableExecutionTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'Resume requires identical'):
             run.run_suite(args, None, *load_suite(self.path))
 
+    def test_rate_limit_repair_is_opt_in_and_keeps_prior_error(self):
+        self.output.mkdir()
+        rows = load_suite(self.path)[3]
+        first = {'id': rows[0]['id'], 'error': 'HTTP 429', 'http_status': 429,
+                 'attempts': 4, 'http_errors': [{'attempt': 4, 'status': 429}]}
+        with patch('run.request_record', side_effect=[first, self.predict(self.args(), None, load_suite(self.path)[1], rows[1])]), contextlib.redirect_stdout(io.StringIO()):
+            summary = run.run_suite(self.args(), None, *load_suite(self.path))
+        self.assertEqual(summary['failed_rows'], 1)
+        (self.output / 'summary.json').write_text(json.dumps({'tiny': summary}))
+        write_reports(self.output)
+        with patch('retry.request_record') as request, contextlib.redirect_stdout(io.StringIO()):
+            self.assertEqual(retry_run(self.output, None)['tiny']['failed_rows'], 1)
+        request.assert_not_called()
+        with patch('retry.request_record', side_effect=self.predict), contextlib.redirect_stdout(io.StringIO()):
+            self.assertEqual(retry_run(self.output, None, workers=1, retry_429=True)['tiny']['failed_rows'], 0)
+        records = [json.loads(x) for x in (self.output / 'tiny/predictions.jsonl').read_text().splitlines()]
+        self.assertEqual(records[0]['prior_results'][0]['http_status'], 429)
+        self.assertTrue(audit_run(self.output, [self.path])['complete'])
+
     def test_image_retry_restores_assets_and_rechecks_bytes(self):
         from preparation.vision import make_row
         png = base64.b64decode('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+aL1sAAAAASUVORK5CYII=')

@@ -195,7 +195,8 @@ judgments overlap with `decision`'s flattened `legal-contractnli`. Do not add
 both to one comparison. Prepare `legal-contractnli-multi.jsonl` from the same
 pinned source and evaluate it separately; see
 [shared-context instructions](notes/MULTI_DECISION.md) and
-[validation evidence](notes/PRESET_VALIDATION.md).
+[validation evidence](notes/PRESET_VALIDATION.md) and the
+[existing Jev reference coverage audit](notes/JEV_REFERENCE_COVERAGE.md).
 
 Private cloud submission, saved job handles, experiment-only backend patches,
 model caches and raw run archives are not required or copied. HTTP concurrency,
@@ -278,7 +279,8 @@ Omit `--key-env` for an unauthenticated local endpoint. Keep prepared images at
 their original location for repair: saved asset bindings are restored and every
 image checksum is revalidated before requests.
 
-Only HTTP 5xx failures are retried. Successful predictions are preserved, original
+Only HTTP 5xx failures are retried by default. Add `--retry-429` to also repair
+saved rate-limit responses. Successful predictions are preserved, original
 failures are retained in `prior_results` and a retry journal, and scores are rebuilt.
 Do not retry a run while another process is writing to it.
 

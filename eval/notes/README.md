@@ -9,7 +9,7 @@ Start with the [quickstart](../README.md). Commands assume the repository root.
 | Category partition rules | [Splits](SPLIT_SUITES.md) |
 | Dataset availability and exclusions | [Availability](AVAILABILITY_AUDIT.md) |
 | MMLU and other knowledge benchmarks | [Knowledge](KNOWLEDGE_SUITES.md) |
-| Separated knowledge/decision presets and shared-context requests | [Multi-decision](MULTI_DECISION.md) · [Validation](PRESET_VALIDATION.md) |
+| Separated knowledge/decision presets and shared-context requests | [Multi-decision](MULTI_DECISION.md) · [Validation](PRESET_VALIDATION.md) · [Jev reference coverage](JEV_REFERENCE_COVERAGE.md) |
 | Additional public-source Decision Index tasks | [Public-source decisions](DECISION_INDEX_PUBLIC.md) |
 | Code classification | [Coding](CODING_SUITES.md) |
 | Legal, tool, and security retrieval | [Domains](DOMAIN_BENCHMARKS.md) |
