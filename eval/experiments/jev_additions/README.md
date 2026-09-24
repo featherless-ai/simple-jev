@@ -10,6 +10,8 @@ This is a four-suite, **task-by-task** comparison, not one pooled score. Grouped
 
 The local CPU-only workstation cannot serve the five supported model checkpoints. Their model IDs/revisions, policy choices, dataset hashes and source-code hashes are frozen in `/root/open-jev-experiments/jev-additions-v1/plan.json`; the matching isolated jobs and outputs are under its `jobs/` and `results/` directories. Source Python/JSON files were copied from the initial `feat/evals-main` commit. Three large prepared datasets are symlinks to this worktree for shared volume I/O, **verified by SHA256 at the start of every GPU job**. Do not change them while jobs run. The script pins Transformers, Accelerate, image digest, bf16, and a 32768-token context; CUDA is mandatory. Each MI325X job serves one model, runs all four suite requests, and invokes the audit before marking success. No missing rows are silently omitted; if a job fails, inspect it and do **not** pass it off as a score.
 
+All five jobs succeeded and each audited **4 suites / 8,462 requests / 21,679 scored slots / 0 failed rows**. Job IDs (in that order): `d67389e7-de77-4e35-bdcf-49310a94a4e9`, `57150738-11da-4578-8545-5d4562e71872`, `30cdc781-83a9-4fe5-b90d-8a6c0465ab1b`, `5738e5f0-3d36-4baa-9f3a-87d1093a8839`, `7516c86f-84f1-4e4a-afc8-ec677c032c30`. Their audited comparison is in [Jev reference coverage](../../notes/JEV_REFERENCE_COVERAGE.md#new-jev-runs-2026-09-24).
+
 Model job keys: `qwen4b`, `qwen27b`, `qwen-moe`, `gemma12b`, `gemma-moe`. Submit idempotently with `/root/.bun/bin/bun eval/experiments/jev_additions/submit.ts MODEL` from the worktree. The script fetches current GPU pricing and existing network volume IDs, writes the submission first, and checks its durable existing job record before submitting. Monitor `jobs/MODEL.json` (cloud job ID), `results/MODEL/job.log` and `results/MODEL/eval/SUITE/predictions.jsonl`; do not submit another job until the current one is accounted for. GPU outputs and OpenRouter data are ignored, not pushed to Git.
 
 ## Recompute
@@ -18,7 +20,7 @@ Model job keys: `qwen4b`, `qwen27b`, `qwen-moe`, `gemma12b`, `gemma-moe`. Submit
 cd /workspace/open-jev/simple-jev-evals
 PYTHONPATH=eval python3 -m unittest discover -s eval -p 'test_*.py' -q
 python3 eval/experiments/jev_additions/compare_new.py
-# Only after all five cloud runs succeeded:
+# Required for the final report; now all five cloud runs have succeeded:
 python3 eval/experiments/jev_additions/compare_new.py --require-models
 ```
 

@@ -47,7 +47,18 @@ Using the credential from `keys/OPENROUTER_API_KEY` without storing its value in
 
 The historical ContractNLI **0.7785748445719751** is a *different single-question-per-request protocol* and must not replace the newly measured grouped score. Historical grouped Unfair ToS F1 **0.3552769070010449** remains the matching fourth-suite reference; it was **not** resubmitted. To check these metrics and the archived Unfair ToS source/adapter hashes together, run `python3 eval/experiments/jev_additions/compare_new.py` from the worktree; it rejects failed/incomplete records and writes a local comparison under `eval/results/jev-additions-v1/`.
 
-Five separate, pinned GPU jobs were also submitted concurrently for the supported HF-server models (Qwen 4B, 27B, 35B-A3B; Gemma 12B, 26B-A4B). Each job evaluates the same four nonoverlapping request suites, including the historically covered Unfair ToS protocol, with an isolated output and no pooled/duplicate decision score. The immutable model revisions, frozen server/evaluation code hashes, dataset hashes, durable cloud job IDs and status are in `/root/open-jev-experiments/jev-additions-v1/plan.json` and `jobs/`; all status and numeric results must be audited before being reported as complete. `compare_new.py --require-models` refuses pending or failed runs. Model runs are **not** yet results in this dated addendum.
+Five separate, pinned GPU jobs were also submitted concurrently for the supported HF-server models (Qwen 4B, 27B, 35B-A3B; Gemma 12B, 26B-A4B). Each job evaluates the same four nonoverlapping request suites, including the historically covered Unfair ToS protocol, with an isolated output and no pooled/duplicate decision score. The pinned model revisions, frozen server/evaluation code hashes, dataset hashes, durable cloud job IDs and status are in `/root/open-jev-experiments/jev-additions-v1/plan.json` and `jobs/`. All five GPU jobs **succeeded**, each independently passed `eval/audit.py` with **4 suites, 8,462 requests, 21,679 scored slots and 0 failed rows**. `compare_new.py --require-models` also verified exact dataset/adapter hashes against the Jev reference and refused incomplete or failed runs. The completed model comparisons follow; these are **new HF-server evaluations**, not archived Jev runs.
+
+| Model | Grouped ContractNLI question accuracy | Grouped Unfair ToS F1 | When2Call accuracy | BANKING77 macro-F1 |
+| --- | ---: | ---: | ---: | ---: |
+| Jev 1.13 (3 new, 1 archived) | 0.778096604 | 0.355276907 | 0.806955093 | 0.792791152 |
+| Qwen 3.5 4B | 0.727881396 | 0.483957219 | 0.546823658 | 0.700044398 |
+| Qwen 3.8 27B | 0.809182209 | 0.436183395 | 0.730284775 | 0.779503235 |
+| Qwen 3.6 35B-A3B | 0.770923003 | 0.576388889 | 0.807502738 | 0.761154109 |
+| Gemma 4 12B | 0.833572453 | 0.617169374 | 0.748904710 | 0.781833431 |
+| Gemma 4 26B-A4B | 0.840746055 | 0.530864198 | 0.686746988 | 0.776298696 |
+
+**Do not average across these differently scored tasks or count grouped cases again alongside their flattened sources.** Differences here are descriptive benchmark observations, not significance claims. The SHA256 of the locally audited, Git-ignored `eval/results/jev-additions-v1/comparison.json` is `7896dd20c79bc55eda04140a1eca7193b0c00889902824a6b3521567b9a62232`. The raw per-request responses, cloud job logs and audit JSONs remain outside Git; rerun `compare_new.py --require-models` to verify the table.
 
 Verify the stored historical summaries, artifact source hashes, unchanged adapters and
 new request counts locally (no credentials or inference):
