@@ -173,8 +173,13 @@ python RFDT/export.py \
   --output RFDT/runs/student-merged
 
 python hf-server/hf_server.py \
-  --model RFDT/runs/student-merged --device auto --dtype bfloat16
+  --model RFDT/runs/student-merged --device auto --dtype bfloat16 \
+  --classifier-prompt-policy baseline
 ```
+
+RFDT uses the shared baseline formatter. Pin `--classifier-prompt-policy baseline`
+when serving these exports so architecture-based startup recommendations do not
+replace the training prompt format. Retune deliberately before choosing another format.
 
 Use the exact training base model and revision when merging. `--revision` is available on training and export. Send the exported model path as the inference request's `model`. For evaluation of full-weight output, pass that output directory to `train.py --model ... --eval-only`.
 

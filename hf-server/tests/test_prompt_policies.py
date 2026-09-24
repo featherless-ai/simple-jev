@@ -175,7 +175,8 @@ def test_loader_preserves_checkpoint_precision_and_batch_settings(monkeypatch, p
     monkeypatch.setattr(transformers.AutoConfig, 'from_pretrained', config_load)
     monkeypatch.setattr(transformers.AutoModelForImageTextToText, 'from_pretrained', model_load)
     service = load_service('source/model', revision='pinned', device='cpu', dtype='float32',
-                           prompt_policy=policy, max_batch_size=7, max_batch_tokens=1234)
+                           prompt_policy=policy, max_batch_size=7, max_batch_tokens=1234,
+                           max_choice_options=50)
     token_load.assert_called_once_with('source/model', revision='pinned')
     config_load.assert_called_once_with('source/model', revision='pinned')
     model_load.assert_called_once_with('source/model', revision='pinned', config=config,

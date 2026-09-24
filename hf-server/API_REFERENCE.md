@@ -11,7 +11,8 @@ It reads selected next-token logits; it does not generate prose answers.
 | --- | --- | --- |
 | POST | `/v1/classifier` | Score the supplied questions. |
 | POST | `/v1/systemone` | Exact alias of `/v1/classifier`; omitted from generated OpenAPI. |
-| GET | `/health` | Returns `{"status":"ready","model":"<loaded model>"}` after service initialization. This does not run an inference probe. |
+| GET | `/v1/models` | OpenAI-style `object: "list"` with the served model ID and `x_max_choice_options`. No inference. |
+| GET | `/health` | Returns `{"status":"ready","model":"<served model>"}` after service initialization. This does not run an inference probe. |
 | GET | `/docs` | Interactive Swagger documentation. |
 | GET | `/redoc` | Generated ReDoc documentation. |
 | GET | `/openapi.json` | Generated request schema and route definitions. |
@@ -33,7 +34,9 @@ cache and tokenizer requirements:
 simple-jev --model Qwen/Qwen3.5-2B --host 0.0.0.0 --port 8000
 ```
 
-Use that same model identifier in requests:
+Request model IDs are accepted without name checking by default; they never select or load a model. `--served-model-name` controls the ID in discovery, health and responses (default: `--model`). Add `--enforce-model-id` to require that served ID. For example, `--served-model-name jev-latest --enforce-model-id` enables strict SDK-name matching.
+
+Example request:
 
 ```bash
 curl --fail-with-body http://localhost:8000/v1/classifier \
@@ -95,7 +98,7 @@ coercion.
 
 | Field | Type | Required/default | Behavior |
 | --- | --- | --- | --- |
-| `model` | string | Required; nonempty | Must match the model ID or local path used to start this server. The HTTP request does not load or switch models. |
+| `model` | string | Required; nonempty | Any nonempty ID is accepted by default. With `--enforce-model-id`, it must match the served name. The HTTP request does not load or switch models. |
 | `state` | string, object, array, or null | Supply exactly one non-null `state` or `messages` | Shared context. Objects/arrays are serialized into prompt text; they are not executable state. A top-level number or boolean is not supported. |
 | `messages` | array of messages or null | Alternative to `state`; at least one message | Text chat history rendered with the model's chat template. |
 | `questions` | object mapping IDs to questions | Required; 1–256 entries at schema level | IDs must be nonempty strings. The server's branch limit is additionally enforced, default 100. |
@@ -144,7 +147,7 @@ entries. `instructions` is required even though its value may be null.
 
 | Question type | `instructions` | `criteria` |
 | --- | --- | --- |
-| `choice` | Required entry describing the question | Required object with 2–50 candidate IDs mapped to entries describing each candidate. Null descriptions are allowed. |
+| `choice` | Required entry describing the question | Required object with 2–255 candidate IDs, subject to `--max-choice-options`, mapped to entries describing each candidate. Null descriptions are allowed. |
 | `score` | Required entry describing what to evaluate | Required ordered array of 2–50 entries, lowest level first. |
 | `noul` | Required entry describing a truth/yes-no proposition | Optional object with only `"true"` and/or `"false"` keys mapped to entries; default null. Neither key is required. |
 
@@ -189,7 +192,7 @@ Every successful response contains:
 
 | Field | Meaning |
 | --- | --- |
-| `model` | Request model identifier. |
+| `model` | Configured served model identifier, regardless of the request's model string. |
 | `answers` | Object keyed by the supplied question IDs. |
 | `usage.input_tokens` | Exact union of token prefixes across the compiled question branches. Shared prefixes count once. Includes classifier instructions, examples, template tokens and suffixes. |
 | `usage.output_tokens` | Always 0 for this HF backend: it scores logits without sampling output tokens. |
@@ -200,7 +203,7 @@ the common seed prefix. It is not persistent-cache billing across requests.
 
 ### Choice
 
-One branch assigns single-token labels `A`–`Z`, then `a`–`x`, for up to 50
+For up to 50 options, one branch assigns the unchanged single-token labels `A`–`Z`, then `a`–`x`. For 51–255 options the entire question instead uses distinct, fixed-width two-letter uppercase labels selected deterministically for the tokenizer (e.g. `AA`, `AB`). Single-letter labels are not mixed with two-letter labels, so no label is a prefix or substring of another. Both forms use one branch for the
 candidates. A softmax over candidate logits produces:
 
 | Field | Meaning |
@@ -293,7 +296,24 @@ capacity (17 admitted requests), additional requests receive 429.
 
 The default request limit is 100 branches, configurable with
 `--max-request-branches`. Every question consumes exactly one branch. The schema
-caps questions at 256; choice/score criteria are limited to 50 entries.
+caps questions at 256. Choice supports 2–255 options, limited by `--max-choice-options` (default 255). Score remains limited to 50 levels.
+
+Set all three independently at startup, for example:
+
+```bash
+simple-jev --model Qwen/Qwen3.8-27B \
+  --max-request-branches 256 --max-model-len 32768 --max-choice-options 255
+```
+
+This permits up to 256 questions per request, each with up to 255 Choice options,
+provided each rendered branch fits 32768 tokens. Three 255-option questions use
+three branches, not 765. Setting a branch limit above 256 does not bypass the
+schema cap. These limits are not per-request fields; `max_tokens` does not set
+input length. Options, template overhead, and policy repetition count toward the
+branch's input tokens. All maxima need not fit simultaneously. Input violations
+return 422 rather than silently dropping questions, candidates, or context.
+
+For limits above 50, the Transformers loader checks that the tokenizer has enough distinct, non-special, single-token two-letter labels before loading weights. If not, startup fails with guidance to reduce the limit. Actual rendered answer boundaries are checked again per request; incompatible boundaries return 422. No candidates are truncated and multi-token scoring is not substituted. More options lengthen the prompt, so context/token limits still apply.
 
 Each complete compiled branch, including shared context and appended question
 instructions, must fit `--max-model-len`. There is no automatic truncation.
@@ -349,16 +369,22 @@ custom client fields. For example, `stream: true` still returns ordinary JSON,
 and `max_tokens` does not change the number of questions scored. Declared fields
 remain validated; misspelled fields inside questions/options are rejected.
 
-## Optional prompt policies
+## Startup prompt policies
 
-`--classifier-prompt-policy` selects `baseline` (default), `examples_binary`,
+If the flag is omitted, known architecture/size profiles auto-select the
+recommended policy; unknown profiles use baseline with a prominent tuning warning.
+No model-name matching is used. Set `--classifier-prompt-policy baseline` to
+preserve the former default or use plain-text `messages`. Advanced metadata
+includes `prompt_policy` and `prompt_policy_selection` (mode/profile/signature).
+
+An explicit `--classifier-prompt-policy` selects `baseline`, `examples_binary`,
 `repeat_state`, or `strict_mix_repeat2`. It is a startup setting, not a request
 field or header. Invalid names fail argument parsing; non-baseline policies
 with `--backend laya` fail before loading weights.
 
 | Policy | Formatting | Noul |
 |---|---|---|
-| `baseline` | Unchanged common v1, including plain-text chat support | Nine bins mapped to [0.01,0.99] |
+| `baseline` | Explicit legacy format, including plain-text chat support | Nine bins mapped to [0.01,0.99] |
 | `examples_binary` | Strict rules + worked examples; state once | Restricted probability of yes over no/yes, in [0,1] |
 | `repeat_state` | Same as examples_binary; state repeated twice | Same binary probability |
 | `strict_mix_repeat2` | Strict rules; full user-input block repeated twice | Original evaluated nine-bin wording and [0.01,0.99] mapping |
@@ -374,7 +400,7 @@ metrics; nine-bin rating diagnostics do not apply. Choice/Score response math
 and usage accounting are unchanged. Advanced metadata reports a distinct
 `hf-<policy>-v1` template version. Common v1 itself is not modified. These formats
 do not change the model precision, inference backend, cache, batching, workers
-or scheduler. See [model recommendations](README.md#optional-prompt-formats-transformers-only).
+or scheduler. See [model recommendations](README.md#prompt-format-selection-transformers-only).
 
 ## Server startup arguments — exhaustive list
 
@@ -385,13 +411,16 @@ These are process settings, not HTTP request fields. Both `simple-jev` and
 | --- | --- | --- |
 | `--model` | Required | HF model ID or local pretrained model directory. Also the accepted request `model` string. |
 | `--revision` | Unset | HF revision passed to tokenizer, config and model loading. |
-| `--classifier-prompt-policy` | `baseline` | Transformers-only opt-in prompt format; see the policy table above. |
+| `--classifier-prompt-policy` | Omitted: architecture/size selection | Known profiles auto-select a recommended format; unknown profiles warn and use baseline. Explicit values always override, including baseline. |
 | `--device` | `auto` | Passed as Transformers `device_map`; examples: `auto`, `cpu`, `cuda:0`. ROCm PyTorch also uses CUDA device naming. |
 | `--dtype` | `bfloat16` | One of `float32`, `float16`, `bfloat16`. |
-| `--max-model-len` | `16384` | Maximum token length of each compiled branch. |
+| `--max-model-len` | `16384` | Maximum input tokens per complete rendered question branch, including context, instructions, options, template overhead, and repetition. Not generated output length or native context extension. |
 | `--max-batch-size` | `32` | Maximum suffix rows per model forward; must be positive. |
 | `--max-batch-tokens` | `32768` | Maximum padded suffix tokens per batch; must be positive. Does not chunk or limit the prefix forward. |
-| `--max-request-branches` | `100` | Positive expanded-branch cap per classifier request, subject to schema hard limits. |
+| `--served-model-name` | value of `--model` | Public model ID in responses, health and discovery; does not change checkpoint loading. |
+| `--enforce-model-id` | off | Reject request IDs other than the served name. |
+| `--max-choice-options` | `255` | Choice cap from 2 to 255; Score/Noul unchanged. |
+| `--max-request-branches` | `100` | Maximum questions per request: each question uses one branch regardless of option count. Set 256 for the schema maximum; larger settings cannot bypass it. |
 | `--host` | `127.0.0.1` | Bind address. |
 | `--port` | `8000` | HTTP port. |
 | `-h`, `--help` | — | Print argument help and exit. |

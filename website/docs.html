@@ -320,7 +320,7 @@ JSON</code></pre>
           <h2>Choice: select an answer</h2>
           <p>
             Use <code>choice</code> for routing, intent, sentiment, or any
-            decision among named candidates. Provide 2–50 candidates in the
+            decision among named candidates. Provide 2–255 candidates, subject to the deployment’s configured limit, in the
             shared schema. Each key is a public answer ID; its value is an
             optional description.
           </p>
@@ -719,8 +719,7 @@ except urllib.error.HTTPError as error:
           <p>
             The repository’s HF server uses the same shared request, prompt, and
             scoring modules. Unlike the hosted demo, it loads one model at
-            startup: the request’s <code>model</code> must match that ID or
-            local path.
+            startup. <code>--served-model-name</code> sets the public ID; request model IDs are unchecked unless <code>--enforce-model-id</code> is set. Responses always identify the served model.
           </p>
           <div class="docs-code">
             <div>
@@ -739,10 +738,31 @@ python hf-server/hf_server.py \
             <code>http://127.0.0.1:8000/v1/classifier</code>. It also exposes
             <code>/health</code>, <code>/docs</code>, and
             <code>/openapi.json</code>, plus <code>/v1/systemone</code> as a
-            classifier alias. The local HF implementation does not expose the
-            demo’s <code>/v1/models</code> endpoint. Its default branch cap is
+            classifier alias. <code>GET /v1/models</code> lists the served model and its configured Choice limit. <code>--max-choice-options</code> defaults to 255. Choice formats up to 50 options are unchanged; larger questions use only distinct two-letter uppercase labels validated as single tokens. Unsupported tokenizers can use a limit of 50. If no prompt format is specified, the HF loader auto-selects a recommended format for known architecture/size profiles; unknown profiles warn and use baseline. Explicit <code>--classifier-prompt-policy baseline</code> preserves the former default and text-chat support. Use <code>eval/prompt_search.py</code> to compare formats on quick eval. Its default branch cap is
             100; the shared schema allows up to 256 questions. Runtime
             token/branch limits apply in addition to schema validation.
+          </p>
+          <h3>Set the three independent limits</h3>
+          <ul>
+            <li><code>--max-request-branches 256</code>: maximum questions per HTTP request. Default: 100; schema maximum: 256. Each question uses one branch regardless of option count.</li>
+            <li><code>--max-model-len 32768</code>: maximum input tokens per complete rendered branch. Default: 16384. Includes state/history, system and question instructions, options, template overhead, and policy repetition—not characters or generated tokens.</li>
+            <li><code>--max-choice-options 255</code>: maximum choices per Choice question. Default: 255; valid range: 2–255. Score remains capped at 50 levels; Noul is unchanged.</li>
+          </ul>
+          <div class="docs-code">
+            <div><span>bash</span><button type="button" class="copy-code">Copy</button></div>
+            <pre tabindex="0"><code>simple-jev --model Qwen/Qwen3.8-27B --device auto --dtype bfloat16 \
+  --max-request-branches 256 \
+  --max-model-len 32768 \
+  --max-choice-options 255</code></pre>
+          </div>
+          <p>
+            These are startup settings, not request fields. Three questions with
+            255 choices each use three branches, not 765. The limits do not guarantee
+            that all maxima fit together: longer descriptions and repeated inputs
+            use more tokens and memory. Over-limit inputs receive 422; nothing is
+            silently truncated. A larger token cap does not extend the checkpoint's
+            native context support. Request <code>max_tokens</code> does not set input
+            length. Batch size is separate from the maximum question count.
           </p>
           <p>
             For local diagnostic logits, start the HF server with

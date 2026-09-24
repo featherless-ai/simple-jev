@@ -24,7 +24,7 @@ async def test_multi_question_http_and_validation():
                 {},
             )
 
-    service = DecisionService("test", FakeCompiler(), Backend())
+    service = DecisionService("test", FakeCompiler(), Backend(), enforce_model_id=True)
     async with httpx.AsyncClient(
         transport=httpx.ASGITransport(app=create_app(service)), base_url="http://test"
     ) as client:

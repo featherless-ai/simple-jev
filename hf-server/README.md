@@ -38,8 +38,8 @@ See the [complete HTTP API reference](API_REFERENCE.md) for all request fields,
 options, response formats, errors, limits, metrics and server arguments.
 
 `POST /v1/classifier` and its alias `POST /v1/systemone` return non-streaming JSON.
-`GET /health` reports readiness. `/docs` provides the generated API schema.
-The request model must match the name/path passed to `--model`.
+`GET /health` reports readiness; `GET /v1/models` lists the served model and its configured Choice limit. `/docs` provides the generated API schema.
+Use `--served-model-name` to set the public name (default: `--model`). Request model strings are not checked by default, so SDK defaults such as `jev-latest` work without selecting a different checkpoint. Add `--enforce-model-id` to require the served name. Responses always identify the served model.
 
 ```json
 {
@@ -62,8 +62,8 @@ The request model must match the name/path passed to `--model`.
 ```
 
 Supply exactly one of `messages` or `state`. State accepts text or JSON.
-Chat uses the model tokenizer's chat template. Choice and score support up to
-50 entries. The server defaults to 100 scoring branches per request;
+Chat uses the model tokenizer's chat template. Choice supports up to 255 options by default; `--max-choice-options` sets a cap from 2 to 255. Score still supports up to 50 levels.
+Choice questions with at most 50 options retain their exact existing format. Larger questions use exclusively two-letter uppercase labels, validated as distinct single tokens, without mixing in single-letter labels. The Transformers loader checks capacity before loading weights and validates actual prompt boundaries on each request. Unsupported tokenizers can use `--max-choice-options 50`; options are never truncated. The server defaults to 100 scoring branches per request;
 `--max-request-branches` configures the limit. The shared v1 template uses exactly one branch per question. Legacy choice/score
 modes and score-format switches are no longer accepted.
 Invalid input returns readable 422 errors; a full queue returns 429.
@@ -75,10 +75,45 @@ reads logits without sampling any output tokens. Set
 `ENABLE_OPEN_JEV_ADVANCED_METRICS=1` to include detailed timing and metadata.
 Standard completion settings such as `max_tokens` and `temperature` are ignored.
 
-## Optional prompt formats (Transformers only)
+## Configure request limits
 
-Select a server-wide format explicitly; the default `baseline` leaves the
-existing common v1 prompts and scoring unchanged:
+Set these at server startup; they are independent:
+
+| Flag | Default | Controls |
+|---|---|---|
+| `--max-request-branches` | `100` | Maximum questions per HTTP request (one branch per question). Set `256` for the schema maximum; larger values do not permit more than 256 questions. |
+| `--max-model-len` | `16384` | Maximum tokens in each complete rendered branch: state/history, system and question instructions, options, template overhead, and repetitions. Not characters or output length. |
+| `--max-choice-options` | `255` | Maximum options in each Choice question; valid settings 2–255. Score stays at 50 levels; Noul is unchanged. |
+
+```bash
+simple-jev --model Qwen/Qwen3.8-27B --device auto --dtype bfloat16 \
+  --max-request-branches 256 --max-model-len 32768 --max-choice-options 255
+```
+
+This Qwen configuration automatically selects `examples_binary` when no prompt
+format is specified. Three 255-choice questions consume three branches, not 765.
+The limits do not guarantee that all maxima fit simultaneously: long options and
+policy repetition increase input length. Violations return 422; candidates/context
+are never silently truncated. Setting a larger token cap does not extend the
+checkpoint's native context support or guarantee sufficient memory. The checked
+255-choice prompts fit at 32K; other content may require more.
+
+`--max-batch-size` and `--max-batch-tokens` control execution batches, not the
+question-count limit. A single suffix must also fit the batch-token budget;
+when using longer inputs, check that budget as well. Request `max_tokens` is not
+an input-length setting and is ignored for this non-generating classifier.
+See [the API limits reference](API_REFERENCE.md#limits-batching-and-cancellation).
+
+## Prompt format selection (Transformers only)
+
+Omitting `--classifier-prompt-policy` auto-selects a development recommendation
+for known language-backbone architecture/size profiles. Matching uses the loaded
+configuration (including attention/expert dimensions and vocabulary), not model
+names or aliases. Unknown profiles fall back to `baseline` with a prominent
+warning to run `eval/prompt_search.py` first. Laya retains its native format.
+
+Explicit selection always overrides auto-selection. In particular, explicit
+`baseline` preserves the former default prompts, scoring, and text-chat support:
 
 ```bash
 simple-jev --model Qwen/Qwen3.8-27B --device auto \
@@ -108,7 +143,23 @@ Binary Noul returns `{"type":"noul","noul":P(yes)}` in [0,1], with no nine-bin
 0.01–0.99 remapping or nested rating diagnostics. Choice/Score math is unchanged.
 
 These formats were selected in development-set prompt experiments, not held-out
-evaluation. Named policies pass text blocks to the model's native template while
+evaluation. They are recommendations, not guaranteed optima for new revisions,
+fine-tunes, or precision settings. Unregistered sizes are not guessed from nearby
+models. Advanced metadata records the resolved policy and selection mode/profile.
+
+For a new model, use the [quick prompt search](../eval/README.md#prompt-format-search):
+
+```bash
+python eval/prompt_search.py --model YOUR_MODEL --device cuda \
+  --max-model-len 32768 --output eval/results/my-prompt-search
+```
+
+Run this from the repository root in the server environment after preparing the
+quick datasets. It evaluates all four formats sequentially with native scoring;
+apply the winner explicitly. Repeated-input policies need enough context (32K
+fits the checked 255-option case), and larger requests use more memory.
+
+Named policies pass text blocks to the model's native template while
 leaving baseline rendering unchanged. Prompt selection does not establish
 numerical equivalence across execution environments or a throughput guarantee.
 Repetition consumes additional context; the complete rendered branch remains
@@ -145,8 +196,8 @@ not imply multimodal input support. Models need a compatible Transformers cache
 that supports copying and `reorder_cache`, a chat template, and single-token
 rating/choice labels. Arbitrary model compatibility is not guaranteed.
 
-The shared v1 prompt and scoring rules are the source of truth for the default
-`baseline` format; opt-in policy differences are described above.
+The shared v1 prompt and scoring rules are the source of truth for the explicit
+`baseline` format; alternative policy differences are described above.
 It does not claim exact numeric equivalence with another inference engine.
 Tests compare reused-cache logits against independent full-prompt forwards for
 tiny Qwen3, Qwen3.5, Gemma2 and Gemma4 models, and exercise API validation,

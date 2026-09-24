@@ -30,7 +30,7 @@ from dataclasses import dataclass, field
 
 from .request_schema import ClassifierRequest
 
-# Fifty case-sensitive labels match the schema's maximum candidate count.
+# Preserve the original fifty case-sensitive labels for requests up to 50 choices.
 # These are strings, not token IDs: the adapter must check that each is a single
 # distinct token after the rendered answer prefix for its particular tokenizer.
 # Shared default for all adapters; version selection belongs to this builder.
@@ -131,13 +131,18 @@ class PromptPlan:
 
 
 def prepare_prompt(
-    request: ClassifierRequest | dict, version: str = DEFAULT_TEMPLATE_VERSION
+    request: ClassifierRequest | dict, version: str = DEFAULT_TEMPLATE_VERSION,
+    *, extended_choice_labels: tuple[str, ...] = (),
 ) -> PromptPlan:
     """Copy and validate server arguments, using the selected template version.
 
     Call prepare_prompt(request) for the shared default, or
     prepare_prompt(request, version="v1") to select a version explicitly.
     Unsupported versions raise ValueError; request fields do not select versions.
+
+    Above 50 Choice options, adapters must supply enough tokenizer-validated,
+    distinct two-letter uppercase extended_choice_labels; smaller questions keep
+    their original labels and formatting. Score labels are unaffected.
 
     Context is deliberately absent from the strings returned here. Adapters place
     their state or messages between the prefix and suffix instructions.
@@ -152,10 +157,18 @@ def prepare_prompt(
     request = ClassifierRequest.model_validate(request).model_copy(deep=True)
     # When adding a version, extend the validation and dispatch here;
     # never silently substitute a newer formatter for a pinned older version.
-    return _prepare_v1(request)
+    extended_choice_labels = tuple(extended_choice_labels)
+    if any(not isinstance(label, str) or len(label) != 2 or any(c not in string.ascii_uppercase for c in label)
+           for label in extended_choice_labels) or len(set(extended_choice_labels)) != len(extended_choice_labels):
+        raise ValueError("Extended Choice labels must be distinct two-letter uppercase strings")
+    for question in request.questions.values():
+        if question.type == 'choice' and len(question.criteria) > 50:
+            if len(extended_choice_labels) < len(question.criteria):
+                raise ValueError("Extended Choice requires enough tokenizer-validated labels")
+    return _prepare_v1(request, extended_choice_labels)
 
 
-def _prepare_v1(request: ClassifierRequest) -> PromptPlan:
+def _prepare_v1(request: ClassifierRequest, extended_choice_labels=()) -> PromptPlan:
     """v1: preserve these strings and mappings when adding versions."""
     # Brief all questions before the context, allowing their instructions and
     # the context to share a common prompt prefix across scoring branches.
@@ -192,6 +205,8 @@ def _prepare_v1(request: ClassifierRequest) -> PromptPlan:
             # rubric indices work for up to ten levels (0..9); larger rubrics
             # use letters to avoid multi-token numbers. Choices always use letters.
             symbols = tuple(
+                extended_choice_labels[: len(labels)]
+                if is_choice and len(labels) > 50 else
                 CHOICE_LABELS[: len(labels)]
                 if is_choice or len(labels) > 10
                 else string.digits[: len(labels)]

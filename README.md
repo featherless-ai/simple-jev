@@ -76,6 +76,7 @@ python -m pip install -e './hf-server'
 python hf-server/hf_server.py \
   --model Qwen/Qwen3.5-0.8B \
   --device cpu --dtype float32 \
+  --classifier-prompt-policy baseline \
   --max-model-len 4096 \
   --max-batch-size 4 --max-batch-tokens 4096
 
@@ -84,8 +85,8 @@ python hf-server/hf_server.py \
 python hf-server/hf_server.py \
   --model google/gemma-4-26B-A4B-it \
   --device cuda --dtype bfloat16 \
-  --max-model-len 8192 \
-  --max-batch-size 4 --max-batch-tokens 8192
+  --max-model-len 32768 --max-choice-options 255 \
+  --max-batch-size 4 --max-batch-tokens 32768
 
 # Alternatively, run Laya Typed Decisions with its native encoder backend.
 # Stop the previous server first, or choose a different --port.
@@ -112,14 +113,104 @@ curl http://127.0.0.1:8000/health
 
 Open `http://127.0.0.1:8000/docs` for the interactive API documentation. After installation, `simple-jev` and `python -m hf_server` accept the same arguments as the script.
 
+## Set question, context, and Choice limits
+
+These are **server startup flags**, not fields in a classification request:
+
+| What to limit | Flag | Default | Meaning |
+|---|---|---|---|
+| Questions per HTTP request | `--max-request-branches` | `100` | Each question uses one scoring branch. Set `256` to allow the schema maximum; higher values cannot bypass that maximum. |
+| Model input length | `--max-model-len` | `16384` | Maximum **tokens per complete rendered question branch**, including state/history, system instructions, options, template overhead, and any policy repetition—not characters or generated tokens. |
+| Choices per Choice question | `--max-choice-options` | `255` | Configurable from `2` to `255`. This is per question, not the number of questions. Score remains limited to 50 levels; Noul is unchanged. |
+
+For Qwen 27B, allow up to 256 questions per request, 32K input tokens per branch,
+and 255 choices per Choice question:
+
+```bash
+simple-jev --model Qwen/Qwen3.8-27B --device auto --dtype bfloat16 \
+  --max-request-branches 256 \
+  --max-model-len 32768 \
+  --max-choice-options 255 \
+  --enforce-model-id
+```
+
+With no format flag, this recognized Qwen 27B configuration auto-selects
+`examples_binary`. For example, a request with **3 questions containing 255 choices
+each** uses 3 branches, not 765. Branch batch size is a separate throughput control;
+you do not need to set `--max-batch-size` to the question limit.
+
+These are independent upper bounds, not a guarantee that every combination fits.
+Long descriptions and repeated-input policies consume more tokens. Over-limit
+requests are rejected with **422**, never silently truncated. Raising input length
+does not extend the checkpoint's native context support or available memory.
+Use a supported context size and budget for extra memory/work. The 32K setting
+fits the checked 255-choice prompts, but arbitrarily long descriptions may not.
+`max_tokens` in a request is not a substitute: this server scores without generating
+output tokens. See [batch/token-budget details](hf-server/API_REFERENCE.md#limits-batching-and-cancellation).
+
+## Model sizes and recommended prompt formats
+
+When `--classifier-prompt-policy` is **omitted**, the HF loader matches the model's
+language-backbone architecture and size configuration—not its repository name,
+local directory name, or public alias—to these development-selected formats:
+
+| Architecture / size | Reference model | Auto-selected format |
+|---|---|---|
+| Qwen dense, 4B | `Qwen/Qwen3.5-4B` | `strict_mix_repeat2` |
+| Qwen dense, 27B | `Qwen/Qwen3.8-27B` | `examples_binary` |
+| Qwen MoE, 35B total / A3B active | `Qwen/Qwen3.6-35B-A3B` | `repeat_state` |
+| Gemma unified dense, 12B | `google/gemma-4-12B-it` | `strict_mix_repeat2` |
+| Gemma MoE, 26B total / A4B active | `google/gemma-4-26B-A4B-it` | `strict_mix_repeat2` |
+
+The match checks backbone type, depth, widths, attention dimensions, vocabulary,
+and expert configuration. A family name or approximate parameter count alone is
+not enough. Unknown configurations (including unregistered smaller sizes) use
+`baseline` with a **prominent startup warning to run prompt tuning first**.
+Laya keeps its native format and is not part of this selection.
+
+An explicit flag always wins, including `--classifier-prompt-policy baseline`.
+Use explicit `baseline` to reproduce the former no-flag behavior or to use
+`messages`; the three named policies currently require text/JSON `state`.
+Existing evaluation launches with an explicit policy keep that policy.
+Recommendations are starting points, not universal optima for every fine-tune,
+revision, or precision. See [format details](hf-server/README.md#prompt-format-selection-transformers-only).
+
+### Search for the best format on quick eval
+
+After [preparing the quick datasets](eval/README.md#portable-presets-and-full-reproduction)
+and activating the HF-server environment:
+
+```bash
+# Inspect the four-policy plan without loading weights or downloading anything.
+python eval/prompt_search.py --model Qwen/Qwen3.8-27B --list
+
+# Stop any server using port 8179 first. Requires hardware for this checkpoint.
+python eval/prompt_search.py \
+  --model Qwen/Qwen3.8-27B --revision 1d4bf0f2ff6012fd82039f2fa52739d0dd7c60c0 \
+  --device cuda --dtype bfloat16 --max-model-len 32768 \
+  --output eval/results/qwen27b-prompt-search
+```
+
+The tool starts and stops its own local server sequentially for `baseline`,
+`examples_binary`, `repeat_state`, and `strict_mix_repeat2`: **477 cases per
+format, 1,908 total**. It pins remote revisions, preserves logs/raw responses and
+native summaries, and writes `comparison.json`. Incomplete searches do not get a
+recommended winner. Selection uses pooled native correct/477; ties use requested
+policy order (baseline first by default). Apply the reported format explicitly
+with `--classifier-prompt-policy`; the tool never rewrites defaults or this table.
+
+Quick is a **development/selection set**, not held-out accuracy evidence. Validate
+on disjoint data before claiming generalization. This search is not a 255-option
+accuracy benchmark. See [search controls and artifacts](eval/README.md#prompt-format-search).
+
 ## How do I use the API?
 
-Send a non-streaming `POST /v1/classifier` request. The `model` value must exactly match the ID or path used to start the server. The examples below use Qwen; if you started Gemma, use `google/gemma-4-26B-A4B-it` instead. Supply exactly one of:
+Send a non-streaming `POST /v1/classifier` request. With `--enforce-model-id`, the `model` value must exactly match the served ID. The examples below use Qwen; if you started Gemma, use `google/gemma-4-26B-A4B-it` instead. Supply exactly one of:
 
 - `state`: a string, JSON object, or JSON array containing the shared context.
 - `messages`: text chat history, rendered using the model's own chat template.
 
-The API takes inspiration from TypeSafe's structured-decision interface and includes project-specific behavior. `/v1/systemone` is an alias of `/v1/classifier`; both run the same implementation. Use this repository's [API reference](hf-server/API_REFERENCE.md) as the contract for clients.
+The API takes inspiration from TypeSafe's structured-decision interface and includes project-specific behavior. `/v1/systemone` is an alias of `/v1/classifier`; both run the same implementation. Use this repository's [API reference](hf-server/API_REFERENCE.md) as the contract for clients. `GET /v1/models` advertises the served ID (`--served-model-name`, defaulting to `--model`). Request model IDs are unchecked unless `--enforce-model-id` is set. Choice defaults to a 255-option cap; set `--max-choice-options` to lower it. Formats for 50 or fewer choices are unchanged.
 
 ```bash
 curl http://127.0.0.1:8000/v1/classifier \
@@ -175,7 +266,7 @@ Question IDs become keys in `answers`. The following response illustrates the sh
 
 | Question type | Input criteria | Result |
 | --- | --- | --- |
-| `choice` | Object with 2–50 candidate IDs and optional descriptions | Highest-probability candidate, its confidence, and the candidate distribution. |
+| `choice` | Object with 2–255 candidate IDs and optional descriptions, subject to `--max-choice-options` | Highest-probability candidate, its confidence, and the candidate distribution. |
 | `score` | Array of 2–50 rubric levels, lowest to highest | Expected zero-based rubric index, confidence, distribution, and rubric legend. A three-level rubric returns a value from 0 to 2, including fractional values. |
 | `noul` | Optional `true` and/or `false` descriptions | Truth/support judgment from 0.01 to 0.99, derived from the model's distribution over nine rating tokens. |
 

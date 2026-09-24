@@ -93,7 +93,7 @@ class ScoreQuestion(StrictModel):
 
 
 class ChoiceQuestion(StrictModel):
-    """Select among 2–50 candidate IDs with optional descriptions.
+    """Select among 2–255 candidate IDs with optional descriptions.
 
     Example: {"type": "choice", "instructions": "Color?",
               "criteria": {"red": None, "blue": "A blue object"}}
@@ -104,7 +104,7 @@ class ChoiceQuestion(StrictModel):
 
     type: Literal["choice"]
     instructions: EntryType
-    criteria: dict[str, EntryType] = Field(min_length=2, max_length=50)
+    criteria: dict[str, EntryType] = Field(min_length=2, max_length=255)
 
 
 class NoulQuestion(StrictModel):

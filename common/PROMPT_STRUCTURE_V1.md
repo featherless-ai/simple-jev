@@ -86,8 +86,10 @@ There must be 1–256 questions. Each question has:
 | `instructions` | The question: text, a JSON object/array, or null |
 | `criteria` | Candidates, ordered rubric, or optional truth descriptions |
 
-**Choice:** `criteria` is an object with 2–50 candidate IDs as keys and descriptions
-as values. A description can be text, a JSON object/array, or null.
+**Choice:** `criteria` is an object with 2–255 candidate IDs as keys and descriptions
+as values. A description can be text, a JSON object/array, or null. The original
+format remains unchanged for 2–50 options. Larger questions require adapter-supplied,
+tokenizer-validated two-letter uppercase labels; an adapter may impose a lower limit.
 
 **Score:** `criteria` is an array of 2–50 rubric descriptions, ordered lowest to
 highest. Entries may be text, a JSON object/array, or null.
@@ -97,7 +99,7 @@ highest. Entries may be text, a JSON object/array, or null.
 
 Unknown top-level fields do not affect the prompt. Unknown fields inside questions
 or options are invalid. The only current option, `raw_logits`, controls response
-diagnostics and does not affect prompt text. `model` selects the model but is not
+diagnostics and does not affect prompt text. `model` is interpreted by the serving integration but is not
 inserted into the classifier instructions. Tools/media settings, when supplied,
 are handled by the integration and do not add classifier text under this spec.
 
@@ -222,6 +224,12 @@ reasoning-generation step is performed.
 
 Assign candidates the labels `A`–`Z`, then `a`–`x`, in candidate source order.
 Labels are case-sensitive. The public answer is the original candidate ID.
+
+For more than 50 candidates, use only the adapter's supplied, distinct two-letter
+uppercase labels, in their supplied order, instead of mixing widths. Each must be
+one distinct token at the rendered answer boundary. No label is a prefix or
+substring of another. The response mapping retains every original candidate ID;
+never truncate options or silently substitute multi-token scoring.
 
 ```text
 Select the best option. Return the selected label.

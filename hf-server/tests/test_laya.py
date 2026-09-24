@@ -88,7 +88,8 @@ async def test_limits_and_model_validation(service):
         await service.classify(data)
     data = request()
     data["model"] = "other"
-    with pytest.raises(ValueError, match="Loaded model"):
+    service.enforce_model_id = True
+    with pytest.raises(ValueError, match="Served model"):
         await service.classify(data)
     data = request()
     data["options"] = {"raw_logits": True}

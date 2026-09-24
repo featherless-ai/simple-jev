@@ -14,7 +14,7 @@ Request flow:
     Laya: ClassifierRequest -> LayaBackend -> native encoder scoring -> response
 
 common owns validation, default versioned classifier wording, label semantics,
-and answer math. hf_prompt_policies adds opt-in formatting and binary Noul
+and answer math. hf_prompt_policies adds startup-selected formatting and binary Noul
 adaptation without modifying common. This file owns text-only role assembly,
 native chat/tokenizer boundaries,
 shared-prefix inference, queue/cancellation controls, usage accounting, HTTP, and
@@ -60,6 +60,7 @@ from common import (
 from common.prompt_builder import DEFAULT_TEMPLATE_VERSION, canonical
 from hf_prompt_policies import (
     PROMPT_POLICIES, format_branch, prepare_policy, restore_binary_noul, validate_policy,
+    resolve_prompt_policy,
 )
 
 # Shared plan to native chat and tokens
@@ -123,11 +124,11 @@ def common_prefix(sequences):
 class PromptCompiler:
     """Render shared classifier plans with a model's native tokenizer template."""
 
-    def __init__(self, tokenizer, max_tokens=16384, version=DEFAULT_TEMPLATE_VERSION, prompt_policy="baseline"):
+    def __init__(self, tokenizer, max_tokens=16384, version=DEFAULT_TEMPLATE_VERSION, prompt_policy="baseline", max_choice_options=255):
         """Store the renderer, complete-prompt token limit, and shared version.
 
         Version validation is performed by common.prepare_prompt during compile.
-        Named prompt policies are opt-in HF formatting/scoring adaptations.
+        Named prompt policies are startup-selected HF formatting/scoring adaptations.
         This class does not load a tokenizer or model on its own.
         """
         self.tokenizer = tokenizer
@@ -135,6 +136,36 @@ class PromptCompiler:
         self.version = version
         validate_policy(prompt_policy)
         self.prompt_policy = prompt_policy
+        if type(max_choice_options) is not int or not 2 <= max_choice_options <= 255:
+            raise ValueError("max_choice_options must be between 2 and 255")
+        self.max_choice_options = max_choice_options
+        self._extended_choice_labels = None
+
+    def validate_choice_capacity(self):
+        """Allocate fixed-width labels; every real prompt is checked again below."""
+        if self.max_choice_options <= 50:
+            return ()
+        if self._extended_choice_labels is None:
+            import itertools
+            import string
+            boundary = '{"answer": "'
+            prefix = self.tokenizer.encode(boundary, add_special_tokens=False)
+            labels, seen = [], set()
+            special = set(getattr(self.tokenizer, 'all_special_ids', ()))
+            for pair in itertools.product(string.ascii_uppercase, repeat=2):
+                label = ''.join(pair)
+                ids = self.tokenizer.encode(boundary + label, add_special_tokens=False)
+                if (len(ids) == len(prefix) + 1 and ids[:-1] == prefix
+                        and ids[-1] not in seen and ids[-1] not in special):
+                    labels.append(label)
+                    seen.add(ids[-1])
+            if len(labels) < self.max_choice_options:
+                raise ValueError(
+                    f"Tokenizer supports only {len(labels)} distinct two-letter Choice labels; "
+                    "reduce --max-choice-options (50 or fewer uses legacy labels)"
+                )
+            self._extended_choice_labels = tuple(labels)
+        return self._extended_choice_labels
 
     def compile(self, request: ClassifierRequest, *, render_only=False):
         """Validate text input and compile one branch per shared-plan question.
@@ -163,7 +194,14 @@ class PromptCompiler:
         ):
             raise ValueError("HF text reference accepts plain text chat only")
 
-        plan, binary_noul_keys = prepare_policy(request, self.version, self.prompt_policy)
+        largest_choice = max((len(q.criteria) for q in request.questions.values()
+                              if q.type == 'choice'), default=0)
+        if largest_choice > self.max_choice_options:
+            raise ValueError(f"Choice has {largest_choice} options; maximum is {self.max_choice_options}")
+        labels = self.validate_choice_capacity() if largest_choice > 50 else ()
+        plan, binary_noul_keys = prepare_policy(
+            request, self.version, self.prompt_policy, extended_choice_labels=labels
+        )
         system = plan.system_prompt_prefix + plan.prefix_instruction
         branches = []
         for question in plan.questions:
@@ -705,19 +743,27 @@ class DecisionService:
         queue_size=16,
         max_request_branches=100,
         model_aliases=(),
+        enforce_model_id=False,
+        max_choice_options=255,
         advanced_metrics=None,
     ):
         """Configure admission and diagnostic output for a loaded model.
 
         concurrency counts active coroutine slots; queue_size adds waiting slots.
         Supply a positive concurrency and nonnegative queue size. model_aliases
-        permits additional names for the same loaded model, not dynamic loading.
+        permits additional names when enforce_model_id is enabled, not dynamic
+        loading. By default any request ID is accepted; responses identify model.
+        max_choice_options limits Choice cardinality independently of branch count.
         advanced_metrics explicitly overrides the environment flag when provided;
         otherwise 1/true/yes/on enable ENABLE_OPEN_JEV_ADVANCED_METRICS.
         """
         if max_request_branches < 1:
             raise ValueError("max_request_branches must be positive")
         self.max_request_branches = max_request_branches
+        if type(max_choice_options) is not int or not 2 <= max_choice_options <= 255:
+            raise ValueError("max_choice_options must be between 2 and 255")
+        self.max_choice_options = max_choice_options
+        self.enforce_model_id = enforce_model_id
         self.model_aliases = {model, *model_aliases}
         self.model = model
         self.compiler = compiler
@@ -743,8 +789,12 @@ class DecisionService:
         """
         if not isinstance(request, ClassifierRequest):
             request = ClassifierRequest.model_validate(request)
-        if request.model not in self.model_aliases:
-            raise ValueError(f"Loaded model is {self.model!r}")
+        if self.enforce_model_id and request.model not in self.model_aliases:
+            raise ValueError(f"Served model is {self.model!r}")
+        for question in request.questions.values():
+            if question.type == 'choice' and len(question.criteria) > self.max_choice_options:
+                raise ValueError(f"Choice options exceed configured maximum of {self.max_choice_options}")
+        request = request.model_copy(update={'model': self.model})
         # v1 has exactly one inference branch per question; candidate count no
         # longer expands requests. The shared schema separately caps 256 questions.
         branches = len(request.questions)
@@ -763,6 +813,7 @@ class DecisionService:
                 queued = time.perf_counter() - start
                 if hasattr(self.backend, "classify_native"):
                     response = await self.backend.classify_native(request)
+                    response['model'] = self.model
                     if self.advanced_metrics:
                         response["metadata"] = {
                             **self.metadata,
@@ -908,6 +959,15 @@ def create_app(service):
         """Return the configured model identifier without invoking inference."""
         return {"status": "ready", "model": service.model}
 
+    @app.get("/v1/models")
+    async def models():
+        """Discovery is metadata-only and never occupies an inference slot."""
+        return {"object": "list", "data": [{
+            "id": service.model, "object": "model", "created": 0,
+            "owned_by": "simple-jev",
+            "x_max_choice_options": service.max_choice_options,
+        }]}
+
     attach_routes(app, lambda request: service)
     return app
 
@@ -958,7 +1018,7 @@ def load_service(
     model_name,
     *,
     revision=None,
-    prompt_policy="baseline",
+    prompt_policy=None,
     backend="transformers",
     subfolder=None,
     rope_factor=1,
@@ -968,9 +1028,14 @@ def load_service(
     max_batch_size=32,
     max_batch_tokens=32768,
     max_request_branches=100,
+    served_model_name=None,
+    enforce_model_id=False,
+    max_choice_options=255,
 ):
     """Load a model and return a ready-to-use service, without starting HTTP.
 
+    An omitted prompt_policy selects a known architecture/size recommendation;
+    unknown profiles warn and fall back to baseline. Explicit strings always win.
     device is passed to Transformers as device_map; dtype selects a torch dtype.
     max_model_len limits each complete compiled prompt. max_batch_tokens limits
     padded suffix tokens per batch, not shared-prefix prefill or total KV memory.
@@ -981,8 +1046,14 @@ def load_service(
     prevents overlap if cancellation releases admission before a forward ends.
     """
     validate_rope_factor(rope_factor)
-    validate_policy(prompt_policy)
-    if backend == "laya" and prompt_policy != "baseline":
+    if prompt_policy is not None:
+        validate_policy(prompt_policy)
+    if type(max_choice_options) is not int or not 2 <= max_choice_options <= 255:
+        raise ValueError("max_choice_options must be between 2 and 255")
+    if served_model_name is not None and not served_model_name.strip():
+        raise ValueError("served_model_name must not be empty")
+    public_model = served_model_name if served_model_name is not None else model_name
+    if backend == "laya" and prompt_policy not in (None, "baseline"):
         raise ValueError("Prompt policies apply only to --backend transformers; Laya uses native formatting")
     if backend == "laya":
         # Resolve the revision ourselves because the SDK does not expose it.
@@ -1014,9 +1085,11 @@ def load_service(
         )
         extend_laya_rope(agent, rope_factor)
         return DecisionService(
-            model_name,
+            public_model,
             None,
             LayaBackend(agent, max_model_len),
+            enforce_model_id=enforce_model_id,
+            max_choice_options=max_choice_options,
             concurrency=1,
             max_request_branches=max_request_branches,
             metadata={
@@ -1043,6 +1116,7 @@ def load_service(
 
     tokenizer = AutoTokenizer.from_pretrained(model_name, revision=revision)
     config = AutoConfig.from_pretrained(model_name, revision=revision)
+    prompt_policy, policy_selection = resolve_prompt_policy(config, prompt_policy)
     configure_rope(config, rope_factor)
     # These checkpoint families use the image/text auto-loader even for text
     # scoring. This selection does not enable image input: the compiler remains
@@ -1052,6 +1126,9 @@ def load_service(
         if config.model_type in {"gemma4", "qwen3_5", "qwen3_5_moe"}
         else AutoModelForCausalLM
     )
+    compiler = PromptCompiler(tokenizer, max_tokens=max_model_len, prompt_policy=prompt_policy,
+                              max_choice_options=max_choice_options)
+    compiler.validate_choice_capacity()
     model = loader.from_pretrained(
         model_name,
         revision=revision,
@@ -1061,21 +1138,23 @@ def load_service(
     )
     # PromptCompiler's default comes from common.DEFAULT_TEMPLATE_VERSION.
     # Keep one compiler/backend pair for the service's loaded model/tokenizer.
-    compiler = PromptCompiler(tokenizer, max_tokens=max_model_len, prompt_policy=prompt_policy)
     backend = HFBackend(
         model,
         max_batch_size=max_batch_size,
         max_batch_tokens=max_batch_tokens,
     )
     return DecisionService(
-        model_name,
+        public_model,
         compiler,
         backend,
+        enforce_model_id=enforce_model_id,
+        max_choice_options=max_choice_options,
         concurrency=1,
         max_request_branches=max_request_branches,
         metadata={
             "backend": "transformers",
             "prompt_policy": prompt_policy,
+            "prompt_policy_selection": policy_selection,
             "model_revision": revision,
             "rope_factor": rope_factor,
         },
@@ -1094,10 +1173,13 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--model", required=True)
     parser.add_argument("--revision")
+    parser.add_argument("--served-model-name", help="Public model ID for discovery and responses (default: --model)")
+    parser.add_argument("--enforce-model-id", action="store_true", help="Reject request model IDs other than the served name")
+    parser.add_argument("--max-choice-options", type=int, default=255, help="Maximum Choice options, 2–255 (default: 255)")
     parser.add_argument(
         "--classifier-prompt-policy", dest="prompt_policy",
-        choices=PROMPT_POLICIES, default="baseline",
-        help="Opt-in Transformers prompt format; named policies require text/JSON state",
+        choices=PROMPT_POLICIES, default=None,
+        help="Explicit format override; omitted: match known architecture/size, otherwise warn and use baseline. Named policies require state",
     )
     parser.add_argument(
         "--backend", choices=["transformers", "laya"], default="transformers"

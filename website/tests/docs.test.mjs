@@ -23,3 +23,23 @@ test('API beta pricing lists all eight models in the requested order', () => {
   assert.equal([...experimental.matchAll(/<code>/g)].length, 3);
   assert.doesNotMatch(experimental, /Qwen|gemma/);
 });
+
+test('local serving docs distinguish questions, input tokens, and choices', () => {
+  const limits = html.split('<h3>Set the three independent limits</h3>')[1];
+  assert.ok(limits);
+  assert.match(limits, /--max-request-branches 256/);
+  assert.match(limits, /Default: 100; schema maximum: 256/);
+  assert.match(limits, /--max-model-len 32768/);
+  assert.match(limits, /Default: 16384/);
+  assert.match(limits, /--max-choice-options 255/);
+  assert.match(limits, /valid range: 2–255/);
+  assert.match(limits, /three branches, not 765/);
+  assert.match(limits, /startup settings, not request fields/);
+  assert.match(limits, /native context support/);
+  for (const relative of ['../../README.md', '../../hf-server/README.md', '../../hf-server/API_REFERENCE.md']) {
+    const markdown = readFileSync(new URL(relative, import.meta.url), 'utf8');
+    for (const flag of ['--max-request-branches 256', '--max-model-len 32768', '--max-choice-options 255']) {
+      assert.ok(markdown.includes(flag), `${relative} must demonstrate ${flag}`);
+    }
+  }
+});

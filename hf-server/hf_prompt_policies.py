@@ -1,6 +1,6 @@
-"""Opt-in HF prompt formats. No model, cache, batching or scheduler changes.
+"""Startup-selected HF prompt formats. No model, cache, batching or scheduler changes.
 
-The common v1 formatter/scorer stays unchanged. Binary Noul uses a temporary
+Legacy common v1 formatting and native scoring stay unchanged. Binary Noul uses a temporary
 Choice plan and is mapped back to the public Noul answer by the HF adapter.
 """
 import json
@@ -23,16 +23,68 @@ NOUL_SYSTEM = (
 )
 
 
+# Match the language-backbone configuration, never a repository/served-name substring.
+# These are development-selection recommendations, not guarantees for fine-tunes.
+PROFILE_FIELDS = ('model_type', 'hidden_size', 'num_hidden_layers',
+                  'num_attention_heads', 'num_key_value_heads', 'head_dim',
+                  'intermediate_size', 'num_experts', 'moe_intermediate_size',
+                  'active_experts', 'vocab_size')
+KNOWN_PROFILES = (
+    ('Qwen dense 4B', 'strict_mix_repeat2',
+     ('qwen3_5_text', 2560, 32, 16, 4, 256, 9216, None, None, None, 248320)),
+    ('Qwen dense 27B', 'examples_binary',
+     ('qwen3_5_text', 5120, 64, 24, 4, 256, 17408, None, None, None, 248320)),
+    ('Qwen MoE 35B-A3B', 'repeat_state',
+     ('qwen3_5_moe_text', 2048, 40, 16, 2, 256, None, 256, 512, 8, 248320)),
+    ('Gemma unified dense 12B', 'strict_mix_repeat2',
+     ('gemma4_unified_text', 3840, 48, 16, 8, 256, 15360, None, None, None, 262144)),
+    ('Gemma MoE 26B-A4B', 'strict_mix_repeat2',
+     ('gemma4_text', 2816, 30, 16, 8, 256, 2112, 128, 704, 8, 262144)),
+)
+
+
+def resolve_prompt_policy(config, requested=None):
+    """Resolve once at startup; explicit baseline is distinct from omission."""
+    import logging
+    if requested is not None:
+        validate_policy(requested)
+        return requested, {'mode': 'explicit'}
+    # Serialize instead of reading ambiguous global attributes on heterogeneous
+    # Gemma configs. These are size fingerprints, not execution dimensions.
+    if hasattr(config, 'to_dict'):
+        config = config.to_dict()
+    def get(obj, key):
+        return obj.get(key) if isinstance(obj, dict) else getattr(obj, key, None)
+    text = get(config, 'text_config') or config
+    signature = tuple((get(text, 'num_experts_per_tok') or get(text, 'top_k_experts'))
+                      if key == 'active_experts' else get(text, key)
+                      for key in PROFILE_FIELDS)
+    for name, policy, expected in KNOWN_PROFILES:
+        if signature == expected:
+            logging.getLogger(__name__).warning(
+                'AUTO PROMPT FORMAT: %s -> %s (override with --classifier-prompt-policy)', name, policy)
+            return policy, {'mode': 'architecture-size', 'profile': name,
+                            'signature': dict(zip(PROFILE_FIELDS, signature))}
+    logging.getLogger(__name__).warning(
+        '\n%s\nUNRECOGNIZED MODEL ARCHITECTURE/SIZE: NO TUNED PROMPT FORMAT\n'
+        'Using baseline, NOT a tuned recommendation. Run eval/prompt_search.py with\n'
+        '--model and --output before relying on accuracy. Then explicitly set\n'
+        '--classifier-prompt-policy to the selected format (or baseline to opt out).\n'
+        'Detected language-backbone configuration: %s\n%s',
+        '!' * 78, dict(zip(PROFILE_FIELDS, signature)), '!' * 78)
+    return 'baseline', {'mode': 'unknown-baseline', 'signature': dict(zip(PROFILE_FIELDS, signature))}
+
+
 def validate_policy(policy):
     if policy not in PROMPT_POLICIES:
         raise ValueError(f'Unknown prompt policy {policy!r}; choose from {PROMPT_POLICIES}')
 
 
-def prepare_policy(request, version, policy):
+def prepare_policy(request, version, policy, *, extended_choice_labels=()):
     """Return the shared scoring plan and original keys requiring binary Noul."""
     validate_policy(policy)
     if policy == 'baseline':
-        return prepare_prompt(request, version=version), ()
+        return prepare_prompt(request, version=version, extended_choice_labels=extended_choice_labels), ()
     if request.messages is not None:
         raise ValueError('Named HF prompt policies require text/JSON state; use baseline for chat')
     binary_keys = ()
@@ -49,7 +101,7 @@ def prepare_policy(request, version, policy):
                           'yes': criteria.get('true', 'The answer to the question is yes.')},
             )
         surrogate = request.model_copy(update={'questions': questions})
-    plan = prepare_prompt(surrogate, version=version)
+    plan = prepare_prompt(surrogate, version=version, extended_choice_labels=extended_choice_labels)
     if policy == 'strict_mix_repeat2':
         questions = tuple(replace(q, instruction=q.instruction.replace(
             ' Encode probability with 0.1 being the lowers, and 0.9 as the highest',
