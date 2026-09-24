@@ -13,6 +13,8 @@
     <link rel="stylesheet" href="docs.css" />
     <script src="docs.js" defer></script>
     <script src="syntax.js" defer></script>
+    <link rel="stylesheet" href="shared/header.css" />
+    <script type="module" src="shared/header.js"></script>
   </head>
   <body>
     <a class="skip-link" href="#docs-content">Skip to API documentation</a>
@@ -70,6 +72,8 @@
         <div class="docs-intro">
           <p class="eyebrow">BUILD WITH SIMPLE JEV</p>
           <h1>API documentation.</h1>
+          <p>Building with an agent? Start with <a href="skills.md">skills.md</a>
+            for public, authenticated, and private API instructions.</p>
           <p>Context and questions in. Structured decisions out.</p>
           <p>
             <strong>Demo · POST</strong><br />
@@ -89,7 +93,7 @@
           </p>
           <div class="docs-badges">
             <span>No demo API key</span><span>2k-token context</span
-            ><span>4 requests / second</span>
+            ><span>2 requests / second</span>
           </div>
           <p>
             This page covers the public demo’s client-facing interface and
@@ -115,7 +119,7 @@
             ><code>curl https://simple-jev-demo-api.featherless.ai/v1/models</code></pre>
           </div>
           <p>
-            This example uses Gemma. You can replace its ID with any ID returned
+            This example uses Qwen3.6 35B A3B. You can replace its ID with any ID returned
             by the model list.
           </p>
           <div class="docs-code">
@@ -129,7 +133,7 @@
   -H &#x27;Content-Type: application/json&#x27; \
   --data-binary @- &lt;&lt;&#x27;JSON&#x27;
 {
-  &quot;model&quot;: &quot;featherless-ai/gemma-4-26B-A4B-classifier&quot;,
+  &quot;model&quot;: &quot;featherless-ai/Qwen3.6-35B-A3B-classifier&quot;,
   &quot;state&quot;: &quot;Mia owns a red bicycle.&quot;,
   &quot;questions&quot;: {
     &quot;color&quot;: {
@@ -155,7 +159,7 @@ JSON</code></pre>
               ><button type="button" class="copy-code">Copy</button>
             </div>
             <pre tabindex="0"><code>{
-  &quot;model&quot;: &quot;featherless-ai/gemma-4-26B-A4B-classifier&quot;,
+  &quot;model&quot;: &quot;featherless-ai/Qwen3.6-35B-A3B-classifier&quot;,
   &quot;answers&quot;: {
     &quot;color&quot;: {
       &quot;type&quot;: &quot;choice&quot;,
@@ -204,7 +208,7 @@ JSON</code></pre>
           </div>
           <p>
             The public demo has a <strong>2k-token context limit</strong> and a
-            <strong>4 requests-per-second rate limit</strong>. The context
+            <strong>2 requests-per-second rate limit</strong>. The context
             budget includes the classifier instructions, questions, criteria,
             and model chat formatting—not just your text. Short inputs and
             focused question sets work best.
@@ -229,7 +233,7 @@ JSON</code></pre>
   &quot;object&quot;: &quot;list&quot;,
   &quot;data&quot;: [
     {
-      &quot;id&quot;: &quot;featherless-ai/gemma-4-26B-A4B-classifier&quot;,
+      &quot;id&quot;: &quot;featherless-ai/Qwen3.6-35B-A3B-classifier&quot;,
       &quot;object&quot;: &quot;model&quot;
     }
   ]
@@ -506,7 +510,7 @@ JSON</code></pre>
               ><button type="button" class="copy-code">Copy</button>
             </div>
             <pre tabindex="0"><code>{
-  &quot;model&quot;: &quot;featherless-ai/gemma-4-26B-A4B-classifier&quot;,
+  &quot;model&quot;: &quot;featherless-ai/Qwen3.6-35B-A3B-classifier&quot;,
   &quot;messages&quot;: [
     {
       &quot;role&quot;: &quot;user&quot;,
@@ -557,7 +561,7 @@ const response = await fetch(endpoint, {
   method: &quot;POST&quot;,
   headers: { &quot;Content-Type&quot;: &quot;application/json&quot; },
   body: JSON.stringify({
-    model: &quot;featherless-ai/gemma-4-26B-A4B-classifier&quot;,
+    model: &quot;featherless-ai/Qwen3.6-35B-A3B-classifier&quot;,
     state: &quot;The bicycle is red.&quot;,
     questions: {
       color: {
@@ -586,7 +590,7 @@ import urllib.request
 import urllib.error
 
 payload = {
-    &quot;model&quot;: &quot;featherless-ai/gemma-4-26B-A4B-classifier&quot;,
+    &quot;model&quot;: &quot;featherless-ai/Qwen3.6-35B-A3B-classifier&quot;,
     &quot;state&quot;: &quot;The bicycle is red.&quot;,
     &quot;questions&quot;: {
         &quot;color&quot;: {

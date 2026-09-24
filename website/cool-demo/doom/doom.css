@@ -1,0 +1,63 @@
+* { box-sizing: border-box; }
+body { margin: 0; background: #f8f9f6; color: #202a26; font: 15px/1.6 system-ui, sans-serif; }
+main { max-width: 1600px; margin: 100px auto 40px; padding: 0 24px; }
+h1 { font-size: clamp(32px, 5vw, 52px); letter-spacing: -2px; margin: 0; }
+h2 { font-size: 20px; margin-top: 0; }
+a { color: inherit; }
+.eyebrow { font-size: 12px; letter-spacing: 2px; color: #60705a; }
+.intro { max-width: 780px; }
+.controls { display: flex; align-items: end; flex-wrap: wrap; gap: 12px; margin-top: 24px; }
+label { display: grid; gap: 5px; max-width: 100%; }
+select, button { padding: 11px 14px; border: 1px solid #c9d2c2; border-radius: 7px; font: inherit; max-width: 100%; }
+button { background: #e4efcf; color: #243327; cursor: pointer; font-weight: 600; }
+button:disabled { opacity: .5; cursor: default; }
+:focus-visible { outline: 3px solid #a35723; outline-offset: 3px; }
+#status { min-height: 26px; }
+.game-layout { display: grid; grid-template-columns: minmax(0, 3fr) minmax(340px, 2fr); gap: 24px; }
+.screen { background: #101410; border-radius: 10px; overflow: hidden; display: grid; place-items: center; }
+canvas { display: block; width: 100% !important; height: 100% !important; image-rendering: pixelated; pointer-events: none; }
+aside { padding: 20px; border: 1px solid #dce1d6; border-radius: 10px; background: #fff; }
+aside p, .credits { font-size: 12px; color: #586a60; }
+dl { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+dd { margin: 0; text-align: right; overflow-wrap: anywhere; }
+details { margin: 24px 0; padding: 16px; border: 1px solid #dce1d6; border-radius: 8px; }
+summary { cursor: pointer; }
+pre { max-height: 400px; overflow: auto; white-space: pre-wrap; overflow-wrap: anywhere; font-size: 12px; }
+@media (max-width: 760px) { .game-layout { grid-template-columns: 1fr; } }
+@media (max-width: 560px) { main { margin-top: 125px; padding: 0 16px; } }
+
+.agent-panel { padding: 24px; border: 1px solid #dce1d6; border-radius: 12px; background: #fff; }
+.agent-panel > .eyebrow { margin-top: 0; }
+.agent-panel h3 { font-size: 14px; margin-top: 24px; }
+.agent-current { padding: 20px; background: #edf3e5; border-radius: 10px; }
+.agent-current span { display: block; font-size: 12px; color: #586a60; }
+.agent-current strong { display: block; font-size: 30px; text-transform: capitalize; }
+.agent-current p { margin-bottom: 0; font-size: 14px; }
+.game-sidebar { display: flex; flex-direction: column; gap: 16px; }
+.game-sidebar .screen { flex: none; aspect-ratio: 8 / 5; }
+.probability { display: grid; grid-template-columns: 105px 1fr 44px; gap: 12px; align-items: center; margin: 10px 0; font-size: 13px; }
+.probability meter { width: 100%; height: 18px; accent-color: #6c8644; }
+.probability.selected { font-weight: 700; }
+#history { max-height: 250px; overflow: auto; padding-left: 22px; font-size: 13px; }
+#history li { padding: 7px 0; border-bottom: 1px solid #edf0e9; }
+.empty, #latency { color: #687462; font-weight: 400; font-size: 12px; }
+@media (max-width: 760px) { .game-sidebar { width: 100%; } .agent-panel { padding: 18px; } }
+
+.game-layout { align-items: start; margin-top: 28px; }
+.game-sidebar { position: sticky; top: 84px; }
+.game-sidebar aside dl { grid-template-columns: repeat(4, auto 1fr); }
+.game-sidebar aside h2 { font-size: 16px; }
+.agent-panel .controls { margin-top: 16px; gap: 8px; }
+.agent-panel .controls label { width: 100%; }
+.agent-panel .controls select { width: 100%; font-size: 12px; }
+.agent-panel .controls button { font-size: 13px; padding: 9px 12px; }
+.agent-panel #status { font-size: 12px; }
+.agent-panel h2 { margin-bottom: 0; }
+@media (max-width: 900px) {
+  .game-layout { grid-template-columns: 1fr; }
+  .game-sidebar { position: static; }
+}
+@media (max-width: 560px) { .game-sidebar aside dl { grid-template-columns: repeat(2, auto 1fr); } }
+
+.screen { position: relative; }
+.screen canvas { position: absolute; inset: 0; }

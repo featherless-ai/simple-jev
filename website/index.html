@@ -12,7 +12,10 @@
     <link rel="icon" type="image/png" href="assets/simple-jev.png" />
     <link rel="stylesheet" href="styles.css?v=20260918-how-button" />
     <script src="docs.js" defer></script>
+    <script src="shared/agent-prompt.js" defer></script>
     <script src="syntax.js" defer></script>
+    <link rel="stylesheet" href="shared/header.css" />
+    <script type="module" src="shared/header.js"></script>
   </head>
   <body>
     <a class="skip-link" href="#try-it">Skip to demo</a>
@@ -84,6 +87,28 @@
         </div>
       </section>
 
+      <section class="agent-quickstart wrap" aria-labelledby="agent-quickstart-title">
+        <div class="agent-intro">
+          <div>
+            <p class="eyebrow">FOR YOUR CODING AGENT</p>
+            <h2 id="agent-quickstart-title">One prompt. Ready to build.</h2>
+            <p>Copy, paste into your agent, and start with the API.</p>
+          </div>
+          <a class="agent-skill-link" href="skills.md">Explore the skill <span aria-hidden="true">↗</span></a>
+        </div>
+        <div class="agent-prompt-box">
+          <div class="agent-prompt-toolbar">
+            <span class="agent-prompt-label"><span aria-hidden="true">&gt;_</span> Agent prompt</span>
+            <button type="button" id="copy-agent-prompt">
+              <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V4a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v11a1 1 0 0 0 1 1h4"/></svg>
+              <span class="copy-label">Copy prompt</span>
+            </button>
+          </div>
+          <p id="agent-quick-prompt" tabindex="0">Read <span class="agent-skill-url">https://simplejev.ai/skills.md</span> and help me use Simple Jev for this project where appropriate</p>
+          <div class="agent-prompt-footer"><span id="agent-copy-status" role="status">Paste into your agent to get started.</span><span class="agent-keyless">No API key to try</span></div>
+        </div>
+      </section>
+
       <section class="quick-api wrap" aria-labelledby="quick-api-title">
         <div class="quick-api-heading">
           <h2 id="quick-api-title">Try the demo API in one request</h2>
@@ -137,6 +162,7 @@
           Actual Gemma response, showing the <code>answers</code> field. Results
           may vary. Demo limits: 2k tokens · 2 requests/second.
           <a href="docs.html">Full API documentation ↗</a>
+          · <a href="skills.md">Agent quick start ↗</a>
         </p>
         <span class="sr-only" id="docs-copy-status" role="status"></span>
       </section>

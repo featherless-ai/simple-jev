@@ -1,0 +1,389 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#050505">
+  <meta name="legacy-ci-compat" content="GENMIDI FM opl_music.js">
+  <title>DOOM — Direct LinuxDOOM WebAssembly Port</title>
+  <style>
+    :root { color-scheme: dark; }
+    * { box-sizing: border-box; }
+    html, body { width: 100%; height: 100%; margin: 0; background: #050505; overflow: hidden; }
+    body { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+    #app { width: 100%; height: 100%; display: grid; place-items: center; background: radial-gradient(circle at center,#161616 0%,#050505 70%); }
+    #frame { position: relative; width: min(100vw, calc(100vh * 1.6)); aspect-ratio: 8/5; max-height: 100vh; background: #000; box-shadow: 0 0 60px rgba(0,0,0,.85); }
+    #canvas { display: block; width: 100%; height: 100%; background: #000; image-rendering: pixelated; outline: none; }
+    #hud { position: absolute; inset: 0; pointer-events: none; }
+    #topbar { position: absolute; top: 12px; left: 12px; right: 12px; display: flex; justify-content: space-between; align-items: center; gap: 10px; opacity: 0; transition: opacity .2s ease; }
+    #frame:hover #topbar, #frame:focus-within #topbar { opacity: 1; }
+    .badge { background: rgba(0,0,0,.72); border: 1px solid rgba(255,255,255,.16); border-radius: 7px; padding: 7px 9px; color: #ddd; font-size: 11px; letter-spacing: .04em; backdrop-filter: blur(6px); }
+    #controls { display: flex; gap: 7px; pointer-events: auto; align-items: center; }
+    #mcpBadge { display: none; }
+    #mcpBadge.online { display: inline-block; border-color: rgba(116,255,147,.5); color: #b8ffc7; }
+    button { appearance: none; border: 1px solid rgba(255,255,255,.22); background: rgba(0,0,0,.76); color: #eee; border-radius: 7px; padding: 7px 10px; font: inherit; font-size: 11px; cursor: pointer; }
+    button:hover { background: rgba(40,40,40,.92); }
+    #loading { position: absolute; inset: 0; display: grid; place-items: center; background: #050505; color: #ddd; transition: opacity .25s ease; pointer-events: auto; }
+    #loading.hidden { opacity: 0; pointer-events: none; }
+    #loadingBox { text-align: center; padding: 24px; }
+    #loadingTitle { font-size: 30px; font-weight: 900; letter-spacing: .18em; margin-bottom: 12px; }
+    #status { color: #999; font-size: 12px; min-height: 18px; }
+    #progress { width: min(320px,70vw); margin-top: 10px; accent-color: #aaa; }
+    #start { display: none; margin: 18px auto 0; padding: 12px 18px; font-size: 13px; font-weight: 800; letter-spacing: .08em; border-color: rgba(255,255,255,.45); background: #171717; }
+    #start.ready { display: inline-block; }
+    #audioNote { display: none; color: #777; font-size: 10px; margin-top: 10px; }
+    #audioNote.ready { display: block; }
+    @media (max-aspect-ratio:8/5) { #frame { width: 100vw; height: auto; } }
+  </style>
+</head>
+<body>
+  <main id="app">
+    <section id="frame">
+      <canvas id="canvas" tabindex="0" oncontextmenu="event.preventDefault()"></canvas>
+      <div id="hud">
+        <div id="topbar">
+          <div class="badge">LINUXDOOM 1.10 · DIRECT WASM · MCP AUTHORING · NUKED OPL2</div>
+          <div id="controls">
+            <span id="mcpBadge" class="badge">MCP CONNECTED</span>
+            <button id="restart" type="button">RESTART</button>
+            <button id="fullscreen" type="button">FULLSCREEN</button>
+          </div>
+        </div>
+        <div id="loading">
+          <div id="loadingBox">
+            <div id="loadingTitle">DOOM</div>
+            <div id="status">Loading engine…</div>
+            <progress id="progress" value="0" max="100" hidden></progress>
+            <button id="start" type="button" disabled>CLICK TO START</button>
+            <div id="audioNote">Starts the game and unlocks browser audio.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const canvas = document.getElementById('canvas');
+    const loading = document.getElementById('loading');
+    const statusEl = document.getElementById('status');
+    const progressEl = document.getElementById('progress');
+    const startButton = document.getElementById('start');
+    const audioNote = document.getElementById('audioNote');
+    const mcpBadge = document.getElementById('mcpBadge');
+
+    let runtimeReady = false;
+    let gameStarted = false;
+    let mcpSocket = null;
+    let mcpReconnectTimer = null;
+
+    function showReady() {
+      statusEl.textContent = 'Ready';
+      progressEl.hidden = true;
+      startButton.disabled = false;
+      startButton.classList.add('ready');
+      audioNote.classList.add('ready');
+    }
+
+    function hideLauncher() {
+      loading.classList.add('hidden');
+      canvas.focus();
+    }
+
+    function resumeAudioContext() {
+      try {
+        if (typeof SDL2 !== 'undefined' && SDL2.audioContext && SDL2.audioContext.state !== 'running') {
+          const result = SDL2.audioContext.resume();
+          if (result && typeof result.catch === 'function') result.catch(console.error);
+        }
+      } catch (err) {
+        console.error('Audio resume failed:', err);
+      }
+    }
+
+    function requireRuntime() {
+      if (!runtimeReady || typeof Module.ccall !== 'function') {
+        throw new Error('DOOM WebAssembly runtime is not ready yet');
+      }
+    }
+
+    function bytesToBase64(bytes) {
+      let binary = '';
+      const chunkSize = 0x8000;
+      for (let offset = 0; offset < bytes.length; offset += chunkSize) {
+        binary += String.fromCharCode(...bytes.subarray(offset, offset + chunkSize));
+      }
+      return btoa(binary);
+    }
+
+    function safeVirtualFilename(filename) {
+      const raw = String(filename || 'ai_map.wad');
+      const safe = raw.replace(/[^a-zA-Z0-9._-]+/g, '_').replace(/^\.+/, '');
+      return safe.toLowerCase().endsWith('.wad') ? safe : `${safe || 'ai_map'}.wad`;
+    }
+
+    // Public, intentionally narrow engine-control API. MCP talks to this
+    // surface rather than reading or writing arbitrary WASM memory.
+    window.DoomControl = {
+      getState() {
+        requireRuntime();
+        const json = Module.ccall('doomctl_get_state_json', 'string', [], []);
+        return JSON.parse(json);
+      },
+      getSectors(limit = 256) {
+        requireRuntime();
+        const json = Module.ccall('doomctl_get_sectors_json', 'string', ['number'], [Math.trunc(limit)]);
+        return JSON.parse(json);
+      },
+      setSectorLight(sector, light) {
+        requireRuntime();
+        return Module.ccall('doomctl_set_sector_light', 'number', ['number', 'number'],
+          [Math.trunc(sector), Math.trunc(light)]);
+      },
+      heal(amount) {
+        requireRuntime();
+        return Module.ccall('doomctl_heal', 'number', ['number'], [Math.trunc(amount)]);
+      },
+      giveAmmo(ammoType, amount) {
+        requireRuntime();
+        return Module.ccall('doomctl_give_ammo', 'number', ['number', 'number'],
+          [Math.trunc(ammoType), Math.trunc(amount)]);
+      },
+      teleport(x, y) {
+        requireRuntime();
+        return Module.ccall('doomctl_teleport', 'number', ['number', 'number'],
+          [Math.trunc(x), Math.trunc(y)]);
+      },
+      spawnEnemy(name, count, distance) {
+        requireRuntime();
+        return Module.ccall('doomctl_spawn_enemy', 'number', ['string', 'number', 'number'],
+          [String(name), Math.trunc(count), Math.trunc(distance)]);
+      },
+      removeNearestEnemy(visibleOnly, maxDistance) {
+        requireRuntime();
+        const json = Module.ccall('doomctl_remove_nearest_enemy_json', 'string',
+          ['number', 'number'], [visibleOnly ? 1 : 0, Math.trunc(maxDistance)]);
+        return JSON.parse(json);
+      },
+      getChangeSet() {
+        requireRuntime();
+        const json = Module.ccall('doomctl_get_changeset_json', 'string', [], []);
+        return JSON.parse(json);
+      },
+      exportPwad(filename) {
+        requireRuntime();
+        if (!Module.FS || typeof Module.FS.readFile !== 'function') {
+          throw new Error('Emscripten filesystem export is unavailable');
+        }
+
+        const safeName = safeVirtualFilename(filename);
+        const virtualPath = `/${safeName}`;
+        try {
+          try { Module.FS.unlink(virtualPath); } catch {}
+          const size = Module.ccall('doomctl_export_pwad', 'number', ['string'], [virtualPath]);
+          if (size <= 0) throw new Error(`PWAD export failed with engine code ${size}`);
+          const bytes = Module.FS.readFile(virtualPath);
+          if (bytes.length !== size) {
+            throw new Error(`PWAD export size mismatch: engine=${size}, fs=${bytes.length}`);
+          }
+          return {
+            filename: safeName,
+            size,
+            base64: bytesToBase64(bytes)
+          };
+        } finally {
+          try { Module.FS.unlink(virtualPath); } catch {}
+        }
+      }
+    };
+
+    function localMcpBridgeUrl() {
+      const local = location.hostname === '127.0.0.1' || location.hostname === 'localhost';
+      if (!local) return null;
+      const protocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
+      return `${protocol}//${location.host}/control`;
+    }
+
+    function replyMcp(id, ok, payload) {
+      if (!mcpSocket || mcpSocket.readyState !== WebSocket.OPEN) return;
+      mcpSocket.send(JSON.stringify(ok
+        ? { id, ok: true, result: payload }
+        : { id, ok: false, error: String(payload && payload.message ? payload.message : payload) }));
+    }
+
+    function handleMcpRequest(message) {
+      const { id, method, params = {} } = message || {};
+      if (!id || !method) return;
+
+      try {
+        let result;
+        switch (method) {
+          case 'ping':
+            result = { runtimeReady, gameStarted };
+            break;
+          case 'get_state':
+            result = window.DoomControl.getState();
+            break;
+          case 'get_sectors':
+            result = window.DoomControl.getSectors(params.limit);
+            break;
+          case 'set_sector_light':
+            result = { light: window.DoomControl.setSectorLight(params.sector, params.light) };
+            break;
+          case 'heal':
+            result = { health: window.DoomControl.heal(params.amount) };
+            break;
+          case 'give_ammo':
+            result = { ammo: window.DoomControl.giveAmmo(params.ammoType, params.amount) };
+            break;
+          case 'teleport':
+            result = { moved: window.DoomControl.teleport(params.x, params.y) };
+            break;
+          case 'spawn_enemy':
+            result = {
+              spawned: window.DoomControl.spawnEnemy(params.name, params.count, params.distance)
+            };
+            break;
+          case 'remove_nearest_enemy':
+            result = window.DoomControl.removeNearestEnemy(
+              Boolean(params.visibleOnly), params.maxDistance
+            );
+            break;
+          case 'get_changeset':
+            result = window.DoomControl.getChangeSet();
+            break;
+          case 'export_pwad':
+            result = window.DoomControl.exportPwad(params.filename);
+            break;
+          default:
+            throw new Error(`Unknown DOOM control method: ${method}`);
+        }
+        replyMcp(id, true, result);
+      } catch (err) {
+        replyMcp(id, false, err);
+      }
+    }
+
+    function connectMcpBridge() {
+      const url = localMcpBridgeUrl();
+      if (!url || mcpSocket) return;
+
+      try {
+        mcpSocket = new WebSocket(url);
+      } catch (err) {
+        console.error('MCP bridge connection failed:', err);
+        mcpSocket = null;
+        return;
+      }
+
+      mcpSocket.addEventListener('open', () => {
+        mcpBadge.classList.add('online');
+        mcpSocket.send(JSON.stringify({ event: 'hello', runtimeReady, gameStarted }));
+      });
+
+      mcpSocket.addEventListener('message', event => {
+        try {
+          handleMcpRequest(JSON.parse(event.data));
+        } catch (err) {
+          console.error('Bad MCP bridge message:', err);
+        }
+      });
+
+      mcpSocket.addEventListener('close', () => {
+        mcpBadge.classList.remove('online');
+        mcpSocket = null;
+        clearTimeout(mcpReconnectTimer);
+        mcpReconnectTimer = setTimeout(connectMcpBridge, 1200);
+      });
+
+      mcpSocket.addEventListener('error', () => {
+        // close will schedule a reconnect; keep the game itself unaffected.
+      });
+    }
+
+    var Module = {
+      canvas,
+      print: (...args) => console.log(...args),
+      printErr: (...args) => console.error(...args),
+      onRuntimeInitialized() {
+        runtimeReady = true;
+        showReady();
+        connectMcpBridge();
+      },
+      setStatus(text) {
+        if (!text) {
+          if (gameStarted) hideLauncher();
+          else if (runtimeReady) showReady();
+          return;
+        }
+        statusEl.textContent = text;
+        const m = text.match(/\((\d+)\/(\d+)\)/);
+        if (m) {
+          progressEl.hidden = false;
+          progressEl.max = Number(m[2]);
+          progressEl.value = Number(m[1]);
+        } else {
+          progressEl.hidden = true;
+        }
+      },
+      monitorRunDependencies(left) {
+        if (!left) return;
+        Module.setStatus(`Loading game data… (${Module.totalDependencies - left}/${Module.totalDependencies})`);
+      },
+      totalDependencies: 0
+    };
+
+    const oldMonitor = Module.monitorRunDependencies;
+    Module.monitorRunDependencies = function(left) {
+      this.totalDependencies = Math.max(this.totalDependencies, left);
+      oldMonitor(left);
+    };
+
+    startButton.addEventListener('click', () => {
+      if (!runtimeReady || gameStarted) return;
+      gameStarted = true;
+      startButton.disabled = true;
+      statusEl.textContent = 'Starting DOOM + hardware-style OPL audio…';
+
+      try {
+        const result = Module.callMain([]);
+        resumeAudioContext();
+        hideLauncher();
+        if (mcpSocket && mcpSocket.readyState === WebSocket.OPEN) {
+          mcpSocket.send(JSON.stringify({ event: 'game_started' }));
+        }
+        if (result && typeof result.catch === 'function') {
+          result.catch(err => {
+            console.error(err);
+            loading.classList.remove('hidden');
+            statusEl.textContent = 'Startup failed — see browser console.';
+          });
+        }
+      } catch (err) {
+        console.error(err);
+        loading.classList.remove('hidden');
+        statusEl.textContent = 'Startup failed — see browser console.';
+      }
+    });
+
+    for (const eventName of ['pointerdown', 'keydown', 'touchstart']) {
+      window.addEventListener(eventName, resumeAudioContext, { passive: true });
+    }
+
+    document.getElementById('fullscreen').addEventListener('click', async () => {
+      resumeAudioContext();
+      try {
+        if (!document.fullscreenElement) await document.getElementById('frame').requestFullscreen();
+        else await document.exitFullscreen();
+      } catch (err) {
+        console.error('Fullscreen failed:', err);
+      }
+      canvas.focus();
+    });
+
+    document.getElementById('restart').addEventListener('click', () => location.reload());
+    connectMcpBridge();
+  </script>
+
+  {{{ SCRIPT }}}
+</body>
+</html>

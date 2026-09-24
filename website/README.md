@@ -138,3 +138,17 @@ Both 2048 and the driving simulator load `shared/demo-header.js`, providing the 
 Configure the repository Actions secret `CLOUDFLARE_API_TOKEN` with **Account → Cloudflare Pages → Edit**, restricted to Recursal PROD. The workflow supplies the PROD account ID and deploys to the `simple-jev` project (`https://simple-jev-6i4.pages.dev`). DNS and custom domains are managed separately; deployments update the existing project.
 
 The workflow installs locked dependencies, runs website tests and the driving API adapter tests, rebuilds the driving simulator, and stages the website without tests or README files. The deployment token is supplied only to the upload step. No local Cloudflare login is required by CI.
+
+## DOOM autoplay
+
+`cool-demo/doom/` hosts a Web DOOM adaptation with a large live game view beside a classifier decision dashboard. Navigation runs locally and combat decisions use the public Simple Jev API. Gameplay continues during requests and after stopping the agent. Include the whole `cool-demo/doom/` directory (including its WebAssembly/data files) and `shared/` when deploying. Source attribution and behavior are documented in `cool-demo/doom/README.md`.
+
+## Agent API guide
+
+`skills.md` is the canonical agent quick start for the public demo, authenticated Featherless API, and user-managed HF endpoints. `llms.txt` indexes the skill and reference docs. `.well-known/agent-skills/index.json` discovers the skill and includes its SHA-256 digest; update the digest whenever `skills.md` changes. Deploy all three files, including the hidden `.well-known/` directory. The homepage and API docs link to the guide. Agents can read it directly or save it as `SKILL.md` inside their skill directory.
+
+## Shared responsive header and agent prompt
+
+All main pages load `shared/header.css` and `shared/header.js`. Standalone games reuse them through `shared/demo-header.js`. Navigation stays on one row above 1050px and uses an accessible Menu disclosure for the six site links at tablet/mobile widths. GitHub remains visible outside the menu at every width. The homepage's copyable agent prompt uses `shared/agent-prompt.js`, with manual selection if clipboard access is unavailable. Include these shared files in deployment.
+
+Optional browser regression checks: `PLAYWRIGHT_MODULE=/path/to/playwright/index.mjs node website/tests/header.browser.mjs`. They cover seven pages at fourteen widths (320–1920px), including gutter alignment and element overlap, menu keyboard behavior, and both clipboard paths.

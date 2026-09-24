@@ -1,26 +1,33 @@
-/* Shared navigation for standalone games. Shadow DOM isolates game styles. */
+/* Standalone games use the same navigation styles and behavior as site pages. */
+const sharedHeaderBase = new URL('.', document.currentScript.src);
+const siteBase = new URL('../', sharedHeaderBase);
 class SimpleJevDemoHeader extends HTMLElement {
-  connectedCallback() {
+  async connectedCallback() {
     if (this.shadowRoot) return;
-    this.attachShadow({mode:'open'}).innerHTML = `
+    const root = this.attachShadow({ mode: 'open' });
+    const local = path => new URL(path, siteBase).href;
+    const links = [
+      ['Cool demos', 'demos.html'], ['Playground', 'playground.html'],
+      ['Evaluations', 'evaluations.html'], ['API docs', 'docs.html'],
+      ['How it works', 'how-it-works.html'], ['RFDT', 'index.html#rfdt'],
+    ];
+    root.innerHTML = `
+      <link rel="stylesheet" href="${new URL('header.css', sharedHeaderBase)}" />
       <style>
-        :host { display:block; position:fixed; inset:0 0 auto; height:64px; z-index:5000; font:14px system-ui,sans-serif; }
-        header { box-sizing:border-box; height:64px; display:flex; align-items:center; justify-content:space-between; gap:16px; padding:8px 24px; background:#f8f9f6; border-bottom:1px solid #dce1d6; color:#202a26; }
-        a { color:inherit; text-decoration:none; } a:hover { text-decoration:underline; }
-        .brand { display:flex; align-items:center; gap:10px; font-size:18px; font-weight:700; white-space:nowrap; }
-        img { width:44px; height:44px; object-fit:contain; }
-        .identity { display:flex; align-items:center; gap:24px; }
-        .built-by { display:flex; align-items:center; gap:8px; font-size:11px; color:#586a60; white-space:nowrap; }
-        .built-by img { width:130px; height:42px; object-fit:contain; }
-        nav { display:flex; gap:24px; align-items:center; font-weight:600; }
-        a:focus-visible { outline:3px solid #d4792c; outline-offset:4px; border-radius:3px; }
-        @media(max-width:760px) { .identity { gap:12px; } .built-by { gap:4px; } .built-by img { width:92px; } }
-        @media(max-width:560px) { header { padding:8px 12px; gap:8px; } .brand { font-size:16px; gap:6px; } nav { gap:10px; font-size:12px; } .docs { display:none; } .built-by { flex-direction:column; gap:0; font-size:9px; } .built-by img { width:80px; height:24px; } :host { height:100px; } header { height:100px; flex-wrap:wrap; align-content:center; row-gap:6px; } .identity { width:100%; justify-content:space-between; } nav { width:100%; justify-content:space-between; } nav a[href="/playground.html"] { display:none; } }
+        :host { display:block; position:fixed; inset:0 0 auto; z-index:5000; background:#f8f9f6; border-bottom:1px solid #dce1d6; }
+        .site-header.wrap { border-bottom:0; }
       </style>
-      <header><div class="identity"><a class="brand" href="/index.html" aria-label="Simple Jev home"><img src="/assets/simple-jev.png" alt=""/><span>Simple Jev</span></a><a class="built-by" href="https://featherless.ai/" aria-label="Built by Featherless.ai"><span>Built by</span><img src="/assets/featherless_logo_dark.svg" alt="Featherless.ai"/></a></div><nav aria-label="Demo navigation"><a href="/demos.html">Cool demos</a><a href="/how-it-works.html">How it works</a><a href="/playground.html">Playground</a><a class="docs" href="/docs.html">API docs</a></nav></header>`;
-    // Game keyboard shortcuts must not intercept navigation keyboard events.
+      <header class="site-header wrap">
+        <a class="wordmark" href="${local('index.html')}" aria-label="Simple Jev home"><img class="brand-logo" src="${local('assets/simple-jev.png')}" alt="Simple Jev" width="48" height="48" /></a>
+        <a class="built-by header-credit" href="https://featherless.ai/" aria-label="Built by Featherless.ai"><span>Built by</span><img src="${local('assets/featherless_logo_dark.svg')}" alt="Featherless.ai" width="120" height="40" /></a>
+        <nav aria-label="Main navigation">${links.map(([label,path]) => `<a href="${local(path)}">${label}</a>`).join('')}
+          <a class="nav-github" href="https://github.com/featherless-ai/simple-jev">GitHub <span aria-hidden="true">↗</span></a>
+        </nav>
+      </header>`;
     this.addEventListener('keydown', event => event.stopPropagation());
     this.addEventListener('keyup', event => event.stopPropagation());
+    const { setupHeader } = await import(new URL('header.js', sharedHeaderBase));
+    setupHeader(root.querySelector('header'));
   }
 }
 customElements.define('simple-jev-demo-header', SimpleJevDemoHeader);

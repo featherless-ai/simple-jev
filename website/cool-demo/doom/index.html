@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>DOOM autoplay — Simple Jev</title>
+  <link rel="icon" href="../../assets/simple-jev.png" />
+  <link rel="stylesheet" href="doom.css" />
+  <script src="../../shared/demo-header.js" defer></script>
+</head>
+<body>
+  <simple-jev-demo-header></simple-jev-demo-header>
+  <main>
+    <p class="eyebrow">COMMUNITY DEMO · PAVY23 × SIMPLE JEV</p>
+    <h1>Let Jev play DOOM.</h1>
+    <p class="intro">Follow the agent’s observations and decisions as it plays E1M1. The game keeps running while Simple Jev chooses the next combat action.</p>
+    <div class="game-layout">
+      <div class="game-sidebar">
+      <div class="screen"><canvas id="canvas" width="640" height="400" tabindex="-1" aria-label="DOOM gameplay"></canvas></div>
+      <aside>
+        <h2>Live game</h2>
+        <dl><dt>Health</dt><dd id="health">—</dd><dt>Armor</dt><dd id="armor">—</dd><dt>Kills</dt><dd id="kills">—</dd><dt>API calls</dt><dd id="calls">0</dd></dl>
+        <p>No login or API key. Requests run one at a time, at most twice per second.</p>
+        <p>Stop releases the agent controls; the game keeps running. New run resets the level.</p>
+      </aside>
+      </div>
+      <section class="agent-panel" aria-labelledby="agent-title">
+        <p class="eyebrow">OBSERVE → CLASSIFY → ACT</p>
+        <h2 id="agent-title">Inside the decision loop</h2>
+    <div class="controls">
+      <label>Model <select id="model"><option>featherless-ai/Qwen3.6-35B-A3B-classifier</option></select></label>
+      <button id="start" disabled>Start autoplay</button>
+      <button id="stop" disabled>Stop</button>
+      <button id="restart" disabled>New run</button>
+    </div>
+    <p id="status" role="status">Loading DOOM…</p>
+
+        <div class="agent-current"><span id="activity">Ready to observe</span><strong id="decision">Waiting to start</strong><p id="decision-detail">Start autoplay to see real classifier choices and their probabilities.</p></div>
+        <h3>What the agent sees</h3>
+        <p id="observation">No game observations yet.</p>
+        <h3>Latest classifier probabilities <small id="latency"></small></h3>
+        <div id="probabilities"><p class="empty">The first API response will appear here.</p></div>
+        <h3>Decision history</h3>
+        <ol id="history"><li class="empty">No decisions yet.</li></ol>
+      </section>
+    </div>
+    <details><summary>Latest API request and response</summary><pre id="inspector">No requests yet.</pre></details>
+    <p class="credits">Adapted from <a href="https://github.com/pavy23/web-doom">Web DOOM by pavy23 ↗</a> · <a href="https://x.com/meta_pavy/status/2101820142238011534">Original post ↗</a> · <a href="README.md">Credits and source details</a>. Original DOOM by id Software. Shareware episode; no invulnerability.</p>
+  </main>
+  <script src="runtime.js"></script>
+  <script src="vendor/webdoom.js" async></script>
+  <script type="module" src="app.js"></script>
+</body>
+</html>

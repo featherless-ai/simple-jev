@@ -157,9 +157,6 @@ td:last-child {
 .docs-section .docs-caption {
   font-size: 13px;
 }
-.site-header [aria-current="page"] {
-  color: #59753c;
-}
 .inspector-docs {
   font-size: 12px;
   color: #c4ef63;
@@ -169,9 +166,6 @@ td:last-child {
   .docs-layout {
     gap: 32px;
     grid-template-columns: 165px minmax(0, 1fr);
-  }
-  .site-header nav {
-    gap: 18px;
   }
 }
 @media (max-width: 760px) {
@@ -211,11 +205,5 @@ td:last-child {
   .docs-code pre {
     padding: 15px;
     font-size: 12px;
-  }
-  .site-header nav {
-    gap: 12px;
-  }
-  .site-header nav a.docs-link {
-    display: inline-flex;
   }
 }

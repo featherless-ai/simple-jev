@@ -1,0 +1,16 @@
+# Simple Jev
+
+> Structured classification, rubric scores, and yes/no judgments from shared context. Public keyless demo, authenticated Featherless API, and self-hosted HF server.
+
+## Agent quick start
+
+- [Simple Jev API skill](https://simplejev.ai/skills.md): Endpoint selection, runnable public and authenticated requests, schemas, response interpretation, and retries.
+- [Agent skill discovery](https://simplejev.ai/.well-known/agent-skills/index.json): Machine-readable skill manifest.
+
+## Reference
+
+- [Hosted API documentation](https://simple-jev.featherless.ai/docs.html): Classifier request and response contract, examples, production access, and pricing.
+- [Classifier model guide](https://simple-jev.featherless.ai/model-cards/classifier-models.md): Hosted model IDs and supported input types.
+- [Live hosted model catalog](https://simple-jev-demo-api.featherless.ai/v1/models): Query current classifier model IDs; no authentication required.
+- [HF server setup](https://github.com/featherless-ai/simple-jev/blob/main/hf-server/README.md): Run a private Transformers server.
+- [HF API reference](https://github.com/featherless-ai/simple-jev/blob/main/hf-server/API_REFERENCE.md): Self-hosted routes, runtime limits, and prompt policy differences.

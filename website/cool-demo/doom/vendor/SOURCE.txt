@@ -1,0 +1,19 @@
+P2.2 direct browser build of id Software LinuxDOOM 1.10
+=======================================================
+
+Engine baseline: id Software DOOM, pinned commit
+a77dfb96cb91780ca334d0d4cfd86957558007e0
+
+Toolchain: Emscripten 6.0.5 + SDL2 + SDL2_mixer.
+Music: pinned Vanilla/DMX-compatible Chocolate Doom OPL subsystem.
+
+Public launcher modes:
+- PLAY CLASSIC DOOM: original shareware campaign, one local player.
+- PLAY AI DEATHMATCH: generated P2.2 E1M1 arena, one human plus three
+  real LinuxDOOM player slots controlled by Easy / Normal / Hard bots.
+
+The bundled p22-demo.wad is generated deterministically by
+mcp/build_p22_demo_wad.mjs and rebuilt with the pinned ZDBSP pipeline.
+
+P2.2 local multiplayer is intentionally single-process and netgame=false.
+Remote browser synchronization remains P3.0 work.

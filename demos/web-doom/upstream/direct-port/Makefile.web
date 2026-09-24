@@ -1,0 +1,263 @@
+# Build the original id Software LinuxDOOM 1.10 source directly for browsers.
+# Platform-specific i_*.c files are replaced by files from direct-port/ before make.
+# Music uses a build-prepared, pinned subset of Chocolate Doom's researched
+# Vanilla-DMX OPL path plus Nuked OPL3 v1.8 running in OPL2-compatible mode.
+
+CC := emcc
+
+PORT_FLAGS := -sUSE_SDL=2 -sUSE_SDL_MIXER=2
+CHOCO_COMMIT := 410d96855b5df5410ff591a90efeafa889119224
+CHOCO_DIR := /tmp/chocolate-doom-opl
+IMPORT_SCRIPT := $(GITHUB_WORKSPACE)/direct-port/import_vanilla_opl.py
+CONTROL_SOURCE := $(GITHUB_WORKSPACE)/direct-port/doom_control.c
+LINEDEF_SOURCE := $(GITHUB_WORKSPACE)/direct-port/doom_linedefs.c
+LINEDEF_PATCH := $(GITHUB_WORKSPACE)/direct-port/patch_control_linedefs.py
+LINEDEF_PRE_JS := $(GITHUB_WORKSPACE)/direct-port/authoring_linedef_bridge.js
+VISUAL_SOURCE := $(GITHUB_WORKSPACE)/direct-port/doom_visuals.c
+VISUAL_PATCH := $(GITHUB_WORKSPACE)/direct-port/patch_control_visuals.py
+VISUAL_PRE_JS := $(GITHUB_WORKSPACE)/direct-port/authoring_visual_bridge.js
+PLAYTEST_SOURCE := $(GITHUB_WORKSPACE)/direct-port/doom_playtest.c
+PLAYTEST_PATCH := $(GITHUB_WORKSPACE)/direct-port/patch_playtest_ticker.py
+PLAYTEST_PRE_JS := $(GITHUB_WORKSPACE)/direct-port/playtest_bridge.js
+AGENT_SOURCE := $(GITHUB_WORKSPACE)/direct-port/doom_agent_input.c
+AGENT_PATCH := $(GITHUB_WORKSPACE)/direct-port/patch_agent_input.py
+AGENT_PRE_JS := $(GITHUB_WORKSPACE)/direct-port/agent_input_bridge.js
+ORCHESTRATION_PRE_JS := $(GITHUB_WORKSPACE)/direct-port/orchestration_bridge.js
+CHEAT_SOURCE := $(GITHUB_WORKSPACE)/direct-port/doom_cheats.c
+AUDIO_UNLOCK_PRE_JS := $(GITHUB_WORKSPACE)/direct-port/audio_unlock.js
+CHEAT_PRE_JS := $(GITHUB_WORKSPACE)/direct-port/cheat_bridge.js
+RELOAD_SOURCE := $(GITHUB_WORKSPACE)/direct-port/doom_reload.c
+RELOAD_PATCH := $(GITHUB_WORKSPACE)/direct-port/patch_control_reload.py
+RELOAD_PRE_JS := $(GITHUB_WORKSPACE)/direct-port/authoring_reload_bridge.js
+MCP_DIR := $(GITHUB_WORKSPACE)/mcp
+MCP_SERVER := $(MCP_DIR)/server.js
+MCP_PLAYTEST_SERVER := $(MCP_DIR)/playtest_server.js
+MCP_V1_SERVER := $(MCP_DIR)/v1_server.js
+MCP_CHEAT_SERVER := $(MCP_DIR)/cheat_server.js
+MCP_ORCHESTRATOR := $(MCP_DIR)/orchestrator.js
+MCP_PACKAGE := $(MCP_DIR)/package.json
+
+# Optional linker flags are intentionally empty for the normal direct-port build.
+# P2.2 uses this hook to explicitly export its additional local-player bot C API
+# without forcing those symbols into older single-player build configurations.
+EXTRA_EMFLAGS ?=
+
+# LinuxDOOM 1.10 predates modern compiler diagnostics by decades. Suppress
+# legacy warnings so CI logs surface real adapter/link errors clearly.
+CFLAGS := -O2 -w -std=gnu89 -DNORMALUNIX -D__EMSCRIPTEN__ $(PORT_FLAGS) -I. -Ichoco_opl
+
+SOURCES := \
+  doomdef.c doomstat.c dstrings.c \
+  i_system.c i_sound.c i_video.c i_net.c doom_control.c doom_linedefs.c doom_visuals.c doom_playtest.c doom_agent_input.c doom_reload.c doom_cheats.c \
+  choco_opl/i_oplmusic.c choco_opl/memio.c choco_opl/mus2mid.c \
+  choco_opl/midifile.c choco_opl/opl.c choco_opl/opl_queue.c \
+  choco_opl/opl_sdl.c choco_opl/opl3.c \
+  tables.c f_finale.c f_wipe.c d_main.c d_net.c d_items.c g_game.c \
+  m_menu.c m_misc.c m_argv.c m_bbox.c m_fixed.c m_swap.c m_cheat.c m_random.c \
+  am_map.c p_ceilng.c p_doors.c p_enemy.c p_floor.c p_inter.c p_lights.c \
+  p_map.c p_maputl.c p_plats.c p_pspr.c p_setup.c p_sight.c p_spec.c \
+  p_switch.c p_mobj.c p_telept.c p_tick.c p_saveg.c p_user.c \
+  r_bsp.c r_data.c r_draw.c r_main.c r_plane.c r_segs.c r_sky.c r_things.c \
+  w_wad.c wi_stuff.c v_video.c st_lib.c st_stuff.c hu_stuff.c hu_lib.c \
+  s_sound.c z_zone.c info.c sounds.c i_main.c
+
+EMFLAGS := $(PORT_FLAGS) \
+  -sASYNCIFY=1 \
+  -sALLOW_MEMORY_GROWTH=1 \
+  -sINITIAL_MEMORY=67108864 \
+  -sSTACK_SIZE=1048576 \
+  -sFORCE_FILESYSTEM=1 \
+  -sASSERTIONS=1 \
+  -sENVIRONMENT=web \
+  -sINVOKE_RUN=0 \
+  -sEXIT_RUNTIME=0 \
+  -sEXPORTED_RUNTIME_METHODS=callMain,ccall,FS \
+  --pre-js $(RELOAD_PRE_JS) \
+  --pre-js $(LINEDEF_PRE_JS) \
+  --pre-js $(VISUAL_PRE_JS) \
+  --pre-js $(PLAYTEST_PRE_JS) \
+  --pre-js $(AGENT_PRE_JS) \
+  --pre-js $(ORCHESTRATION_PRE_JS) \
+  --pre-js $(AUDIO_UNLOCK_PRE_JS) \
+  --pre-js $(CHEAT_PRE_JS) \
+  --preload-file doom1.wad@doom1.wad \
+  --shell-file shell.html
+
+all: prepare-opl prepare-control validate-mcp
+	$(MAKE) -f Makefile.web webdoom.html
+
+prepare-opl:
+	@test -n "$(GITHUB_WORKSPACE)" || (echo "GITHUB_WORKSPACE is required" && false)
+	rm -rf $(CHOCO_DIR)
+	git clone -q https://github.com/chocolate-doom/chocolate-doom.git $(CHOCO_DIR)
+	git -C $(CHOCO_DIR) checkout -q $(CHOCO_COMMIT)
+	test -f $(CHOCO_DIR)/src/i_oplmusic.c
+	grep -q "version: 1.8" $(CHOCO_DIR)/opl/opl3.c
+	python3 $(IMPORT_SCRIPT) "$(CURDIR)" $(CHOCO_DIR)
+	grep -q "Vanilla DMX + Nuked OPL2 backend ready" choco_opl/i_oplmusic.c
+	grep -q "OPL3_GenerateStream" choco_opl/opl_sdl.c
+
+prepare-control:
+	@test -n "$(GITHUB_WORKSPACE)" || (echo "GITHUB_WORKSPACE is required" && false)
+	test -f $(CONTROL_SOURCE)
+	test -f $(LINEDEF_SOURCE)
+	test -f $(LINEDEF_PATCH)
+	test -f $(LINEDEF_PRE_JS)
+	test -f $(VISUAL_SOURCE)
+	test -f $(VISUAL_PATCH)
+	test -f $(VISUAL_PRE_JS)
+	test -f $(PLAYTEST_SOURCE)
+	test -f $(PLAYTEST_PATCH)
+	test -f $(PLAYTEST_PRE_JS)
+	test -f $(AGENT_SOURCE)
+	test -f $(AGENT_PATCH)
+	test -f $(AGENT_PRE_JS)
+	test -f $(ORCHESTRATION_PRE_JS)
+	test -f $(CHEAT_SOURCE)
+	test -f $(AUDIO_UNLOCK_PRE_JS)
+	test -f $(CHEAT_PRE_JS)
+	test -f $(RELOAD_SOURCE)
+	test -f $(RELOAD_PATCH)
+	test -f $(RELOAD_PRE_JS)
+	cp $(CONTROL_SOURCE) doom_control.c
+	cp $(LINEDEF_SOURCE) doom_linedefs.c
+	cp $(VISUAL_SOURCE) doom_visuals.c
+	cp $(PLAYTEST_SOURCE) doom_playtest.c
+	cp $(AGENT_SOURCE) doom_agent_input.c
+	cp $(RELOAD_SOURCE) doom_reload.c
+	cp $(CHEAT_SOURCE) doom_cheats.c
+	python3 $(LINEDEF_PATCH) doom_control.c
+	python3 $(VISUAL_PATCH) doom_control.c
+	python3 $(RELOAD_PATCH) doom_control.c
+	python3 $(PLAYTEST_PATCH) "$(CURDIR)"
+	python3 $(AGENT_PATCH) "$(CURDIR)"
+	grep -q "doomctl_get_state_json" doom_control.c
+	grep -q "doomctl_spawn_enemy" doom_control.c
+	grep -q "doomctl_remove_nearest_enemy_json" doom_control.c
+	grep -q "doomctl_get_sectors_json" doom_control.c
+	grep -q "doomctl_set_sector_light" doom_control.c
+	grep -q "doomctl_get_changeset_json" doom_control.c
+	grep -q "doomctl_export_pwad" doom_control.c
+	grep -q "doomctl_build_linedefs_lump" doom_control.c
+	grep -q "doomctl_build_sidedefs_lump" doom_control.c
+	grep -q "doomctl_patch_visual_sectors_lump" doom_control.c
+	grep -q "ML_LINEDEFS" doom_control.c
+	grep -q "ML_SIDEDEFS" doom_control.c
+	grep -q "doomctl_reset_changeset" doom_control.c
+	grep -q "doomctl_reset_visual_changes" doom_control.c
+	grep -q "doomctl_get_linedefs_json" doom_linedefs.c
+	grep -q "doomctl_set_linedef_action_json" doom_linedefs.c
+	grep -q "doomctl_activate_linedef_json" doom_linedefs.c
+	grep -q "P_UseSpecialLine" doom_linedefs.c
+	grep -q "doomctl_get_visuals_json" doom_visuals.c
+	grep -q "doomctl_list_visual_assets_json" doom_visuals.c
+	grep -q "doomctl_set_wall_texture_json" doom_visuals.c
+	grep -q "doomctl_set_sector_flat_json" doom_visuals.c
+	grep -q "R_CheckTextureNumForName" doom_visuals.c
+	grep -q "doomctl_set_playtest_paused" doom_playtest.c
+	grep -q "doomctl_step_playtest_tics" doom_playtest.c
+	grep -q "doomctl_get_playtest_telemetry_json" doom_playtest.c
+	grep -q "doomctl_agent_after_world_tic" doom_playtest.c
+	grep -q "doomctl_playtest_after_world_tic" p_tick.c
+	grep -q "doomctl_consume_world_step" p_tick.c
+	grep -q "doomctl_queue_agent_input" doom_agent_input.c
+	grep -q "doomctl_apply_agent_ticcmd" doom_agent_input.c
+	grep -q "doomctl_get_agent_input_status_json" doom_agent_input.c
+	grep -q "doomctl_apply_agent_ticcmd(cmd)" g_game.c
+	grep -q "doomctl_load_pwad_json" doom_reload.c
+	grep -q "doomctl_reload_current_map_json" doom_reload.c
+	grep -q "W_AddFile" doom_reload.c
+	grep -q "G_InitNew" doom_reload.c
+	grep -q "doomctl_set_god_mode" doom_cheats.c
+	grep -q "CF_GODMODE" doom_cheats.c
+	grep -q "doomctl_give_arsenal" doom_cheats.c
+	grep -q "doomctl_warp" doom_cheats.c
+	grep -q "doomctl_audio_resume" doom_cheats.c
+	grep -q "SDL_PauseAudio(0)" doom_cheats.c
+	grep -q "DoomAudioUnlock" $(AUDIO_UNLOCK_PRE_JS)
+	grep -q "127.0.0.1:3780/cheats" $(CHEAT_PRE_JS)
+	grep -q "P_CheckSight" doom_control.c
+	grep -q "P_CheckPosition" doom_control.c
+	grep -q 'memcpy(header, "PWAD"' doom_control.c
+
+validate-mcp:
+	@test -n "$(GITHUB_WORKSPACE)" || (echo "GITHUB_WORKSPACE is required" && false)
+	test -f $(MCP_SERVER)
+	test -f $(MCP_PLAYTEST_SERVER)
+	test -f $(MCP_V1_SERVER)
+	test -f $(MCP_CHEAT_SERVER)
+	test -f $(MCP_ORCHESTRATOR)
+	test -f $(MCP_PACKAGE)
+	@test -n "$$EMSDK_NODE" || (echo "EMSDK_NODE is required" && false)
+	chmod +x "$$EMSDK_NODE"
+	"$$EMSDK_NODE" --check $(MCP_SERVER)
+	"$$EMSDK_NODE" --check $(MCP_PLAYTEST_SERVER)
+	"$$EMSDK_NODE" --check $(MCP_V1_SERVER)
+	"$$EMSDK_NODE" --check $(MCP_CHEAT_SERVER)
+	"$$EMSDK_NODE" --check $(MCP_ORCHESTRATOR)
+	"$$EMSDK_NODE" -e "JSON.parse(require('fs').readFileSync('$(MCP_PACKAGE)', 'utf8')); console.error('MCP package.json valid')"
+	npm install --prefix $(MCP_DIR) --ignore-scripts --no-audit --no-fund
+	"$$EMSDK_NODE" --input-type=module -e "import { pathToFileURL } from 'node:url'; const m = await import(pathToFileURL('$(MCP_CHEAT_SERVER)').href); const s = m.createMcpServer(); if (!s) process.exit(1); console.error('MCP v1.1 cheats/audio import/self-test passed')"
+	"$$EMSDK_NODE" --input-type=module -e "import { pathToFileURL } from 'node:url'; const o = await import(pathToFileURL('$(MCP_ORCHESTRATOR)').href); if (o.ORCHESTRATOR_VERSION !== '1.0.0') process.exit(1); console.error('MCP v1 orchestrator helpers self-test passed')"
+	grep -q "doom_get_state" $(MCP_SERVER)
+	grep -q "doom_get_enemies" $(MCP_SERVER)
+	grep -q "doom_get_sectors" $(MCP_SERVER)
+	grep -q "doom_set_sector_light" $(MCP_SERVER)
+	grep -q "doom_get_linedefs" $(MCP_SERVER)
+	grep -q "doom_set_linedef_action" $(MCP_SERVER)
+	grep -q "doom_activate_linedef" $(MCP_SERVER)
+	grep -q "doom_get_visuals" $(MCP_SERVER)
+	grep -q "doom_list_visual_assets" $(MCP_SERVER)
+	grep -q "doom_set_wall_texture" $(MCP_SERVER)
+	grep -q "doom_set_sector_flat" $(MCP_SERVER)
+	grep -q "doom_spawn_enemy" $(MCP_SERVER)
+	grep -q "doom_remove_nearest_enemy" $(MCP_SERVER)
+	grep -q "doom_get_changeset" $(MCP_SERVER)
+	grep -q "doom_export_pwad" $(MCP_SERVER)
+	grep -q "doom_list_exports" $(MCP_SERVER)
+	grep -q "doom_load_pwad" $(MCP_SERVER)
+	grep -q "doom_reload_current_map" $(MCP_SERVER)
+	grep -q "doom_pause_playtest" $(MCP_PLAYTEST_SERVER)
+	grep -q "doom_resume_playtest" $(MCP_PLAYTEST_SERVER)
+	grep -q "doom_step_tics" $(MCP_PLAYTEST_SERVER)
+	grep -q "doom_get_playtest_telemetry" $(MCP_PLAYTEST_SERVER)
+	grep -q "doom_reset_playtest_metrics" $(MCP_PLAYTEST_SERVER)
+	grep -q "doom_capture_frame" $(MCP_PLAYTEST_SERVER)
+	grep -q "doom_agent_input_status" $(MCP_PLAYTEST_SERVER)
+	grep -q "doom_cancel_agent_input" $(MCP_PLAYTEST_SERVER)
+	grep -q "doom_run_input" $(MCP_PLAYTEST_SERVER)
+	grep -q "doom_run_input_sequence" $(MCP_PLAYTEST_SERVER)
+	grep -q "doom_run_design_trial" $(MCP_PLAYTEST_SERVER)
+	grep -q "doom_evaluate_playtest" $(MCP_PLAYTEST_SERVER)
+	grep -q "doom_begin_design_session" $(MCP_V1_SERVER)
+	grep -q "doom_run_authoring_iteration" $(MCP_V1_SERVER)
+	grep -q "doom_review_design_iteration" $(MCP_V1_SERVER)
+	grep -q "doom_restore_design_candidate" $(MCP_V1_SERVER)
+	grep -q "doom_finalize_design_session" $(MCP_V1_SERVER)
+	grep -q "doom_cheat_status" $(MCP_CHEAT_SERVER)
+	grep -q "doom_set_god_mode" $(MCP_CHEAT_SERVER)
+	grep -q "doom_set_noclip" $(MCP_CHEAT_SERVER)
+	grep -q "doom_give_arsenal" $(MCP_CHEAT_SERVER)
+	grep -q "doom_give_keys" $(MCP_CHEAT_SERVER)
+	grep -q "doom_give_powerup" $(MCP_CHEAT_SERVER)
+	grep -q "doom_warp" $(MCP_CHEAT_SERVER)
+	grep -q "doom_audio_status" $(MCP_CHEAT_SERVER)
+	grep -q "doom_audio_resume" $(MCP_CHEAT_SERVER)
+	grep -q "sessionArtifactName" $(MCP_ORCHESTRATOR)
+	grep -q "revisionHints" $(MCP_ORCHESTRATOR)
+	grep -q "type: 'image'" $(MCP_PLAYTEST_SERVER)
+	grep -q "serveStdio" $(MCP_CHEAT_SERVER)
+
+webdoom.html: $(SOURCES) doom1.wad shell.html
+	@rm -f emcc-build.log
+	@($(CC) $(CFLAGS) $(SOURCES) -o $@ $(EMFLAGS) $(EXTRA_EMFLAGS) -lm >emcc-build.log 2>&1) || { \
+		echo "===== Emscripten failure diagnostics ====="; \
+		tail -n 240 emcc-build.log; \
+		exit 1; \
+	}
+	@tail -n 40 emcc-build.log
+
+clean:
+	rm -rf choco_opl
+	rm -f doom_control.c doom_linedefs.c doom_visuals.c doom_playtest.c doom_agent_input.c doom_reload.c doom_cheats.c
+	rm -f webdoom.html webdoom.js webdoom.wasm webdoom.data emcc-build.log

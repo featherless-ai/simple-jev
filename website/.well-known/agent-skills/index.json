@@ -1,0 +1,12 @@
+{
+  "$schema": "https://schemas.agentskills.io/discovery/0.2.0/schema.json",
+  "skills": [
+    {
+      "name": "simple-jev-api",
+      "type": "skill-md",
+      "description": "Use Simple Jev through the public demo, authenticated Featherless API, or a private HF server. Includes runnable requests and response handling.",
+      "url": "https://simplejev.ai/skills.md",
+      "digest": "sha256:796766d22f713da272fc7a112ad11db43d78df0e799ebe856bad7c983a326929"
+    }
+  ]
+}
