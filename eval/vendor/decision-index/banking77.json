@@ -1,0 +1,10 @@
+{
+  "repository": "PolyAI-LDN/task-specific-datasets",
+  "revision": "9d081458ff52e53cf7e848f414e6e9344e4e6696",
+  "file": "banking_data/test.csv",
+  "url": "https://raw.githubusercontent.com/PolyAI-LDN/task-specific-datasets/9d081458ff52e53cf7e848f414e6e9344e4e6696/banking_data/test.csv",
+  "sha256": "d12d6e3bc4c3103966ae786dc435913c0c563dfa328f5a3646d0e62cfeeb474d",
+  "source_rows": 3080,
+  "license": "CC-BY-4.0 (PolyAI/banking77 dataset card)",
+  "scope": "Independent public-source BANKING77 test adaptation; not the frozen Decision Index 0.2 suite. Training files are never loaded."
+}

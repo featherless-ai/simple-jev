@@ -1,0 +1,10 @@
+{
+  "repository": "nvidia/When2Call",
+  "revision": "0582f7749df63a96fdc3070932e83e72396ace53",
+  "file": "test/when2call_test_mcq.jsonl",
+  "url": "https://huggingface.co/datasets/nvidia/When2Call/resolve/0582f7749df63a96fdc3070932e83e72396ace53/test/when2call_test_mcq.jsonl",
+  "sha256": "8c3694e583eeeb8dbc297e6cd90da70efc68efa4b6adb7227523e828c6b7b14c",
+  "source_rows": 3652,
+  "license": "CC-BY-4.0 (dataset card)",
+  "scope": "Independent public-source When2Call test MCQ conversion; not the frozen Decision Index 0.2 suite. Training files are never loaded."
+}

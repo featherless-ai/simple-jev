@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "id": "decision-index-when2call",
+  "version": "1",
+  "adapter": "choice-v1",
+  "dataset": "../../data/decision-index-when2call.jsonl",
+  "language_group": "english",
+  "languages": ["en"],
+  "modality": "text",
+  "category": "agentic",
+  "subcategory": "classification-decision",
+  "task_detail": "when2call-mcq",
+  "headline_metric": "accuracy",
+  "project": "When2Call",
+  "project_configuration": "published MCQ test, four response options",
+  "expected_rows": 3652,
+  "source": {
+    "repository": "nvidia/When2Call",
+    "revision": "0582f7749df63a96fdc3070932e83e72396ace53",
+    "file": "test/when2call_test_mcq.jsonl",
+    "sha256": "8c3694e583eeeb8dbc297e6cd90da70efc68efa4b6adb7227523e828c6b7b14c",
+    "license": "CC-BY-4.0"
+  },
+  "scope_note": "Opt-in, independent adaptation from public source. Not verified request/scoring parity with Decision Index 0.2; not included in historical full presets."
+}

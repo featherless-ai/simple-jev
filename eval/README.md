@@ -21,6 +21,15 @@ Repeat `--suite` to run multiple benchmarks. For authentication, set a bearer ke
 in your environment and pass `--key-env JEV_API_KEY`. Use a new output directory
 for each run. The included SemIf fixture needs no preparation; other datasets may.
 
+## Opt-in public-source decision tasks
+
+The public When2Call MCQ test (3,652 decisions) and BANKING77 intent test
+(3,080 decisions, 77-way Choice with native macro-F1) can be prepared from
+pinned upstream bytes. These are independent adaptations, **not** a reproduction
+of the Decision Index 0.2 leaderboard. See
+[public-source preparation and limitations](notes/DECISION_INDEX_PUBLIC.md).
+They are not added to historical presets.
+
 ## Prompt-format search
 
 `prompt_search.py` orchestrates **local Transformers serving**, unlike the ordinary
@@ -77,12 +86,18 @@ claims about generalization.
 | Preset | Selection |
 | --- | --- |
 | `quick` | 231 native JevBench + 144 Authored + 102 TypeSafe = 477 decisions |
-| `decision` | 20 English suites, covering the 26 matched decision items |
-| `full-text` | 65 non-overlapping text suites: 86,747 input examples |
+| `decision` | 23 English manifests, **decision-only** (mixed CodeMMLU parent split into four decision children); covers the same 26 historical decision items |
+| `knowledge` | 12 **knowledge-only** manifests: ten English, two Korean-source variants; mixed CodeMMLU/Korean parents split into knowledge children, no decision examples |
+| `multi-decision` | Shared-context ContractNLI (123 contracts × 17 questions) and LexGLUE Unfair ToS (eight binary questions per provision); one request per context, separate manifests from historical suites |
+| `full-text` | Legacy frozen selection of 65 text suites: 86,747 input examples, includes both knowledge and decisions |
 | `vision` | Seven configurations: 63,372 questions |
 | `full` | `full-text` plus `vision`, without duplicate parent/child suites |
 
-The full selections are pinned in `full-suites.json`. They retain the historical
+The existing knowledge converters, sources, manifests and reporting taxonomy
+were already ported from the older `simple-jev-eval/eval` into this main-based
+worktree. `knowledge` selects those same evaluation inputs as their own run;
+there is no copied/modified gold or second dataset fork. The full selections
+are pinned in `full-suites.json`. They retain the historical
 BigCloneBench and ToolRet Web exclusions. The larger catalog also includes
 opt-in suites and disjoint category partitions; **do not run every manifest**
 or mix `quick` with the full JevBench tier suites, which reuse the same decisions.
@@ -98,7 +113,11 @@ python3 eval/run.py --preset quick \
   --endpoint http://localhost:8000/v1/classifier --model YOUR_MODEL \
   --delay 0 --output eval/results/model-quick
 
-# After preparing ALL selected datasets, substitute decision/full-text/vision/full.
+# After preparing ALL selected datasets, substitute knowledge/decision/multi-decision/full-text/vision/full.
+# Knowledge and decision must use separate output directories and reports.
+python3 eval/run.py --preset knowledge \
+  --endpoint http://localhost:8000/v1/classifier --model YOUR_MODEL \
+  --workers 4 --delay 0 --output eval/results/model-knowledge
 python3 eval/run.py --preset decision \
   --endpoint http://localhost:8000/v1/classifier --model YOUR_MODEL \
   --workers 4 --delay 0 --output eval/results/model-decision
@@ -149,18 +168,34 @@ need a larger `--max-model-len` (for example, 32768) for 255-option cases.
 Overlong prompts are rejected, never truncated.
 
 `compare.py --mode quick` pools the 477 decisions; `--mode decision` uses the
-26 matched English items; `--mode text` reports the 54 matched knowledge,
+26 matched English decision items; `--mode knowledge` uses the 13 matched
+English knowledge items (Korean knowledge suites are reported natively, not
+folded into that English comparison). Both task-only comparisons permit a **mixed project's
+other-task** children to be absent while still checking exact item counts,
+failures, and selected-task coverage. `--mode text` reports the 54 matched knowledge,
 decision and ranking items separately. `--mode vision` averages the seven
-per-question accuracies and preserves native MME points/POPE F1 separately.
+per-question accuracies and preserves native MME points/POPE F1 separately. The multi-decision
+preset reports native per-suite metrics and does not use these historical
+comparison modes; its request grouping differs.
 Repeat `--report NAME=PATH` for models. Comparisons reject missing items,
 failures, incomplete coverage, and mismatched question counts. They check
 **report metadata**, not raw evidence: run `audit.py` first for every model.
 Historical Jev references under `benchmarks/` are not new endpoint measurements.
-The 26-item decision **comparison** contains 21,364 input examples and 33,099
-scored questions; multi-label tasks account for the difference. The `decision`
-preset keeps the mixed CodeMMLU parent intact for honest project-wide coverage,
-so it also executes 11,501 CodeMMLU knowledge examples, excluded from that
-aggregate (32,865 input examples executed in total).
+The historical 26-item decision **comparison** has 21,364 input examples and
+33,099 scored questions; multi-label tasks account for the difference. The old
+20-suite `decision` selection executed an additional 11,501 CodeMMLU knowledge
+examples because it included the mixed parent. The new 23-manifest `decision`
+preset selects only its decision children; `knowledge` selects its disjoint
+knowledge children. This changes the executed request set, **not** the frozen
+`full-text`/`full` selections or historical measurements. The two new
+public-source suites above are opt-in, not added to knowledge/decision presets.
+
+`multi-decision` is **not** an additional independent dataset: its ContractNLI
+judgments overlap with `decision`'s flattened `legal-contractnli`. Do not add
+both to one comparison. Prepare `legal-contractnli-multi.jsonl` from the same
+pinned source and evaluate it separately; see
+[shared-context instructions](notes/MULTI_DECISION.md) and
+[validation evidence](notes/PRESET_VALIDATION.md).
 
 Private cloud submission, saved job handles, experiment-only backend patches,
 model caches and raw run archives are not required or copied. HTTP concurrency,

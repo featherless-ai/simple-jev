@@ -53,6 +53,13 @@ def main():
     from suites import load_suite
     if args.input and len(args.suite) != 1:
         parser.error('--input override requires exactly one suite')
+    # Cross-protocol views of the same source judgments must not be run as
+    # independent examples in one selection, even when IDs/grouping differ.
+    declarations = [json.loads(path.read_text()) for path in args.suite]
+    selected_ids = {suite['id'] for suite in declarations}
+    for suite in declarations:
+        if selected_ids.intersection(suite.get('overlaps_suites', [])):
+            parser.error(f"{suite['id']} overlaps an explicitly selected suite")
     # Validate all suites before sending any requests or creating output.
     loaded = [load_suite(path,args.input) for path in args.suite]
     if len({suite['id'] for suite, _, _, _ in loaded}) != len(loaded):

@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "id": "legal-contractnli-multi",
+  "version": "1",
+  "adapter": "multi-choice-v1",
+  "dataset": "../../data/legal-contractnli-multi.jsonl",
+  "expected_rows": 123,
+  "questions_per_request": 17,
+  "overlaps_suites": ["legal-contractnli"],
+  "language_group": "english",
+  "languages": ["en"],
+  "modality": "text",
+  "category": "legal",
+  "subcategory": "classification-decision",
+  "task_detail": "legal-contractnli-multi",
+  "headline_metric": "macro_f1",
+  "source": {
+    "repository": "stanfordnlp/contract-nli",
+    "revision": "eced6528dd3c1d14d73f9a87df8f7bdbc03126f9",
+    "url": "https://github.com/stanfordnlp/contract-nli"
+  },
+  "scope_note": "All 17 published hypothesis questions per contract sent together in one HTTP request. Same prepared test judgments as legal-contractnli; do not combine or double-count with the flattened suite. Not Decision Index 0.2 wire/scoring parity.",
+  "project": "ContractNLI multi-decision",
+  "project_configuration": "test, 17 judgments per contract"
+}

@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "id": "decision-index-banking77",
+  "version": "1",
+  "adapter": "intent-f1-v1",
+  "dataset": "../../data/decision-index-banking77.jsonl",
+  "language_group": "english",
+  "languages": ["en"],
+  "modality": "text",
+  "category": "agentic",
+  "subcategory": "classification-decision",
+  "task_detail": "banking77-intent",
+  "headline_metric": "macro_f1",
+  "project": "BANKING77",
+  "project_configuration": "published test, 77 intents",
+  "expected_rows": 3080,
+  "source": {
+    "repository": "PolyAI-LDN/task-specific-datasets",
+    "revision": "9d081458ff52e53cf7e848f414e6e9344e4e6696",
+    "file": "banking_data/test.csv",
+    "sha256": "d12d6e3bc4c3103966ae786dc435913c0c563dfa328f5a3646d0e62cfeeb474d",
+    "license": "CC-BY-4.0"
+  },
+  "scope_note": "Opt-in, independent adaptation from public source. 77 published intents are shown as options; unanswered rows count as wrong. Not verified request/scoring parity with Decision Index 0.2; not included in historical full presets."
+}

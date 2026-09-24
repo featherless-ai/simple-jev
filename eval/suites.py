@@ -7,9 +7,9 @@ import hashlib
 import json
 import re
 from pathlib import Path
-from adapters import jevbench, choice, typed, fields, rag, graded_rag, binary_battery, passage_rerank, vision, visual_qa, domain_ranking, mmlu
+from adapters import jevbench, choice, typed, fields, rag, graded_rag, binary_battery, passage_rerank, vision, visual_qa, domain_ranking, mmlu, intent_f1, multi_choice
 
-ADAPTERS = {'jevbench-accuracy-v1': jevbench, 'choice-v1': choice, 'typed-v1': typed, 'fields-v1': fields, 'rag-v1': rag, 'graded-rag-v1': graded_rag, 'binary-battery-v1': binary_battery, 'passage-rerank-v1': passage_rerank, 'vision-choice-v1': vision, 'visual-qa-v1': visual_qa, 'domain-ranking-v1': domain_ranking, 'mmlu-v1': mmlu}
+ADAPTERS = {'jevbench-accuracy-v1': jevbench, 'choice-v1': choice, 'typed-v1': typed, 'fields-v1': fields, 'rag-v1': rag, 'graded-rag-v1': graded_rag, 'binary-battery-v1': binary_battery, 'passage-rerank-v1': passage_rerank, 'vision-choice-v1': vision, 'visual-qa-v1': visual_qa, 'domain-ranking-v1': domain_ranking, 'mmlu-v1': mmlu, 'intent-f1-v1': intent_f1, 'multi-choice-v1': multi_choice}
 
 
 def evaluator_hashes():
@@ -63,6 +63,12 @@ def load_suite(path, override=None):
         rows = [row for row in rows if row[field] in values]
     if 'expected_rows' in suite and len(rows) != suite['expected_rows']:
         raise ValueError('Dataset row count does not match the declared suite')
+    if 'questions_per_request' in suite:
+        n = suite['questions_per_request']
+        if type(n) is not int or n < 2 or any(
+            len(row.get('fields', row.get('questions', {}))) != n for row in rows
+        ):
+            raise ValueError('Shared-context suite requires the declared number of questions per request')
     if hasattr(adapter, 'bind_assets'):
         adapter.bind_assets(rows, dataset.parent)
     adapter.validate(rows)

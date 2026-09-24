@@ -17,7 +17,7 @@ from unittest.mock import patch
 
 from audit import audit_run
 from catalog import entries
-from compare import compare, REFERENCE, QUICK, VISION
+from compare import compare, usable, REFERENCE, QUICK, VISION
 from presets import ROOT, suite_paths
 from report import snapshot, write_reports
 from retry import retry_run
@@ -28,7 +28,8 @@ from suites import load_suite
 class PresetTests(unittest.TestCase):
     def test_frozen_nonoverlapping_selections(self):
         catalog = {s['id']: s for _, s in entries()}
-        for name, count in [('quick', 3), ('decision', 20), ('full-text', 65), ('vision', 7), ('full', 72)]:
+        for name, count in [('quick', 3), ('decision', 23), ('knowledge', 12), ('multi-decision', 2),
+                            ('full-text', 65), ('vision', 7), ('full', 72)]:
             paths = suite_paths(name)
             self.assertEqual(len(paths), count)
             ids = [json.loads(p.read_text())['id'] for p in paths]
@@ -40,7 +41,7 @@ class PresetTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             suite_paths('invented')
 
-    def test_decision_preset_covers_all_26_reference_items_including_mixed_parents(self):
+    def test_decision_preset_covers_all_26_reference_items_without_knowledge(self):
         actual = set()
         for path in suite_paths('decision'):
             suite = json.loads(path.read_text())
@@ -53,7 +54,44 @@ class PresetTests(unittest.TestCase):
                     for r in reference['items'] if r['task'] == 'classification-decision'}
         self.assertEqual(len(expected), 26)
         self.assertEqual(actual, expected)
-        self.assertIn('codemmlu-full', [json.loads(p.read_text())['id'] for p in suite_paths('decision')])
+        decision = [json.loads(p.read_text()) for p in suite_paths('decision')]
+        knowledge = [json.loads(p.read_text()) for p in suite_paths('knowledge')]
+        self.assertNotIn('codemmlu-full', [s['id'] for s in decision + knowledge])
+        self.assertTrue(all(s['subcategory'] == 'classification-decision' for s in decision))
+        self.assertTrue(all(s['subcategory'] == 'model-knowledge' for s in knowledge))
+        self.assertEqual({s['id'] for s in decision} & {s['id'] for s in knowledge}, set())
+        self.assertIn('codemmlu-execution-prediction', [s['id'] for s in decision])
+        self.assertIn('codemmlu-api-frameworks', [s['id'] for s in knowledge])
+        for s in decision + knowledge:
+            self.assertTrue(all(p['subcategory'] == s['subcategory'] for p in snapshot(s)['partitions']))
+        self.assertEqual([json.loads(p.read_text())['id'] for p in suite_paths('multi-decision')],
+                         ['legal-contractnli-multi', 'legal-unfair-tos-multi'])
+
+    def test_knowledge_preset_covers_13_reference_items(self):
+        actual = set()
+        for path in suite_paths('knowledge'):
+            suite = json.loads(path.read_text())
+            if suite['language_group'] != 'english':
+                continue  # Historical 13-item comparison covers English only.
+            for part in snapshot(suite)['partitions']:
+                actual.add((suite['project'], suite['project_configuration'],
+                            part['category'], part['subcategory']))
+        reference = json.loads(REFERENCE.read_text())
+        expected = {(r['project'], r['configuration'], r['category'], r['task'])
+                    for r in reference['items'] if r['task'] == 'model-knowledge'}
+        self.assertEqual(len(expected), 13)
+        self.assertEqual(actual, expected)
+
+    def test_decision_comparison_allows_only_missing_knowledge_children(self):
+        row = {'coverage': 'partial', 'missing_suites': ['codemmlu-api-frameworks'],
+               'metrics': {'rows': 76, 'accuracy': 0.5, 'failed_rows': 0}}
+        self.assertEqual(usable(row, 76, 'accuracy', selected_task='classification-decision'), .5)
+        with self.assertRaises(ValueError):
+            usable(row, 76, 'accuracy')
+        row['missing_suites'] = ['codemmlu-code-repair']
+        with self.assertRaises(ValueError):
+            usable(row, 76, 'accuracy', selected_task='classification-decision')
+        self.assertEqual(usable(row, 76, 'accuracy', selected_task='model-knowledge'), .5)
 
     def test_quick_native_fixture_and_source_commitments(self):
         expected = []
@@ -73,6 +111,19 @@ class PresetTests(unittest.TestCase):
         new = load_suite(ROOT / 'suites/english/semif-authored.json')
         self.assertEqual(old[2:], new[2:])
         self.assertEqual(snapshot(old[0]), snapshot(new[0]))
+
+    def test_multi_and_flattened_views_cannot_run_together(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            for base in ('legal-contractnli', 'legal-unfair-tos'):
+                command = [sys.executable, str(ROOT / 'run.py'),
+                           '--suite', str(ROOT / 'suites/english' / (base + '.json')),
+                           '--suite', str(ROOT / 'suites/english' / (base + '-multi.json')),
+                           '--endpoint', 'http://127.0.0.1:9999/v1/classifier',
+                           '--model', 'test', '--output', str(Path(tmp) / base)]
+                result = subprocess.run(command, text=True, capture_output=True)
+                self.assertNotEqual(result.returncode, 0)
+                self.assertIn('overlaps an explicitly selected suite', result.stderr)
+                self.assertFalse((Path(tmp) / base).exists())
 
     def test_list_from_an_unrelated_working_directory(self):
         with tempfile.TemporaryDirectory() as tmp:

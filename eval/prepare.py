@@ -7,8 +7,8 @@ import argparse
 import importlib
 import sys
 
-GROUPS = ('additional', 'coding', 'domains', 'external', 'knowledge',
-          'mmlu', 'security_rerank', 'vision', 'visual_qa', 'wanli')
+GROUPS = ('additional', 'coding', 'decision_index', 'domains', 'external', 'knowledge',
+          'mmlu', 'multi_decision', 'security_rerank', 'vision', 'visual_qa', 'wanli')
 
 
 def main():

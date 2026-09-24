@@ -74,7 +74,7 @@ def audit_run(root, paths, override=None):
     return {'complete': True, 'verified_suites': len(expected), 'verified_examples': verified,
             # Binary labels / extracted fields / otherwise benchmark examples.
             # Ranking examples are queries, not a count of HTTP question slots.
-            'scored_units': sum(s.get('targets', s.get('fields', s['rows']))
+            'scored_units': sum(s.get('targets', s.get('fields', s.get('questions', s['rows'])))
                                 for s in summaries.values())}
 
 

@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "id": "legal-unfair-tos-multi",
+  "version": "1",
+  "adapter": "binary-battery-v1",
+  "dataset": "../../data/legal-unfair-tos.jsonl",
+  "expected_rows": 1607,
+  "questions_per_request": 8,
+  "overlaps_suites": ["legal-unfair-tos"],
+  "language_group": "english",
+  "languages": ["en"],
+  "modality": "text",
+  "category": "legal",
+  "subcategory": "classification-decision",
+  "task_detail": "legal-unfair-tos-multi",
+  "headline_metric": "f1",
+  "source": {
+    "repository": "coastalcph/lex_glue",
+    "revision": "c23fdff1a6bf74e0e1a71cb86f1e781d37da888c",
+    "files": ["case_hold/test-00000-of-00001.parquet", "unfair_tos/test-00000-of-00001.parquet"],
+    "url": "https://huggingface.co/datasets/coastalcph/lex_glue"
+  },
+  "scope_note": "Same 1607 test provisions and 8 binary questions per provision as the existing legal-unfair-tos suite. Dedicated multi-decision identity; do not count both in one comparison.",
+  "project": "LexGLUE multi-decision",
+  "project_configuration": "unfair-tos, eight questions per request"
+}

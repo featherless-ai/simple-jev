@@ -19,10 +19,19 @@ QUICK = {('JevBench public accuracy', 'public-231'): 231,
          ('SemIf', 'authored'): 144, ('SemIf', 'typesafe'): 102}
 
 
-def usable(row, count, metric):
+def usable(row, count, metric, *, selected_task=None):
     metrics = row['metrics']
-    if (row['coverage'] != 'complete' or metrics.get('failed_rows', 0)
-            or metrics['rows'] != count):
+    partial_other_tasks = False
+    if selected_task and row['coverage'] == 'partial' and row.get('missing_suites'):
+        from catalog import entries
+        catalog = {suite['id']: suite for _, suite in entries()}
+        # A task-only run may omit the other task's children from a mixed
+        # project, but never a child of the selected task. Exact reference
+        # row counts are still checked; project-wide coverage stays partial.
+        partial_other_tasks = all(catalog[id]['subcategory'] != selected_task
+                                  for id in row['missing_suites'])
+    if ((row['coverage'] != 'complete' and not partial_other_tasks)
+            or metrics.get('failed_rows', 0) or metrics['rows'] != count):
         raise ValueError('Incomplete/failed report or mismatched question count')
     value = metrics[metric]
     if type(value) not in (int, float) or not math.isfinite(value) or not 0 <= value <= 1:
@@ -41,15 +50,15 @@ def unique_index(rows, key):
 
 
 def compare(reports, mode, reference=None):
-    if mode not in ('quick', 'decision', 'text', 'vision'):
+    if mode not in ('quick', 'decision', 'knowledge', 'text', 'vision'):
         raise ValueError('Unknown comparison mode')
     result = {'mode': mode, 'models': {},
               'validation': 'Report metadata/counts only; audit.py verifies raw responses separately.'}
-    if mode in ('decision', 'text'):
+    if mode in ('decision', 'knowledge', 'text'):
         reference = reference or json.loads(REFERENCE.read_text())
-        wanted = [r for r in reference['items']
-                  if mode == 'text' or r['task'] == 'classification-decision']
-        if len(wanted) != (54 if mode == 'text' else 26):
+        task = {'decision': 'classification-decision', 'knowledge': 'model-knowledge'}.get(mode)
+        wanted = [r for r in reference['items'] if task is None or r['task'] == task]
+        if len(wanted) != {'decision': 26, 'knowledge': 13, 'text': 54}[mode]:
             raise ValueError('Reference item set changed')
         result['weighting'] = reference['weighting']
         result['historical_reference'] = {'model': reference['model'], 'items': wanted}
@@ -61,10 +70,10 @@ def compare(reports, mode, reference=None):
             for item in wanted:
                 key = (item['project'], item['configuration'], item['category'], item['task'])
                 row = index[key]
-                score = usable(row, item['rows'], item['metric'])
+                score = usable(row, item['rows'], item['metric'], selected_task=task)
                 metrics = row['metrics']
                 items.append({**item, 'score': score, 'reference_score': item['score'],
-                              'scored_units': metrics.get('targets', metrics.get('fields', metrics['rows']))})
+                              'scored_units': metrics.get('targets', metrics.get('fields', metrics.get('questions', metrics['rows'])))})
             scores = {task: mean(i['score'] for i in items if i['task'] == task)
                       for task in sorted({i['task'] for i in items})}
             if mode == 'text':
@@ -96,7 +105,7 @@ def compare(reports, mode, reference=None):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--report', action='append', required=True, metavar='NAME=REPORT_JSON')
-    parser.add_argument('--mode', choices=['quick', 'decision', 'text', 'vision'], default='decision')
+    parser.add_argument('--mode', choices=['quick', 'decision', 'knowledge', 'text', 'vision'], default='decision')
     parser.add_argument('--output', type=Path, help='New JSON file; default stdout')
     args = parser.parse_args()
     reports = {}
