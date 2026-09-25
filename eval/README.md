@@ -296,7 +296,7 @@ change in the evaluator.
 
 **Published Jev 1.13.0 reference on these exact IDs: 200/231 = 86.58%.**
 Easy:48/48; original:71/72; hard:81/111. Derived from upstream's public per-task
-outcomes, not the weighted90.4% full-benchmark score or a new endpoint run.
+outcomes, not the weighted 90.4% full-benchmark score or a new endpoint run.
 `vendor/jevbench/jev-public-reference.json` records the outcomes and source hash.
 
 The fixtures retain every original field and add only `tier`; upstream source
