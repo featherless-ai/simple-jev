@@ -1777,12 +1777,16 @@ input:focus-visible {
 
 .vision-preview {
   display: grid;
+  height: 320px;
+  grid-template-rows: minmax(0, 1fr);
   grid-template-columns: 1fr 1fr;
   overflow: hidden;
-  min-height: 180px;
+  min-height: 0;
   background: #eee;
 }
 .vision-preview img {
+  display: block;
+  min-height: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;

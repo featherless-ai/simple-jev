@@ -61,3 +61,8 @@ pre { max-height: 400px; overflow: auto; white-space: pre-wrap; overflow-wrap: a
 
 .screen { position: relative; }
 .screen canvas { position: absolute; inset: 0; }
+
+.screen-start { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px; text-align: center; background: #101410; color: #d5dece; }
+.screen-start[hidden] { display: none; }
+.screen-start button { background: #c6ef68; color: #202a26; padding: 14px 24px; font-size: 18px; }
+.screen-start p { margin: 12px 0 0; font-size: 13px; }

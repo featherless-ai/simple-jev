@@ -1,6 +1,7 @@
 import { runStageAttempt } from './vendor/runner.js';
 import { API, DEFAULT_MODEL, buildRequest, readAction, combatCommand, targets, actions } from './policy.js';
 const $ = id => document.getElementById(id);
+let runtimeReady = false;
 let controller, running = false, lastCall = 0, calls = 0, stage;
 let pending = false, latest = null, apiError = '', retryAt = 0;
 const records = [];
@@ -102,10 +103,12 @@ function decide(context) {
     : context.proposal;
 }
 async function start() {
-  if (running) return;
+  if (running || !runtimeReady) return;
   running = true;
   controller = new AbortController();
   $('start').disabled = true;
+  $('screen-start-button').disabled = true;
+  $('screen-start').hidden = true;
   $('model').disabled = true;
   $('stop').disabled = false;
   $('restart').disabled = false;
@@ -135,6 +138,7 @@ async function start() {
   }
 }
 $('start').addEventListener('click', start);
+$('screen-start-button').addEventListener('click', start);
 $('stop').addEventListener('click', () => {
   controller?.abort();
   DoomControl.cancelAgentInput();
@@ -143,16 +147,22 @@ $('stop').addEventListener('click', () => {
   $('status').textContent = 'Agent stopped. The game keeps running. Start a new run when ready.';
 });
 $('restart').addEventListener('click', () => { controller?.abort(); location.reload(); });
-const metricsTimer = setInterval(() => { try { update(DoomControl.getState()); } catch {} }, 250);
+const metricsTimer = setInterval(() => { if (runtimeReady) { try { update(DoomControl.getState()); } catch {} } }, 250);
 window.addEventListener('pagehide', () => { controller?.abort(); clearInterval(metricsTimer); });
 try {
   const stageResponse = await fetch('vendor/e1m1.json');
   if (!stageResponse.ok) throw Error('Could not load the level route.');
   stage = await stageResponse.json();
   await window.doomReady;
+  runtimeReady = true;
   $('status').textContent = 'Ready · E1M1 · Hey, Not Too Rough difficulty';
   $('start').disabled = false;
-} catch (error) { $('status').textContent = `Loading failed: ${error.message}`; }
+  $('screen-start-button').disabled = false;
+  $('screen-start-status').textContent = 'Watch Jev observe, decide, and play.';
+} catch (error) {
+  $('status').textContent = `Loading failed: ${error.message}`;
+  $('screen-start-status').textContent = $('status').textContent;
+}
 // Discover models without preventing the default from being used if discovery fails.
 fetch(`${API}/models`, { credentials: 'omit', signal: AbortSignal.timeout(15000) })
   .then(r => { if (!r.ok) throw Error('Model discovery failed'); return r.json(); })
