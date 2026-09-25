@@ -1,0 +1,290 @@
+.emotion-page {
+  padding-top: 104px;
+  padding-bottom: 60px;
+}
+.emotion-page h1 {
+  font-size: clamp(36px, 5vw, 60px);
+}
+.lead {
+  max-width: 720px;
+  color: var(--muted);
+  font-size: 18px;
+  line-height: 1.7;
+}
+.emotion-controls {
+  display: flex;
+  align-items: end;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 28px;
+}
+.emotion-controls label {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+.emotion-controls select,
+.emotion-controls button {
+  padding: 12px 16px;
+  border: 1px solid #cbd4c5;
+  border-radius: 8px;
+  background: white;
+  font: inherit;
+  color: var(--ink);
+  max-width: 100%;
+}
+.emotion-controls button {
+  cursor: pointer;
+  background: var(--lime);
+  font-weight: 600;
+}
+.emotion-controls button.running {
+  background: white;
+}
+.emotion-controls button:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+.limits {
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.emotion-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+  gap: 18px;
+  margin-top: 22px;
+}
+.emotion-card {
+  min-width: 0;
+  background: white;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 18px;
+}
+.emotion-label {
+  margin: 0 0 10px;
+  font: 600 12px var(--mono);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* camera */
+.cam {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  background: #1d2926;
+  border-radius: 8px;
+  overflow: hidden;
+}
+.cam video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scaleX(-1);
+}
+.cam-placeholder {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  text-align: center;
+  color: #c9d1c5;
+  font-size: 14px;
+}
+.cam-badge {
+  position: absolute;
+  left: 12px;
+  top: 12px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: #1d2926cc;
+  color: white;
+  font-size: 13px;
+}
+.cam-placeholder[hidden],
+.cam-badge[hidden] {
+  display: none;
+}
+.emotion-meta {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+  margin: 12px 0 0;
+}
+.emotion-meta dt {
+  font-size: 11px;
+  color: var(--muted);
+}
+.emotion-meta dd {
+  margin: 0;
+  font: 600 14px var(--mono);
+}
+
+/* current reading */
+.emotion-hero {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+.emotion-emoji {
+  width: 72px;
+  font-size: 60px;
+  line-height: 1;
+  text-align: center;
+}
+.emotion-name {
+  font-size: 30px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  text-transform: capitalize;
+}
+.emotion-conf {
+  color: var(--muted);
+  font-size: 14px;
+}
+.emotion-bars {
+  display: grid;
+  gap: 6px;
+}
+.emotion-bar {
+  display: grid;
+  grid-template-columns: 104px 1fr 44px;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+}
+.emotion-bar .name {
+  color: var(--muted);
+  text-transform: capitalize;
+}
+.emotion-bar.top .name {
+  color: var(--ink);
+  font-weight: 600;
+}
+.emotion-bar .track {
+  height: 12px;
+  border-radius: 4px;
+  background: #edf1e7;
+  overflow: hidden;
+}
+.emotion-bar .fill {
+  width: 0;
+  height: 100%;
+  border-radius: 0 4px 4px 0;
+  background: var(--ink);
+  opacity: 0.35;
+  transition: width 0.35s ease-out;
+}
+.emotion-bar.top .fill {
+  opacity: 1;
+}
+.emotion-bar .value {
+  text-align: right;
+  font: 12px var(--mono);
+  color: var(--muted);
+}
+.emotion-meters {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+  margin-top: 22px;
+}
+.meter-top {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 6px;
+  font-size: 13px;
+  color: var(--muted);
+}
+.meter-top b {
+  color: var(--ink);
+  font-family: var(--mono);
+}
+.meter-track {
+  position: relative;
+  height: 10px;
+  border-radius: 4px;
+  background: #edf1e7;
+}
+.meter-dot {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 16px;
+  height: 16px;
+  margin: -8px 0 0 -8px;
+  border-radius: 50%;
+  border: 2px solid white;
+  background: var(--ink);
+  transition: left 0.35s ease-out;
+}
+.meter-ends {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 4px;
+  font-size: 11px;
+  color: var(--muted);
+}
+
+/* timeline */
+.emotion-timeline {
+  grid-column: 1 / -1;
+}
+.chart {
+  position: relative;
+}
+.chart svg {
+  display: block;
+  width: 100%;
+  height: 160px;
+  overflow: visible;
+}
+.chart-tip {
+  position: absolute;
+  display: none;
+  pointer-events: none;
+  white-space: nowrap;
+  padding: 6px 10px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: white;
+  box-shadow: 0 4px 14px #1d292620;
+  font-size: 12px;
+}
+
+.response-inspector {
+  margin-top: 22px;
+}
+.response-inspector summary {
+  cursor: pointer;
+  font-weight: 600;
+}
+.response-inspector pre {
+  max-height: 360px;
+  overflow: auto;
+  padding: 16px;
+  border-radius: 8px;
+  background: #1d2926;
+  color: #e7ecdf;
+  font: 12px/1.5 var(--mono);
+}
+
+@media (max-width: 820px) {
+  .emotion-grid {
+    grid-template-columns: 1fr;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .emotion-bar .fill,
+  .meter-dot {
+    transition: none;
+  }
+}

@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Emotion camera · Simple Jev</title>
+    <link rel="icon" href="/assets/simple-jev.png" />
+    <link rel="stylesheet" href="/styles.css" />
+    <link rel="stylesheet" href="emotion.css" />
+    <script src="/shared/demo-header.js" defer></script>
+    <script type="module" src="app.js"></script>
+  </head>
+  <body>
+    <simple-jev-demo-header></simple-jev-demo-header>
+    <main class="wrap emotion-page">
+      <p class="eyebrow">SIMPLE JEV · VISION LAB</p>
+      <h1>Emotion camera</h1>
+      <p class="lead">
+        Make a face. Every second or two, a still from your webcam goes to the
+        classifier with four questions: which emotion, how positive, how
+        intense, and whether a face is visible at all.
+      </p>
+      <div class="emotion-controls">
+        <div>
+          <label for="model">Vision model</label
+          ><select id="model" disabled>
+            <option>Loading models…</option>
+          </select>
+        </div>
+        <button id="toggle" disabled>Start camera</button>
+      </div>
+      <p id="status" role="status" aria-live="polite">Loading models…</p>
+      <p class="limits">
+        No API key · 2k context · 4 RPS. Frames are sent one at a time, at most
+        one per second, only while the camera is running. Nothing is stored.
+      </p>
+
+      <div class="emotion-grid">
+        <section class="emotion-card">
+          <div class="cam">
+            <video id="video" playsinline muted></video>
+            <div class="cam-placeholder" id="placeholder">
+              <div>Your camera stays off until you press Start camera.</div>
+            </div>
+            <div class="cam-badge" id="noface" hidden>No face detected</div>
+          </div>
+          <dl class="emotion-meta">
+            <div><dt>Frame</dt><dd id="m-frame">–</dd></div>
+            <div><dt>Round trip</dt><dd id="m-rt">–</dd></div>
+            <div><dt>Input tokens</dt><dd id="m-tok">–</dd></div>
+          </dl>
+        </section>
+
+        <section class="emotion-card" aria-labelledby="h-name">
+          <div class="emotion-hero">
+            <div class="emotion-emoji" id="h-emoji" aria-hidden="true">🙂</div>
+            <div>
+              <div class="emotion-name" id="h-name">Waiting for a frame</div>
+              <div class="emotion-conf" id="h-conf">
+                Start the camera to begin.
+              </div>
+            </div>
+          </div>
+          <p class="emotion-label">Emotion probabilities</p>
+          <div class="emotion-bars" id="bars"></div>
+          <div class="emotion-meters">
+            <div class="meter">
+              <div class="meter-top">
+                <span>Valence</span><b id="v-val">–</b>
+              </div>
+              <div class="meter-track"><div class="meter-dot" id="v-dot"></div></div>
+              <div class="meter-ends"><span>negative</span><span>positive</span></div>
+            </div>
+            <div class="meter">
+              <div class="meter-top"><span>Energy</span><b id="e-val">–</b></div>
+              <div class="meter-track">
+                <div class="meter-dot" id="e-dot" style="left: 0"></div>
+              </div>
+              <div class="meter-ends"><span>calm</span><span>intense</span></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="emotion-card emotion-timeline">
+          <p class="emotion-label">Valence over the last 60 seconds</p>
+          <div class="chart" id="chart">
+            <svg id="svg" role="img" aria-label="Valence over time"></svg>
+            <div class="chart-tip" id="tip"></div>
+          </div>
+        </section>
+      </div>
+
+      <details class="response-inspector">
+        <summary>Under the hood · latest response</summary>
+        <pre id="response">Start the camera to see the API responses.</pre>
+      </details>
+    </main>
+  </body>
+</html>

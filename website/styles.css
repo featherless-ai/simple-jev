@@ -1791,6 +1791,19 @@ input:focus-visible {
 .home-demo-card .vision-preview {
   height: 180px;
 }
+.emotion-preview {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 320px;
+  gap: 2px;
+  background: var(--paper);
+}
+.emotion-preview span {
+  display: grid;
+  place-items: center;
+  font-size: 64px;
+  background: #1d2926;
+}
 
 .doom-preview {
   min-height: 320px;
