@@ -131,6 +131,10 @@ Both 2048 and the driving simulator load `shared/demo-header.js`, providing the 
 
 `/cool-demo/vision/` classifies the full 11-photo catalog with Gemma or Qwen. Four images share each API request. Batches run serially with a short delay and bounded HTTP 429 retries that honor Retry-After. Cancel preserves completed results. Source credits are in `catalog.json`. Include `cool-demo/vision/` in deployment; no build is needed.
 
+## Emotion camera
+
+`/cool-demo/emotion/` reads the visitor's facial expression from their webcam. One 320-pixel still per request carries four questions (emotion choice, valence and energy scores, face-visible Noul). Requests are serial and start at least one second apart; Gemma is the default model. The camera starts only on request and stops on errors or when the page is hidden; frames are not stored. It reuses `cool-demo/vision/queue.mjs` for rate-limit retries. Include `cool-demo/emotion/`, `cool-demo/vision/`, and `shared/` when deploying. See its README for details.
+
 ## Production deployment
 
 `.github/workflows/deploy-website.yml` publishes to Cloudflare Pages in **Recursal PROD** when `main` receives changes under `website/`, `demos/jevpilot/`, or the deployment workflow. You can also run **Deploy website** manually from GitHub Actions on `main`.
