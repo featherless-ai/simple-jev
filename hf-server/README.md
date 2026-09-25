@@ -90,7 +90,7 @@ simple-jev --model Qwen/Qwen3.8-27B --device auto --dtype bfloat16 \
   --max-request-branches 256 --max-model-len 32768 --max-choice-options 255
 ```
 
-This Qwen configuration automatically selects `examples_binary` when no prompt
+This Qwen configuration automatically selects `shared_examples_binary` when no prompt
 format is specified. Three 255-choice questions consume three branches, not 765.
 The limits do not guarantee that all maxima fit simultaneously: long options and
 policy repetition increase input length. Violations return 422; candidates/context
@@ -117,16 +117,29 @@ Explicit selection always overrides auto-selection. In particular, explicit
 
 ```bash
 simple-jev --model Qwen/Qwen3.8-27B --device auto \
-  --classifier-prompt-policy examples_binary
+  --classifier-prompt-policy shared_examples_binary
 ```
 
-| Model | Policy |
-|---|---|
-| Qwen/Qwen3.8-27B | `examples_binary` |
-| Qwen/Qwen3.6-35B-A3B | `repeat_state` |
-| Qwen/Qwen3.5-4B | `strict_mix_repeat2` |
-| google/gemma-4-26B-A4B-it | `strict_mix_repeat2` |
-| google/gemma-4-12B-it | `strict_mix_repeat2` |
+| Model | Sharing-constrained policy | Native development correct /477 |
+|---|---|---:|
+| Qwen/Qwen3.8-27B | `shared_examples_binary` |445|
+| Qwen/Qwen3.6-35B-A3B | `shared_repeat_state` |432|
+| Qwen/Qwen3.5-4B | `shared_examples_binary` |374|
+| google/gemma-4-26B-A4B-it | `shared_examples_binary` |437|
+| google/gemma-4-12B-it | `shared_repeat_state` |427|
+
+`shared_examples_binary` and `shared_repeat_state` keep system instructions and
+native thinking flags uniform across mixed-type question branches. Type-specific
+instructions follow shared state/chat. State repetition stays in the shared
+prefix; chat turns are not duplicated. Both support plain-text `messages`.
+The experimental explicit-only `universal_shared` moves universal rules and the
+complete labelled question catalogue before state/chat; only the selected ID and
+answer prefix follow it, with no fixed thinking prefill. It remains an experimental
+replay/tuning option, not an automatic recommendation. These development selections
+reuse the quick477 cases; they are not fresh held-out benchmark scores.
+
+Legacy formats remain explicit options for reproduction, but are excluded from
+default tuning because mixed-type system instructions can defeat context sharing:
 
 - `examples_binary`: strict decision rules, worked examples, raw text/pretty
   JSON state once, and binary no/yes Noul scoring.
@@ -134,9 +147,9 @@ simple-jev --model Qwen/Qwen3.8-27B --device auto \
 - `strict_mix_repeat2`: strict rules, the entire user block twice, and the
   evaluated nine-bin Noul wording/scoring. No extra worked-example block.
 
-The three named policies accept **text/JSON `state` only**, not `messages`;
-use `baseline` to preserve text chat turns. HF still rejects images/tools.
-Choice branches prefill three fixed `[thinking]` lines through the model's native
+The three legacy policies above accept **text/JSON `state` only**, not `messages`;
+use `baseline` or a shared format to preserve text chat turns. HF still rejects images/tools.
+Except for baseline/universal_shared, Choice branches prefill three fixed `[thinking]` lines through the model's native
 chat template; Score/Noul branches answer directly. This does not generate
 reasoning or output tokens. A template that drops the fixed prefill is rejected.
 Binary Noul returns `{"type":"noul","noul":P(yes)}` in [0,1], with no nine-bin
@@ -155,8 +168,10 @@ python eval/prompt_search.py --model YOUR_MODEL --device cuda \
 ```
 
 Run this from the repository root in the server environment after preparing the
-quick datasets. It evaluates all four formats sequentially with native scoring;
-apply the winner explicitly. Repeated-input policies need enough context (32K
+quick datasets. By default it evaluates baseline and the two sharing-compatible
+named formats with native scoring. `--all-formats` opts into all seven formats,
+including legacy and experimental candidates; `--policies` selects an explicit
+subset. Apply the winner explicitly. Repeated-input policies need enough context (32K
 fits the checked 255-option case), and larger requests use more memory.
 
 Named policies pass text blocks to the model's native template while

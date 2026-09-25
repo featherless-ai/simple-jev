@@ -21,7 +21,9 @@ class NativeTokenizer(Tokenizer):
             return super().apply_chat_template(messages, **kwargs)
         assert kwargs == {'tokenize': False, 'add_generation_prompt': False,
                           'continue_final_message': True,
-                          'enable_thinking': 'reasoning_content' in messages[-1]}
+                          'enable_thinking': kwargs['enable_thinking']}
+        assert isinstance(kwargs['enable_thinking'], bool)
+        if 'reasoning_content' in messages[-1]:assert kwargs['enable_thinking']
         assert all(isinstance(m['content'], list) for m in messages)
         assert all(len(m['content']) == 1 and m['content'][0]['type'] == 'text' for m in messages)
         return '\n'.join(f"{m['role']}: {m.get('reasoning_content', '')}{m['content'][0]['text']}" for m in messages)
@@ -71,11 +73,11 @@ def test_frozen_prompt_parity_and_no_mutation(policy, kind):
 @pytest.mark.parametrize('policy', PROMPT_POLICIES)
 def test_labels_and_native_prefill(policy):
     c = PromptCompiler(NativeTokenizer(), prompt_policy=policy).compile(request())
-    binary = policy in ('examples_binary', 'repeat_state')
+    binary = policy.removeprefix('shared_') in ('examples_binary', 'repeat_state', 'universal_shared')
     assert c.binary_noul_keys == (('noul',) if binary else ())
     assert c.branches[-1].output_ids == list(map(ord, 'AB' if binary else '123456789'))
     for branch, q in zip(c.branches, c.plan.questions):
-        assert branch.reasoning_content == ('[thinking]\n' * 3 if policy != 'baseline' and q.question_id == 'choice' else None)
+        assert branch.reasoning_content == ('[thinking]\n' * 3 if policy not in ('baseline','universal_shared') and q.question_id == 'choice' else None)
         assert branch.token_ids
     if policy == 'baseline':
         assert c.plan == prepare_prompt(request())
@@ -113,7 +115,7 @@ async def test_public_http_types_and_binary_probability(policy, advanced):
                 assert body['metadata']['template_version'] == f'hf-{policy}-v1'
 
 
-@pytest.mark.parametrize('policy', PROMPT_POLICIES[1:])
+@pytest.mark.parametrize('policy', ('examples_binary', 'repeat_state', 'strict_mix_repeat2'))
 def test_chat_rejected_and_laya_not_changed(policy):
     req = request().model_dump(exclude={'state'})
     req['messages'] = [{'role': 'user', 'content': 'cat'}]

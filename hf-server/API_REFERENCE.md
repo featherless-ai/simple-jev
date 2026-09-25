@@ -378,7 +378,8 @@ preserve the former default or use plain-text `messages`. Advanced metadata
 includes `prompt_policy` and `prompt_policy_selection` (mode/profile/signature).
 
 An explicit `--classifier-prompt-policy` selects `baseline`, `examples_binary`,
-`repeat_state`, or `strict_mix_repeat2`. It is a startup setting, not a request
+`repeat_state`, `strict_mix_repeat2`, `shared_examples_binary`, `shared_repeat_state`,
+or experimental `universal_shared`. It is a startup setting, not a request
 field or header. Invalid names fail argument parsing; non-baseline policies
 with `--backend laya` fail before loading weights.
 
@@ -388,10 +389,17 @@ with `--backend laya` fail before loading weights.
 | `examples_binary` | Strict rules + worked examples; state once | Restricted probability of yes over no/yes, in [0,1] |
 | `repeat_state` | Same as examples_binary; state repeated twice | Same binary probability |
 | `strict_mix_repeat2` | Strict rules; full user-input block repeated twice | Original evaluated nine-bin wording and [0.01,0.99] mapping |
+| `shared_examples_binary` | Uniform system/native thinking flag; type-specific instructions after shared context | Binary probability |
+| `shared_repeat_state` | Same shared layout; state twice in shared prefix, chat once | Binary probability |
+| `universal_shared` | Experimental universal rules and labelled catalogue before context; selector-only suffix | Binary probability |
 
-Named policies require `state`; `messages` return 422. Existing text-only
-restrictions still apply. Choice branches use a fixed three-line native
-`[thinking]` prefill, not generated reasoning. Score/Noul do not use this prefill.
+Legacy `examples_binary`, `repeat_state`, and `strict_mix_repeat2` require `state`;
+`messages` return422. Baseline, shared_* and universal_shared support plain-text chat.
+Existing text-only restrictions still apply. Choice branches in legacy/shared_*
+policies use a fixed three-line native `[thinking]` prefill, not generated reasoning.
+Baseline/universal_shared and Score/Noul branches do not use this prefill.
+Default tuning excludes the three legacy policies. `--all-formats` in the tuning
+tool explicitly includes them and the experimental universal format.
 The tokenizer must preserve the prefill and every allowed single-token answer
 boundary. All policy content counts toward the complete branch token limit.
 

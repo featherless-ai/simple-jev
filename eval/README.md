@@ -34,17 +34,24 @@ python eval/prompt_search.py --model YOUR_MODEL --device cuda --dtype bfloat16 \
 ```
 
 The search always passes explicit policies; server auto-selection cannot influence
-which candidate is tested. Defaults: `baseline examples_binary repeat_state
-strict_mix_repeat2`, 477 decisions each, workers=1, no request retries, 32K context,
+which candidate is tested. Defaults: `baseline shared_examples_binary shared_repeat_state`
+(context-sharing-compatible formats), 477 decisions each, workers=1, no request retries, 32K context,
 255-option limit. Remote branches/revisions are resolved once to an immutable
 commit before loading weights; offline mode requires cached config/revision data.
 Local checkpoint directories must be kept immutable during the search. Pass
 `--revision COMMIT` to reproduce a specific checkpoint.
 
-- `--policies baseline examples_binary` searches a subset; tied best formats use
-  this order. The default prefers baseline on ties.
+- `--all-formats` explicitly includes all seven formats, including experimental
+  `universal_shared` (universal rules and the full question catalogue before context)
+  and legacy
+  `examples_binary`, `repeat_state`, and `strict_mix_repeat2`, which can break
+  common-prefix sharing across mixed question types. This does not change server
+  auto-selection defaults. Reports identify unrestricted searches.
+- `--policies baseline shared_examples_binary` searches a subset; an explicit
+  subset may also include legacy formats. It cannot be combined with `--all-formats`.
+  Tied best formats use the requested order; the default prefers baseline on ties.
 - `--device cpu --dtype float32` supports CPU testing when the model supports it;
-  four full quick runs can be slow. The model is reloaded once per format.
+  full quick runs can be slow. The model is reloaded once per format.
 - `--max-model-len`, `--max-choice-options`, `--max-batch-size`,
   `--max-batch-tokens`, and `--workers` stay fixed across formats. Increase context
   when needed; the tool never truncates candidates or skips difficult cases.

@@ -203,6 +203,9 @@ class PromptCompiler:
             request, self.version, self.prompt_policy, extended_choice_labels=labels
         )
         system = plan.system_prompt_prefix + plan.prefix_instruction
+        # Some native templates (Gemma) put the thinking flag in the SYSTEM turn.
+        # Shared policies therefore choose it once per request, never per branch.
+        shared_thinking = any(q.type == 'choice' for q in request.questions.values())
         branches = []
         for question in plan.questions:
             content = plan.suffix_instruction + question.instruction
@@ -262,7 +265,8 @@ class PromptCompiler:
                     text = self.tokenizer.apply_chat_template(
                         native_messages, tokenize=False,
                         add_generation_prompt=False, continue_final_message=True,
-                        enable_thinking=reasoning_content is not None,
+                        enable_thinking=(shared_thinking if self.prompt_policy.startswith('shared_')
+                                         else reasoning_content is not None),
                     )
                     if reasoning_content is not None and reasoning_content not in text:
                         raise ValueError("Model chat template did not preserve fixed policy reasoning content")

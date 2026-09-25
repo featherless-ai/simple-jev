@@ -4,7 +4,7 @@ from types import SimpleNamespace
 from unittest.mock import Mock
 
 import pytest
-from hf_prompt_policies import KNOWN_PROFILES, PROFILE_FIELDS, resolve_prompt_policy
+from hf_prompt_policies import AUTO_TUNE_POLICIES, KNOWN_PROFILES, PROFILE_FIELDS, resolve_prompt_policy
 
 
 def config_for(signature):
@@ -18,8 +18,9 @@ def test_known_architecture_size(name, policy, signature):
     config = config_for(signature)
     original = copy.deepcopy(config)
     selected, metadata = resolve_prompt_policy(config)
-    assert selected == policy
-    assert metadata['mode'] == 'architecture-size' and metadata['profile'] == name
+    assert selected == (policy if policy in AUTO_TUNE_POLICIES else 'baseline')
+    assert metadata['mode'] == ('architecture-size' if policy in AUTO_TUNE_POLICIES else 'performance-fallback')
+    assert metadata['profile'] == name
     assert config == original
     # A nearby size is NOT assigned a guessed policy.
     config['text_config']['hidden_size'] += 1
@@ -49,7 +50,7 @@ def test_heterogeneous_config_serialization():
             raise AssertionError('Must not read ambiguous live attributes')
         def to_dict(self):
             return config_for(KNOWN_PROFILES[3][2])
-    assert resolve_prompt_policy(Config())[0] == 'strict_mix_repeat2'
+    assert resolve_prompt_policy(Config())[0] == 'shared_repeat_state'
 
 
 def test_loader_auto_selects_without_changing_weights(monkeypatch):
@@ -63,7 +64,7 @@ def test_loader_auto_selects_without_changing_weights(monkeypatch):
     loader = Mock(return_value=Mock())
     monkeypatch.setattr(transformers.AutoModelForImageTextToText, 'from_pretrained', loader)
     service = load_service('/renamed/checkpoint', served_model_name='anything', max_choice_options=50)
-    assert service.compiler.prompt_policy == 'strict_mix_repeat2'
+    assert service.compiler.prompt_policy == 'shared_examples_binary'
     assert service.metadata['prompt_policy_selection']['profile'] == 'Qwen dense 4B'
     assert loader.call_args.args == ('/renamed/checkpoint',)
     explicit = load_service('/renamed/checkpoint', prompt_policy='baseline', max_choice_options=50)
@@ -71,11 +72,11 @@ def test_loader_auto_selects_without_changing_weights(monkeypatch):
 
 
 @pytest.mark.parametrize('signature,expected', [
-    (('qwen3_5_text', 2560, 32, 16, 4, 256, 9216, None, None, None, 248320), 'strict_mix_repeat2'),
-    (('qwen3_5_text', 5120, 64, 24, 4, 256, 17408, None, None, None, 248320), 'examples_binary'),
-    (('qwen3_5_moe_text', 2048, 40, 16, 2, 256, None, 256, 512, 8, 248320), 'repeat_state'),
-    (('gemma4_unified_text', 3840, 48, 16, 8, 256, 15360, None, None, None, 262144), 'strict_mix_repeat2'),
-    (('gemma4_text', 2816, 30, 16, 8, 256, 2112, 128, 704, 8, 262144), 'strict_mix_repeat2'),
+    (('qwen3_5_text', 2560, 32, 16, 4, 256, 9216, None, None, None, 248320), 'shared_examples_binary'),
+    (('qwen3_5_text', 5120, 64, 24, 4, 256, 17408, None, None, None, 248320), 'shared_examples_binary'),
+    (('qwen3_5_moe_text', 2048, 40, 16, 2, 256, None, 256, 512, 8, 248320), 'shared_repeat_state'),
+    (('gemma4_unified_text', 3840, 48, 16, 8, 256, 15360, None, None, None, 262144), 'shared_repeat_state'),
+    (('gemma4_text', 2816, 30, 16, 8, 256, 2112, 128, 704, 8, 262144), 'shared_examples_binary'),
     (('qwen3_5_text', 1024, 24, 8, 2, 256, 3584, None, None, None, 248320), 'baseline'),
 ])
 def test_frozen_reference_configurations(signature, expected):
@@ -92,11 +93,12 @@ def test_frozen_reference_configurations(signature, expected):
 def test_search_candidates_match_server_policies():
     import ast
     from pathlib import Path
-    from hf_prompt_policies import PROMPT_POLICIES
+    from hf_prompt_policies import AUTO_TUNE_POLICIES
     module = ast.parse((Path(__file__).resolve().parents[2] / 'eval/prompt_search.py').read_text())
     value = next(node.value for node in module.body if isinstance(node, ast.Assign)
                  and any(isinstance(t, ast.Name) and t.id == 'POLICIES' for t in node.targets))
-    assert ast.literal_eval(value) == PROMPT_POLICIES
+    assert ast.literal_eval(value) == AUTO_TUNE_POLICIES
+    assert 'strict_mix_repeat2' not in AUTO_TUNE_POLICIES
 
 
 def test_cli_omission_is_not_explicit_baseline(monkeypatch):

@@ -38,13 +38,52 @@ class SearchTests(unittest.TestCase):
              contextlib.redirect_stdout(io.StringIO()) as output:
             self.assertEqual(search.main(['--model', 'unloaded/model', '--list']), 0)
         plan = json.loads(output.getvalue())
-        self.assertEqual(len(plan['commands']), 4)
+        self.assertEqual(len(plan['commands']), 3)
+        self.assertTrue(plan['sharing_compatible_only'])
+        self.assertEqual(plan['nonshared_policies'], [])
+        self.assertNotIn('strict_mix_repeat2', plan['policies'])
         for policy, command in zip(search.POLICIES, plan['commands']):
             self.assertEqual(command[command.index('--classifier-prompt-policy') + 1], policy)
             self.assertIn('--enforce-model-id', command)
         with tempfile.TemporaryDirectory() as directory, contextlib.redirect_stderr(io.StringIO()):
             with self.assertRaises(SystemExit):
                 search.main(['--model', 'unused', '--output', directory])
+
+    def test_all_formats_and_explicit_legacy_subset_are_opt_in(self):
+        for flags, expected in [(['--all-formats'], search.ALL_POLICIES),
+                                (['--policies', 'strict_mix_repeat2'], ('strict_mix_repeat2',))]:
+            with patch.object(search, 'preflight', side_effect=AssertionError('offline only')), \
+                 contextlib.redirect_stdout(io.StringIO()) as output:
+                self.assertEqual(search.main(['--model', 'unused', '--list', *flags]), 0)
+            plan = json.loads(output.getvalue())
+            self.assertEqual(plan['policies'], list(expected))
+            self.assertFalse(plan['sharing_compatible_only'])
+            self.assertIn('strict_mix_repeat2', plan['nonshared_policies'])
+            report = search.comparison([], expected)
+            self.assertFalse(report['sharing_compatible_only'])
+            self.assertIn('strict_mix_repeat2', report['nonshared_policies'])
+        with contextlib.redirect_stderr(io.StringIO()), self.assertRaises(SystemExit):
+            search.main(['--model', 'unused', '--list', '--all-formats', '--policies', 'baseline'])
+
+    def test_policy_lists_match_server_registry(self):
+        # Keep offline orchestration independent of server/runtime dependencies.
+        import ast
+        tree = ast.parse((search.ROOT / 'hf-server/hf_prompt_policies.py').read_text())
+        constants = {target.id: ast.literal_eval(node.value)
+                     for node in tree.body if isinstance(node, ast.Assign)
+                     for target in node.targets if isinstance(target, ast.Name)
+                     and target.id in {'PROMPT_POLICIES', 'AUTO_TUNE_POLICIES'}}
+        self.assertEqual(search.ALL_POLICIES, constants['PROMPT_POLICIES'])
+        self.assertEqual(search.POLICIES, constants['AUTO_TUNE_POLICIES'])
+
+    def test_explicit_universal_is_sharing_compatible_but_not_default(self):
+        with contextlib.redirect_stdout(io.StringIO()) as output:
+            self.assertEqual(search.main(['--model', 'unused', '--list',
+                                          '--policies', 'universal_shared']), 0)
+        plan = json.loads(output.getvalue())
+        self.assertTrue(plan['sharing_compatible_only'])
+        self.assertEqual(plan['nonshared_policies'], [])
+        self.assertNotIn('universal_shared', search.POLICIES)
 
     def test_missing_data_prevents_launch(self):
         with tempfile.TemporaryDirectory() as root, \
