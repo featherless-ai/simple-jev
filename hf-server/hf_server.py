@@ -629,7 +629,11 @@ class LayaBackend:
         with self._lock:
             if stop.is_set():
                 raise asyncio.CancelledError()
-            if request.tools or request.mm_processor_kwargs:
+            if (
+                request.tools
+                or request.mm_processor_kwargs
+                or request.media_io_kwargs
+            ):
                 raise ValueError("Laya supports text state and text chat only")
             if request.options.raw_logits:
                 raise ValueError("Laya raw_logits diagnostics are not supported")
