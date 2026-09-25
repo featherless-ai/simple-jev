@@ -54,9 +54,13 @@ def test_compiler_renders_common_plan_and_checks_real_boundaries():
         assert branch.output_ids == [ord(label) for label in question.output_labels]
     assert compiled.branches[1].output_ids == list(map(ord, "ABCDEFGHIJK"))
     assert (
-        "Encode probability with 0.1 being the lowers"
+        "Encode probability 0.1 as 1, 0.2 as 2, and so on through 0.9 as 9."
         in compiled.branches[2].messages[-1]["content"]
     )
+
+    assert compiled.plan.questions[2].answer_prefix == '{"answer": '
+    assert compiled.plan.questions[2].output_labels == tuple("123456789")
+    assert compiled.branches[2].output_ids == list(map(ord, "123456789"))
 
 
 def test_chat_roles_are_preserved_without_mutating_request():

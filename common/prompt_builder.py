@@ -248,7 +248,7 @@ def _prepare_v1(request: ClassifierRequest, extended_choice_labels=()) -> Prompt
             detail = (
                 f"Truth rubric:\n{canonical(question.criteria or {})}\n"
                 "Rate the probability that the answer is yes, from 0.1 to 0.9."
-                " Encode probability with 0.1 being the lowers, and 0.9 as the highest"
+                " Encode probability 0.1 as 1, 0.2 as 2, and so on through 0.9 as 9."
             )
         # The repeated question and deliberation wording are intentional parts
         # of the inherited v1 prompt. They are instructions within a forward
