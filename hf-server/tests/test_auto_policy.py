@@ -63,6 +63,7 @@ def test_loader_auto_selects_without_changing_weights(monkeypatch):
     monkeypatch.setattr(transformers.AutoTokenizer, 'from_pretrained', Mock(return_value=NativeTokenizer()))
     loader = Mock(return_value=Mock())
     monkeypatch.setattr(transformers.AutoModelForImageTextToText, 'from_pretrained', loader)
+    monkeypatch.setattr(transformers.AutoProcessor, 'from_pretrained', Mock(return_value=SimpleNamespace(image_processor=None)))
     service = load_service('/renamed/checkpoint', served_model_name='anything', max_choice_options=50)
     assert service.compiler.prompt_policy == 'shared_examples_binary'
     assert service.metadata['prompt_policy_selection']['profile'] == 'Qwen dense 4B'

@@ -106,13 +106,13 @@ def test_invalid_boundary_and_duplicate_labels_rejected():
         {
             "state": None,
             "messages": [
-                {"role": "user", "content": [{"type": "text", "text": "red"}]}
+                {"role": "user", "content": [{"type": "input_audio", "input_audio": {"data": "AAAA", "format": "wav"}}]}
             ],
         },
     ],
 )
 def test_text_restrictions_remain(patch):
-    """Shared schema acceptance must not bypass the HF text-only restrictions."""
+    """Unsupported tools/modalities remain explicit errors, not discarded input."""
     with pytest.raises(ValueError, match="text|tools"):
         PromptCompiler(Tokenizer()).compile({**request(), **patch})
 

@@ -131,7 +131,7 @@ simple-jev --model Qwen/Qwen3.8-27B --device auto \
 `shared_examples_binary` and `shared_repeat_state` keep system instructions and
 native thinking flags uniform across mixed-type question branches. Type-specific
 instructions follow shared state/chat. State repetition stays in the shared
-prefix; chat turns are not duplicated. Both support plain-text `messages`.
+prefix; chat turns are not duplicated. Both support text and [image chat](VISION.md) `messages`.
 The experimental explicit-only `universal_shared` moves universal rules and the
 complete labelled question catalogue before state/chat; only the selected ID and
 answer prefix follow it, with no fixed thinking prefill. It remains an experimental
@@ -148,7 +148,9 @@ default tuning because mixed-type system instructions can defeat context sharing
   evaluated nine-bin Noul wording/scoring. No extra worked-example block.
 
 The three legacy policies above accept **text/JSON `state` only**, not `messages`;
-use `baseline` or a shared format to preserve text chat turns. HF still rejects images/tools.
+use `baseline` or a shared format to preserve chat turns. Supported vision models
+also accept [image chat inputs](VISION.md), sharing image processing and prefill
+when the compiled context is shared. Tools remain unsupported.
 Except for baseline/universal_shared, Choice branches prefill three fixed `[thinking]` lines through the model's native
 chat template; Score/Noul branches answer directly. This does not generate
 reasoning or output tokens. A template that drops the fixed prefill is rejected.
@@ -181,13 +183,19 @@ Repetition consumes additional context; the complete rendered branch remains
 subject to `--max-model-len`. Advanced metadata identifies
 `hf-<policy>-v1` instead of the baseline `v1` template.
 
-This is a prompt/scoring-adapter addition only: model loading, precision, cache
-reuse, batching, locking, admission and inference code are unchanged. No worker,
+Named prompt formats change prompt/scoring adapters, not model precision or
+execution controls. Image-specific loading and cache handling are described in
+[VISION.md](VISION.md). No worker,
 stream, FP8, kernel, or other performance optimizations are included. Laya keeps
 its native formatting and rejects non-baseline prompt policies at startup.
 Implementation: `hf_prompt_policies.py`, packaged alongside `hf_server.py`.
 
 ## Shared-prefix execution
+
+The following batching description applies to text-only requests. Image requests
+use native expanded media tokens, image attention masks/positions, and independent
+unpadded suffixes while sharing image preprocessing and prefill once; see
+[VISION.md](VISION.md).
 
 The compiler calls `common.prepare_prompt(request, version="v1")`, assembles the
 returned strings with state/chat roles, and applies the model chat template.
@@ -205,17 +213,22 @@ one forward and is not chunked by `--max-batch-tokens`.
 
 ## Scope and validation
 
-This reference currently accepts **text only**, including text messages.
-Images, audio, video and tool calls are rejected. A multimodal model loader does
-not imply multimodal input support. Models need a compatible Transformers cache
-that supports copying and `reorder_cache`, a chat template, and single-token
-rating/choice labels. Arbitrary model compatibility is not guaranteed.
+The Transformers backend accepts text and **image chat**. Supported Qwen-VL/
+Qwen3.5, Gemma3/4 and LLaVA-family checkpoints use native processors and cache
+continuations. Images may be inline PNG/JPEG/WebP data URLs or bounded public
+HTTP(S) URLs. Audio, video and tools are rejected. See [supported architectures,
+transport security, limits and numerical behavior](VISION.md).
+
+Models need compatible copyable Transformers caches, a native chat template,
+and single-token rating/choice labels. Text suffix batching additionally needs
+`reorder_cache`. Arbitrary model compatibility is not guaranteed.
 
 The shared v1 prompt and scoring rules are the source of truth for the explicit
 `baseline` format; alternative policy differences are described above.
 It does not claim exact numeric equivalence with another inference engine.
 Tests compare reused-cache logits against independent full-prompt forwards for
-tiny Qwen3, Qwen3.5, Gemma2 and Gemma4 models, and exercise API validation,
+tiny Qwen, Gemma and LLaVA models, and exercise native processors, image-call
+counts, cache isolation, public-URL validation, API validation,
 confidence, usage accounting and endpoint aliases. They use random local models,
 without downloading weights; they do not measure answer quality.
 

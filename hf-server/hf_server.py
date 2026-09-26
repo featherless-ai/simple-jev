@@ -15,7 +15,7 @@ Request flow:
 
 common owns validation, default versioned classifier wording, label semantics,
 and answer math. hf_prompt_policies adds startup-selected formatting and binary Noul
-adaptation without modifying common. This file owns text-only role assembly,
+adaptation without modifying common. This file owns text/image chat role assembly,
 native chat/tokenizer boundaries,
 shared-prefix inference, queue/cancellation controls, usage accounting, HTTP, and
 startup. Model weights load only when load_service/main is called.
@@ -75,6 +75,8 @@ class Branch:
     as the shared question's output_labels. Messages/prefix remain available for
     inspection; they are not reconstructed from tokens during inference.
     reasoning_content is an optional fixed native assistant prefill, not output.
+    model_inputs holds native processor tensors for image branches, including
+    expanded input IDs, image grids/positions, pixel values and modality masks.
 
     render_only compilation leaves both ID lists empty and is not executable.
     frozen prevents attribute reassignment, not mutation of the contained lists.
@@ -86,6 +88,8 @@ class Branch:
     messages: list[dict]
     answer_prefix: str
     reasoning_content: str | None = None
+    model_inputs: dict[str, Any] | None = None
+    image_mask: Any = None
 
 
 @dataclass
@@ -121,10 +125,43 @@ def common_prefix(sequences):
     return first[:end]
 
 
+def render_chat(renderer, messages, **kwargs):
+    """Preserve turns unless the native template requires strict alternation.
+
+    Appending a classifier question to user-ending chat otherwise makes valid
+    Gemma3 conversations unrenderable. For that native constraint only, coalesce
+    adjacent user content in order, preserving every image and text block.
+    """
+    from jinja2.exceptions import TemplateError
+    try:
+        return renderer.apply_chat_template(messages, **kwargs)
+    except TemplateError as exc:
+        if 'alternat' not in str(exc).lower():
+            raise ValueError('Model chat template rejected the conversation') from exc
+        merged = []
+        for message in messages:
+            if merged and message['role'] == merged[-1]['role'] == 'user':
+                left, right = merged[-1]['content'], message['content']
+                if isinstance(left, str) and isinstance(right, str):
+                    merged[-1]['content'] = left + '\n\n' + right
+                else:
+                    left = [{'type': 'text', 'text': left}] if isinstance(left, str) else left
+                    right = [{'type': 'text', 'text': right}] if isinstance(right, str) else right
+                    merged[-1]['content'] = left + [{'type': 'text', 'text': '\n\n'}] + copy.deepcopy(right)
+            else:
+                merged.append(copy.deepcopy(message))
+        if len(merged) == len(messages):
+            raise ValueError('Model chat template requires alternating conversation roles') from exc
+        try:
+            return renderer.apply_chat_template(merged, **kwargs)
+        except TemplateError as retry:
+            raise ValueError('Model chat template rejected the conversation') from retry
+
+
 class PromptCompiler:
     """Render shared classifier plans with a model's native tokenizer template."""
 
-    def __init__(self, tokenizer, max_tokens=16384, version=DEFAULT_TEMPLATE_VERSION, prompt_policy="baseline", max_choice_options=255):
+    def __init__(self, tokenizer, max_tokens=16384, version=DEFAULT_TEMPLATE_VERSION, prompt_policy="baseline", max_choice_options=255, processor=None):
         """Store the renderer, complete-prompt token limit, and shared version.
 
         Version validation is performed by common.prepare_prompt during compile.
@@ -132,6 +169,7 @@ class PromptCompiler:
         This class does not load a tokenizer or model on its own.
         """
         self.tokenizer = tokenizer
+        self.processor = processor
         self.max_tokens = max_tokens
         self.version = version
         validate_policy(prompt_policy)
@@ -140,6 +178,9 @@ class PromptCompiler:
             raise ValueError("max_choice_options must be between 2 and 255")
         self.max_choice_options = max_choice_options
         self._extended_choice_labels = None
+
+    async def compile_async(self, request):
+        return await asyncio.to_thread(self.compile, request)
 
     def validate_choice_capacity(self):
         """Allocate fixed-width labels; every real prompt is checked again below."""
@@ -168,7 +209,7 @@ class PromptCompiler:
         return self._extended_choice_labels
 
     def compile(self, request: ClassifierRequest, *, render_only=False):
-        """Validate text input and compile one branch per shared-plan question.
+        """Validate text/image input and compile one branch per shared-plan question.
 
         request may be a ClassifierRequest or an input dictionary. render_only
         returns roles/content and the shared plan for diagnostics/tests; it skips
@@ -180,19 +221,29 @@ class PromptCompiler:
         """
         if not isinstance(request, ClassifierRequest):
             request = ClassifierRequest.model_validate(request)
-        # The shared schema allows richer contexts for other integrations. This
-        # adapter narrows that contract before constructing text-only messages.
+        # Reject unimplemented tools/options rather than silently dropping them.
         if request.tools or request.mm_processor_kwargs or request.media_io_kwargs:
             raise ValueError(
-                "HF text reference does not support tools or media options"
+                "HF reference does not support tools or media processing overrides"
             )
         if request.messages and any(
-            not isinstance(m.content, str)
-            or m.model_extra
-            or m.role in {"tool", "function"}
+            m.model_extra or m.role in {"tool", "function"} or m.content is None
             for m in request.messages
         ):
-            raise ValueError("HF text reference accepts plain text chat only")
+            raise ValueError("HF reference does not support tool messages or null content")
+        chat = [m.model_dump(exclude_none=True) for m in request.messages] if request.messages else None
+        images, processor = [], None
+        if chat and any(not isinstance(m['content'], str) for m in chat):
+            from hf_vision import image_messages, cached_processor
+            chat, images = image_messages(chat)
+            if images:
+                if self.processor is None:
+                    raise ValueError("Image chat requires a supported vision model and processor")
+                processor = cached_processor(self.processor)
+            # System policy assembly operates on text; image blocks are user-only.
+            for message in chat:
+                if isinstance(message['content'], list) and all(b['type'] == 'text' for b in message['content']):
+                    message['content'] = ''.join(b['text'] for b in message['content'])
 
         largest_choice = max((len(q.criteria) for q in request.questions.values()
                               if q.type == 'choice'), default=0)
@@ -223,7 +274,7 @@ class PromptCompiler:
             else:
                 # Dump into new dictionaries so adding classifier instructions
                 # never mutates the caller's existing conversation.
-                messages = [m.model_dump(exclude_none=True) for m in request.messages]
+                messages = copy.deepcopy(chat)
                 if messages[0]["role"] == "system":
                     messages[0]["content"] = system + "\n" + messages[0]["content"]
                 else:
@@ -233,15 +284,16 @@ class PromptCompiler:
             messages, reasoning_content = format_branch(
                 messages, request, question.question_id, self.prompt_policy
             )
-            ids, output_ids = [], []
+            ids, output_ids, model_inputs, image_mask = [], [], None, None
             if not render_only:
+                renderer = processor if processor is not None else self.tokenizer
                 # Render first, then append incomplete JSON to the open assistant
                 # position. Do not create a completed assistant message or add
                 # a closing brace/EOS before the next-token scoring position.
                 if self.prompt_policy == "baseline":
                     text = (
-                        self.tokenizer.apply_chat_template(
-                            messages,
+                        render_chat(
+                            renderer, messages,
                             tokenize=False,
                             add_generation_prompt=True,
                             enable_thinking=False,
@@ -259,11 +311,12 @@ class PromptCompiler:
                     # one text block (e.g. a system-turn boundary space). Do not
                     # hardcode model names, whitespace, or tokenizer IDs here.
                     native_messages = [
-                        {**message, "content": [{"type": "text", "text": message["content"]}]}
+                        {**message, "content": ([{"type": "text", "text": message["content"]}]
+                                                if isinstance(message['content'], str) else message['content'])}
                         for message in messages + [assistant]
                     ]
-                    text = self.tokenizer.apply_chat_template(
-                        native_messages, tokenize=False,
+                    text = render_chat(
+                        renderer, native_messages, tokenize=False,
                         add_generation_prompt=False, continue_final_message=True,
                         enable_thinking=(shared_thinking if self.prompt_policy.startswith('shared_')
                                          else reasoning_content is not None),
@@ -272,7 +325,13 @@ class PromptCompiler:
                         raise ValueError("Model chat template did not preserve fixed policy reasoning content")
                 # The template already supplies special tokens. Adding another
                 # BOS/EOS during encode would alter the intended model input.
-                ids = self.tokenizer.encode(text, add_special_tokens=False)
+                if processor is not None:
+                    from hf_vision import processor_inputs, image_token_mask
+                    model_inputs = processor_inputs(processor, text, images, self.max_tokens)
+                    image_mask = image_token_mask(processor, model_inputs)
+                    ids = model_inputs['input_ids'][0].tolist()
+                else:
+                    ids = self.tokenizer.encode(text, add_special_tokens=False)
                 if not ids or len(ids) > self.max_tokens:
                     raise ValueError(
                         f"Branch for {question.question_id!r} must contain 1–{self.max_tokens} tokens"
@@ -280,9 +339,13 @@ class PromptCompiler:
                 # Derive IDs at the actual rendered boundary, not from isolated
                 # label encoding. Check every branch; templates/context can affect it.
                 for label in question.output_labels:
-                    extended = self.tokenizer.encode(
-                        text + label, add_special_tokens=False
-                    )
+                    if processor is not None:
+                        # Check the actual expanded image-token boundary, not a
+                        # text-only approximation. Image preprocessing is memoized.
+                        extended = processor_inputs(processor, text + label, images,
+                                                    self.max_tokens + 1)['input_ids'][0].tolist()
+                    else:
+                        extended = self.tokenizer.encode(text + label, add_special_tokens=False)
                     if len(extended) != len(ids) + 1 or extended[:-1] != ids:
                         raise ValueError(
                             f"Answer label {label!r} is not single-token stable"
@@ -298,6 +361,8 @@ class PromptCompiler:
                     messages,
                     question.answer_prefix,
                     reasoning_content,
+                    model_inputs,
+                    image_mask,
                 )
             )
         return CompiledRequest(plan, branches, binary_noul_keys)
@@ -401,6 +466,9 @@ class HFBackend:
             if stop.is_set():
                 raise asyncio.CancelledError()
             start = time.perf_counter()
+            if any(b.model_inputs is not None for b in compiled.branches):
+                from hf_vision import score_vision
+                return score_vision(self, compiled, stop)
             sequences = [b.token_ids for b in compiled.branches]
             if not sequences or any(not ids for ids in sequences):
                 raise ValueError("Expected nonempty scoring prompts")
@@ -1120,22 +1188,27 @@ def load_service(
         AutoModelForCausalLM,
         AutoModelForImageTextToText,
         AutoTokenizer,
+        AutoProcessor,
     )
 
     tokenizer = AutoTokenizer.from_pretrained(model_name, revision=revision)
     config = AutoConfig.from_pretrained(model_name, revision=revision)
     prompt_policy, policy_selection = resolve_prompt_policy(config, prompt_policy)
     configure_rope(config, rope_factor)
-    # These checkpoint families use the image/text auto-loader even for text
-    # scoring. This selection does not enable image input: the compiler remains
-    # text-only and rejects unsupported media/tool requests.
-    loader = (
-        AutoModelForImageTextToText
-        if config.model_type in {"gemma4", "qwen3_5", "qwen3_5_moe"}
-        else AutoModelForCausalLM
-    )
+    # Use Transformers' native registry rather than treating newer vision
+    # architectures as text-only. Cache compatibility is checked by the adapter.
+    from transformers.models.auto.modeling_auto import MODEL_FOR_IMAGE_TEXT_TO_TEXT_MAPPING_NAMES
+    from hf_vision import VISION_MODEL_TYPES
+    native_vision = (type(config) in AutoModelForImageTextToText._model_mapping
+                     or config.model_type in MODEL_FOR_IMAGE_TEXT_TO_TEXT_MAPPING_NAMES)
+    loader = AutoModelForImageTextToText if native_vision else AutoModelForCausalLM
+    processor = None
+    if native_vision:
+        candidate = AutoProcessor.from_pretrained(model_name, revision=revision)
+        if config.model_type in VISION_MODEL_TYPES and getattr(candidate, 'image_processor', None) is not None:
+            processor = candidate
     compiler = PromptCompiler(tokenizer, max_tokens=max_model_len, prompt_policy=prompt_policy,
-                              max_choice_options=max_choice_options)
+                              max_choice_options=max_choice_options, processor=processor)
     compiler.validate_choice_capacity()
     model = loader.from_pretrained(
         model_name,
@@ -1163,6 +1236,7 @@ def load_service(
             "backend": "transformers",
             "prompt_policy": prompt_policy,
             "prompt_policy_selection": policy_selection,
+            "image_input": processor is not None,
             "model_revision": revision,
             "rope_factor": rope_factor,
         },

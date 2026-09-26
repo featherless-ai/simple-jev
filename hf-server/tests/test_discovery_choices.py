@@ -221,6 +221,7 @@ def test_loader_public_name_and_extended_capacity(monkeypatch):
     monkeypatch.setattr(transformers.AutoConfig, 'from_pretrained', Mock(return_value=SimpleNamespace(model_type='qwen3_5')))
     loader = Mock(return_value=model)
     monkeypatch.setattr(transformers.AutoModelForImageTextToText, 'from_pretrained', loader)
+    monkeypatch.setattr(transformers.AutoProcessor, 'from_pretrained', Mock(return_value=SimpleNamespace(image_processor=None)))
     service = load_service('physical-model', served_model_name='public-name', enforce_model_id=True)
     assert service.model == 'public-name' and service.enforce_model_id
     assert service.max_choice_options == 255

@@ -1,0 +1,466 @@
+{
+  "snapshot_scope": "Historical v1 before public URLs and expanded adapters; failed full-forward gates are retained",
+  "current_extension_report": "CONTINUATION_RESULTS.json",
+  "implementation_functionally_verified": true,
+  "strict_numerical_equivalence_established": false,
+  "counts": {
+    "image_http_requests": 92,
+    "independent_full_forward_comparisons": 300,
+    "top_scoring_label_agreements": 299,
+    "http422_checks": 40,
+    "color_smoke_correct": 91,
+    "route_control_cases": 4
+  },
+  "regression_tests": {
+    "tests": 216,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "junit_sha256": "7691b7cdd21b83061980d76646efb079204fc451a26d84bab48c01bafe921e3a"
+  },
+  "production_source_sha256": {
+    "hf-server/hf_prompt_policies.py": "110f22367ebc4fae4d8bfc9c3c5a1a816be7869bd2f6f6659d9512476d6d10d2",
+    "hf-server/hf_server.py": "1ff8aa908e494797c40214e7df4887d94d71b9c7f68634e308d49513857a6ced",
+    "hf-server/hf_vision.py": "777c90b575e56c1a7073d935bea976fbd38c23d974ead764193a84ff0c8f9732",
+    "common/__init__.py": "670f21965e6799ef3b0b28e6f6c9d36d2c067c713f39f5c5886e9bd5a5266896",
+    "common/prompt_builder.py": "f93b8c53f6c876b4eac6eabed2055df02e27c0862819a001fb0254100c7ede87",
+    "common/request_schema.py": "4350ba05a3ff54f4d6983da38cf7dd8c6ed804481a86b4d032ce401df684f18d",
+    "common/response_scoring.py": "b1b1303ace5218fb40904e7aaf5a1ad01aa3d072c30678d45e921bb0e8613dfa"
+  },
+  "production_and_test_sources_match_executed_snapshot": true,
+  "wheel": {
+    "sha256": "ebc50606ee4c1516d226205d08b8738141298b6b5421e633c853d956a54523e2",
+    "required_modules": [
+      "hf_server.py",
+      "hf_prompt_policies.py",
+      "hf_vision.py",
+      "common/request_schema.py",
+      "common/response_scoring.py"
+    ],
+    "cli_help_passed": true
+  },
+  "jobs": {
+    "a": {
+      "id": "d2a22330-a5b3-4e20-9ca3-f9e5e1af3e56",
+      "state": "failed",
+      "exitCode": 1
+    },
+    "b": {
+      "id": "41abff69-f89d-4072-a511-bbf64f29243b",
+      "state": "failed",
+      "exitCode": 1
+    },
+    "c": {
+      "id": "ca51d0dc-2e4f-4808-b94a-a5fe691f8702",
+      "state": "failed",
+      "exitCode": 1
+    },
+    "d": {
+      "id": "2000e02e-9a5d-44f1-9614-b09f65fa0373",
+      "state": "succeeded",
+      "exitCode": 0
+    }
+  },
+  "bf16": {
+    "functional_passed": true,
+    "numerical_gate_passed": false,
+    "color_smoke_gate_passed": true,
+    "auditor_sha256": "211451226f95590cbdb75c3f8aba8a395d4dce40fa93a20212a7f122daf5fa46",
+    "dtype": "bfloat16",
+    "job_id": "d2a22330-a5b3-4e20-9ca3-f9e5e1af3e56",
+    "job_state": "failed",
+    "exit_code": 1,
+    "source_files_verified": 14,
+    "fixtures_sha256": "0a6452721509e9bb5ff5dad5c333f56f04a94320e44d09bd990aff82293769c7",
+    "regression_tests": null,
+    "frozen_gates": {
+      "max_probability_delta": 0.03,
+      "require_top_label_agreement": true,
+      "require_color_smoke_accuracy": true,
+      "shared_image_forwards_per_request": 1,
+      "shared_preprocess_calls_per_request": 1
+    },
+    "models": [
+      {
+        "model": "Qwen/Qwen3.5-4B",
+        "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+        "image_http_requests": 14,
+        "native_logit_comparisons": 45,
+        "color_smoke_correct": 14,
+        "max_probability_delta": 0.03101712465286255,
+        "max_expanded_branch_tokens": 5181,
+        "shared_image_calls": 1,
+        "independent_image_calls": 3,
+        "http422_checks": 5,
+        "functional_passed": true,
+        "top_label_agreements": 45,
+        "failed_numerical_gates": [
+          "universal_shared-red-blue"
+        ],
+        "numerical_gate_passed": false,
+        "failed_color_gates": [],
+        "color_smoke_gate_passed": true
+      },
+      {
+        "model": "google/gemma-4-12B-it",
+        "revision": "707f0a3b8a3c7ad586ed01e27eafbad8a27dd0f7",
+        "image_http_requests": 14,
+        "native_logit_comparisons": 45,
+        "color_smoke_correct": 14,
+        "max_probability_delta": 0.03358417749404907,
+        "max_expanded_branch_tokens": 5570,
+        "shared_image_calls": 1,
+        "independent_image_calls": 3,
+        "http422_checks": 5,
+        "functional_passed": true,
+        "top_label_agreements": 45,
+        "failed_numerical_gates": [
+          "universal_shared-blue-red"
+        ],
+        "numerical_gate_passed": false,
+        "failed_color_gates": [],
+        "color_smoke_gate_passed": true
+      },
+      {
+        "model": "google/gemma-4-26B-A4B-it",
+        "revision": "4d7ae4984b7db7de8f8457170b3f1a419ee76d52",
+        "image_http_requests": 14,
+        "native_logit_comparisons": 45,
+        "color_smoke_correct": 14,
+        "max_probability_delta": 0.058971285820007324,
+        "max_expanded_branch_tokens": 5570,
+        "shared_image_calls": 1,
+        "independent_image_calls": 3,
+        "http422_checks": 5,
+        "functional_passed": true,
+        "top_label_agreements": 45,
+        "failed_numerical_gates": [
+          "shared_examples_binary-red-blue",
+          "shared_repeat_state-red-blue",
+          "universal_shared-red-blue",
+          "universal_shared-blue-red"
+        ],
+        "numerical_gate_passed": false,
+        "failed_color_gates": [],
+        "color_smoke_gate_passed": true
+      },
+      {
+        "model": "Qwen/Qwen3.6-35B-A3B",
+        "revision": "995ad96eacd98c81ed38be0c5b274b04031597b0",
+        "image_http_requests": 14,
+        "native_logit_comparisons": 45,
+        "color_smoke_correct": 14,
+        "max_probability_delta": 0.1998492181301117,
+        "max_expanded_branch_tokens": 5181,
+        "shared_image_calls": 1,
+        "independent_image_calls": 3,
+        "http422_checks": 5,
+        "functional_passed": true,
+        "top_label_agreements": 45,
+        "failed_numerical_gates": [
+          "universal_shared-red-blue",
+          "universal_shared-blue-red"
+        ],
+        "numerical_gate_passed": false,
+        "failed_color_gates": [],
+        "color_smoke_gate_passed": true
+      }
+    ],
+    "total_image_http_requests": 56,
+    "total_native_logit_comparisons": 180,
+    "scope": "Synthetic execution smoke, not a representative image quality benchmark"
+  },
+  "fp32": {
+    "functional_passed": true,
+    "numerical_gate_passed": false,
+    "color_smoke_gate_passed": false,
+    "auditor_sha256": "211451226f95590cbdb75c3f8aba8a395d4dce40fa93a20212a7f122daf5fa46",
+    "dtype": "float32",
+    "job_id": "ca51d0dc-2e4f-4808-b94a-a5fe691f8702",
+    "job_state": "failed",
+    "exit_code": 1,
+    "source_files_verified": 32,
+    "fixtures_sha256": "598527284f89ff3cd7d7ae70b196d75bea83f2f194ce10a123e9a7ee1acd57de",
+    "regression_tests": {
+      "tests": 216,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "junit_sha256": "7691b7cdd21b83061980d76646efb079204fc451a26d84bab48c01bafe921e3a"
+    },
+    "frozen_gates": {
+      "max_probability_delta": 0.0001,
+      "require_top_label_agreement": true,
+      "require_color_smoke_accuracy": true,
+      "shared_image_forwards_per_request": 1,
+      "shared_preprocess_calls_per_request": 1
+    },
+    "models": [
+      {
+        "model": "Qwen/Qwen3.5-4B",
+        "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+        "image_http_requests": 9,
+        "native_logit_comparisons": 30,
+        "color_smoke_correct": 8,
+        "max_probability_delta": 4.351139068603516e-06,
+        "max_expanded_branch_tokens": 1275,
+        "shared_image_calls": 1,
+        "independent_image_calls": 3,
+        "http422_checks": 5,
+        "functional_passed": true,
+        "top_label_agreements": 30,
+        "failed_numerical_gates": [],
+        "numerical_gate_passed": true,
+        "failed_color_gates": [
+          "universal_shared-red-blue"
+        ],
+        "color_smoke_gate_passed": false
+      },
+      {
+        "model": "google/gemma-4-12B-it",
+        "revision": "707f0a3b8a3c7ad586ed01e27eafbad8a27dd0f7",
+        "image_http_requests": 9,
+        "native_logit_comparisons": 30,
+        "color_smoke_correct": 9,
+        "max_probability_delta": 0.00012242794036865234,
+        "max_expanded_branch_tokens": 1669,
+        "shared_image_calls": 1,
+        "independent_image_calls": 3,
+        "http422_checks": 5,
+        "functional_passed": true,
+        "top_label_agreements": 30,
+        "failed_numerical_gates": [
+          "universal_shared-blue-red"
+        ],
+        "numerical_gate_passed": false,
+        "failed_color_gates": [],
+        "color_smoke_gate_passed": true
+      },
+      {
+        "model": "google/gemma-4-26B-A4B-it",
+        "revision": "4d7ae4984b7db7de8f8457170b3f1a419ee76d52",
+        "image_http_requests": 9,
+        "native_logit_comparisons": 30,
+        "color_smoke_correct": 9,
+        "max_probability_delta": 0.03473326563835144,
+        "max_expanded_branch_tokens": 1669,
+        "shared_image_calls": 1,
+        "independent_image_calls": 3,
+        "http422_checks": 5,
+        "functional_passed": true,
+        "top_label_agreements": 29,
+        "failed_numerical_gates": [
+          "shared_examples_binary-red-blue",
+          "shared_repeat_state-red-blue",
+          "universal_shared-red-blue",
+          "universal_shared-blue-red"
+        ],
+        "numerical_gate_passed": false,
+        "failed_color_gates": [],
+        "color_smoke_gate_passed": true
+      },
+      {
+        "model": "Qwen/Qwen3.6-35B-A3B",
+        "revision": "995ad96eacd98c81ed38be0c5b274b04031597b0",
+        "image_http_requests": 9,
+        "native_logit_comparisons": 30,
+        "color_smoke_correct": 9,
+        "max_probability_delta": 0.015600979328155518,
+        "max_expanded_branch_tokens": 1275,
+        "shared_image_calls": 1,
+        "independent_image_calls": 3,
+        "http422_checks": 5,
+        "functional_passed": true,
+        "top_label_agreements": 30,
+        "failed_numerical_gates": [
+          "baseline-red-blue",
+          "shared_examples_binary-red-blue",
+          "shared_examples_binary-blue-red",
+          "shared_repeat_state-red-blue",
+          "shared_repeat_state-blue-red",
+          "universal_shared-red-blue",
+          "universal_shared-blue-red",
+          "repeat-via-alias"
+        ],
+        "numerical_gate_passed": false,
+        "failed_color_gates": [],
+        "color_smoke_gate_passed": true
+      }
+    ],
+    "total_image_http_requests": 36,
+    "total_native_logit_comparisons": 120,
+    "scope": "FP32 precision diagnostic, matched eight multi-image fixtures from original BF16 study; not a general accuracy benchmark"
+  },
+  "routing_control": {
+    "passed": true,
+    "job_id": "2000e02e-9a5d-44f1-9614-b09f65fa0373",
+    "state": "succeeded",
+    "exit_code": 0,
+    "source_files_verified": 13,
+    "gates": {
+      "fixed_probability_delta": 0.001,
+      "large_natural_delta": 0.0001,
+      "minimum_reduction_factor": 10
+    },
+    "cases": [
+      {
+        "model": "google/gemma-4-26B-A4B-it",
+        "id": "universal_shared-blue-red",
+        "branch": "2",
+        "role": "worst",
+        "natural_probability_delta": 0.03473325328892485,
+        "fixed_probability_delta": 0.00016493834525466156,
+        "changed_layer_token_pairs": 1087,
+        "earliest_change": {
+          "layer": "model.language_model.layers.7.router",
+          "token": 1549,
+          "full_ids": [
+            10,
+            122,
+            106,
+            0,
+            69,
+            51,
+            43,
+            115
+          ],
+          "natural_ids": [
+            10,
+            122,
+            106,
+            0,
+            69,
+            51,
+            43,
+            109
+          ],
+          "full_margin": 2.421438694000244e-08,
+          "natural_margin": 0.0
+        },
+        "passed": true
+      },
+      {
+        "model": "google/gemma-4-26B-A4B-it",
+        "id": "baseline-blue-red",
+        "branch": "2",
+        "role": "control",
+        "natural_probability_delta": 1.0644146291038936e-06,
+        "fixed_probability_delta": 5.606433095550756e-10,
+        "changed_layer_token_pairs": 454,
+        "earliest_change": {
+          "layer": "model.language_model.layers.12.router",
+          "token": 641,
+          "full_ids": [
+            81,
+            21,
+            53,
+            45,
+            25,
+            71,
+            50,
+            125
+          ],
+          "natural_ids": [
+            81,
+            21,
+            53,
+            45,
+            25,
+            71,
+            50,
+            120
+          ],
+          "full_margin": 2.3283064365386963e-08,
+          "natural_margin": 2.0489096641540527e-08
+        },
+        "passed": true
+      },
+      {
+        "model": "Qwen/Qwen3.6-35B-A3B",
+        "id": "baseline-red-blue",
+        "branch": "1",
+        "role": "worst",
+        "natural_probability_delta": 0.015600888807204782,
+        "fixed_probability_delta": 7.29304668212194e-07,
+        "changed_layer_token_pairs": 4627,
+        "earliest_change": {
+          "layer": "model.language_model.layers.7.mlp.gate",
+          "token": 29,
+          "full_ids": [
+            171,
+            164,
+            132,
+            245,
+            116,
+            120,
+            11,
+            35
+          ],
+          "natural_ids": [
+            171,
+            164,
+            132,
+            245,
+            116,
+            120,
+            11,
+            36
+          ],
+          "full_margin": 7.450580596923828e-09,
+          "natural_margin": 3.166496753692627e-08
+        },
+        "passed": true
+      },
+      {
+        "model": "Qwen/Qwen3.6-35B-A3B",
+        "id": "baseline-blue-red",
+        "branch": "1",
+        "role": "control",
+        "natural_probability_delta": 1.3614700482555975e-06,
+        "fixed_probability_delta": 1.5390597376749304e-07,
+        "changed_layer_token_pairs": 3,
+        "earliest_change": {
+          "layer": "model.language_model.layers.30.mlp.gate",
+          "token": 151,
+          "full_ids": [
+            72,
+            19,
+            233,
+            117,
+            184,
+            130,
+            14,
+            234
+          ],
+          "natural_ids": [
+            72,
+            19,
+            233,
+            117,
+            184,
+            130,
+            14,
+            67
+          ],
+          "full_margin": 3.166496753692627e-08,
+          "natural_margin": 4.6566128730773926e-09
+        },
+        "passed": true
+      }
+    ],
+    "route_capture_hashes": {
+      "gemma26/routes-0.pt": "19af1e80290eb8d0dbcbaaa163c16be25266907cd7d104276b5a2e2be01ce685",
+      "gemma26/routes-1.pt": "47d5e509a4ebd174896a213aab229363cb33b84a8b9ca1eb1cab50c61b92da7d",
+      "qwen35/routes-0.pt": "020b5e57840319b7d73ffe53afb91261a00d405b5d69460b3eb7c35d389dd9a7",
+      "qwen35/routes-1.pt": "a1def3caca7eb5bc6569c5b739ac604ce698e245158637a9e08386cbb074158a"
+    },
+    "auditor_sha256": "58f1f93d5b5ca27b33fcb60dbc5f12afbb5e723dbc8ef6ece1ccd7be608e6c10",
+    "scope": "Diagnostic route control only; no production routes, logits or scores overridden"
+  },
+  "audit_sha256": {
+    "audit-a-final.json": "6b1fd23f6ae6835b6723e5500b4ecc7cea666cfe8d6ef2aa3f7ab0d78d396c8d",
+    "audit-c.json": "3107df7fc4581e05140ec8e040c90b0dc768b0c2cdb102f8fc03b461b092814e",
+    "audit-d.json": "70bcf5ded4cf63b400c964eca3571460c9cba8cf9165f72d94d455c859d2baea"
+  },
+  "scope": "Synthetic functional smoke and numerical diagnostics, not a general accuracy/throughput benchmark. Failed gates retained. No forced routes or logits in production. No active owned jobs."
+}

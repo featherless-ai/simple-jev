@@ -305,7 +305,7 @@ curl http://127.0.0.1:8000/v1/classifier \
 JSON
 ```
 
-Unknown top-level request fields are ignored, including completion settings such as `temperature`, `max_tokens`, and `stream`. Unknown fields inside questions and options are rejected. There is no completion sampling or streaming. The HF server currently supports text only; images, audio, video, and tool calls are unsupported.
+Unknown top-level request fields are ignored, including completion settings such as `temperature`, `max_tokens`, and `stream`. Unknown fields inside questions and options are rejected. There is no completion sampling or streaming. The HF server supports text and [image chat inputs](hf-server/VISION.md) with Qwen-VL/Qwen3.5, Gemma3/4, and LLaVA-family vision models. Shared image context is processed once per request. Images use `image_url` blocks in user `messages`, with base64 data URLs or bounded public HTTP(S) downloads. Private-network URLs, audio, video, and tool calls are rejected.
 
 `usage.input_tokens` counts unique token prefixes within the request, sharing the common context across questions. `usage.output_tokens` is zero because no output tokens are generated. For diagnostic timings, start the server with `ENABLE_OPEN_JEV_ADVANCED_METRICS=1`; adding `"options": {"raw_logits": true}` to a request then includes selected-token logits.
 
