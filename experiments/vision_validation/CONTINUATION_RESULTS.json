@@ -1,0 +1,298 @@
+{
+  "image_implementation_verified": true,
+  "native_cache_fork_targets_passed": true,
+  "mixed_compatible_context_reuse_verified": true,
+  "nonchunked_full_forward_equivalence_claimed": false,
+  "counts": {
+    "image_http_requests": 54,
+    "shared_context_native_comparisons": 174,
+    "independent_context_comparisons": 24,
+    "total_native_reference_comparisons": 198,
+    "color_choices_correct": 54,
+    "http422_checks": 30,
+    "public_https_image_downloads": 12,
+    "mixed_context_controls": 6,
+    "native_reference_max_logit_delta": 0.0,
+    "native_reference_max_probability_delta": 0.0
+  },
+  "final_gpu_host_regressions": {
+    "tests": 320,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "junit_sha256": "9034bed34556f7819d3b4e7b6a8746964a1c02a6e671a456d046ec666255ee93"
+  },
+  "local_cpu_regressions": {
+    "tests": 319,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "deselected": 1,
+    "junit_sha256": "b72a5e5ed9700b0151b2f85f5fdd934fb480765349d20e785f91011a94b9f168"
+  },
+  "production_python_sha256": {
+    "hf-server/hf_media.py": "8b090b5b0902b26e09d1b9c68ddfda7b43518002a272f6df45cbfb46769f3c0c",
+    "hf-server/hf_prompt_policies.py": "110f22367ebc4fae4d8bfc9c3c5a1a816be7869bd2f6f6659d9512476d6d10d2",
+    "hf-server/hf_server.py": "ca1dd42b55f538e9137286b4acbb98f6143ae543a84b647ae932aaaa6f0429f5",
+    "hf-server/hf_vision.py": "76436d10cd69791ee9efaeadb17e31846c7668d4804b7a2bf7c55bd028efa9f1",
+    "common/__init__.py": "670f21965e6799ef3b0b28e6f6c9d36d2c067c713f39f5c5886e9bd5a5266896",
+    "common/prompt_builder.py": "f93b8c53f6c876b4eac6eabed2055df02e27c0862819a001fb0254100c7ede87",
+    "common/request_schema.py": "4350ba05a3ff54f4d6983da38cf7dd8c6ed804481a86b4d032ce401df684f18d",
+    "common/response_scoring.py": "b1b1303ace5218fb40904e7aaf5a1ad01aa3d072c30678d45e921bb0e8613dfa"
+  },
+  "packaging_sha256": "f2a7a1f05d9bb517cb61c38b2f22bc03fed2117fcaa36ced15e983985efdc071",
+  "production_test_and_packaging_match_source_i": true,
+  "wheel": {
+    "file": "/root/open-jev-experiments/hf-vision-validation-v1/wheel-i/simple_jev-0.1.0-py3-none-any.whl",
+    "sha256": "4a4a7b4a63f71671beca48a61bc2e7d372f9c311dcedf23b339762449827d9c5",
+    "all_production_module_bytes_match": true,
+    "includes_hf_media": true,
+    "external_import_and_help_passed": true,
+    "production_test_and_packaging_match_source_i": true,
+    "local_pillow": "12.3.0"
+  },
+  "final_six_model_audit": {
+    "functional_passed": true,
+    "numerical_gate_passed": true,
+    "color_smoke_gate_passed": true,
+    "auditor_sha256": "6f27135783928f1d8a9e03e0c5acc96d2cd874d9faa7bdc6e05fefcece6d2bd2",
+    "reference_mode": "native_chunks",
+    "dtype": "bfloat16",
+    "job_id": "0ed09e84-4e60-451f-8fbc-a66ada5f28a6",
+    "job_state": "succeeded",
+    "exit_code": 0,
+    "source_files_verified": 45,
+    "fixtures_sha256": "47f6f3ed6a176f9433a51b6de4be91ceb4bf1f87de47fc9a9177d579df27eeea",
+    "regression_tests": {
+      "tests": 320,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "junit_sha256": "9034bed34556f7819d3b4e7b6a8746964a1c02a6e671a456d046ec666255ee93"
+    },
+    "frozen_gates": {
+      "max_probability_delta": 1e-06,
+      "max_logit_delta": 1e-05,
+      "top_label_agreement": true,
+      "color_smoke_correct": true
+    },
+    "models": [
+      {
+        "model": "Qwen/Qwen2.5-VL-3B-Instruct",
+        "revision": "66285546d2b821cf421d4f5eb2576359d3770cd3",
+        "image_http_requests": 9,
+        "native_logit_comparisons": 33,
+        "color_smoke_correct": 9,
+        "max_probability_delta": 0.0,
+        "max_expanded_branch_tokens": 5047,
+        "max_logit_delta": 0.0,
+        "nonchunked_full_max_probability_delta": 0.031232178211212158,
+        "nonchunked_full_failed_numeric_cases": [
+          "single-JPEG"
+        ],
+        "shared_image_calls": 1,
+        "independent_image_calls": 3,
+        "mixed_context_image_calls": 2,
+        "mixed_context_max_logit_delta": 0.0,
+        "mixed_context_max_probability_delta": 0.0,
+        "http422_checks": 5,
+        "functional_passed": true,
+        "top_label_agreements": 33,
+        "failed_numerical_gates": [],
+        "numerical_gate_passed": true,
+        "failed_color_gates": [],
+        "color_smoke_gate_passed": true
+      },
+      {
+        "model": "Qwen/Qwen3-VL-2B-Instruct",
+        "revision": "89644892e4d85e24eaac8bacfd4f463576704203",
+        "image_http_requests": 9,
+        "native_logit_comparisons": 33,
+        "color_smoke_correct": 9,
+        "max_probability_delta": 0.0,
+        "max_expanded_branch_tokens": 5157,
+        "max_logit_delta": 0.0,
+        "nonchunked_full_max_probability_delta": 0.005844712257385254,
+        "nonchunked_full_failed_numeric_cases": [],
+        "shared_image_calls": 1,
+        "independent_image_calls": 3,
+        "mixed_context_image_calls": 2,
+        "mixed_context_max_logit_delta": 0.0,
+        "mixed_context_max_probability_delta": 0.0,
+        "http422_checks": 5,
+        "functional_passed": true,
+        "top_label_agreements": 33,
+        "failed_numerical_gates": [],
+        "numerical_gate_passed": true,
+        "failed_color_gates": [],
+        "color_smoke_gate_passed": true
+      },
+      {
+        "model": "Qwen/Qwen3.5-4B",
+        "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+        "image_http_requests": 9,
+        "native_logit_comparisons": 33,
+        "color_smoke_correct": 9,
+        "max_probability_delta": 0.0,
+        "max_expanded_branch_tokens": 5181,
+        "max_logit_delta": 0.0,
+        "nonchunked_full_max_probability_delta": 0.004572570323944092,
+        "nonchunked_full_failed_numeric_cases": [],
+        "shared_image_calls": 1,
+        "independent_image_calls": 3,
+        "mixed_context_image_calls": 2,
+        "mixed_context_max_logit_delta": 0.0,
+        "mixed_context_max_probability_delta": 0.0,
+        "http422_checks": 5,
+        "functional_passed": true,
+        "top_label_agreements": 33,
+        "failed_numerical_gates": [],
+        "numerical_gate_passed": true,
+        "failed_color_gates": [],
+        "color_smoke_gate_passed": true
+      },
+      {
+        "model": "google/gemma-4-12B-it",
+        "revision": "707f0a3b8a3c7ad586ed01e27eafbad8a27dd0f7",
+        "image_http_requests": 9,
+        "native_logit_comparisons": 33,
+        "color_smoke_correct": 9,
+        "max_probability_delta": 0.0,
+        "max_expanded_branch_tokens": 5570,
+        "max_logit_delta": 0.0,
+        "nonchunked_full_max_probability_delta": 0.0010528564453125,
+        "nonchunked_full_failed_numeric_cases": [],
+        "shared_image_calls": 1,
+        "independent_image_calls": 3,
+        "mixed_context_image_calls": 2,
+        "mixed_context_max_logit_delta": 0.0,
+        "mixed_context_max_probability_delta": 0.0,
+        "http422_checks": 5,
+        "functional_passed": true,
+        "top_label_agreements": 33,
+        "failed_numerical_gates": [],
+        "numerical_gate_passed": true,
+        "failed_color_gates": [],
+        "color_smoke_gate_passed": true
+      },
+      {
+        "model": "google/gemma-4-26B-A4B-it",
+        "revision": "4d7ae4984b7db7de8f8457170b3f1a419ee76d52",
+        "image_http_requests": 9,
+        "native_logit_comparisons": 33,
+        "color_smoke_correct": 9,
+        "max_probability_delta": 0.0,
+        "max_expanded_branch_tokens": 5570,
+        "max_logit_delta": 0.0,
+        "nonchunked_full_max_probability_delta": 0.012343108654022217,
+        "nonchunked_full_failed_numeric_cases": [],
+        "shared_image_calls": 1,
+        "independent_image_calls": 3,
+        "mixed_context_image_calls": 2,
+        "mixed_context_max_logit_delta": 0.0,
+        "mixed_context_max_probability_delta": 0.0,
+        "http422_checks": 5,
+        "functional_passed": true,
+        "top_label_agreements": 33,
+        "failed_numerical_gates": [],
+        "numerical_gate_passed": true,
+        "failed_color_gates": [],
+        "color_smoke_gate_passed": true
+      },
+      {
+        "model": "Qwen/Qwen3.6-35B-A3B",
+        "revision": "995ad96eacd98c81ed38be0c5b274b04031597b0",
+        "image_http_requests": 9,
+        "native_logit_comparisons": 33,
+        "color_smoke_correct": 9,
+        "max_probability_delta": 0.0,
+        "max_expanded_branch_tokens": 5181,
+        "max_logit_delta": 0.0,
+        "nonchunked_full_max_probability_delta": 0.02746737003326416,
+        "nonchunked_full_failed_numeric_cases": [],
+        "shared_image_calls": 1,
+        "independent_image_calls": 3,
+        "mixed_context_image_calls": 2,
+        "mixed_context_max_logit_delta": 0.0,
+        "mixed_context_max_probability_delta": 0.0,
+        "http422_checks": 5,
+        "functional_passed": true,
+        "top_label_agreements": 33,
+        "failed_numerical_gates": [],
+        "numerical_gate_passed": true,
+        "failed_color_gates": [],
+        "color_smoke_gate_passed": true
+      }
+    ],
+    "total_image_http_requests": 54,
+    "total_native_logit_comparisons": 198,
+    "scope": "Native cache-fork equivalence and image HTTP execution smoke, not non-chunked full-forward equivalence or broad semantic accuracy. Original failed full-forward gates retained; new full-forward comparisons are separately reported."
+  },
+  "final_audit_sha256": "2629b7dd8a5d7d2e4131f9b30fdc3db4a79240a98241ebdc4215cc1de32698f5",
+  "intermediate_extension_history": {
+    "attempts": [
+      "f",
+      "g",
+      "h"
+    ],
+    "image_http_requests": 72,
+    "native_reference_comparisons": 240,
+    "max_logit_delta": 0.0,
+    "max_probability_delta": 0.0,
+    "scope": "Earlier snapshots, not additional current-source coverage",
+    "audit_sha256": {
+      "audit-f.json": "5b80f4fa7bea8474d52bcfdfc727cee6c078b6aa4015efa573e56fbad8e3f364",
+      "audit-g.json": "2c14333d109836e34fcd4b4f5e0f72d6098008b1a8045834eb37767fe77ad4b5",
+      "audit-h.json": "8fd730a2399816d839df9f123e7270d65c856d953f3a2f6d7a4c57cc180ad3f8"
+    }
+  },
+  "jobs": {
+    "a": {
+      "id": "d2a22330-a5b3-4e20-9ca3-f9e5e1af3e56",
+      "state": "failed",
+      "exitCode": 1
+    },
+    "b": {
+      "id": "41abff69-f89d-4072-a511-bbf64f29243b",
+      "state": "failed",
+      "exitCode": 1
+    },
+    "c": {
+      "id": "ca51d0dc-2e4f-4808-b94a-a5fe691f8702",
+      "state": "failed",
+      "exitCode": 1
+    },
+    "d": {
+      "id": "2000e02e-9a5d-44f1-9614-b09f65fa0373",
+      "state": "succeeded",
+      "exitCode": 0
+    },
+    "e": {
+      "id": "e4bc5411-431e-4d33-9abd-bed90a3e6c2e",
+      "state": "failed",
+      "exitCode": 1
+    },
+    "f": {
+      "id": "34e82590-69bf-41ce-a23c-1c23934d9a71",
+      "state": "succeeded",
+      "exitCode": 0
+    },
+    "g": {
+      "id": "9b6f4f32-3b3f-41ba-9b50-2790d5f011f2",
+      "state": "succeeded",
+      "exitCode": 0
+    },
+    "h": {
+      "id": "11238583-ea83-40b6-b295-b0819dc8b975",
+      "state": "succeeded",
+      "exitCode": 0
+    },
+    "i": {
+      "id": "0ed09e84-4e60-451f-8fbc-a66ada5f28a6",
+      "state": "succeeded",
+      "exitCode": 0
+    }
+  },
+  "historical_full_forward_failures": "RESULTS.json; unchanged and not converted to passing gates",
+  "scope": "Synthetic execution and native continuation cache-fork correctness, including mixed compatible subsets. Not broad image accuracy/calibration, unchunked-forward equivalence, throughput, or all hardware/checkpoints."
+}

@@ -8,7 +8,7 @@ name = "simple-jev"
 version = "0.1.0"
 description = "Standalone Transformers shared-prefix classifier API"
 requires-python = ">=3.12"
-dependencies = ["torch>=2.6", "transformers>=5.16.1,<6", "accelerate>=1", "pydantic>=2", "fastapi", "uvicorn", "numpy"]
+dependencies = ["torch>=2.6", "transformers>=5.16.1,<6", "accelerate>=1", "pydantic>=2", "fastapi", "uvicorn", "numpy", "Pillow>=10.4", "torchvision"]
 
 # Both this command and python -m hf_server call the same entry point.
 [project.scripts]
@@ -22,7 +22,7 @@ test = ["pytest", "pytest-asyncio", "httpx"]
 # Include the shared modules in an HF wheel without introducing a separate
 # common distribution. Build/install from a checkout containing both folders.
 [tool.setuptools]
-py-modules = ["hf_server", "hf_prompt_policies"]
+py-modules = ["hf_server", "hf_prompt_policies", "hf_vision", "hf_media"]
 packages = ["common"]
 package-dir = {"" = ".", common = "../common"}
 

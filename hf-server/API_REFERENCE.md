@@ -100,7 +100,7 @@ coercion.
 | --- | --- | --- | --- |
 | `model` | string | Required; nonempty | Any nonempty ID is accepted by default. With `--enforce-model-id`, it must match the served name. The HTTP request does not load or switch models. |
 | `state` | string, object, array, or null | Supply exactly one non-null `state` or `messages` | Shared context. Objects/arrays are serialized into prompt text; they are not executable state. A top-level number or boolean is not supported. |
-| `messages` | array of messages or null | Alternative to `state`; at least one message | Text chat history rendered with the model's chat template. |
+| `messages` | array of messages or null | Alternative to `state`; at least one message | Text/image chat history rendered with the model's native template; see [image support](VISION.md). |
 | `questions` | object mapping IDs to questions | Required; 1–256 entries at schema level | IDs must be nonempty strings. The server's branch limit is additionally enforced, default 100. |
 | `options` | object | Defaults shown below | Response diagnostics; prompt/scoring rules are fixed by v1. |
 | `tools` | array of objects or null | Omitted/null | Reserved in the schema; nonempty values are rejected by the HF implementation. |
@@ -119,12 +119,22 @@ For this HF implementation each message contains only:
 | Field | Supported value |
 | --- | --- |
 | `role` | `system`, `developer`, `user`, or `assistant` |
-| `content` | String, including an empty string |
+| `content` | String (including empty), or text/image_url blocks; images in user turns only |
 
-The shared schema also describes `tool`/`function` roles, null content, content
-part arrays and extra message fields. **The HF compiler rejects these.** Images,
-audio, video, tool calls, `name`, and other extra message properties are not
-supported. A model's chat template may further restrict roles or their order.
+Text blocks use `{"type":"text","text":"..."}`. Image blocks use
+`{"type":"image_url","image_url":{"url":"data:image/png;base64,..."}}`.
+The URL may also be public HTTP(S), for example
+`{"type":"image_url","image_url":{"url":"https://example.com/photo.jpg"}}`.
+See [image support and limits](VISION.md) for supported Qwen/Gemma/LLaVA
+architectures, JPEG/WebP, multiple images, prefix reuse, and validation scope.
+Text-only models reject images. Downloads enforce byte/time limits, standard
+HTTP(S) ports, public-IP-only DNS pinning, TLS verification and redirect checks;
+private-network URLs, URL userinfo and local paths are rejected. Ambient proxies
+and cookies are never used.
+
+`tool`/`function` roles, null content, audio/video blocks, tool calls, `name`, and
+other extra message properties are rejected. A model's chat template may further
+restrict roles or their order.
 
 For chat input replace `state` in the example with:
 
@@ -274,14 +284,16 @@ values), `probabilities` (nine values), `expected_score`, `variance`, and `entro
 | Field | Meaning |
 | --- | --- |
 | `backend` | `transformers` |
-| `prefill_strategy` | `shared_prefix` |
-| `prefix_tokens` | Length of the shared prefix actually evaluated once. At least one token is left for each suffix, even for identical prompts. |
+| `prefill_strategy` | Text: `shared_prefix`. Images: `multimodal_shared_prefix`, `multimodal_grouped_prefix`, or `multimodal_independent`. |
+| `prefix_tokens` | Length of the single shared prefix evaluated once; zero for grouped/independent contexts. At least one token is left for each cached suffix. |
+| `vision_forwards` | Image-feature-stage calls; one per shared image context, not per question. A call can contain multiple images. |
+| `context_groups`, `group_prefix_tokens` | Grouped image requests only: context count and each group's cached prefix length (zero for an independent singleton). |
 | `suffix_batch_sizes` | Number of question/candidate branches in each suffix forward. |
 | `engine_forwards` | Prefix forward, if any, plus suffix forwards. These are model calls, not HTTP calls. |
 | `branch_prompt_tokens` | Sum of all complete branch lengths, including repeated prefixes. |
-| `computed_prompt_tokens` | Shared prefix length plus padded suffix tokens. |
-| `logical_prefill_tokens` | Shared prefix length plus unpadded suffix lengths. |
-| `padded_suffix_tokens` | Sum of batch size times maximum suffix length for each batch. |
+| `computed_prompt_tokens` | Tokens actually processed: prefix seeds plus suffixes (including batched-text padding), or independent full prompts; summed across context groups. |
+| `logical_prefill_tokens` | Same accounting without padding. |
+| `padded_suffix_tokens` | Text batching: sum of batch size times maximum suffix length. Image suffixes are unpadded/unbatched and report zero for this text-batching field. |
 | `branch_output_tokens` | 0 |
 | `scored_positions` | Number of scoring branches. |
 | `backend_seconds` | Backend elapsed time inside model lock. |
@@ -395,7 +407,8 @@ with `--backend laya` fail before loading weights.
 
 Legacy `examples_binary`, `repeat_state`, and `strict_mix_repeat2` require `state`;
 `messages` return422. Baseline, shared_* and universal_shared support plain-text chat.
-Existing text-only restrictions still apply. Choice branches in legacy/shared_*
+The chat-compatible policies also support [image chat](VISION.md) on supported
+vision models. Choice branches in legacy/shared_*
 policies use a fixed three-line native `[thinking]` prefill, not generated reasoning.
 Baseline/universal_shared and Score/Noul branches do not use this prefill.
 Default tuning excludes the three legacy policies. `--all-formats` in the tuning
@@ -434,7 +447,8 @@ These are process settings, not HTTP request fields. Both `simple-jev` and
 | `-h`, `--help` | — | Print argument help and exit. |
 
 No CLI flags are currently provided for authentication, quantization, model
-aliases, request queue size, request concurrency, or vision. The service requires
+aliases, request queue size, or request concurrency. Image support is selected
+from the loaded model/processor as documented in [VISION.md](VISION.md). The service requires
 compatible copyable/reorderable Transformers caches and suitable single-token
 rating/choice labels; arbitrary HF models are not guaranteed to work.
 
