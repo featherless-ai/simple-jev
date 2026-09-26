@@ -67,6 +67,45 @@ A public image URL can replace the data URL without changing the request shape:
 
 Images are inputs only; the server does not generate images.
 
+## Image resize configuration
+
+Resize oversized images **to fit** a bounding box, preserving aspect ratio,
+without cropping or upscaling smaller images. These are resize settings, not
+rejection thresholds. Three levels are supported:
+
+```bash
+simple-jev --model YOUR_MODEL \
+  --max-image-width 1920 --max-image-height 1080 \
+  --default-image-max-width 1024 --default-image-max-height 768
+```
+
+- `--max-image-width` / `--max-image-height`: server hard caps on the decoded
+  image passed to the native processor. A request cannot increase these caps.
+- `--default-image-max-width` / `--default-image-max-height`: default request
+  bounds. Defaults must not exceed corresponding hard caps.
+- Per-request `media_io_kwargs.image.max_width` / `max_height`: override each
+  default independently, clamped to the corresponding server hard cap:
+
+```json
+"media_io_kwargs": {"image": {"max_width": 1600, "max_height": 900}}
+```
+
+Here the request uses a 1600×900 box rather than the default 1024×768. Requesting
+4096×2160 instead uses the hard 1920×1080 box. A 4000×3000 image in that box becomes
+1440×1080. Omitted request axes retain their defaults. An unset server default
+falls back to its hard cap; an unset hard cap imposes no bound on that axis.
+All four startup options default to unset, preserving previous behavior.
+Dimensions must be positive integers; null/zero are not ways to bypass a cap.
+
+This applies identically to base64 and URL images, after EXIF orientation/RGB
+conversion and before native processing, once per image occurrence per request.
+Original byte/pixel/animation safety checks still apply **before** resizing.
+It does not reduce upload size or avoid initial image decoding. The native
+processor may subsequently resize, upscale, crop or pad to its required grid;
+these are **processor-input caps**, not guarantees of final tensor dimensions,
+image-token counts, GPU memory or speed. Smaller images can lose OCR/fine detail.
+Laya remains text-only and rejects these options.
+
 ## Sharing and correctness
 
 - Decode images once per request. Request-local native-processor memoization
@@ -110,8 +149,8 @@ Images are inputs only; the server does not generate images.
 - Up to 16 images; 10 MiB encoded-image bytes each, 20 MiB total; 20 million
   decoded pixels each, 40 million total. Animated images are rejected.
 - `image_url.detail` may be omitted or `"auto"`. Unsupported block fields,
-  audio/video, tools, and nonempty `mm_processor_kwargs`/`media_io_kwargs`
-  currently return 422 rather than being silently ignored. Other modalities
+  audio/video, tools, nonempty `mm_processor_kwargs`, and `media_io_kwargs`
+  other than the image resize keys above return 422 rather than being silently ignored. Other modalities
   require a validated processor/cache adapter; model capability alone does not
   imply they are implemented by this server yet.
 - Images are accepted only in user messages. Other roles can contain text

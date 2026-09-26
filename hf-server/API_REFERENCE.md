@@ -105,7 +105,7 @@ coercion.
 | `options` | object | Defaults shown below | Response diagnostics; prompt/scoring rules are fixed by v1. |
 | `tools` | array of objects or null | Omitted/null | Reserved in the schema; nonempty values are rejected by the HF implementation. |
 | `mm_processor_kwargs` | object or null | Omitted/null | Reserved; nonempty values are rejected. |
-| `media_io_kwargs` | object of objects or null | Omitted/null | Reserved; nonempty values are rejected. |
+| `media_io_kwargs` | object of objects or null | Omitted/null | Transformers: `{"image":{"max_width":1024,"max_height":768}}` resizes images to fit, preserving aspect ratio. Positive integers override server defaults, clamped to server hard caps. Other keys are rejected; Laya rejects nonempty values. |
 
 Empty reserved containers are accepted but have no effect. Omit them normally.
 Explicit `null` does not count as supplied context. An empty string or empty JSON
@@ -438,6 +438,8 @@ These are process settings, not HTTP request fields. Both `simple-jev` and
 | `--max-model-len` | `16384` | Maximum input tokens per complete rendered question branch, including context, instructions, options, template overhead, and repetition. Not generated output length or native context extension. |
 | `--max-batch-size` | `32` | Maximum suffix rows per model forward; must be positive. |
 | `--max-batch-tokens` | `32768` | Maximum padded suffix tokens per batch; must be positive. Does not chunk or limit the prefix forward. |
+| `--max-image-width`, `--max-image-height` | Unset | Hard resize bounds on images passed to the native processor. Requests above these are clamped, not rejected. |
+| `--default-image-max-width`, `--default-image-max-height` | Corresponding hard cap | Default request resize bounds; overridable via `media_io_kwargs.image.max_width/max_height` within hard caps. Explicit defaults must be positive and not exceed hard caps. |
 | `--served-model-name` | value of `--model` | Public model ID in responses, health and discovery; does not change checkpoint loading. |
 | `--enforce-model-id` | off | Reject request IDs other than the served name. |
 | `--max-choice-options` | `255` | Choice cap from 2 to 255; Score/Noul unchanged. |

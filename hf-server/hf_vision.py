@@ -25,7 +25,47 @@ MAX_TOTAL_PIXELS = 40_000_000
 MAX_MEDIA_SECONDS = 20
 
 
-def image_messages(messages):
+def validate_image_dimensions(max_image_width=None, max_image_height=None):
+    """Optional preprocessor input bounds; never relax encoded/source-image limits."""
+    for name, value in [('max_image_width', max_image_width), ('max_image_height', max_image_height)]:
+        if value is not None and (type(value) is not int or value <= 0):
+            raise ValueError(f'{name} must be a positive integer or None')
+
+
+def validate_image_resize_config(max_image_width=None, max_image_height=None,
+                                 default_image_max_width=None, default_image_max_height=None):
+    validate_image_dimensions(max_image_width, max_image_height)
+    for name, default, cap in [('default_image_max_width', default_image_max_width, max_image_width),
+                               ('default_image_max_height', default_image_max_height, max_image_height)]:
+        if default is not None and (type(default) is not int or default <= 0):
+            raise ValueError(f'{name} must be a positive integer or None')
+        if default is not None and cap is not None and default > cap:
+            raise ValueError(f'{name} must not exceed the server hard cap')
+
+
+def image_resize_bounds(media_io_kwargs, *, max_image_width=None, max_image_height=None,
+                        default_image_max_width=None, default_image_max_height=None):
+    """Resolve request overrides without mutating shared compiler configuration."""
+    validate_image_resize_config(max_image_width, max_image_height,
+                                 default_image_max_width, default_image_max_height)
+    options = {} if media_io_kwargs is None else media_io_kwargs
+    if not isinstance(options, dict) or set(options) - {'image'}:
+        raise ValueError('media_io_kwargs supports only image max_width/max_height')
+    image = options.get('image', {})
+    if not isinstance(image, dict) or set(image) - {'max_width', 'max_height'}:
+        raise ValueError('media_io_kwargs.image supports only max_width/max_height')
+    for name, value in image.items():
+        if type(value) is not int or value <= 0:
+            raise ValueError(f'media_io_kwargs.image.{name} must be a positive integer')
+    bounds = []
+    for key, default, cap in [('max_width', default_image_max_width, max_image_width),
+                              ('max_height', default_image_max_height, max_image_height)]:
+        value = image.get(key, default)
+        bounds.append(cap if value is None else value if cap is None else min(value, cap))
+    return tuple(bounds)
+
+
+def image_messages(messages, *, max_image_width=None, max_image_height=None):
     """Copy OpenAI text/image_url blocks to HF image blocks and decoded PIL images.
 
     Images are RGB, in conversation order. Public HTTP(S) and inline data URLs
@@ -34,6 +74,7 @@ def image_messages(messages):
     """
     from PIL import Image, ImageOps
 
+    validate_image_dimensions(max_image_width, max_image_height)
     result, images, total, total_pixels = [], [], 0, 0
     deadline = time.monotonic() + MAX_MEDIA_SECONDS
     for message in messages:
@@ -94,7 +135,14 @@ def image_messages(messages):
                             raise ValueError('Image pixel limit exceeded or animated image')
                         # Match native HF image loading for camera JPEGs: honor
                         # EXIF orientation before handing pixels to the processor.
-                        images.append(ImageOps.exif_transpose(image).convert('RGB'))
+                        decoded = ImageOps.exif_transpose(image).convert('RGB')
+                        # Aspect-preserving, downscale-only cap in displayed (EXIF-
+                        # corrected) coordinates. Native model processing still follows.
+                        if max_image_width is not None or max_image_height is not None:
+                            decoded.thumbnail((min(max_image_width or decoded.width, decoded.width),
+                                               min(max_image_height or decoded.height, decoded.height)),
+                                              resample=Image.Resampling.LANCZOS)
+                        images.append(decoded)
             except (OSError, Image.DecompressionBombError, Image.DecompressionBombWarning) as exc:
                 raise ValueError('Invalid or oversized image') from exc
             blocks.append({'type': 'image'})

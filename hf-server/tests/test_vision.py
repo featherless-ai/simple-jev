@@ -239,7 +239,13 @@ def test_loader_selects_native_processor_and_revision(monkeypatch):
     load_model = Mock(return_value=Mock())
     monkeypatch.setattr(transformers.AutoProcessor, 'from_pretrained', load_processor)
     monkeypatch.setattr(transformers.AutoModelForImageTextToText, 'from_pretrained', load_model)
-    service = load_service('checkpoint', revision='frozen', prompt_policy='baseline', max_choice_options=50)
+    service = load_service('checkpoint', revision='frozen', prompt_policy='baseline', max_choice_options=50,
+                           max_image_width=1920, max_image_height=1080,
+                           default_image_max_width=1024, default_image_max_height=768)
+    assert service.compiler.max_image_width == service.metadata['max_image_width'] == 1920
+    assert service.compiler.max_image_height == service.metadata['max_image_height'] == 1080
+    assert service.compiler.default_image_max_width == service.metadata['default_image_max_width'] == 1024
+    assert service.compiler.default_image_max_height == service.metadata['default_image_max_height'] == 768
     assert service.compiler.processor is processor
     assert service.metadata['image_input'] is True
     load_processor.assert_called_once_with('checkpoint', revision='frozen')

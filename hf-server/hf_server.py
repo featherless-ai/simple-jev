@@ -161,7 +161,8 @@ def render_chat(renderer, messages, **kwargs):
 class PromptCompiler:
     """Render shared classifier plans with a model's native tokenizer template."""
 
-    def __init__(self, tokenizer, max_tokens=16384, version=DEFAULT_TEMPLATE_VERSION, prompt_policy="baseline", max_choice_options=255, processor=None):
+    def __init__(self, tokenizer, max_tokens=16384, version=DEFAULT_TEMPLATE_VERSION, prompt_policy="baseline", max_choice_options=255, processor=None, max_image_width=None, max_image_height=None,
+                 default_image_max_width=None, default_image_max_height=None):
         """Store the renderer, complete-prompt token limit, and shared version.
 
         Version validation is performed by common.prepare_prompt during compile.
@@ -169,7 +170,14 @@ class PromptCompiler:
         This class does not load a tokenizer or model on its own.
         """
         self.tokenizer = tokenizer
+        from hf_vision import validate_image_resize_config
+        validate_image_resize_config(max_image_width, max_image_height,
+                                     default_image_max_width, default_image_max_height)
         self.processor = processor
+        self.max_image_width = max_image_width
+        self.max_image_height = max_image_height
+        self.default_image_max_width = default_image_max_width
+        self.default_image_max_height = default_image_max_height
         self.max_tokens = max_tokens
         self.version = version
         validate_policy(prompt_policy)
@@ -222,10 +230,17 @@ class PromptCompiler:
         if not isinstance(request, ClassifierRequest):
             request = ClassifierRequest.model_validate(request)
         # Reject unimplemented tools/options rather than silently dropping them.
-        if request.tools or request.mm_processor_kwargs or request.media_io_kwargs:
+        if request.tools or request.mm_processor_kwargs:
             raise ValueError(
-                "HF reference does not support tools or media processing overrides"
+                "HF reference does not support tools or native processor overrides"
             )
+        from hf_vision import image_resize_bounds
+        image_width, image_height = image_resize_bounds(
+            request.media_io_kwargs, max_image_width=self.max_image_width,
+            max_image_height=self.max_image_height,
+            default_image_max_width=self.default_image_max_width,
+            default_image_max_height=self.default_image_max_height,
+        )
         if request.messages and any(
             m.model_extra or m.role in {"tool", "function"} or m.content is None
             for m in request.messages
@@ -235,7 +250,8 @@ class PromptCompiler:
         images, processor = [], None
         if chat and any(not isinstance(m['content'], str) for m in chat):
             from hf_vision import image_messages, cached_processor
-            chat, images = image_messages(chat)
+            chat, images = image_messages(chat, max_image_width=image_width,
+                                          max_image_height=image_height)
             if images:
                 if self.processor is None:
                     raise ValueError("Image chat requires a supported vision model and processor")
@@ -1107,6 +1123,10 @@ def load_service(
     served_model_name=None,
     enforce_model_id=False,
     max_choice_options=255,
+    max_image_width=None,
+    max_image_height=None,
+    default_image_max_width=None,
+    default_image_max_height=None,
 ):
     """Load a model and return a ready-to-use service, without starting HTTP.
 
@@ -1121,6 +1141,12 @@ def load_service(
     while branches within a request are batched. The backend's thread lock also
     prevents overlap if cancellation releases admission before a forward ends.
     """
+    from hf_vision import validate_image_resize_config
+    validate_image_resize_config(max_image_width, max_image_height,
+                                 default_image_max_width, default_image_max_height)
+    if backend == 'laya' and any(value is not None for value in (
+            max_image_width, max_image_height, default_image_max_width, default_image_max_height)):
+        raise ValueError('Image resize options require --backend transformers')
     validate_rope_factor(rope_factor)
     if prompt_policy is not None:
         validate_policy(prompt_policy)
@@ -1208,7 +1234,10 @@ def load_service(
         if config.model_type in VISION_MODEL_TYPES and getattr(candidate, 'image_processor', None) is not None:
             processor = candidate
     compiler = PromptCompiler(tokenizer, max_tokens=max_model_len, prompt_policy=prompt_policy,
-                              max_choice_options=max_choice_options, processor=processor)
+                              max_choice_options=max_choice_options, processor=processor,
+                              max_image_width=max_image_width, max_image_height=max_image_height,
+                              default_image_max_width=default_image_max_width,
+                              default_image_max_height=default_image_max_height)
     compiler.validate_choice_capacity()
     model = loader.from_pretrained(
         model_name,
@@ -1237,6 +1266,10 @@ def load_service(
             "prompt_policy": prompt_policy,
             "prompt_policy_selection": policy_selection,
             "image_input": processor is not None,
+            "max_image_width": max_image_width,
+            "max_image_height": max_image_height,
+            "default_image_max_width": default_image_max_width,
+            "default_image_max_height": default_image_max_height,
             "model_revision": revision,
             "rope_factor": rope_factor,
         },
@@ -1282,6 +1315,14 @@ def main():
         "--dtype", choices=["float32", "float16", "bfloat16"], default="bfloat16"
     )
     parser.add_argument("--max-model-len", type=int, default=16384)
+    parser.add_argument("--max-image-width", type=int, default=None,
+                        help="Hard preprocessor image width cap; downscale preserving aspect ratio (default: unset)")
+    parser.add_argument("--max-image-height", type=int, default=None,
+                        help="Hard preprocessor image height cap; downscale preserving aspect ratio (default: unset)")
+    parser.add_argument("--default-image-max-width", type=int, default=None,
+                        help="Default image resize width, overridable per request within the hard cap (default: hard cap)")
+    parser.add_argument("--default-image-max-height", type=int, default=None,
+                        help="Default image resize height, overridable per request within the hard cap (default: hard cap)")
     parser.add_argument("--max-batch-size", type=int, default=32)
     parser.add_argument("--max-batch-tokens", type=int, default=32768)
     parser.add_argument("--max-request-branches", type=int, default=100)

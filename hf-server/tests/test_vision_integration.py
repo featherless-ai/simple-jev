@@ -9,7 +9,8 @@ from test_vision import payload, tiny_model
 from test_vision_processors import native_processor, preserves_reasoning  # noqa: F401 (pytest fixture)
 
 
-async def test_native_images_through_real_model_and_http(native_processor):
+@pytest.mark.parametrize('resize', [False, True])
+async def test_native_images_through_real_model_and_http(native_processor, resize, monkeypatch):
     import httpx
     import torch
     from transformers import AutoConfig, AutoModelForImageTextToText
@@ -34,8 +35,23 @@ async def test_native_images_through_real_model_and_http(native_processor):
         with torch.no_grad():
             model.model.multi_modal_projector.mm_input_projection_weight.normal_(std=.02)
     policy = 'shared_examples_binary' if preserves_reasoning(p) else 'baseline'
-    compiler = PromptCompiler(p.tokenizer, processor=p, prompt_policy=policy, max_choice_options=50)
-    compiled = compiler.compile(payload())
+    options = dict(max_image_width=24, max_image_height=24,
+                   default_image_max_width=16, default_image_max_height=16) if resize else {}
+    compiler = PromptCompiler(p.tokenizer, processor=p, prompt_policy=policy, max_choice_options=50, **options)
+    request = payload()
+    if resize:
+        # Width overrides the default but clamps to24; height remains default16.
+        request['media_io_kwargs'] = {'image': {'max_width': 100}}
+    import hf_vision
+    decode = hf_vision.image_messages
+    sizes = []
+    def observed_decode(*args, **kwargs):
+        messages, images = decode(*args, **kwargs)
+        sizes.append([image.size for image in images])
+        return messages, images
+    monkeypatch.setattr(hf_vision, 'image_messages', observed_decode)
+    compiled = compiler.compile(request)
+    assert sizes[-1] == [(16, 16) if resize else (32, 32)] * 2
     backend = HFBackend(model)
     actual = await backend.score(compiled)
     assert actual.metrics['vision_forwards'] == 1
@@ -46,9 +62,29 @@ async def test_native_images_through_real_model_and_http(native_processor):
             torch.testing.assert_close(actual.logits[branch.branch_id], expected, atol=3e-6, rtol=3e-5)
     service = DecisionService('test', compiler, backend, advanced_metrics=True)
     async with httpx.AsyncClient(transport=httpx.ASGITransport(app=create_app(service)), base_url='http://test') as client:
-        response = await client.post('/v1/classifier', json=payload())
+        response = await client.post('/v1/classifier', json=request)
         assert response.status_code == 200, response.text
         body = response.json()
         assert body['metrics']['vision_forwards'] == 1
         assert body['metrics']['prefill_strategy'] == 'multimodal_shared_prefix'
         assert set(body['answers']) == {'color', 'red', 'level'}
+        assert sizes[-1] == [(16, 16) if resize else (32, 32)] * 2
+        if resize:
+            # An override may raise/lower defaults, never the hard caps; omitted
+            # arguments on the following request restore defaults (no shared mutation).
+            for override, expected in [({'max_width': 100, 'max_height': 100}, 24),
+                                       ({'max_width': 8, 'max_height': 8}, 8), (None, 16)]:
+                next_request = payload()
+                if override is not None:
+                    next_request['media_io_kwargs'] = {'image': override}
+                response = await client.post('/v1/systemone', json=next_request)
+                assert response.status_code == 200, response.text
+                assert sizes[-1] == [(expected, expected)] * 2
+                assert response.json()['metrics']['vision_forwards'] == 1
+            assert compiler.default_image_max_width == compiler.default_image_max_height == 16
+            bad = payload()
+            bad['media_io_kwargs'] = {'image': {'max_width': 0}}
+            count = len(sizes)
+            response = await client.post('/v1/classifier', json=bad)
+            assert response.status_code == 422
+            assert len(sizes) == count

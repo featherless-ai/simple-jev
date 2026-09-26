@@ -219,6 +219,13 @@ continuations. Images may be inline PNG/JPEG/WebP data URLs or bounded public
 HTTP(S) URLs. Audio, video and tools are rejected. See [supported architectures,
 transport security, limits and numerical behavior](VISION.md).
 
+Optional `--max-image-width` / `--max-image-height` set hard **resize** caps before
+native processing. `--default-image-max-width` / `--default-image-max-height`
+set request defaults; `media_io_kwargs.image.max_width/max_height` overrides them
+within the hard caps. Oversized images are downscaled to fit, preserving aspect
+ratio—not rejected for exceeding these dimensions. Original safety limits still
+apply, and native processors may subsequently resize/pad to their required grids.
+
 Models need compatible copyable Transformers caches, a native chat template,
 and single-token rating/choice labels. Text suffix batching additionally needs
 `reorder_cache`. Arbitrary model compatibility is not guaranteed.
