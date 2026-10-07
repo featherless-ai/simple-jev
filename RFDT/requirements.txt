@@ -1,3 +1,5 @@
 # Install the existing HF server first: pip install -e './hf-server[test]'
 # PEFT is needed only for --lora, --adapter, and export.py.
 peft>=0.18,<1
+# requests is needed for prepare.py's teacher API calls.
+requests>=2.32,<3
