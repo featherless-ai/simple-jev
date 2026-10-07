@@ -38,7 +38,7 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
-from fastapi import APIRouter, FastAPI, HTTPException, Request
+from fastapi import APIRouter, Depends, FastAPI, Header, HTTPException, Request
 from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse
 from fastapi.routing import APIRoute
@@ -1064,13 +1064,24 @@ def create_app(service):
     return app
 
 
+def require_api_key(x_api_key: str = Header(default=None)):
+    """Reject requests whose x-api-key does not match SIMPLE_JEV_API_KEY.
+
+    Auth is skipped only when the server operator has not configured a key,
+    preserving existing local/trusted-network deployments.
+    """
+    expected_api_key = os.environ.get("SIMPLE_JEV_API_KEY")
+    if expected_api_key and x_api_key != expected_api_key:
+        raise HTTPException(401, "Invalid or missing API key")
+
+
 def attach_routes(app, get_service):
     """Attach classifier endpoints; the alias stays out of generated OpenAPI.
 
     get_service is synchronous and request-scoped, allowing an embedding app to
     select its service without changing the classifier handler's implementation.
     """
-    router = APIRouter(route_class=ClassifierRoute)
+    router = APIRouter(route_class=ClassifierRoute, dependencies=[Depends(require_api_key)])
 
     @router.post("/v1/classifier")
     @router.post("/v1/systemone", include_in_schema=False)
