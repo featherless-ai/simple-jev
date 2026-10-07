@@ -11,9 +11,9 @@ import json
 import os
 import random
 import time
-import urllib.error
-import urllib.request
 from pathlib import Path
+
+import requests
 
 from data import (
     context_key,
@@ -70,22 +70,17 @@ def label_missing(row, request, missing, args):
     key = os.environ.get(args.api_key_env)
     if key:
         headers["Authorization"] = f"Bearer {key}"
-    req = urllib.request.Request(
-        args.teacher_base_url.rstrip("/") + "/chat/completions",
-        data=json.dumps(body).encode(),
-        headers=headers,
-    )
+    url = args.teacher_base_url.rstrip("/") + "/chat/completions"
     for attempt in range(3):
-        try:
-            with urllib.request.urlopen(req, timeout=args.timeout) as response:
-                reply = json.load(response)
+        response = requests.post(url, json=body, headers=headers, timeout=args.timeout)
+        if response.ok:
+            reply = response.json()
             break
-        except urllib.error.HTTPError as error:
-            if attempt == 2 or error.code not in {429, 500, 502, 503, 504}:
-                raise RuntimeError(
-                    f"Teacher HTTP {error.code}; record {row.get('id', '<unnamed>')}"
-                ) from None
-            time.sleep(2**attempt)
+        if attempt == 2 or response.status_code not in {429, 500, 502, 503, 504}:
+            raise RuntimeError(
+                f"Teacher HTTP {response.status_code}; record {row.get('id', '<unnamed>')}"
+            ) from None
+        time.sleep(2**attempt)
     content = reply["choices"][0]["message"]["content"]
     # Accept a single Markdown code fence, but never extract arbitrary JSON from
     # surrounding prose: ambiguous/truncated responses should fail visibly.

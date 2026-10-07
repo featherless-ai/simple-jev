@@ -85,34 +85,28 @@ def test_teacher_requests_only_missing_targets():
     probabilities["9"] = 1.0
 
     class Response:
-        def __enter__(self):
-            return self
+        ok = True
 
-        def __exit__(self, *args):
-            pass
-
-        def read(self):
-            return json.dumps(
-                {
-                    "choices": [
-                        {
-                            "message": {
-                                "content": json.dumps(
-                                    {
-                                        "targets": {
-                                            "refund": {"probabilities": probabilities}
-                                        }
+        def json(self):
+            return {
+                "choices": [
+                    {
+                        "message": {
+                            "content": json.dumps(
+                                {
+                                    "targets": {
+                                        "refund": {"probabilities": probabilities}
                                     }
-                                )
-                            }
+                                }
+                            )
                         }
-                    ]
-                }
-            ).encode()
+                    }
+                ]
+            }
 
-    with patch("urllib.request.urlopen", return_value=Response()) as call:
+    with patch("prepare.requests.post", return_value=Response()) as call:
         result = label_missing(row, request, ["refund"], args)
-        sent = json.loads(call.call_args.args[0].data)
+        sent = call.call_args.kwargs["json"]
         assert json.loads(sent["messages"][1]["content"])["question_ids_to_label"] == [
             "refund"
         ]
