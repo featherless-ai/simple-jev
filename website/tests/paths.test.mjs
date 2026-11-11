@@ -94,3 +94,23 @@ test("URL prefix rules keep /simple-jev/ working", () => {
     assert.ok(lines.includes(`${dir} ${dir}/ 301`), `_redirects must keep the prefix when normalizing ${dir}`);
   }
 });
+
+test("404 page is self-contained, de-indexed, and clearly says not found", () => {
+  const html = readFileSync(join(websiteRoot, "404.html"), "utf8");
+  assert.match(html, /<title>Page not found/i);
+  assert.match(html, /name="robots"\s+content="noindex"/);
+  assert.match(html, /404/);
+  assert.match(html, /doesn.t exist|does not exist|not found/i);
+  const refs = [...html.matchAll(/(?:href|src)="([^"]+)"/g)]
+    .map((m) => m[1])
+    .filter((ref) => !/^(https?:|\/\/|mailto:|tel:|data:|#)/.test(ref));
+  for (const ref of refs) {
+    assert.ok(
+      ref.endsWith(".html"),
+      `404 page ref "${ref}" must be a site-local .html page, not an asset`,
+    );
+  }
+  assert.match(html, /data-home/);
+  assert.match(html, /data-docs/);
+  assert.match(html, /simple-jev/);
+});

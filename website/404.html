@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- CookieHub consent: sync load + explicit init, matching featherless.ai. -->
+    <script src="https://cdn.cookiehub.eu/c2/65d105e9.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function (event) {
+        var cpm = {};
+        window.cookiehub.load(cpm);
+      });
+    </script>
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-KG695H35');</script>
+    <!-- End Google Tag Manager -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f8f9f6" />
+    <meta name="robots" content="noindex" />
+    <meta name="description" content="Page not found — this URL does not exist under /simple-jev/." />
+    <title>Page not found — Simple Jev</title>
+    <style>
+      :root {
+        --ink: #1d2926;
+        --muted: #68726d;
+        --paper: #f8f9f6;
+        --line: #dfe4dc;
+        --orange: #e25b26;
+        --mono: ui-monospace, SFMono-Regular, Consolas, monospace;
+        --sans: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        color-scheme: light;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        font-family: var(--sans);
+        font-size: 16px;
+        line-height: 1.55;
+        background: var(--paper);
+        color: var(--ink);
+      }
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+      .text-link {
+        text-decoration: underline;
+        text-decoration-color: var(--orange);
+        text-underline-offset: 3px;
+      }
+      a:focus-visible {
+        outline: 3px solid var(--orange);
+        outline-offset: 4px;
+      }
+      .skip-link {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+      }
+      .skip-link:focus {
+        position: static;
+        width: auto;
+        height: auto;
+        margin: 12px;
+        padding: 8px 12px;
+        overflow: visible;
+        clip: auto;
+        white-space: normal;
+      }
+      header {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        padding: 18px 24px;
+        border-bottom: 1px solid var(--line);
+      }
+      .wordmark {
+        display: inline-flex;
+        align-items: center;
+        font-family: var(--sans);
+      }
+      .tiny-square {
+        display: inline-block;
+        width: 10px;
+        height: 10px;
+        margin-right: 10px;
+        background: var(--orange);
+      }
+      .header-credit {
+        display: inline-flex;
+        gap: 8px;
+        font-size: 14px;
+        color: var(--muted);
+      }
+      .header-credit a {
+        color: var(--ink);
+      }
+      main {
+        max-width: 56ch;
+        margin: 0 auto;
+        padding: clamp(56px, 12vh, 128px) 24px 96px;
+      }
+      .status {
+        font-family: var(--mono);
+        color: var(--muted);
+        letter-spacing: 0.16em;
+        margin: 0 0 16px;
+      }
+      h1 {
+        font-size: clamp(28px, 5vw, 40px);
+        line-height: 1.15;
+        margin: 0 0 16px;
+      }
+      main p {
+        color: var(--muted);
+        margin: 0 0 16px;
+      }
+      .links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        margin-top: 28px;
+      }
+    </style>
+  </head>
+  <body>
+    <a class="skip-link" href="#content">Skip to content</a>
+    <header>
+      <span class="wordmark"><span class="tiny-square"></span><strong>Simple Jev</strong></span>
+      <span class="header-credit"
+        >Built by <a href="https://featherless.ai/">Featherless.ai</a>
+        <a href="https://featherless.ai/legal/privacy-policy">Privacy</a></span
+      >
+    </header>
+    <main id="content">
+      <p class="status">404</p>
+      <h1>This page doesn't exist</h1>
+      <p>
+        The address may be mistyped, or the page may have moved. Nothing lives at
+        this URL under /simple-jev/.
+      </p>
+      <p class="links">
+        <a class="text-link" href="index.html" data-home>Back to home</a>
+        <a class="text-link" href="docs.html" data-docs>API docs</a>
+      </p>
+    </main>
+    <script>
+      (function(){
+        var marker = "/simple-jev";
+        var path = location.pathname;
+        var base = "/";
+        if (path === marker || path.indexOf(marker + "/") === 0) {
+          base = marker + "/";
+        } else {
+          var at = path.indexOf(marker + "/");
+          if (at > -1) base = path.slice(0, at + marker.length + 1);
+        }
+        var home = document.querySelector("[data-home]");
+        var docs = document.querySelector("[data-docs]");
+        if (home) home.setAttribute("href", base);
+        if (docs) docs.setAttribute("href", base + "docs");
+      })();
+    </script>
+  </body>
+</html>
