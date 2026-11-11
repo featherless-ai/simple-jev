@@ -143,6 +143,10 @@ Both 2048 and the driving simulator load `shared/demo-header.js`, providing the 
 
 `/cool-demo/sf-tech-week-signal/` includes the October 5–11, 2026 San Francisco calendar snapshot and classifies the full 1,593-event dataset in live batches. The browser calls the public Simple Jev classifier API directly; no API key, server function, database, or site-side per-IP run cap is required. The API enforces its own usage limits. See `demos/sf-tech-week-signal/README.md` for local setup and data provenance.
 
+## 404 page
+
+`404.html` is served by Cloudflare Pages with a real 404 status for any path without a matching asset, including unknown paths under `/simple-jev/` that reach the project through the catch-all rewrite. Adding it replaces the SPA `index.html` fallback that previously returned 200 for everything. The page is self-contained, with inline styles and no site-local assets, so it renders unchanged at any bogus depth; it repairs its links from the `/simple-jev/` prefix at runtime. It carries `noindex` and the same CookieHub and GTM head blocks as the other pages. `_redirects` keeps the `/simple-jev/404.html` → `/simple-jev/404` canonical-form rule.
+
 ## Production deployment
 
 `.github/workflows/deploy-website.yml` publishes the static site to Cloudflare Pages in **Recursal PROD** when `main` receives changes under `website/`, `demos/jevpilot/`, `demos/sf-tech-week-signal/`, or the deployment workflow. You can also run **Deploy website** manually from GitHub Actions on `main`.

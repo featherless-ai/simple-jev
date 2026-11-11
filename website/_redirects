@@ -11,6 +11,7 @@
 /simple-jev/how-it-works.html /simple-jev/how-it-works 301
 /simple-jev/playground.html /simple-jev/playground 301
 /simple-jev/evaluations.html /simple-jev/evaluations 301
+/simple-jev/404.html /simple-jev/404 301
 
 # Directory URLs: add the trailing slash without losing the prefix.
 /simple-jev/cool-demo /simple-jev/cool-demo/ 301
