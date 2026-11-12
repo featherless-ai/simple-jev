@@ -42,6 +42,10 @@ JSON
 
 For production deployments, [Featherless paid plans](https://featherless.ai/) offer higher limits. To run the server yourself, follow the setup below.
 
+## Application compatibility
+
+- [Jev Social](https://github.com/socai-io/jev-social) can use a self-hosted Simple Jev `/v1/systemone` endpoint to choose bounded, read-only Instagram, TikTok, and LinkedIn research operations. Its [pinned setup and seven-case compatibility matrix](https://github.com/socai-io/jev-social/blob/abceb05a1e1e4d263f88b9a19df0815c4bda882d/docs/simple-jev.md) record the exact client, server, and model revisions and separate decision timing from browser duration.
+
 ## Evaluation tooling
 
 The [evaluation framework](eval/README.md) includes native JevBench scoring,
